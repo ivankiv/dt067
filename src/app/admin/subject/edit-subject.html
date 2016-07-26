@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h3 class="modal-title">Редагувати предмет</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="editSubjectForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Назва предмету: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" required
+                      ng-model="subjects.currentSubject.subject_name">
+            </div>
+            <div ng-if="">Назва предмету повинна містити тільки букви</div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Опис предмету: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" required
+                       ng-model="subjects.currentSubject.subject_description">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="subjects.updateSubject()"
+            ng-disabled="editSubjectForm.$invalid"> Редагувати предмет
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="subjects.cancelForm()">Відмінити</button>
+</div>

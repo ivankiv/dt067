@@ -3,18 +3,12 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['subjectService', '$state', '$uibModal'];
+        subjectController.$inject = ['subjectService', 'appConstants', '$uibModal'];
 
-        var currentId = 0;
-
-
-        function subjectController(subjectService, $state, $uibModal) {
+        function subjectController(subjectService, appConstants, $uibModal) {
             var self = this;
 
         //variables
-            self.showForm = false;
-            self.hideForm = hideForm;
-            self.currentSubject = {};
             self.list = {};
             self.listAllSubjects = {};
 
@@ -34,9 +28,8 @@
             self.getRecordsRange = getRecordsRange;
             self.countSubjects = countSubjects;
             self.deleteSubject = deleteSubject;
-            self.editSubject = editSubject;
-            self.updateSubject = updateSubject;
             self.showAddSubjectForm = showAddSubjectForm;
+            self.showEditSubjectForm = showEditSubjectForm;
 
             activate();
 
@@ -63,21 +56,6 @@
             function deleteSubject(subject_id) {
                 subjectService.deleteSubject(subject_id)
                     .then(deleteSubjectComplete, rejected);
-            }
-
-            function editSubject(subject) {
-                currentId = subject.subject_id;
-                self.currentSubject = subject;
-                self.showForm = true;
-            }
-
-            function updateSubject() {
-                subjectService.editSubject(currentId, self.currentSubject)
-                    .then(updateComplete, rejected);
-            }
-
-            function hideForm() {
-                self.showForm = false;
             }
 
             function pageChanged() {
@@ -109,20 +87,34 @@
                 }
             }
 
-            function updateComplete(response) {
-                if(response.data.response == 'ok') {
-                    self.currentSubject = {};
-                    hideForm();
-                }
-            }
-
             function showAddSubjectForm() {
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/add-subject.html',
-                    controller: 'SubjectModalController as subjects'
+                    controller: 'SubjectModalController as subjects',
+                    resolve: {
+                        currentSubject: {}
+                    }
                 });
                 modalInstance.result.then(function() {
                     countSubjects();
+                    pageChanged();
+                })
+            }
+
+            function showEditSubjectForm(subject) {
+                //we need this to get data of current subject and to pass it to SubjectModalController
+                // to edit current subject
+                appConstants.currentID = subject.subject_id;
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/edit-subject.html',
+                    controller: 'SubjectModalController as subjects',
+                    resolve: {
+                        currentSubject: subject
+
+                    }
+                });
+                modalInstance.result.then(function() {
                     pageChanged();
                 })
             }
@@ -131,6 +123,5 @@
                 console.log(response.data.response);
                 console.log(response.status + " " + response.statusText);
             }
-
         }
 })();

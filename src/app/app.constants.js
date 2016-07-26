@@ -4,6 +4,7 @@
     angular.module('app')
 
         .constant('appConstants', {
+            currentID: '',
             logInURL: 'http://dtapi.local/login/index',
             logOutURL: 'http://dtapi.local/login/logout',
             IsLoggedURL: 'http://dtapi.local/login/isLogged',
