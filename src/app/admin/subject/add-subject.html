@@ -10,10 +10,10 @@
                 placeholder="Напиши назву предмету" ng-model="subjects.subject.subject_name">
             </div>
             <div ng-if="subjects.duplicateMessage">
-                <hr/><span class="bg-danger">Предмет із такою назвою вже зареєстрований в системі!</span>
+                <hr/><span class="bg-danger">Предмет з такою назвою вже зареєстрований в системі!</span>
             </div>
             <div ng-if="subjects.incorrectMessage">
-                <hr/><span class="bg-danger">Назва предмету повинна містити тільки букви кирилицею та латиницею!</span>
+                <hr/><span class="bg-danger">Назва предмету повинна містити тільки букви кирилицею або латиницею!</span>
             </div>
         </div>
         <div class="form-group">

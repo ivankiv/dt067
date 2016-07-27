@@ -30,6 +30,10 @@
             }
 
             function updateSubject() {
+                if(!(/[а-яa-z]+/gi.test(self.currentSubject.subject_name))) {
+                    self.incorrectMessage = true;
+                    return;
+                }
                 subjectService.editSubject(appConstants.currentID, self.currentSubject)
                     .then(updateComplete, rejected);
             }
@@ -51,6 +55,11 @@
             }
 
             function updateComplete(response) {
+                if(response.status == 400) {
+                    self.duplicateMessage = true;
+                    return;
+                }
+
                 if(response.data.response == 'ok') {
                     self.currentSubject = {};
                     $uibModalInstance.close();
