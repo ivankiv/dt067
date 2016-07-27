@@ -59,9 +59,9 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="admin in admins.list">
-                        <td>{{admin.id}}</td>
-                        <td>{{admin.username}}</td>
-                        <td>{{admin.email}}</td>
+                        <td>{{::admin.id}}</td>
+                        <td>{{::admin.username}}</td>
+                        <td>{{::admin.email}}</td>
                         <td class="text-center"><button class="btn btn-info" ng-click = "admins.edit(admin)" >Редагувати</button></td>
                         <td class="text-center"><button class="btn btn-info" ng-click = "admins.remove(admin.id)">Видалити</button></td>
                     </tr>

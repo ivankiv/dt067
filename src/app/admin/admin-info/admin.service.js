@@ -2,45 +2,49 @@
     'use strict';
 
     angular
-        .module("app")
-        .factory("adminService",adminService);
+        .module('app')
+        .factory('adminService',adminService);
 
-    adminService.$inject = ["$http"];
+    adminService.$inject = ['$http', 'appConstants'];
 
-    function adminService($http) {
+    function adminService($http, appConstants) {
         return{
             getAdmins:getAdmins,
             deleteAdmin:deleteAdmin,
-            editAdmin:editAdmin
+            editAdmin:editAdmin,
+            createAdmin:createAdmin
         };
 
         function getAdmins() {
-            var url = "http://dtapi.local/AdminUser/getRecords";
-            return $http.get(url)
+            return $http.get(appConstants.getAdmins)
                 .then(complete)
                 .catch(failed);
-        };
+        }
 
         function editAdmin(obj) {
-            var url = "/AdminUser/update/" + obj.id;
-            return $http.post(url,obj)
+            return $http.post(appConstants.editAdmins + obj.id, obj)
                 .then(complete)
                 .catch(failed);
-        };
+        }
 
         function deleteAdmin(id) {
-            var url = "/AdminUser/del/" + id;
-            return $http.delete(url)
+            return $http.delete(appConstants.delAdmins + id)
                 .then(complete)
                 .catch(failed);
-        };
+        }
+
+        function createAdmin(admin) {
+            return $http.post(appConstants.addAdmins, admin)
+                .then(complete)
+                .catch(failed);
+        }
 
         function complete(response) {
             return response.data;
         }
 
         function failed(error) {
-            alert("XHR Failed. Error: " + error.data);
+            alert('XHR Failed. Error: ' + error.data);
         }
     }
 })();

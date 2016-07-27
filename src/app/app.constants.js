@@ -24,12 +24,18 @@
             delSpeciality: 'http://dtapi.local/speciality/del/',
 
             getFaculties: 'http://dtapi.local/faculty/getRecords',
-            getRangeOfFacultiesURL: 'http://dtapi.local/faculty/getRecordsRange/10/9',
+            getRangeOfFaculties: 'http://dtapi.local/faculty/getRecordsRange',
             countFaculties: 'http://dtapi.local/faculty/countRecords',
             addFaculty: 'http://dtapi.local/faculty/insertData',
             editFaculty: 'http://dtapi.local/faculty/update/',
-            delFaculty: 'http://dtapi.local/faculty/del/'
+            delFaculty: 'http://dtapi.local/faculty/del/',
+
+            getAdmins: 'http://dtapi.local/AdminUser/getRecords',
+            editAdmins: '/AdminUser/update/',
+            delAdmins: '/AdminUser/del/',
+            addAdmins:'/AdminUser/insertData'
+
         })
 
     ;
-})();
+}());
