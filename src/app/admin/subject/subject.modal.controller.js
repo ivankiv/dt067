@@ -5,19 +5,26 @@
         .controller('SubjectModalController', subjectModalController);
         subjectModalController.$inject = ['subjectService', 'appConstants', '$uibModalInstance', 'currentSubject'];
 
-        function subjectModalController(subjectService, appConstants, $uibModalInstance, currentSubject) {
+        function subjectModalController(subjectService, appConstants, $uibModalInstance,  currentSubject) {
             var self = this;
 
         //Variables
             self.subject = {subject_name: "", subject_description: ""};
             self.currentSubject = currentSubject;
+            self.duplicateMessage = false;
+            self.incorrectMessage = false;
 
-         //Methods
+            //Methods
             self.addSubject = addSubject;
             self.updateSubject = updateSubject;
             self.cancelForm = cancelForm;
 
             function addSubject() {
+                if(!(/[а-яa-z]+/gi.test(self.subject.subject_name))) {
+                    self.incorrectMessage = true;
+                    return;
+                }
+
                 subjectService.addSubject(self.subject)
                     .then(addSubjectComplete, rejected)
             }
@@ -32,9 +39,14 @@
             }
 
             function addSubjectComplete(response) {
+                if(response.status == 400) {
+                    self.duplicateMessage = true;
+                    return;
+                }
+
                 if(response.data.response = "ok") {
                     self.subject = {};
-                    $uibModalInstance.close();
+                    $uibModalInstance.close(response);
                 }
             }
 

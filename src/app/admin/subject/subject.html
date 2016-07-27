@@ -1,5 +1,5 @@
 <section id="main-content">
-    <section ng-if="!subjects.showForm " class="wrapper">
+    <section class="wrapper">
         <div class="row">
             <div class="col-xs-12">
               <table class="subject-list">
@@ -28,7 +28,8 @@
                                 ng-click="subjects.showEditSubjectForm(subject);"><i class="glyphicon glyphicon-pencil"></i>
                         </button>
                     </td>
-                    <td><button type="button" class="btn btn-default" ng-click="subjects.deleteSubject(subject.subject_id)" title="Видалити">
+                    <td><button type="button" class="btn btn-default" ng-click="subjects.deleteSubject(subject.subject_id)"
+                               title="Видалити">
                         <i class="glyphicon glyphicon-remove"></i></button>
                     </td>
                     <td><button type="button" class="btn btn-default" title="Тести">

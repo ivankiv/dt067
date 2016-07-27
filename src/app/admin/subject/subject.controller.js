@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['subjectService', 'appConstants', '$uibModal'];
+        subjectController.$inject = ['subjectService', 'appConstants', '$uibModal', 'ngDialog'];
 
-        function subjectController(subjectService, appConstants, $uibModal) {
+        function subjectController(subjectService, appConstants, $uibModal, ngDialog) {
             var self = this;
 
         //variables
@@ -54,8 +54,19 @@
             }
 
             function deleteSubject(subject_id) {
-                subjectService.deleteSubject(subject_id)
-                    .then(deleteSubjectComplete, rejected);
+                ngDialog.openConfirm({
+                    template:
+                        '<div class="ngdialog-message">' +
+                        '  <h5 class="confirmation-title"><i class="fa fa-exclamation-triangle orange"></i> Ви підтверджуєте видалення предмету?</h5>' +
+                        '    <div class="ngdialog-buttons">' +
+                        '      <button type="button"  class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog()">Cancel</button>' +
+                        '      <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="confirm()">Ok</button>' +
+                        '    </div>' +
+                        '</div>'
+                }).then(function() {
+                    subjectService.deleteSubject(subject_id)
+                        .then(deleteSubjectComplete, rejected);
+                });
             }
 
             function pageChanged() {
@@ -82,6 +93,10 @@
 
             function deleteSubjectComplete(response) {
                 if(response.data.response == "ok") {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Предмет було успішно видалено!</div>',
+                        plain: 'true'
+                    });
                    countSubjects();
                    pageChanged();
                 }
@@ -95,21 +110,27 @@
                         currentSubject: {}
                     }
                 });
-                modalInstance.result.then(function() {
-                    countSubjects();
-                    pageChanged();
+                modalInstance.result.then(function(response) {
+                        ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Предмет було успішно додано!</div>',
+                            plain: 'true'
+                        });
+                        countSubjects();
+                        pageChanged();
                 })
             }
 
             function showEditSubjectForm(subject) {
-                //we need this to get data of current subject and to pass it to SubjectModalController
-                // to edit current subject
+            //we need this to get current ID of subject and to pass it to SubjectModalController
+            // to edit current subject
                 appConstants.currentID = subject.subject_id;
 
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/edit-subject.html',
                     controller: 'SubjectModalController as subjects',
                     resolve: {
+                    //the variable is needed to store data of current subject
+                    // to fill up the form of editing subject
                         currentSubject: subject
 
                     }
