@@ -1,0 +1,70 @@
+//colors
+$color_shark_approx: #29272b;
+$color_straw_approx: #d6bf8c;
+
+//urls
+$url_0: url(../img/enter-bg.jpg);
+
+* {
+	padding: 0;
+	margin: 0;
+}
+html {
+	width: 100%;
+	height: 100%;
+}
+body {
+  position: relative; }
+.login-wrapper{
+  background: url(../img/enter-bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+}
+.main {
+	height: 100%;
+	width: 100%;
+	display: table;
+}
+.login-pass-inputs-wrapper {
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+	:first-child {
+		margin-bottom: 20px;
+	}
+	input {
+		display: block;
+		margin: auto;
+		height: 40px;
+		width: 250px;
+		padding-left: 10px;
+	}
+	.enter-submit {
+		margin: auto;
+		display: block;
+		width: 150px;
+		margin-top: 20px;
+		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+		border-radius: 20px;
+		height: 35px;
+		color: $color_shark_approx;
+		background-color: $color_straw_approx;
+		font-weight: bold;
+		border: none;
+	}
+}
+.pagination {
+  cursor: pointer;
+  width: auto;
+}
+
+table.subject-list {
+	a {
+	  cursor: pointer;
+	}
+  	.subject-list-centered{
+	  text-align: center;
+	}
+}

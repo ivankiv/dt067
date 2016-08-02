@@ -1,0 +1,69 @@
+<section id="main-content">
+  <section class="wrapper">
+    <div class="row">
+      <div class="col-lg-12"></div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+
+        <table>
+          <thead>
+            <tr>
+              <th colspan="4">Група</th>
+              <th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нового студента</th>
+            </tr>
+            <tr>
+              <th>Реєстр №</th>
+              <th>Прізвище і ім'я</th>
+              <th colspan="3">Управління</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>number</td>
+              <td>student</td>
+              <td>Редагувати</td>
+              <td>Результати</td>
+              <td>Видалити</td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addGroup" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="name-of-group col-xs-5">Реєстрація нового студента</span>
+              </div>
+              <div class="modal-body add-student">
+                <div class="col-xs-12 add-student-modal-inpts-wrpr">
+                  <span class="name-of-group col-xs-5">Прізвище і ім'я</span>
+                  <input class="col-xs-3" type="text"></div>
+                <div class="col-xs-12 add-student-modal-inpts-wrpr">
+                  <span class="name-of-group col-xs-5">Пароль</span>
+                  <input class="col-xs-3" type="password"></div>
+                <div class="col-xs-12 add-student-modal-inpts-wrpr">
+                  <span class="name-of-group col-xs-5">Підтвердження пароля</span>
+                  <input class="col-xs-3" type="password"></div>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Зареєструвати</button>
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Згенерувати пароль</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+</section>

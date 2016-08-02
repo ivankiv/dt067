@@ -1,0 +1,40 @@
+       <section id="main-content">
+          <section class="wrapper">
+              <div class="row">
+                  <div class="col-xs-12">
+                          <table>
+            <thead>
+              <tr>
+                <th colspan="2">Спеціальність</th>
+                <th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нову спеціальність</th>
+              </tr>
+              <tr>
+                <th>№ п/п</th>
+                <th>Назва спеціалізаці</th>
+                <th >Код</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="speciality in speciality.list">
+                <td>{{$index + 1}}</td>
+                <td>{{::speciality.speciality_name}}</td>
+                <td>{{::speciality.speciality_code}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+
+                      <uib-pagination
+                              total-items="speciality.totalSpecialities.numberOfRecords"
+                              ng-model="speciality.currentPage"
+                              ng-change="speciality.pageChanged()"
+                              previous-text="&lsaquo;"
+                              next-text="&rsaquo;">
+                      </uib-pagination>
+
+                  </div>
+
+              </div>
+
+          </section>
+      </section>

@@ -1,0 +1,37 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-lg-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="button" class="btn btn-danger" ui-sref="admin-home.subject" title="Назад">
+                    <i class="glyphicon glyphicon-share-alt"></i>
+                </button>
+                <form class="form-horizontal" name="newSubjectForm" role="form" ng-submit="subjects.addSubject()">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="name">Назва предмету: </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="name" required
+                                   placeholder="Напиши назву предмету" ng-model="subjects.subject.subject_name">
+                        </div>
+                        <div ng-if="">Назва предмету повинна містити тільки букви</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="description">Опис предмету: </label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="description" required
+                                   placeholder="Додай опис предмету" ng-model="subjects.subject.subject_description">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success" ng-disabled="newSubjectForm.$invalid">Додати предмет</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>

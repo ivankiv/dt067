@@ -1,0 +1,115 @@
+<!-- container section start -->
+  <section id="container" class="">
+     
+      
+      <header>
+          <nav class="navbar navbar-default" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+
+                  <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">Admin menu</a>
+              </div>
+
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+
+                  <ul class="nav navbar-nav">
+                      <li><a ui-sref="admin-home.faculty">Факультети</a></li>
+                      <li><a>Спеціальності</a></li>
+                      <li><a>Групи</a></li>
+                      <li><a ui-sref="admin-home.subject">Предмети</a></li>
+                      <li><a ui-sref="admin-home.admin">Адміністратори</a></li>
+
+
+                  </ul>
+                  <form class="navbar-form navbar-left" role="search">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Search">
+                      </div>
+                      <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a  ui-sref="login">Log out</a></li>
+                  </ul>
+              </div><!-- /.navbar-collapse -->
+          </nav>
+
+
+      </header>      
+      <!--header end-->
+
+      <!--sidebar start-->
+      <!--<aside class="admin-aside col-md-2">-->
+          <!--<div id="sidebar"  class="nav-collapse ">-->
+              <!--<ul class="sidebar-menu">                -->
+                  <!--<li >-->
+                      <!--<a ui-sref="StatisticSystem" class="" >-->
+                          <!--<span>Statistics system</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+				  <!--<li class="sub-menu">-->
+                      <!--<a ui-sref="GroupsAndStudents" class="">-->
+                          <!--<span>Groups and students</span>-->
+                      <!--</a>-->
+                  <!--</li>       -->
+                  <!--<li>-->
+                      <!--<a ui-sref="admin-home.subject" class="">-->
+                          <!--<span>Subjects</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+                  <!--<li>-->
+                      <!--<a class="" ui-sref="TestsOfSubject">-->
+                          <!--<span>Subject tests</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+                             <!---->
+
+                 <!--<li class="sub-menu">-->
+                      <!--<a ui-sref="RegistrationTestTask" class="">-->
+                          <!--<span>New test task</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+
+                   <!--<li class="sub-menu">-->
+                      <!--<a ui-sref="admin-home.admin" class="">-->
+                          <!--<span>Admins</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+
+                  <!--<li class="sub-menu">-->
+                      <!--<a ui-sref="admin-home.speciality" class="">-->
+                          <!--<span>Specialities</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+
+                  <!--<li class="sub-menu">-->
+                      <!--<a ui-sref="admin-home.faculty" class="">-->
+                          <!--<span>Faculties</span>-->
+                      <!--</a>-->
+                  <!--</li>-->
+
+                  <!--<li>                     -->
+                      <!--<a ui-sref="login" class="">-->
+                          <!--<span>Log out</span>-->
+                          <!---->
+                      <!--</a>-->
+                                         <!---->
+                  <!--</li>-->
+                  <!---->
+              <!--</ul>-->
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      
+      <section ui-view="content" class="col-xs-12 col-md-12"></section>
+
+
+
+
+  </section>
