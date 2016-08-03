@@ -2,40 +2,53 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12">
-                <table>
-                    <thead>
-                    <tr>
-                        <th colspan="2">Факультети</th>
-                        <th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати новий факультет</th>
-                    </tr>
-                    <tr>
-                        <th>№ п/п</th>
-                        <th>Назва факультету</th>
-                        <th>Опис</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="faculty in faculty.list">
-                        <td>{{$index  + 1}}</td>
-                        <td>{{::faculty.faculty_name}}</td>
-                        <td>{{::faculty.faculty_description}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <h1>RWD List to Table</h1>
+                <!--<table>-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th colspan="2">Факультети</th>-->
+                        <!--<th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати новий факультет</th>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<th>№ п/п</th>-->
+                        <!--<th>Назва факультету</th>-->
+                        <!--<th>Опис</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr ng-repeat="faculty in faculty.list">-->
+                        <!--<td>{{$index  + 1}}</td>-->
+                        <!--<td>{{::faculty.faculty_name}}</td>-->
+                        <!--<td>{{::faculty.faculty_description}}</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--<section class="container-fluid">-->
+                <!--<section class="row view-headers">-->
+                    <!--<div class="col-xs-10">-->
+                        <!--<h5>Факультети</h5>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-2"></div>-->
+                <!--</section>-->
+            <!--</section>-->
                 <table class="rwd-table">
                     <tr>
-                        <th>Movie Title</th>
-                        <th>Genre</th>
+                        <th>Факультети</th>
+                        <th>Опис факультету</th>
                         <th>Year</th>
                         <th>Gross</th>
+                        <th>lalala</th>
+                        <!--<th>Gross</th>-->
                     </tr>
                     <tr>
                         <td data-th="Movie Title">Star Wars</td>
                         <td data-th="Genre">Adventure, Sci-fi</td>
-                        <td data-th="Year">1977</td>
-                        <td data-th="Gross">$460,935,665</td>
+                        <td data-th="Year"><button type="button" class="btn btn-default " title="Редагувати"
+                           ><i class="glyphicon glyphicon-pencil"></i>
+                            </button></td>
+                        <td data-th="Gross"><button type="button" class="btn btn-default views-remove-btn"  title="Видалити">
+                            <i class="glyphicon glyphicon-remove"></i></button></td>
+                        <td data-th="Gross"><button type="button" class="btn btn-default" title="Тести">
+                            <i class="glyphicon glyphicon-list-alt"></i></button></td>
                     </tr>
                     <tr>
                         <td data-th="Movie Title">Howard The Duck</td>
@@ -51,7 +64,9 @@
                     </tr>
                 </table>
 
-                <p>&larr; Drag window (in editor or full page view) to see the effect. &rarr;</p>
+
+
+
                 <uib-pagination
                         total-items="faculty.totalFaculties.numberOfRecords"
                         ng-model="faculty.currentPage"

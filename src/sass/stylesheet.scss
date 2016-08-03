@@ -1,11 +1,10 @@
 
 
-
 $breakpoint-alpha: 480px; // adjust to your needs
 
 .rwd-table {
   margin: 1em 0;
-  min-width: 300px; // adjust to your needs
+  min-width: 100%; // adjust to your needs
 
   tr {
     border-top: 1px solid #ddd;
@@ -13,7 +12,7 @@ $breakpoint-alpha: 480px; // adjust to your needs
   }
 
   th {
-    display: none;
+    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
   }
 
   td {
@@ -46,7 +45,7 @@ $breakpoint-alpha: 480px; // adjust to your needs
 
     @media (min-width: $breakpoint-alpha) {
       display: table-cell;
-      padding: .25em .5em;
+      //padding: .25em .5em;
 
       &:first-child {
         padding-left: 0;
@@ -63,21 +62,14 @@ $breakpoint-alpha: 480px; // adjust to your needs
 }
 
 
-
 body {
-  padding: 0 2em;
   font-family: Montserrat, sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   color: #444;
-  background: #eee;
+  background: #eee!important;
 }
 
-h1 {
-  font-weight: normal;
-  letter-spacing: -1px;
-  color: #34495E;
-}
 
 .rwd-table {
   background: #34495E;
@@ -96,5 +88,11 @@ h1 {
   th, td:before {
     color: #dd5;
   }
+  td:nth-last-of-type(-n+2){
+    width: 40px;
+  }
 }
-
+.views-remove-btn{
+  display: block!important;
+  margin: auto!important;
+}

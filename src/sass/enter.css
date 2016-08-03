@@ -49,4 +49,8 @@ body {
   cursor: pointer;
   width: auto; }
 
-/*# sourceMappingURL=enter.css.map */
+table.subject-list a {
+  cursor: pointer; }
+
+table.subject-list .subject-list-centered {
+  text-align: center; }
