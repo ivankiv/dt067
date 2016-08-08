@@ -1,0 +1,74 @@
+<form class="add-new-test-form" name="newTestForm">
+    <table>
+        <thead>
+        <tr>
+            <th class="col-md-6" >Додати тест</th>
+            <th class="col-md-6" ></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>ID Предмету:</td>
+            <td >
+                <input type="text" name="subjectId" ng-model="tests.test.subject_id" disabled>
+            </td>
+        </tr>
+        <tr>
+            <td >Назва:</td>
+            <td >
+                <input type="text" name="name" ng-model="tests.test.test_name"
+                       required
+                       ng-minlength="3"
+                       ng-maxlength="100">
+                <novalidate-messages field="newTestForm.name" minlength="3" maxlength="100"></novalidate-messages>
+            </td>
+        </tr>
+        <tr>
+            <td >Кільксть задач:</td>
+            <td >
+                <input type="number" name="amount" ng-model="tests.test.tasks"
+                       required
+                       min="5"
+                       max="100">
+                <novalidate-messages field="newTestForm.amount" min="5" max="100"></novalidate-messages>
+            </td>
+        </tr>
+        <tr>
+            <td >Час для проходження: </td>
+            <td >
+                <input type="number"  name="time" ng-model="tests.test.time_for_test"
+                       placeholder="Час, хв"
+                       required
+                       min="30"
+                       max="180">
+                <novalidate-messages field="newTestForm.time" min="30" max="180"></novalidate-messages>
+            </td>
+        </tr>
+        <tr>
+            <td >Статус:</td>
+            <td >
+                <select class="input-form" name="status" ng-model="tests.test.enabled" required>
+                    <option value="0">Недоступно</option>
+                    <option value="1">Доступно</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td >Кількість спроб:</td>
+            <td >
+                <input type="number"  name="attemp" ng-model="tests.test.attempts"
+                       required
+                       min="1"
+                       max="10">
+                <novalidate-messages field="newTestForm.attemp" min="1" max="10"></novalidate-messages>
+            </td>
+        </tr>
+        <tr>
+            <td  class="text-center"><button class="btn btn-default" ng-click="tests.HideFormTest()">Скасувати</button></td>
+            <td  class="text-center">
+                <button class="btn btn-info" ng-click="tests.addTest()" ng-disabled="newTestForm.$invalid">Підтвердити</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

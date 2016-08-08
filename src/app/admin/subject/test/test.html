@@ -1,0 +1,60 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 edit-admin-wrapper" ng-if="tests.showAddTestForm" ng-include="'app/admin/subject/test/add-test.html'"></div>
+            <div class="col-xs-12 edit-admin-wrapper" ng-if="tests.showEditTestForm" ng-include="'app/admin/subject/test/edit-test.html'"></div>
+            <div class="col-xs-12">
+                <div class='col-sm-4 col-xs-12 views-header'><h4>Тести предмету: {{tests.currentSubjectName}}</h4></div>
+                <div class='col-sm-8 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-default add-btn" title="Додати тест"
+                            ng-click="tests.showAddForm()"><i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table">
+                    <thead>
+                    <tr>
+                        <th>Назва тесту</th>
+                        <th>К-сть завдань</th>
+                        <th>Тривалість тесту</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!tests.showMessageNoEntity">
+                    <tr ng-repeat="test in tests.list">
+                        <td data-th="Тест">{{::test.test_name}}</td>
+                        <td data-th="К-сть завдань">{{::test.tasks}}</td>
+                        <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
+                        <td data-th="Статус">{{::test.enabled}}</td>
+                        <td>
+                            <button  type="button" class="btn btn-default subject-list-centered" title="Редагувати"
+                                     ng-click='tests.editTest(test)'><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default" title="Завдання">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button  type="button" class="btn btn-default" title="Деталі">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button  type="button" class="btn btn-default" title="Видалити"
+                                     ng-click="tests.deleteTest(test.test_id)"><i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="tests.showMessageNoEntity" class="text-center">
+                    <h1>Немає тестів для даного предмету!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

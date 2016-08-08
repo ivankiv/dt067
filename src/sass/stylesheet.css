@@ -144,3 +144,42 @@ body {
 .views-remove-btn {
   display: block !important;
   margin: auto !important; }
+
+/************************************************
+                  ngMessage styles
+/*************************************************/
+[ng-messages] {
+  color: #a94442;
+  font-size: 1em;
+  visibility: hidden; }
+
+[ng-messages].ng-active {
+  opacity: 0;
+  -webkit-transition: opacity .3s linear, top .3s linear, visibility 0s linear .3s;
+  transition: opacity .3s linear, top .3s linear, visibility 0s linear .3s; }
+
+[ng-messages].ng-active.show-messages {
+  -webkit-transition: opacity .3s linear, top .3s linear, visibility 0s linear .3s;
+  transition: opacity .3s linear, top .3s linear, visibility .3s linear; }
+
+[ng-messages].show-messages {
+  visibility: visible;
+  opacity: 1; }
+
+[ng-message].ng-enter.ng-enter-active {
+  opacity: 1; }
+
+[ng-message].ng-enter {
+  opacity: 0; }
+
+[ng-message].ng-leave {
+  opacity: 1; }
+
+[ng-message].ng-leave-active {
+  opacity: 0; }
+
+/************************************************
+               The end of ngMessage styles
+/*************************************************/
+
+/*# sourceMappingURL=stylesheet.css.map */

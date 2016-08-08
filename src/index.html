@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="sass/enter.css">
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog.css">
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog-theme-default.css">
 	<link rel="stylesheet" href="sass/admin-scss/elegant-icons-style.css">
 	<link rel="stylesheet" href="sass/admin-scss/font-awesome.css">
 	<link rel="stylesheet" href="sass/admin-scss/line-icons.css">
@@ -15,9 +17,8 @@
     <link rel="stylesheet" href="sass/header.css">
     <!-- endinject -->
 </head>
-<body>
+<body ng-cloak>
 <ui-view></ui-view>
-
 
 <!-- inject:js -->
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -27,6 +28,9 @@
 <script src="../bower_components/angular-route/angular-route.min.js"></script>
 <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/ng-dialog/js/ngDialog.min.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="app/app.module.js"></script>
 <script src="app/app.config.js"></script>
 <script src="app/app.constants.js"></script>
@@ -34,6 +38,11 @@
 <script src="app/auth/loginCtrl.js"></script>
 <script src="app/admin/subject/subject.service.js"></script>
 <script src="app/admin/subject/subject.controller.js"></script>
+<script src="app/admin/subject/subject.modal.controller.js"></script>
+<script src="app/admin/subject/test/test.controller.js"></script>
+<script src="app/admin/subject/test/test.service.js"></script>
+<script src="app/directives/validate.input.directive.js"></script>
+<script src="app/directives/stringToNumber.directive.js"></script>
 <script src="app/admin/speciality/speciality.service.js"></script>
 <script src="app/admin/speciality/specialityCtrl.js"></script>
 <script src="app/admin/faculty/faculty.service.js"></script>
