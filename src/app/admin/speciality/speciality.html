@@ -2,26 +2,65 @@
           <section class="wrapper">
               <div class="row">
                   <div class="col-xs-12">
-                          <table>
-            <thead>
-              <tr>
-                <th colspan="2">Спеціальність</th>
-                <th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нову спеціальність</th>
-              </tr>
-              <tr>
-                <th>№ п/п</th>
-                <th>Назва спеціалізаці</th>
-                <th >Код</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="speciality in speciality.list">
-                <td>{{$index + 1}}</td>
-                <td>{{::speciality.speciality_name}}</td>
-                <td>{{::speciality.speciality_code}}</td>
-              </tr>
-            </tbody>
-          </table>
+                      <div class='col-sm-2 col-xs-12 views-header'><h4>Спеціальності</h4></div>
+                      <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                          <button type="button" class="btn btn-default add-btn" title="Додати спеціальність"
+                          ><i class="fa fa-plus" aria-hidden="true"></i>
+                          </button>
+                          <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
+                      </div>
+                      <table class="rwd-table faculty-table">
+                          <tr>
+                              <th>Назва</th>
+                              <th>Код</th>
+                              <!--<th>Gross</th>-->
+                          </tr>
+                          <tr>
+                              <td data-th="Назва">Факультет</td>
+                              <td data-th="Код">Adventure, Sci-fi</td>
+                              <td><button type="button" class="btn btn-default " title="Редагувати"
+                              ><i class="glyphicon glyphicon-pencil"></i>
+                              </button></td>
+                              <td><button type="button" class="btn btn-default views-remove-btn"  title="Видалити">
+                                  <i class="glyphicon glyphicon-remove"></i></button></td>
+                          </tr>
+                          <tr>
+                              <td data-th="Movie Title">Star Wars</td>
+                              <td data-th="Genre">Adventure, Sci-fi</td>
+                              <td data-th="Year"><button type="button" class="btn btn-default " title="Редагувати"
+                              ><i class="glyphicon glyphicon-pencil"></i>
+                              </button></td>
+                              <td data-th="Gross"><button type="button" class="btn btn-default views-remove-btn"  title="Видалити">
+                                  <i class="glyphicon glyphicon-remove"></i></button></td>
+                          </tr>
+                          <tr>
+                              <td data-th="Movie Title">American Graffiti</td>
+                              <td data-th="Genre">Comedy, Drama</td>
+                              <td data-th="Year">1973</td>
+                              <td data-th="Gross">$115,000,000</td>
+                          </tr>
+                      </table>
+
+                      <!--<table>-->
+            <!--<thead>-->
+              <!--<tr>-->
+                <!--<th colspan="2">Спеціальність</th>-->
+                <!--<th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нову спеціальність</th>-->
+              <!--</tr>-->
+              <!--<tr>-->
+                <!--<th>№ п/п</th>-->
+                <!--<th>Назва спеціалізаці</th>-->
+                <!--<th >Код</th>-->
+              <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+              <!--<tr ng-repeat="speciality in speciality.list">-->
+                <!--<td>{{$index + 1}}</td>-->
+                <!--<td>{{::speciality.speciality_name}}</td>-->
+                <!--<td>{{::speciality.speciality_code}}</td>-->
+              <!--</tr>-->
+            <!--</tbody>-->
+          <!--</table>-->
 
 
                       <uib-pagination
