@@ -1,5 +1,20 @@
 angular.module('app')
-    .config(function($stateProvider, $urlRouterProvider) {
+    .config(configApp);
+
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider' ];
+
+function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
+
+    ngDialogProvider.setDefaults({
+        plain: true,
+        showClose: true,
+        closeByDocument: false,
+        closeByEscape: true,
+        closeByNavigation: true
+    });
+
+    $urlRouterProvider.otherwise('/');
+
     $stateProvider
 
         .state('login', {
@@ -23,12 +38,12 @@ angular.module('app')
             }
         })
 
-        .state('admin-home.subjectNew', {
-            url: '/newSubject',
+        .state('admin-home.test', {
+            url: '/subject/:currentSubjectId/test',
             views: {
                 'content': {
-                    templateUrl: 'app/admin/subject/add-subject.html',
-                    controller: 'SubjectController as subjects'
+                    templateUrl: 'app/admin/subject/test/test.html',
+                    controller: 'TestController as tests'
                 }
             }
         })
@@ -48,7 +63,17 @@ angular.module('app')
             views: {
                 'content': {
                     templateUrl: 'app/admin/faculty/faculty.html',
-                    controller: 'facultyCtrl as faculty'
+                    controller: 'facultyController as faculties'
+                }
+            }
+        })
+
+        .state('admin-home.newFaculty', {
+            url: '/newFaculty',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/faculty/faculty-add.html',
+                    controller: 'facultyController as faculties'
                 }
             }
         })
@@ -61,60 +86,5 @@ angular.module('app')
                     controller: 'AdminEditController as admins'
                 }
             }
-        })
-        // .state('StatisticSystem', {
-        //     url: '/StatisticSystem',
-        //     templateUrl: 'src/app/admin/StatisticSystem.html'
-        // })
-        //
-        // .state('GroupsAndStudents', {
-        //     url: '/GroupsAndStudents',
-        //     templateUrl: 'src/app/admin/group/GroupsAndStudents.html'
-        // })
-        //
-        // .state('Subjects', {
-        //     url: '/Subjects',
-        //     templateUrl: 'admin/subject/Subjects.html'
-        // })
-        //
-        // .state('StudentsInGroup', {
-        //     url: '/StudentsInGroup',
-        //     templateUrl: 'src/app/admin/group/StudentsInGroup.html'
-        // })
-        // .state('TimeTableTesting', {
-        //     url: '/TimeTableTesting',
-        //     templateUrl: 'admin/subject/TimeTableTesting.html'
-        // })
-        // .state('AddNewTimeTable', {
-        //     url: '/AddNewTimeTable',
-        //     templateUrl: 'views/admin/templates/AddNewTimeTable.html'
-        // })
-        // .state('TestsOfSubject', {
-        //     url: '/TestsOfSubject',
-        //     templateUrl: 'admin/subject/TestsOfSubject.html'
-        // })
-        // .state('RegistrNewTest', {
-        //     url: '/RegistrNewTest',
-        //     templateUrl: 'admin/subject/RegistrNewTest.html'
-        // })
-        // .state('MoreOptionsForTest', {
-        //     url: '/MoreOptionsForTest',
-        //     templateUrl: 'admin/subject/MoreOptionsForTest.html'
-        // })
-        // .state('RegistrationTestTask', {
-        //     url: '/RegistrationTestTask',
-        //     templateUrl: 'admin/subject/RegistrationTestTask.html'
-        // })
-        // .state('GroupRoots', {
-        //     url: '/GroupRoots',
-        //     templateUrl: 'src/app/admin/user/edit-admin.html'
-        // })
-        //  .state('RegisterNewAnministr', {
-        //     url: '/RegisterNewAnministr',
-        //     templateUrl: 'src/app/admin/admin-info/RegisterNewAnministr.html'
-        // })
-    ;
-
-    $urlRouterProvider.otherwise('/');
-
-});
+        });
+}

@@ -8,6 +8,7 @@
         function subjectService ($http, appConstants) {
             return {
                 getSubjects: getSubjects,
+                getOneSubject: getOneSubject,
                 countSubjects: countSubjects,
                 getRecordsRange: getRecordsRange,
                 addSubject: addSubject,
@@ -17,6 +18,10 @@
 
             function getSubjects() {
                 return $http.get(appConstants.getSubjects)
+                    .then(fulfilled, rejected);
+            }
+            function getOneSubject(currentId) {
+                return $http.get(appConstants.getOneSubject + currentId)
                     .then(fulfilled, rejected);
             }
             function countSubjects() {
@@ -47,4 +52,4 @@
                 return response;
             }
         }
-})();
+}());

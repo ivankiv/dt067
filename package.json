@@ -4,12 +4,11 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "gulp sass"
+    "start": "gulp index && gulp admin && gulp sass && node app.js"
   },
-  "author": "",
+  "author": "IF-067",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
