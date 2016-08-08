@@ -3,6 +3,7 @@
 $breakpoint-alpha: 501px;
 $white: #fff;
 $black: #000;
+$table-bg:gray;
 .collapse.in{
   clear: both!important;
 }
@@ -118,7 +119,7 @@ body {
 }
 
 .faculty-table{
-  background: #A32C9B;
+  background: $table-bg;
   color: white;
   overflow: hidden;
   font-weight: bold;
@@ -141,7 +142,7 @@ body {
   }
 }
 .subject-table{
-  background: #A32C9B;
+  background: $table-bg;
   color: white;
   overflow: hidden;
   font-weight: bold;
@@ -167,7 +168,7 @@ body {
   }
 }
 .statistic-table{
-  background: #A32C9B;
+  background: $table-bg;
   color: $white;
   overflow: hidden;
   font-weight: bold;
