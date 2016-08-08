@@ -20,6 +20,7 @@
               <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
 
                   <ul class="nav navbar-nav">
+                      <li><a ui-sref="admin-home">Статистика системи</a></li>
                       <li><a ui-sref="admin-home.faculty">Факультети</a></li>
                       <li><a ui-sref="admin-home.speciality">Спеціальності</a></li>
                       <li><a>Групи</a></li>
@@ -101,7 +102,35 @@
           </div>
       </aside>
       
-      <section ui-view="content" class="col-xs-12 col-md-12"></section>
+      <section ui-view="content" class="col-xs-12 col-md-12">
+          <div class='col-xs-12 views-header'><h4>Статистика системи</h4></div>
+          <table class="rwd-table statistic-table">
+              <tr>
+                  <td>Зареєстровано факультетів</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано спеціальностей</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано груп</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано студентів</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано предметів</td>
+                  <td>1</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано тестів</td>
+                  <td>1</td>
+              </tr>
+          </table>
+      </section>
 
 
 

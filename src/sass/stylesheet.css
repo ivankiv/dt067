@@ -118,6 +118,24 @@ body {
         .subject-table td:nth-last-of-type(-n+4):before {
           display: none; } }
 
+.statistic-table {
+  background: #A32C9B;
+  color: #fff;
+  overflow: hidden;
+  font-weight: bold; }
+  .statistic-table td:nth-child(1) {
+    padding-top: 0px;
+    width: 95%; }
+    @media (max-width: 501px) {
+      .statistic-table td:nth-child(1) {
+        width: 80%;
+        display: block;
+        float: left; } }
+  .statistic-table td:before {
+    content: attr(data-th) " ";
+    font-weight: bold;
+    width: 1px; }
+
 .admin-views-header {
   background-color: #0f0f0f; }
   .admin-views-header h4 {

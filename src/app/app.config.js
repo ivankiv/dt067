@@ -62,6 +62,7 @@ angular.module('app')
                 }
             }
         })
+
         // .state('StatisticSystem', {
         //     url: '/StatisticSystem',
         //     templateUrl: 'src/app/admin/StatisticSystem.html'
