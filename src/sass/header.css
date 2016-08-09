@@ -1,13 +1,18 @@
 .navbar-default, .navbar-collapse, .avbar-header {
-  background-color: #F6FF00; }
+  background: -webkit-linear-gradient(45deg, #deffd9 0%, teal 100%) !important;
+  background: -moz-linear-gradient(45deg, #deffd9 0%, teal 100%) !important; }
   .navbar-default .fa-sign-out, .navbar-collapse .fa-sign-out, .avbar-header .fa-sign-out {
     font-size: 20px; }
 
 .navbar-nav a {
   color: black !important; }
 
+.navbar-nav li {
+  height: 55px; }
+
 .navbar-nav li:hover {
-  background-color: #E8E52C; }
+  background-color: #5F9EA0;
+  border-bottom: 3px solid #ffffff; }
 
 .navbar-brand {
   color: black !important; }

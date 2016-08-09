@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp'),
-	 inject = require('gulp-inject'),
+	 // inject = require('gulp-inject'),
 	 sass = require('gulp-sass');
 
 gulp.task('sass', function () {
@@ -14,14 +14,14 @@ gulp.task('sass:watch', function () {
     gulp.watch('src/sass/*.scss', ['sass']);
 });
 
-gulp.task('index', function() {
- gulp.src('index.html')
-  .pipe(inject(gulp.src(['./sass/*.css',
-   './bower_components/jquery/dist/*.min.js',
-    './bower_components/bootstrap/dist/css/*.min.css',
-    './bower_components/bootstrap/dist/js/*bootstrap.min.js'], {read: false}), {relative: true}))
-  .pipe(gulp.dest(''));
-});
+// gulp.task('index', function() {
+//  gulp.src('index.html')
+//   .pipe(inject(gulp.src(['./sass/*.css',
+//    './bower_components/jquery/dist/*.min.js',
+//     './bower_components/bootstrap/dist/css/*.min.css',
+//     './bower_components/bootstrap/dist/js/*bootstrap.min.js'], {read: false}), {relative: true}))
+//   .pipe(gulp.dest(''));
+// });
 
 // gulp.task('admin', function() {
 //  gulp.src(src/index.html')

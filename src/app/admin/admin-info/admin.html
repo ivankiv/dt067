@@ -3,7 +3,7 @@
         <div class="col-xs-12 edit-admin-wrapper" ng-if = "admins.showEdit" ng-include = "'app/admin/admin-info/admin-edit-form.html'"></div>
 
         <div class="col-xs-12 create-admin-wrapper" ng-if = "admins.showCreate" ng-include = "'app/admin/admin-info/admin-create-form.html'"></div>
-                                <div class="col-xs-12" ng-if = "!admins.showEdit && !admins.showCreate">
+                                <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!admins.showEdit && !admins.showCreate">
                                 <div class='col-sm-2 col-xs-12 views-header'><h4>Адміністратори</h4></div>
                                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                                     <button type="button" class="btn btn-default add-btn" title="Додати адміністратора" ng-click="admins.showCreateForm()"
@@ -11,19 +11,19 @@
                                     </button>
                                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
                                 </div>
-                                    <table class="text-center rwd-table faculty-table">
+                                    <table class="text-center rwd-table faculty-table table-striped">
                                         <thead class="text-center">
                                         <tr>
-                                            <th>ID</th>
-                                            <th>Логін</th>
-                                            <th>Поштова скринька</th>
+                                            <th data-th="ID">ID</th>
+                                            <th data-th="Логін">Логін</th>
+                                            <th data-th="Поштова скринька">Поштова скринька</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr ng-repeat="admin in admins.list">
-                                            <td>{{::admin.id}}</td>
-                                            <td>{{::admin.username}}</td>
-                                            <td>{{::admin.email}}</td>
+                                            <td  data-th="ID">{{::admin.id}}</td>
+                                            <td data-th="Логін">{{::admin.username}}</td>
+                                            <td  data-th="Поштова скринька">{{::admin.email}}</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-default" title="Редагувати" ng-click="admins.showEditForm(admin)">
                                                     <i class="glyphicon glyphicon-pencil"></i>

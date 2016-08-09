@@ -1,1 +1,44 @@
-<h1>234</h1>
+<form class="form-group" name="adminEditForm">
+    <table class="rwd-table add-edit-admin-table">
+        <thead>
+        <tr>
+            <th colspan="6" >Редагувати</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td colspan="3">Ім'я</td>
+            <td colspan="3">
+                <input type="text" class="form-control" name="name-of-test" ng-model="admins.currentObj.username"></td>
+        </tr>
+        <tr>
+            <td colspan="3">email</td>
+            <td colspan="3">
+                <input type="email" class="form-control" name="name-of-test" ng-model="admins.currentObj.email"></td>
+        </tr>
+        <tr>
+            <td colspan="3">Пароль</td>
+            <td colspan="3">
+                <input type="password" class="form-control" name="name-of-test" ng-model="admins.password"></td>
+        </tr>
+        <tr>
+            <td colspan="3">Підтвердження пароля</td>
+            <td colspan="3">
+                <input type="password" class="form-control" name="name-of-test" ng-model="admins.password1"></td>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-center">
+                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="admins.update()" ng-disabled="adminEditForm.$invalid">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </button>
+            </td>
+            <td colspan="3" class="text-center">
+                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="admins.hide('edit')">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
