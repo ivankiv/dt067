@@ -1,80 +1,47 @@
 <section id="main-content" class="wrapper">
     <section class="wrapper">
+        <div class="col-xs-12 edit-admin-wrapper" ng-if = "admins.showEdit" ng-include = "'app/admin/admin-info/admin-edit-form.html'"></div>
 
-    <div class="col-xs-12 edit-admin-wrapper" ng-if = "admins.show">
-        <form>
-            <table>
-                <thead>
-                <tr>
-                    <th colspan="6" >Edit admin</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td colspan="3">Ім'я</td>
-                    <td colspan="3">
-                        <input type="text" class="registr-new-test-nameof-inp" name="name-of-test" ng-model="admins.currentObj.username"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">email</td>
-                    <td colspan="3">
-                        <input type="text" class="registr-new-test-nameof-inp" name="name-of-test" ng-model="admins.currentObj.email"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">Пароль</td>
-                    <td colspan="3">
-                        <input type="password" class="registr-new-test-inpts" name="name-of-test" ng-model="admins.password"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">Підтвердження пароля</td>
-                    <td colspan="3">
-                        <input type="password" class="registr-new-test-inpts" name="name-of-test" ng-model="admins.password1"></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-center"><button class="btn btn-info" ng-click="admins.hide()">Скасувати</button></td>
-                    <td colspan="3" class="text-center">
-                        <button class="btn btn-info" ng-click="admins.update()">Підтвердити</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+        <div class="col-xs-12 create-admin-wrapper" ng-if = "admins.showCreate" ng-include = "'app/admin/admin-info/admin-create-form.html'"></div>
+                                <div class="col-xs-12" ng-if = "!admins.showEdit && !admins.showCreate">
+                                <div class='col-sm-2 col-xs-12 views-header'><h4>Адміністратори</h4></div>
+                                <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                                    <button type="button" class="btn btn-default add-btn" title="Додати адміністратора" ng-click="admins.showCreateForm()"
+                                    ><i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
+                                    <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
+                                </div>
+                                    <table class="text-center rwd-table faculty-table">
+                                        <thead class="text-center">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Логін</th>
+                                            <th>Поштова скринька</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="admin in admins.list">
+                                            <td>{{::admin.id}}</td>
+                                            <td>{{::admin.username}}</td>
+                                            <td>{{::admin.email}}</td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-default" title="Редагувати" ng-click="admins.showEditForm(admin)">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </button>
+                                            </td>
+                                            <td class="text-center">
+                                                <button type="button" class="btn btn-danger" title="Видалити" ng-click="admins.remove(admin.id)">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-10">
-                <table class="text-center">
-                    <thead class="text-center">
-                    <tr>
-                        <th colspan="4">Адміністратори</th>
-                        <th class="addGroup" data-target="#addAdmin" data-toggle="modal">
-                            <button type="button" class="btn btn-default entity-btn" title="Створити адміністратора"
-                                    ui-sref="admin-home.admin.create"><i class="glyphicon glyphicon-plus"></i>
-                            </button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th colspan="2" class="text-center">Управління</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="admin in admins.list">
-                        <td>{{admin.id}}</td>
-                        <td>{{admin.username}}</td>
-                        <td>{{admin.email}}</td>
-                        <td class="text-center"><button class="btn btn-info" ng-click = "admins.edit(admin)" >Редагувати</button></td>
-                        <td class="text-center"><button class="btn btn-info" ng-click = "admins.remove(admin.id)">Видалити</button></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
 
-    </section>
-</section>
+                            </div>
+
+
+                    </section>
+                </section>
+

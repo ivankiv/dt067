@@ -138,6 +138,23 @@ body {
     font-weight: bold;
     width: 1px; }
 
+.add-edit-admin-table {
+  background: gray;
+  color: #fff;
+  overflow: hidden;
+  font-weight: bold; }
+  .add-edit-admin-table td:nth-child(1) {
+    padding-top: 0px;
+    width: 15%; }
+    @media (max-width: 501px) {
+      .add-edit-admin-table td:nth-child(1) {
+        display: block;
+        float: left; } }
+  .add-edit-admin-table td:before {
+    content: attr(data-th) " ";
+    font-weight: bold;
+    width: 1px; }
+
 .admin-views-header {
   background-color: #0f0f0f; }
   .admin-views-header h4 {

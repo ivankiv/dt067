@@ -1,0 +1,42 @@
+<form class="form-group" name="adminCreationForm">
+    <div class='col-xs-12 views-header'><h4>Створити Адміністратора</h4></div>
+    <input type="text" ng-hide = "true">
+    <input type="password" ng-hide = "true">
+    <table class="rwd-table add-edit-admin-table">
+        <tbody>
+        <tr>
+            <td colspan="3">Ім'я</td>
+            <td colspan="3">
+                <input type="text" class="form-control" name="name" ng-model="admins.currentObj.username" placeholder="Введіть логін" required ></td>
+        </tr>
+        <tr>
+            <td colspan="3">email</td>
+            <td colspan="3">
+                <input type="email" class="form-control" name="email" ng-model="admins.currentObj.email" placeholder="Ведіть адресу почтової скриньки" required></td>
+        </tr>
+        <tr>
+            <td colspan="3">Введіть пароль</td>
+            <td colspan="3">
+                <input type="password" class="form-control" name="pass" ng-model="admins.password" placeholder="Пароль"  required></td>
+        </tr>
+        <tr>
+            <td colspan="3">Підтвердження пароля</td>
+            <td colspan="3">
+                <input type="password" class="form-control" name="pass2" ng-model="admins.password1"   placeholder="Підтвердіть пароль" required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="text-center">
+                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="admins.create()" ng-disabled="adminCreationForm.$invalid">
+                    <i class="glyphicon glyphicon-ok"></i>
+                </button>
+            </td>
+            <td colspan="3" class="text-center">
+                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="admins.hide()">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

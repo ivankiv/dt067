@@ -193,6 +193,29 @@ body {
     }
   }
 }
+
+.add-edit-admin-table{
+  background: $table-bg;
+  color: $white;
+  overflow: hidden;
+  font-weight: bold;
+  td{
+    &:nth-child(1){
+      padding-top: 0px;
+      width: 15%;
+      @media (max-width: $breakpoint-alpha) {
+        display: block;
+        float: left;
+      }
+    }
+    &:before {
+      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+      width: 1px;
+
+    }
+  }
+}
 .admin-views-header{
   background-color: #0f0f0f;
   h4{
