@@ -74,6 +74,9 @@ body {
   text-rendering: optimizeLegibility;
   color: #444;
   background: #eee!important;
+  input,select{
+    color:$black;
+  }
 }
 
 

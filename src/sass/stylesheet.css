@@ -39,6 +39,8 @@ body {
   text-rendering: optimizeLegibility;
   color: #444;
   background: #eee !important; }
+  body input, body select {
+    color: #000; }
 
 .rwd-table {
   background: #34495E;
@@ -76,7 +78,7 @@ body {
         float: left; } }
 
 .faculty-table {
-  background: #A32C9B;
+  background: gray;
   color: white;
   overflow: hidden;
   font-weight: bold; }
@@ -96,7 +98,7 @@ body {
           display: none; } }
 
 .subject-table {
-  background: #A32C9B;
+  background: gray;
   color: white;
   overflow: hidden;
   font-weight: bold; }
@@ -119,7 +121,7 @@ body {
           display: none; } }
 
 .statistic-table {
-  background: #A32C9B;
+  background: gray;
   color: #fff;
   overflow: hidden;
   font-weight: bold; }
@@ -181,5 +183,3 @@ body {
 /************************************************
                The end of ngMessage styles
 /*************************************************/
-
-/*# sourceMappingURL=stylesheet.css.map */

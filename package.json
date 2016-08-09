@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "gulp index && gulp admin && gulp sass && node app.js"
+    "start": "gulp sass"
   },
   "author": "IF-067",
   "license": "ISC",
