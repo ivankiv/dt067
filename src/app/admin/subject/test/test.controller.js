@@ -17,6 +17,7 @@
             self.wasNotEditTestMessage = false;
             self.test = {};
             self.test.subject_id = $stateParams.currentSubjectId;
+            self.subjectList = {};
 
             //methods
             self.getTestById = getTestById;
@@ -24,6 +25,7 @@
             self.deleteTest = deleteTest;
             self.editTest = editTest;
             self.updateTest = updateTest;
+            self.getSubjects = getSubjects;
             self.getOneSubject = getOneSubject;
             self.showAddForm = showAddForm;
             self.HideFormTest = HideFormTest;
@@ -33,6 +35,12 @@
             function activate() {
                 getOneSubject();
                 getTestById();
+            }
+
+            function getSubjects() {
+                subjectService.getSubjects().then(function(response) {
+                    self.subjectList = response.data;
+                    });
             }
 
             function getOneSubject() {
@@ -96,11 +104,14 @@
             }
 
             function editTest(currentTest) {
+                getSubjects();
+                self.showAddTestForm = false;
                 self.showEditTestForm = true;
                 self.test = currentTest;
             }
 
              function showAddForm() {
+                 self.showEditTestForm = false;
                 self.showAddTestForm = true;
                 self.test.subject_id = $stateParams.currentSubjectId;
             }

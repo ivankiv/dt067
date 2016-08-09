@@ -5,7 +5,7 @@
                 <div class='col-sm-2 col-xs-12 views-header'><h4>Предмети</h4></div>
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <select class="pull-right" ng-show="subjects.showSearch"  ng-model="subjects.subjectsPerPage"
-                            ng-options="x for x in subjects.numberToDisplaySubjectsOnPage"  ng-change="subjects.pageChanged()"
+                            ng-options="subjectPerPage for subjectPerPage in subjects.numberToDisplaySubjectsOnPage"  ng-change="subjects.pageChanged()"
                             name="subjectsPerPage"></select>
                     <button type="button" class="btn btn-default add-btn" title="Додати предмет"
                        ng-click="subjects.showAddSubjectForm()"><i class="fa fa-plus" aria-hidden="true"></i>
