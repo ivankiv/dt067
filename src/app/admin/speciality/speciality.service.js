@@ -3,14 +3,16 @@
 
     angular.module('app')
         .factory('specialityService', specialityService);
-    specialityService.$inject = ['$http', 'appConstants', '$state'];
+    specialityService.$inject = ['$http', 'appConstants'];
 
-    function specialityService ($http, appConstants, $state) {
+    function specialityService ($http, appConstants) {
         return {
             getSpecialities: getSpecialities,
             countSpecialities: countSpecialities,
             getRecordsRange: getRecordsRange,
-            addSpeciality: addSpeciality
+            addSpeciality: addSpeciality,
+            deleteSpeciality: deleteSpeciality,
+            editSpeciality: editSpeciality
         };
 
         function getSpecialities() {
@@ -29,6 +31,14 @@
             return $http.post(appConstants.addSpeciality, data)
                 .then(fulfilled, rejected);
         }
+        function deleteSpeciality(speciality_id) {
+            return $http.delete(appConstants.delSpeciality + speciality_id)
+                .then(fulfilled,rejected);
+        }
+        function editSpeciality(speciality_id,data) {
+            return $http.post(appConstants.editSpeciality + speciality_id,data)
+                .then(fulfilled,rejected);
+        }
 
         function fulfilled(response) {
             return response;
@@ -37,4 +47,4 @@
             return response;
         }
     }
-})();
+}());
