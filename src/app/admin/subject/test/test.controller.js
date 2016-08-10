@@ -11,8 +11,6 @@
             //variables
             self.list = {};
             self.currenSubjectName = '';
-            self.showAddTestForm = false;
-            self.showEditTestForm = false;
             self.showMessageNoEntity = false;
             self.wasNotEditTestMessage = false;
             self.test = {};
@@ -21,7 +19,6 @@
 
             //methods
             self.getTestById = getTestById;
-            self.addTest = addTest;
             self.deleteTest = deleteTest;
             self.editTest = editTest;
             self.updateTest = updateTest;
@@ -58,16 +55,6 @@
                     }
                 })
             }
-            function addTest() {
-                testService.addTest(self.test).then(function(response) {
-                    if(response.data.response == "ok") {
-                        getTestById();
-                        self.test = {};
-                        self.showMessageNoEntity = false;
-                        self.showAddTestForm = false;
-                    }
-                })
-            }
 
             function deleteTest(testId) {
                 ngDialog.openConfirm({
@@ -95,12 +82,13 @@
                         currentTest: {}
                     }
                 });
-                // modalInstance.result.then(function(response) {
-                //     ngDialog.open({template: '<div class="ngdialog-message"> \
-					// 	  Тест успішно додано!</div>'
-                //     });
-                //     getTestById();
-                // })
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Тест успішно додано!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    getTestById();
+                })
             }
 
             function updateTestComplete(response) {
@@ -123,19 +111,19 @@
 
             function editTest(currentTest) {
                 getSubjects();
-                self.showAddTestForm = false;
+                // self.showAddTestForm = false;
                 self.showEditTestForm = true;
                 self.test = currentTest;
             }
 
              function showAddForm() {
                  self.showEditTestForm = false;
-                self.showAddTestForm = true;
+                // self.showAddTestForm = true;
                 self.test.subject_id = $stateParams.currentSubjectId;
             }
 
             function HideFormTest() {
-                self.showAddTestForm = false;
+                // self.showAddTestForm = false;
                 self.showEditTestForm = false;
                 self.wasNotEditTestMessage = false;
                 self.test = {};
