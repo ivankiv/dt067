@@ -3,7 +3,7 @@
 $breakpoint-alpha: 501px;
 $white: #fff;
 $black: #000;
-$table-bg:gray;
+$table-bg:#837EB1;
 .collapse.in{
   clear: both!important;
 }
@@ -12,10 +12,7 @@ $table-bg:gray;
   min-width: 100%;
   // adjust to your needs
 
-  tr {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-  }
+
 
   th {
     display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
@@ -84,9 +81,6 @@ body {
   background: #34495E;
   color: #fff;
   overflow: hidden;
-  tr {
-    border-color: $black;
-  }
   th, td {
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
@@ -99,7 +93,7 @@ body {
 }
 .views-header{
   height: 70px;
-  background-color: #000000;
+  background-color: #0D083B;
   padding-top: 20px;
   color: $white;
   .add-btn{
@@ -126,6 +120,7 @@ body {
   color: white;
   overflow: hidden;
   font-weight: bold;
+
   td:nth-last-of-type(-n+2){
     width: 42px;
     display: block;
@@ -181,6 +176,29 @@ body {
       width: 95%;
       @media (max-width: $breakpoint-alpha) {
         width: 80%;
+        display: block;
+        float: left;
+      }
+    }
+    &:before {
+      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+      width: 1px;
+
+    }
+  }
+}
+
+.add-edit-admin-table{
+  background: $table-bg;
+  color: $white;
+  overflow: hidden;
+  font-weight: bold;
+  td{
+    &:nth-child(1){
+      padding-top: 0px;
+      width: 15%;
+      @media (max-width: $breakpoint-alpha) {
         display: block;
         float: left;
       }
