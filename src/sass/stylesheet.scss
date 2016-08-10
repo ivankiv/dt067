@@ -221,6 +221,9 @@ body {
   display: block!important;
   margin: auto!important;
 }
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #5A5494!important;
+}
 
 
 /************************************************
