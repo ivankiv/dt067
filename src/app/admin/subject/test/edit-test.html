@@ -9,9 +9,10 @@
         </thead>
         <tbody>
         <tr>
-            <td>ID Предмету:</td>
-            <td >
-                <input type="text" name="subjectId" ng-model="tests.test.subject_id" disabled>
+            <td>Предмет:</td>
+            <td>
+                <select name="subject" id="subject" ng-model="tests.test.subject_id"
+                        ng-options="sublectList.subject_id as sublectList.subject_name for sublectList in tests.subjectList"></select>
             </td>
         </tr>
         <tr>
