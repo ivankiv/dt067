@@ -16,15 +16,14 @@
         self.totalFaculties = 0;
         self.showSearch = true;
         self.textSearch = "";
-        
+        self.begin = 0;
         self.currentPage = 1;
-        self.facultiesPerPage = 10;
-        var firstFacultyInList = 0;
+        self.facultiesPerPage = 5;
+        self.numberToDisplayFacultiesOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 
         //Methods
-        self.getAllFaculties = getAllFaculties;
-        self.getRecordsRange = getRecordsRange;
+        self.getFaculties = getFaculties;
         self.countFaculties = countFaculties;
         self.deleteFaculty = deleteFaculty;
         self.showAddFacultytForm = showAddFacultyForm;
@@ -37,17 +36,11 @@
 
         function activate() {
             countFaculties();
-            getRecordsRange()
+            getFaculties()
         }
 
-        function getAllFaculties() {
-            facultyService.getAllFaculties().then(function (response) {
-                self.listAllFaculties = response.data;
-            })
-        }
-
-        function getRecordsRange() {
-            facultyService.getRecordsRange(self.facultiesPerPage, firstFacultyInList).then(function (response) {
+        function getFaculties() {
+            facultyService.getFaculties().then(function (response) {
                 self.list = response.data;
             })
         }
@@ -69,9 +62,8 @@
 
         function pageChanged() {
             var begin = ((self.currentPage - 1) * self.facultiesPerPage);
-            facultyService.getRecordsRange(self.facultiesPerPage, begin).then(function (response) {
-                self.list = response.data;
-            })
+            self.showSearch = (self.currentPage == 1) ? true : false;
+            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
         }
 
         function deleteFacultyComplete(response) {

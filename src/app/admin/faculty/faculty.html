@@ -4,18 +4,21 @@
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class='col-sm-2 col-xs-12 views-header'><h4>Факультети</h4></div>
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <select class="pull-right" ng-show="faculties.showSearch"  ng-model="faculties.facultiesPerPage"
+                            ng-options="facultyPerPage for facultyPerPage in faculties.numberToDisplayFacultiesOnPage"  ng-change="faculties.pageChanged()"
+                            name="facultiesPerPage"></select>
                     <button type="button" class="btn btn-default add-btn" title="Додати факультет"
                             ng-click="faculties.showAddFacultyForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <input class="views-header-search-inpts" ng-show="faculties.showSearch"type="text"
-                           placeholder="Пошук на сторінці" ng-model="faculties.textSearch" name="search">
+                    <input class="views-header-search-inpts" ng-show="faculties.showSearch" type="text"
+                           placeholder="Пошук" ng-model="faculties.textSearch" name="search">
                     </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
                         <th>Факультет</th>
                         <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr ng-repeat="faculty in faculties.list | filter:faculties.textSearch">
+                    <tr ng-repeat="faculty in faculties.list | filter:faculties.textSearch | limitTo: faculties.facultiesPerPage : faculties.begin ">
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
                         <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
                         <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"
@@ -29,7 +32,9 @@
 
                 <div class="subject-pagination pull-right">
                     <uib-pagination
+                            ng-show="faculties.totalFaculties > faculties.facultiesPerPage"
                             total-items="faculties.totalFaculties"
+                            items-per-page="faculties.facultiesPerPage"
                             ng-model="faculties.currentPage"
                             ng-change="faculties.pageChanged()"
                             previous-text="&lsaquo;"
