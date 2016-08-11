@@ -5,14 +5,14 @@
                 <div class='col-sm-2 col-xs-12 views-header'><h4>Факультети</h4></div>
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-default add-btn" title="Додати факультет"
-                            ng-click="showAddFacultyForm()"><i class="fa fa-plus" aria-hidden="true"></i>
+                            ng-click="faculties.showAddFacultyForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
                     </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
                         <th>Факультет</th>
-                        <th colspan="2">Опис факультету</th>
+                        <th colspan="2">Опис факультету</th>s
                     </tr>
                     <tr ng-repeat="faculty in faculties.list">
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
