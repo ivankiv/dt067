@@ -25,6 +25,7 @@
             self.getSubjects = getSubjects;
             self.getOneSubject = getOneSubject;
             self.showAddTestForm = showAddTestForm;
+            self.showEditTestForm = showEditTestForm;
             self.showAddForm = showAddForm;
             self.HideFormTest = HideFormTest;
 
@@ -80,6 +81,24 @@
                     backdrop: false,
                     resolve: {
                         currentTest: {}
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Тест успішно додано!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    getTestById();
+                })
+            }
+
+            function showEditTestForm(test) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/edit-test.html',
+                    controller: 'TestModalController as tests',
+                    backdrop: false,
+                    resolve: {
+                        currentTest: test
                     }
                 });
                 modalInstance.result.then(function() {
