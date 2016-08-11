@@ -20,6 +20,7 @@
         self.pageChanged = pageChanged;
 
         self.showErrorMessage = false;
+        self.message = "Дані відсутні!";
 
         self.getSpecialities = getSpecialities;
         self.countSpecialities = countSpecialities;
