@@ -1,0 +1,42 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'><h4>Розклад предмету: &nbsp;{{schedules.currentSubjectName}}</h4></div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-default add-btn" title="Додати дату тесту"
+                            ><i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Група</th>
+                        <th>Дата проведення</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="schedule in schedules.list">
+                        <td data-th="Група">{{::schedules.associativeGroup[schedule.group_id]}}</td>
+                        <td data-th="Дата проведення">{{::schedule.event_date | date}}</td>
+                        <td>
+                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
+                                   ><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                    ><i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="schedules.showMessageNoEntity" class="text-center">
+                    <h1>В розкладі немає тестів для даного предмету!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

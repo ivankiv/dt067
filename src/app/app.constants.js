@@ -17,6 +17,11 @@
             editSubject: 'http://dtapi.local/subject/update/',
             delSubject: 'http://dtapi.local/subject/del/',
 
+            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/',
+            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/',
+
+            getGroups: 'http://dtapi.local/group/getRecords',
+
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',
             countTests: 'http://dtapi.local/test/countRecords',
