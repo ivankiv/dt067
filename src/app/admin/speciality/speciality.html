@@ -17,50 +17,25 @@
                           <tr>
                               <td data-th="Назва">Факультет</td>
                               <td data-th="Код">Adventure, Sci-fi</td>
-                              <td><button type="button" class="btn btn-default " title="Редагувати"
+                              <td>
+                                  <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
                               ><i class="glyphicon glyphicon-pencil"></i>
-                              </button></td>
-                              <td><button type="button" class="btn btn-default views-remove-btn"  title="Видалити">
-                                  <i class="glyphicon glyphicon-remove"></i></button></td>
+                              </button>
+                                  <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити">
+                                      <i class="glyphicon glyphicon-remove"></i></button>
+                              </td>
                           </tr>
                           <tr>
                               <td data-th="Movie Title">Star Wars</td>
                               <td data-th="Genre">Adventure, Sci-fi</td>
-                              <td data-th="Year"><button type="button" class="btn btn-default " title="Редагувати"
+                              <td><button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
                               ><i class="glyphicon glyphicon-pencil"></i>
-                              </button></td>
-                              <td data-th="Gross"><button type="button" class="btn btn-default views-remove-btn"  title="Видалити">
-                                  <i class="glyphicon glyphicon-remove"></i></button></td>
-                          </tr>
-                          <tr>
-                              <td data-th="Movie Title">American Graffiti</td>
-                              <td data-th="Genre">Comedy, Drama</td>
-                              <td data-th="Year">1973</td>
-                              <td data-th="Gross">$115,000,000</td>
+                              </button>
+                                  <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити">
+                                      <i class="glyphicon glyphicon-remove"></i></button>
+                              </td>
                           </tr>
                       </table>
-
-                      <!--<table>-->
-            <!--<thead>-->
-              <!--<tr>-->
-                <!--<th colspan="2">Спеціальність</th>-->
-                <!--<th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нову спеціальність</th>-->
-              <!--</tr>-->
-              <!--<tr>-->
-                <!--<th>№ п/п</th>-->
-                <!--<th>Назва спеціалізаці</th>-->
-                <!--<th >Код</th>-->
-              <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-              <!--<tr ng-repeat="speciality in speciality.list">-->
-                <!--<td>{{$index + 1}}</td>-->
-                <!--<td>{{::speciality.speciality_name}}</td>-->
-                <!--<td>{{::speciality.speciality_code}}</td>-->
-              <!--</tr>-->
-            <!--</tbody>-->
-          <!--</table>-->
-
 
                       <uib-pagination
                               total-items="speciality.totalSpecialities.numberOfRecords"
