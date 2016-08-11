@@ -62,7 +62,7 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             views: {
                 'content': {
                     templateUrl: 'app/admin/speciality/speciality.html',
-                    controller: 'specialityCtrl as speciality'
+                    controller: 'SpecialityController as specialities'
                 }
             }
         })

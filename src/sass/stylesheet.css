@@ -216,8 +216,8 @@ body {
   margin: auto !important; }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #337ab7 !important;
-  color: #fff !important; }
+  background-color: #5A5494 !important; }
+
 
 /************************************************
                   ngMessage styles
