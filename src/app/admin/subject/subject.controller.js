@@ -25,7 +25,7 @@
             self.showErrorMessage = false;
             self.message = "Loading...";
 
-         //Methods
+         //methods
             self.getSubjects = getSubjects;
             self.countSubjects = countSubjects;
             self.deleteSubject = deleteSubject;

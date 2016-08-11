@@ -1,9 +1,12 @@
 .navbar-default, .navbar-collapse, .avbar-header{
-  background:-webkit-linear-gradient(45deg, rgba(222,255,217,1) 0%, rgba(0,128,128,1) 100%)!important;
-  background:-moz-linear-gradient(45deg, rgba(222,255,217,1) 0%, rgba(0,128,128,1) 100%)!important;
+  background:-webkit-linear-gradient(154deg,#008fe2 0,#00b29c 100%)!important;
+  background:-moz-linear-gradient(154deg,#008fe2 0,#00b29c 100%)!important;
   .fa-sign-out{
     font-size: 20px;
   }
+}
+.collapse.in{
+  border-top:none;
 }
 .navbar-nav{
   a{
@@ -14,7 +17,7 @@
 
   }
   li:hover{
-    background-color: #5F9EA0;
+    background: #337ab7;
     border-bottom: 3px solid #ffffff;
   }
 }

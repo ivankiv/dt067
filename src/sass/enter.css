@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Meddon);
 * {
   padding: 0;
   margin: 0; }
@@ -44,6 +45,14 @@ body {
     background-color: #d6bf8c;
     font-weight: bold;
     border: none; }
+
+.welcome-to-d-tester {
+  font-family: 'Meddon', cursive;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 50px; }
 
 .pagination {
   cursor: pointer;

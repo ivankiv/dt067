@@ -25,21 +25,17 @@
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
-                                <button type="button" class="btn btn-default " title="Редагувати"
+                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
                                     ng-click="subjects.showEditSubjectForm(subject);"><i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-default views-remove-btn"  title="Видалити"
-                                    ng-click="subjects.deleteSubject(subject.subject_id)"><i class="glyphicon glyphicon-remove"></i>
+                                <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                        ng-click="subjects.deleteSubject(subject.subject_id)"><i class="glyphicon glyphicon-remove"></i>
                                 </button>
-                            </td>
-                            <td><button type="button" class="btn btn-default" title="Розклад">
-                                <i class="fa fa-calendar" aria-hidden="true"></i></button></td>
-                            <td>
-                                <button type="button" class="btn btn-default" title="Тести"
+                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Розклад">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Тести"
                                         ui-sref="admin-home.test({currentSubjectId: subject.subject_id})">
-                                        <i class="glyphicon glyphicon-list-alt"></i>
+                                    <i class="glyphicon glyphicon-list-alt"></i>
                                 </button>
                             </td>
                         </tr>

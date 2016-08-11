@@ -1,7 +1,7 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class="col-xs-12 edit-admin-wrapper" ng-if="tests.showAddTestForm" ng-include="'app/admin/subject/test/add-test.html'"></div>
+            <!--<div class="col-xs-12 edit-admin-wrapper" ng-if="tests.showAddTestForm" ng-include="'app/admin/subject/test/add-test.html'"></div>-->
             <div class="col-xs-12 edit-admin-wrapper" ng-if="tests.showEditTestForm" ng-include="'app/admin/subject/test/edit-test.html'"></div>
             <div class="col-xs-12">
                 <div class='col-sm-4 col-xs-12 views-header'><h4>Тести предмету: {{tests.currentSubjectName}}</h4></div>
@@ -30,7 +30,7 @@
                         <td data-th="Статус">{{::test.enabled}}</td>
                         <td>
                             <button  type="button" class="btn btn-default subject-list-centered" title="Редагувати"
-                                     ng-click='tests.editTest(test)'><i class="glyphicon glyphicon-pencil"></i>
+                                     ng-click='tests.showEditTestForm(test) '><i class="glyphicon glyphicon-pencil"></i>
                             </button>
                         </td>
                         <td>
