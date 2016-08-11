@@ -12,34 +12,19 @@
             self.list = {};
             self.currenSubjectName = '';
             self.showMessageNoEntity = false;
-            self.wasNotEditTestMessage = false;
-            self.test = {};
-            self.test.subject_id = $stateParams.currentSubjectId;
-            self.subjectList = {};
 
             //methods
             self.getTestById = getTestById;
             self.deleteTest = deleteTest;
-            self.editTest = editTest;
-            self.updateTest = updateTest;
-            self.getSubjects = getSubjects;
             self.getOneSubject = getOneSubject;
             self.showAddTestForm = showAddTestForm;
             self.showEditTestForm = showEditTestForm;
-            self.showAddForm = showAddForm;
-            self.HideFormTest = HideFormTest;
 
             activate();
 
             function activate() {
                 getOneSubject();
                 getTestById();
-            }
-
-            function getSubjects() {
-                subjectService.getSubjects().then(function(response) {
-                    self.subjectList = response.data;
-                    });
             }
 
             function getOneSubject() {
@@ -49,7 +34,7 @@
             }
             function getTestById() {
                 testService.getTestById($stateParams.currentSubjectId).then(function(response) {
-                    if(response.data.response == 'no records') {
+                    if(response.data.response === 'no records') {
                         self.showMessageNoEntity = true;
                     } else {
                         self.list = response.data;
@@ -63,18 +48,15 @@
                     plain: false
                 }).then(function() {
                     testService.deleteTest(testId).then(function(response) {
-                        if(response.data.response == 'ok') {
+                        if(response.data.response === 'ok') {
                             getTestById();
                         }
                     })
                 });
             }
 
-            function updateTest() {
-                testService.updateTest(self.test.test_id, self.test).then(updateTestComplete);
-            }
-
             function showAddTestForm() {
+                console.log( $uibModal);
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/test/add-test.html',
                     controller: 'TestModalController as tests',
@@ -103,49 +85,11 @@
                 });
                 modalInstance.result.then(function() {
                     ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Тест успішно додано!</div>'
+						  Зміни збережено!</div>'
                     });
                     self.showMessageNoEntity = false;
                     getTestById();
                 })
-            }
-
-            function updateTestComplete(response) {
-                if(response.status == 400) {
-                    ngDialog.open({template: '<div class="ngdialog-message"> Назва тесту не унікальна!</div>'
-                    });
-                }
-
-                if(response.data.response == 'error') {
-                    self.wasNotEditTestMessage = true;
-                }
-
-                if(response.data.response == "ok") {
-                    self.test = {};
-                    self.showEditTestForm = false;
-                    getTestById();
-
-                }
-            }
-
-            function editTest(currentTest) {
-                getSubjects();
-                // self.showAddTestForm = false;
-                self.showEditTestForm = true;
-                self.test = currentTest;
-            }
-
-             function showAddForm() {
-                 self.showEditTestForm = false;
-                // self.showAddTestForm = true;
-                self.test.subject_id = $stateParams.currentSubjectId;
-            }
-
-            function HideFormTest() {
-                // self.showAddTestForm = false;
-                self.showEditTestForm = false;
-                self.wasNotEditTestMessage = false;
-                self.test = {};
             }
         }
 }());

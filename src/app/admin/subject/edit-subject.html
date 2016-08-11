@@ -45,7 +45,7 @@
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="subjects.updateSubject()"
-            ng-disabled="editSubjectForm.$invalid || (editSubjectForm.name.$pristine && editSubjectForm.description.$pristine)">
+            ng-disabled="editSubjectForm.$invalid || (editSubjectForm.name.$pristine || editSubjectForm.description.$pristine)">
         Редагувати предмет
     </button>
     <button class="btn btn-warning" type="button" ng-click="subjects.cancelForm()">Відмінити</button>
