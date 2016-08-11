@@ -5,7 +5,7 @@
                 <div class='col-sm-2 col-xs-12 views-header'><h4>Факультети</h4></div>
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-default add-btn" title="Додати факультет"
-                    ><i class="fa fa-plus" aria-hidden="true"></i>
+                            ng-click="showAddFacultyForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
                     </div>
@@ -14,29 +14,27 @@
                         <th>Факультет</th>
                         <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr>
-                        <td data-th="Факультет">Факультет</td>
-                        <td data-th="Опис факультету">Adventure, Sci-fi</td>
+                    <tr ng-repeat="faculty in faculties.list">
+                        <td data-th="Факультет">{{::faculty.faculty_name}}</td>
+                        <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
                         <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"
-                           ><i class="glyphicon glyphicon-pencil"></i>
+                                    ng-click="faculties.showEditFacultyForm(faculty)"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns"  title="Видалити">
-                                <i class="glyphicon glyphicon-remove"></i></button>
+                            <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns"  title="Видалити"
+                                    ng-click="faculties.deleteFaculty(faculty.faculty_id)"><i class="glyphicon glyphicon-remove"></i></button>
                         </td>
                     </tr>
                 </table>
 
-
-
-
-                <uib-pagination
-                        total-items="faculty.totalFaculties.numberOfRecords"
-                        ng-model="faculty.currentPage"
-                        ng-change="faculty.pageChanged()"
-                        previous-text="&lsaquo;"
-                        next-text="&rsaquo;">
-                </uib-pagination>
-
+                <div class="subject-pagination pull-right">
+                    <uib-pagination
+                            total-items="faculties.totalFaculties"
+                            ng-model="faculties.currentPage"
+                            ng-change="faculties.pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
             </div>
 
         </div>
