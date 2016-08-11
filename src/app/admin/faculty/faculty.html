@@ -7,14 +7,15 @@
                     <button type="button" class="btn btn-default add-btn" title="Додати факультет"
                             ng-click="faculties.showAddFacultyForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
+                    <input class="views-header-search-inpts" ng-show="faculties.showSearch"type="text"
+                           placeholder="Пошук на сторінці" ng-model="faculties.textSearch" name="search">
                     </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
                         <th>Факультет</th>
-                        <th colspan="2">Опис факультету</th>s
+                        <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr ng-repeat="faculty in faculties.list">
+                    <tr ng-repeat="faculty in faculties.list | filter:faculties.textSearch">
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
                         <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
                         <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"

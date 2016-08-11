@@ -14,6 +14,9 @@
 
         //Pagination
         self.totalFaculties = 0;
+        self.showSearch = true;
+        self.textSearch = "";
+        
         self.currentPage = 1;
         self.facultiesPerPage = 10;
         var firstFacultyInList = 0;
