@@ -19,9 +19,6 @@
         self.numberToDisplaySpecialitiesOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 
-        self.showErrorMessage = false;
-        self.message = "Дані відсутні!";
-
         self.getSpecialities = getSpecialities;
         self.countSpecialities = countSpecialities;
         self.deleteSpeciality = deleteSpeciality;
@@ -36,7 +33,7 @@
         }
 
         function getSpecialities() {
-            specialityService.getSpecialities().then(function(response) {
+            return specialityService.getSpecialities().then(function(response) {
                 self.list = response.data;
             });
         }
@@ -56,7 +53,7 @@
                 templateUrl: 'app/partials/confirm-delete-dialog.html',
                 plain:false
             }).then(function () {
-               specialityService.deleteSpeciality(speciality_id).then(deleleSpecialityComplete);
+               specialityService.deleteSpeciality(speciality_id).then(deleteSpecialityComplete);
             });
         }
         function deleteSpecialityComplete(response){
