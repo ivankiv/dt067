@@ -47,4 +47,4 @@
             alert('XHR Failed. Error: ' + error.data);
         }
     }
-})();
+}());
