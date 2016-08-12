@@ -21,20 +21,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="subject in subjects.list | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
+                        <tr ng-repeat="subject in subjects.list | toArray:false | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
-                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
+                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                     ng-click="subjects.showEditSubjectForm(subject);"><i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                                <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                        ng-click="subjects.deleteSubject(subject.subject_id)"><i class="glyphicon glyphicon-remove"></i>
+                                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                        ng-click="subjects.deleteSubject(subject.subject_id)"><i class="glyphicon glyphicon-trash"></i>
                                 </button>
-                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Розклад"
+                                <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад"
                                         ui-sref="admin-home.schedule({currentSubjectId: subject.subject_id})">
                                         <i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Тести"
+                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Тести"
                                         ui-sref="admin-home.test({currentSubjectId: subject.subject_id})">
                                         <i class="glyphicon glyphicon-list-alt"></i>
                                 </button>
