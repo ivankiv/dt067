@@ -1,0 +1,68 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-xs-12 views-header'><h4>Реєстрація нового студента</h4></div>
+
+                <form class="form-group" name="studentCreationForm">
+                    <!--This two inputs prevent the password autofilling, because modern browsers ignore autocomplete="off"-->
+                    <input type="text" ng-hide = "true">
+                    <input type="password" ng-hide = "true">
+                    <!--end-->
+                    <table class="rwd-table create-student-table table-striped">
+                        <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <span>Фото</span>
+                                <input class="form-control add-photo-inp" file-load="students.currentObj.photo" ng-model="students.currentObj.photo" type="file"  accept="image/jpeg,image/png,image/gif/svg"/>
+                                <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250" alt="Зображення">
+                            </td>
+                            <td colspan="4">
+                                <label for="names">ПІБ</label>
+                                <div id="names">
+                                    <input type="text" class="form-control" name="names"  ng-model="students.currentObj.student_surname" placeholder="Прізвище" required >
+                                    <input type="text" class="form-control" name="name-of-test" ng-model="students.currentObj.student_name" placeholder="Ім’я" required>
+                                    <input type="text" class="form-control" name="name-of-test" ng-model="students.currentObj.student_fname" placeholder="Побатькові" required>
+                                    <label for="group">Група</label>
+                                </div>
+                                <select ng-options="group.group_id as group.group_name for group  in students.groupList"  ng-model="students.currentObj.group_id" class="form-control" id="group" placeholder="Виберіть групу">
+                                    <option value="" disabled>Виберіть предмет</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <input type="password" class="form-control" name="pass"  ng-model="students.currentObj.plain_password" placeholder="Введіть пароль" required >
+                            </td>
+                            <td colspan="3" class="text-center">
+                                <input type="text" class="form-control" name="gradebook"  ng-model="students.currentObj.gradebook_id" placeholder="Введіть номер залікової книжки" required >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <input type="text" class="form-control" name="login"  ng-model="students.currentObj.username" placeholder="Введіть логін" required >
+                            </td>
+                            <td colspan="3" class="text-center">
+                                <input type="email" class="form-control" name="email"  ng-model="students.currentObj.email" placeholder="Введіть email" required >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center create-student-submit-btns-wrpr">
+                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.create()" ng-disabled="studentCreationForm.$invalid">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="students.hide()">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+</section>

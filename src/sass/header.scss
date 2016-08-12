@@ -23,4 +23,11 @@
 }
 .navbar-brand{
   color:black!important;
+  position: relative;
+  width: 50px;
+  img{
+    width: 30px;
+    position: absolute;
+    top: 11px;
+  }
 }

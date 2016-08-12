@@ -118,7 +118,7 @@ body {
     padding-left: 0; }
 
 .faculty-table {
-  background: #00bca4;
+  background: #867DB0;
   color: white;
   overflow: hidden;
   font-weight: bold; }
@@ -136,7 +136,7 @@ body {
     margin-right: 10px !important; }
 
 .subject-table {
-  background: #00bca4;
+  background: #867DB0;
   color: white;
   overflow: hidden;
   font-weight: bold; }
@@ -154,7 +154,7 @@ body {
     margin-right: 10px !important; }
 
 .groups-table {
-  background: #00bca4;
+  background: #867DB0;
   color: white;
   overflow: hidden;
   font-weight: bold; }
@@ -171,8 +171,30 @@ body {
   .groups-table td .table-help-btns {
     margin-right: 10px !important; }
 
+.create-student-table {
+  background: #867DB0;
+  color: white;
+  overflow: hidden;
+  font-weight: bold; }
+  .create-student-table #names input {
+    margin-bottom: 5px; }
+  .create-student-table .create-student-submit-btns-wrpr button {
+    float: right;
+    margin-right: 5px; }
+    @media (max-width: 820px) {
+      .create-student-table .create-student-submit-btns-wrpr button {
+        margin-bottom: 10px; } }
+  .create-student-table td:before {
+    content: attr(data-th) " ";
+    font-weight: bold; }
+    @media (min-width: 820px) {
+      .create-student-table td:before {
+        display: none; } }
+  .create-student-table td .add-photo-inp {
+    width: auto; }
+
 .statistic-table {
-  background: #00bca4;
+  background: #867DB0;
   color: #fff;
   overflow: hidden;
   font-weight: bold; }
@@ -190,7 +212,7 @@ body {
     width: 1px; }
 
 .add-edit-admin-table {
-  background: #00bca4;
+  background: #867DB0;
   color: #fff;
   overflow: hidden;
   font-weight: bold; }
@@ -216,8 +238,8 @@ body {
   margin: auto !important; }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #5A5494 !important; }
-
+  background-color: #5D5393 !important;
+  color: #fff !important; }
 
 /************************************************
                   ngMessage styles

@@ -3,7 +3,7 @@
 $breakpoint-alpha: 820px;
 $white: #fff;
 $black: #000;
-$table-bg:#00bca4;
+$table-bg:#867DB0;
 .collapse.in{
   @media (max-width: 768px) {
     clear: both!important;
@@ -244,6 +244,40 @@ body {
     }
   }
 }
+.create-student-table{
+  #names{
+    input{
+      margin-bottom: 5px;
+    }
+  }
+  background: $table-bg;
+  color: white;
+  overflow: hidden;
+  font-weight: bold;
+  .create-student-submit-btns-wrpr{
+    button{
+      float: right;
+      margin-right: 5px;
+      @media (max-width: $breakpoint-alpha) {
+        margin-bottom: 10px;
+      }
+    }
+
+  }
+  td{
+    &:before {
+      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      font-weight: bold;
+
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+    .add-photo-inp{
+    width: auto;
+    }
+  }
+}
 .statistic-table{
   background: $table-bg;
   color: $white;
@@ -302,7 +336,7 @@ body {
   margin: auto!important;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #337ab7!important;
+  background-color: #5D5393!important;
   color:$white!important;
 }
 
