@@ -15,8 +15,9 @@
             createAdmin:createAdmin
         };
 
-        function getAdmins() {
-            return $http.get(appConstants.getAdmins)
+        function getAdmins(id) {
+            var addId =(id) ? "/"+ id: "";
+            return $http.get(appConstants.getAdmins + addId)
                 .then(complete)
                 .catch(failed);
         }
