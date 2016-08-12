@@ -2,9 +2,9 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-xs-12 views-header'><h4>Реєстрація нового студента</h4></div>
+                <div class='col-xs-12 views-header'><h4>Редагування профілю&nbsp;{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</h4></div>
 
-                <form class="form-group" name="studentCreationForm">
+                <form class="form-group" name="studentEditForm">
                     <!--This two inputs prevent the password autofilling, because modern browsers ignore autocomplete="off"-->
                     <input type="text" ng-hide = "true">
                     <input type="password" ng-hide = "true">
@@ -52,10 +52,10 @@
                         </tr>
                         <tr>
                             <td class="text-center create-student-submit-btns-wrpr">
-                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.create()" ng-disabled="studentCreationForm.$invalid">
+                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.update()" ng-disabled="studentCreationForm.$invalid">
                                     <i class="glyphicon glyphicon-ok"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="students.hide()">
+                                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="students.hide('edit')">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
                             </td>
