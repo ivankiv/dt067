@@ -153,6 +153,9 @@ body {
   .subject-table td .table-help-btns {
     margin-right: 10px !important; }
 
+.header-views-select-pages-search {
+  height: 32px; }
+
 .groups-table {
   background: #867DB0;
   color: white;
