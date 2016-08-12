@@ -51,6 +51,11 @@
                         if(response.data.response === 'ok') {
                             getTestById();
                         }
+                        if(response.status === 400) {
+                            ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити тест в якому є завдання!</div>'
+                            });
+                        }
                     })
                 });
             }
