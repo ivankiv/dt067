@@ -25,11 +25,11 @@
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
                         <td>
-                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
-                                    ng-click="specialities.showEditSpecialityForm(speciality);"><i class="glyphicon glyphicon-pencil"></i>
-                            </button>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
                                     ng-click="specialities.deleteSpeciality(speciality.speciality_id)"><i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                    ng-click="specialities.showEditSpecialityForm(speciality);"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
                         </td>
                     </tr>
