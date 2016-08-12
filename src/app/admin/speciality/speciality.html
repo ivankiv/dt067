@@ -6,7 +6,7 @@
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <select class="pull-right" ng-show="specialities.showSearch"  ng-model="specialities.specialitiesPerPage"
                             ng-options="specialitiesPerPage for specialitiesPerPage in specialities.numberToDisplaySpecialitiesOnPage"  ng-change="specialities.pageChanged()"
-                            name="specialitiesPerPage"></select>
+                            name="specialitiesPerPage" title="Кількість записів на сторінці"></select>
                     <button type="button" class="btn btn-default add-btn" title="Додати спеціальність"
                             ng-click="specialities.showAddSpecialityForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
@@ -25,10 +25,10 @@
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
                         <td>
-                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                     ng-click="specialities.showEditSpecialityForm(speciality);"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
                                     ng-click="specialities.deleteSpeciality(speciality.speciality_id)"><i class="glyphicon glyphicon-remove"></i>
                             </button>
                         </td>

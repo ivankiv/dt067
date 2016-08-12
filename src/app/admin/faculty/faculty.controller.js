@@ -26,7 +26,7 @@
         self.getFaculties = getFaculties;
         self.countFaculties = countFaculties;
         self.deleteFaculty = deleteFaculty;
-        self.showAddFacultytForm = showAddFacultyForm;
+        self.showAddFacultyForm = showAddFacultyForm;
         self.showEditFacultyForm = showEditFacultyForm;
 
         self.showErrorMessage = false;

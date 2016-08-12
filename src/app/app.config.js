@@ -106,5 +106,15 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'AdminEditController as admins'
                 }
             }
+        })
+
+        .state('admin-home.student', {
+            url: '/edit-student',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/group/student/student.html',
+                    controller: 'StudentEditController as students'
+                }
+            }
         });
 }

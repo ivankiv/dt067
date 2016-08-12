@@ -52,7 +52,13 @@
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
             delAdmins: '/AdminUser/del/',
-            addAdmins:'/AdminUser/insertData'
+            addAdmins:'/AdminUser/insertData',
+
+            getStudents: 'http://dtapi.local/student/getRecords',
+            countStudents: 'http://dtapi.local/student/countRecords',
+            editStudent: 'http://dtapi.local/student/update/',
+            delStudent: 'http://dtapi.local/student/del/',
+            addStudents:'http://dtapi.local/student/insertData'
 
         })
 
