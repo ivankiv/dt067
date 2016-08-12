@@ -11,7 +11,7 @@
                        ng-click="subjects.showAddSubjectForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" ng-show="subjects.showSearch" type="text"
-                           placeholder="Пошук на сторінці" ng-model="subjects.textSearch" name="search" >
+                           placeholder="Пошук" ng-model="subjects.textSearch" name="search" >
                 </div>
                 <table class="rwd-table subject-table table-striped">
                     <thead>
@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="subject in subjects.list| filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
+                        <tr ng-repeat="subject in subjects.list | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
