@@ -39,12 +39,13 @@
         activate();
 
         function activate() {
-            getGroups();
             studentService.getStudents().then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
                 self.password = "";
                 self.password1 = "";
+                getGroups();
+                console.log(self.list);
             });
 
         }
@@ -120,9 +121,15 @@
         function getGroups() {
             groupService.getGroups().then(function(response) {
                 self.groupList = response.data;
-                angular.forEach(response.data, function(group) {
-                    self.associativeGroup[group.group_id] = group.group_name;
-                });
+                self.groupList.forEach(
+                    function(group) {
+                        self.associativeGroup[group.group_id] = group.group_name;
+                    });
+                self.list = self.list.map(
+                    function(student) {
+                        student.group_name =  self.associativeGroup[student.group_id];
+                        return student;
+                    });
             })
         }
 
