@@ -75,6 +75,11 @@
                         .then(countSubjects)
                         .then(pageChanged);
                 }
+                if(response.status === 400) {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити предмет який містить тести!</div>'
+                    });
+                }
             }
 
             function showAddSubjectForm() {

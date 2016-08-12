@@ -27,17 +27,17 @@
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
                         <td data-th="Статус">{{::test.enabled}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання">
-                                <i class="glyphicon glyphicon-list-alt"></i>
-                            </button>
-                            <button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі">
-                                <i class="glyphicon glyphicon-info-sign"></i>
-                            </button>
                             <button  type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити"
                                      ng-click="tests.deleteTest(test.test_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns" title="Редагувати"
                                      ng-click='tests.showEditTestForm(test) '><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </button>
+                            <button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі">
+                                <i class="glyphicon glyphicon-info-sign"></i>
                             </button>
                         </td>
                     </tr>
