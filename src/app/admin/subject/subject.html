@@ -21,7 +21,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="subject in subjects.list | toArray:false | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
+                        <tr ng-repeat="subject in subjects.list | toArray | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
