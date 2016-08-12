@@ -63,3 +63,9 @@ table.subject-list a {
 
 table.subject-list .subject-list-centered {
   text-align: center; }
+
+.val.ng-invalid {
+  border-color: rgba(255, 0, 0, 0.4); }
+
+.val.ng-valid {
+  border-color: rgba(0, 204, 0, 0.6); }
