@@ -44,7 +44,7 @@
 
             function updateTestComplete(response) {
                 if(response.status === 400) {
-                    ngDialog.open({template: '<div class="ngdialog-message"> На сервері вже є предмет з такою назвою!</div>'
+                    ngDialog.open({template: '<div class="ngdialog-message"> На сервері вже є тест з такою назвою!</div>'
                     });
                 }
 

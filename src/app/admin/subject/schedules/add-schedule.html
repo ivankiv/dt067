@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title">Додати новий запис до розкладу тестів</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="newSubjectForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Група: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name"
+                       required
+                       placeholder="Напиши назву предмету"
+                       ng-pattern="/^[a-zа-яіїє\-'\s]+$/i"
+                       ng-model="subjects.subject.subject_name"
+                       ng-minlength="3"
+                       ng-maxlength="50">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="description">Опис предмету: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="description" name="description" required
+                       placeholder="Додай опис предмету" ng-model="subjects.subject.subject_description">
+            </div>
+        </div>
+    </form>
+    <div class="clearfix" ng-if="subjects.duplicateSubjectsMessage">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Предмет із такою назвою вже зареєстрований в системі!</span>
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="col-sm-10 col-sm-offset-2">
+            <novalidate-messages field="newSubjectForm.name"  maxlength="50"></novalidate-messages>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="subjects.addSubject()"
+            ng-disabled="newSubjectForm.$invalid"> Додати предмет
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="subjects.cancelForm()">Відмінити</button>
+</div>

@@ -61,7 +61,6 @@
             }
 
             function showAddTestForm() {
-                console.log( $uibModal);
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/test/add-test.html',
                     controller: 'TestModalController as tests',

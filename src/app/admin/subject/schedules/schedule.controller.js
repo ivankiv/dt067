@@ -18,6 +18,7 @@
             self.getOneSubject = getOneSubject;
             self.getScheduleForSubject = getScheduleForSubject;
             self.getGroups = getGroups;
+            self.showAddSheduleForm = showAddSheduleForm;
 
             activate();
 
@@ -44,6 +45,25 @@
                     });
                 })
             }
+
+            function showAddSheduleForm() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/schedules/add-schedule.html',
+                    controller: 'ScheduleModalController as schedules',
+                    backdrop: false,
+                    resolve: {
+                        currentShedule: {}
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Додано новий запис!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    getScheduleForSubject();
+                })
+            }
+
             function getScheduleForSubjectComplete(response) {
                 if(response.data.response === 'no records') {
                     self.showMessageNoEntity = true;
