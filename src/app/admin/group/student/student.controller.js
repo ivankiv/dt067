@@ -15,6 +15,7 @@
         self.update = update;
         self.remove = remove;
         self.create = create;
+        self.pageChanged = pageChanged;
         self.list = [];
         self.userList = [];
         self.groupList = [];
@@ -27,6 +28,13 @@
         self.currentUser = {};
         self.currentUserId = 0;
         self.associativeGroup = {};
+        self.totalStudents = 0;
+        self.showSearch = true;
+        self.textSearch = "";
+        self.begin = 0;
+        self.currentPage = 1;
+        self.studentsPerPage = 5;
+        self.numberToDisplayStudentsOnPage = [1,2,5,10,15,20];
 
         activate();
 
@@ -34,6 +42,7 @@
             getGroups();
             studentService.getStudents().then(function (data) {
                 self.list = data;
+                self.totalStudents = data.length;
                 self.password = "";
                 self.password1 = "";
             });
@@ -54,6 +63,12 @@
                 self.currentObj = createStudentObj(self.currentUser,obj);
             });
 
+        }
+
+        function pageChanged() {
+            self.begin = ((self.currentPage - 1) * self.studentsPerPage);
+            self.showSearch = (self.currentPage == 1) ? true : false;
+            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
         }
 
         function showCreateForm() {
