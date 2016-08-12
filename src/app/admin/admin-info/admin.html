@@ -25,11 +25,11 @@
                                             <td data-th="Логін">{{::admin.username}}</td>
                                             <td  data-th="Поштова скринька">{{::admin.email}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати" ng-click="admins.showEditForm(admin)">
-                                                    <i class="glyphicon glyphicon-pencil"></i>
-                                                </button>
                                                 <button type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити" ng-click="admins.remove(admin.id)">
                                                     <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати" ng-click="admins.showEditForm(admin)">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
                                                 </button>
                                             </td>
                                         </tr>

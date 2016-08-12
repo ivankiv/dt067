@@ -19,17 +19,19 @@
                     </tr>
                     <tr ng-repeat="student in students.list">
                         <td>{{::student.user_id}}</td>
+                        <td>{{::student.group_id}}</td>
                         <td>{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
+
                         <td class="text-center">
-                                <button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати" ng-click="students.showEditForm(student)">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </button>
-                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Результати" ng-click="students.showResultForm(student)">
-                                    <i class="glyphicon glyphicon-registration-mark"></i>
-                                </button>
-                                <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns" title="Видалити" ng-click="students.remove(student.user_id)">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </button>
+                            <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns" title="Видалити" ng-click="students.remove(student.user_id)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning   pull-right table-help-btns" title="Редагувати" ng-click="students.showEditForm(student)">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-info pull-right table-help-btns" title="Результати" ng-click="students.showResultForm(student)">
+                                <i class="glyphicon glyphicon-registration-mark"></i>
+                            </button>
                         </td>
                     </tr>
                 </table>
