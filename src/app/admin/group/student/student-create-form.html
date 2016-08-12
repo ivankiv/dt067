@@ -14,7 +14,7 @@
                         <tr>
                             <td colspan="2">
                                 <span>Фото</span>
-                                <input class="form-control add-photo-inp" file-load="students.currentObj.photo" ng-model="students.currentObj.photo" type="file"  accept="image/jpeg,image/png,image/gif/svg"/>
+                                <input class="form-control add-photo-inp" file-load = "students.currentObj.photo" ng-model="students.currentObj.photo" type="file"  accept="image/jpeg,image/png,image/gif/svg"/>
                                 <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250" alt="Зображення">
                             </td>
                             <td colspan="4">
@@ -52,21 +52,18 @@
                         </tr>
                         <tr>
                             <td class="text-center create-student-submit-btns-wrpr">
-                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.create()" ng-disabled="studentCreationForm.$invalid">
-                                    <i class="glyphicon glyphicon-ok"></i>
-                                </button>
                                 <button type="button" class="btn btn-danger" title="Скасувати" ng-click="students.hide()">
                                     <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.create()" ng-disabled="studentCreationForm.$invalid">
+                                    <i class="glyphicon glyphicon-ok"></i>
                                 </button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </form>
-
             </div>
-
         </div>
-
     </section>
 </section>

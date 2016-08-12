@@ -7,7 +7,7 @@
     fileLoad.$inject = [];
 
     function fileLoad() {
-        var directive = {
+        return {
             scope: {
                 fileLoad: "="
             },
@@ -23,7 +23,5 @@
                 });
             }
         };
-
-        return directive;
     }
-})();
+}());
