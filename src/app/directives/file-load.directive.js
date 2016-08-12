@@ -26,4 +26,4 @@
 
         return directive;
     }
-})();
+}());

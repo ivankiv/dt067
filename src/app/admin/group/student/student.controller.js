@@ -24,20 +24,20 @@
         self.password = "";
         self.password1 = "";
         self.currentObj = {};
-        self.currentUser ={};
-        self.currentUserId =0;
+        self.currentUser = {};
+        self.currentUserId = 0;
+        self.associativeGroup = {};
 
         activate();
 
         function activate() {
-            groupService.getGroups().then(function (response) {
-                self.groupList =  response.data;
-            });
+            getGroups();
             studentService.getStudents().then(function (data) {
                 self.list = data;
                 self.password = "";
                 self.password1 = "";
             });
+
         }
 
         function hide(param) {
@@ -102,6 +102,15 @@
             hide();
         }
 
+        function getGroups() {
+            groupService.getGroups().then(function(response) {
+                self.groupList = response.data;
+                angular.forEach(response.data, function(group) {
+                    self.associativeGroup[group.group_id] = group.group_name;
+                });
+            })
+        }
+
         function createStudentObj(userObj,studentObj){
             return {
                 username: userObj.username || "",
@@ -118,4 +127,4 @@
             };
         }
     }
-})();
+}());
