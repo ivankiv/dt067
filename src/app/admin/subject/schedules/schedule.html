@@ -8,7 +8,7 @@
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
                     <button type="button" class="btn btn-default add-btn" title="Додати дату тесту"
-                            ><i class="fa fa-plus" aria-hidden="true"></i>
+                            ng-click="schedules.showAddScheduleForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
                 <table class="rwd-table subject-table table-striped">
@@ -23,11 +23,11 @@
                         <td data-th="Група">{{::schedules.associativeGroup[schedule.group_id]}}</td>
                         <td data-th="Дата проведення">{{::schedule.event_date | date}}</td>
                         <td>
-                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
-                                   ><i class="glyphicon glyphicon-pencil"></i>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                    ng-click="schedules.deleteSchedule(schedule.schedule_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
-                            <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                    ><i class="glyphicon glyphicon-remove"></i>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                   ><i class="glyphicon glyphicon-pencil"></i>
                             </button>
                         </td>
                     </tr>

@@ -18,7 +18,8 @@
             self.getOneSubject = getOneSubject;
             self.getScheduleForSubject = getScheduleForSubject;
             self.getGroups = getGroups;
-            self.showAddSheduleForm = showAddSheduleForm;
+            self.deleteSchedule = deleteSchedule;
+            self.showAddScheduleForm = showAddScheduleForm;
 
             activate();
 
@@ -46,13 +47,26 @@
                 })
             }
 
-            function showAddSheduleForm() {
+            function deleteSchedule(schedule_id) {
+                ngDialog.openConfirm({
+                    template: 'app/partials/confirm-delete-dialog.html',
+                    plain: false
+                }).then(function() {
+                    scheduleService.deleteSchedule(schedule_id).then(function() {
+                        if(response.data.response === 'ok') {
+                            activate();
+                        }
+                    });
+                })
+            }
+
+            function showAddScheduleForm() {
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/schedules/add-schedule.html',
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentShedule: {}
+                        currentSchedule: {}
                     }
                 });
                 modalInstance.result.then(function() {
@@ -60,7 +74,7 @@
 						  Додано новий запис!</div>'
                     });
                     self.showMessageNoEntity = false;
-                    getScheduleForSubject();
+                    activate();
                 })
             }
 
@@ -69,7 +83,6 @@
                     self.showMessageNoEntity = true;
                 } else {
                     self.list = response.data;
-                    console.log(self.list);
                 }
             }
         }

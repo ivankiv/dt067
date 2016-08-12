@@ -14,11 +14,13 @@
             getRangeOfSubjects: 'http://dtapi.local/subject/getRecordsRange',
             countSubjects: 'http://dtapi.local/subject/countRecords',
             addSubject: 'http://dtapi.local/subject/insertData',
-            editSubject: 'http://dtapi.local/subject/update/',
-            delSubject: 'http://dtapi.local/subject/del/',
+            editSubject: 'http://dtapi.local/subject/update/', // + id of subject
+            delSubject: 'http://dtapi.local/subject/del/', // + id of subject
 
-            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/',
-            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/',
+            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/', // + id of group
+            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/', // + id of subject
+            deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of schedule
+            addSchedule: 'http://dtapi.local/timeTable/insertData',
 
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',

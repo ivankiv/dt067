@@ -2,41 +2,34 @@
     <h3 class="modal-title">Додати новий запис до розкладу тестів</h3>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" name="newSubjectForm" role="form">
+    <form class="form-horizontal" name="newScheduleForm" role="form">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="name">Група: </label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" name="name"
-                       required
-                       placeholder="Напиши назву предмету"
-                       ng-pattern="/^[a-zа-яіїє\-'\s]+$/i"
-                       ng-model="subjects.subject.subject_name"
-                       ng-minlength="3"
-                       ng-maxlength="50">
+            <label class="control-label col-sm-4" for="schedule">Група: </label>
+            <div class="col-sm-8">
+                <select class="form-control" name="schedule" id="schedule" ng-model="schedules.schedule.group_id"
+                        ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList"></select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="description">Опис предмету: </label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="description" name="description" required
-                       placeholder="Додай опис предмету" ng-model="subjects.subject.subject_description">
+            <label class="control-label col-sm-4" for="event_date">Дата проведення тесту: </label>
+            <div class="col-sm-8">
+                <input type="text" class="col-sm-11 form-control schedule-date" id="event_date" name="event_date" required
+                       placeholder="Обери дату проведення тесту" ng-model="schedules.schedule.event_date" disabled>
+                <button type="button" class="col-sm-1 btn btn-info table-help-btns" title="Розклад">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
     </form>
-    <div class="clearfix" ng-if="subjects.duplicateSubjectsMessage">
-        <div class="col-sm-10 col-sm-offset-2" >
-            <span class="text-danger">Предмет із такою назвою вже зареєстрований в системі!</span>
-        </div>
-    </div>
-    <div  class="clearfix">
-        <div class="col-sm-10 col-sm-offset-2">
-            <novalidate-messages field="newSubjectForm.name"  maxlength="50"></novalidate-messages>
+    <div class="clearfix" ng-if="schedules.alreadyExistInSchedule">
+        <div class="col-sm-8 col-sm-offset-4">
+            <span class="text-danger" role="alert">Для даної групи вже призначено дату проведення тесту по даному предмету</span>
         </div>
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="subjects.addSubject()"
-            ng-disabled="newSubjectForm.$invalid"> Додати предмет
+    <button class="btn btn-primary" type="button" ng-click="schedules.addSchedule()"
+            ng-disabled="newScheduleForm.$invalid"> Додати
     </button>
-    <button class="btn btn-warning" type="button" ng-click="subjects.cancelForm()">Відмінити</button>
+    <button class="btn btn-warning" type="button" ng-click="schedules.cancelForm()">Відмінити</button>
 </div>

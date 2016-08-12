@@ -59,7 +59,7 @@
             }
 
             function cancelForm () {
-                $uibModalInstance.dismiss('cancel');
+                $uibModalInstance.dismiss();
             }
 
             function addTestComplete(response) {
