@@ -52,8 +52,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             url: '/group',
             views: {
                 'content': {
-                    templateUrl: 'app/admin/group/groups.html'
-                    // controller: 'SubjectController as subjects'
+                    templateUrl: 'app/admin/group/groups.html',
+                    controller: 'GroupController as groups'
                 }
             }
         })

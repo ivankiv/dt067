@@ -20,8 +20,6 @@
             getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/',
             getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/',
 
-            getGroups: 'http://dtapi.local/group/getRecords',
-
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',
             countTests: 'http://dtapi.local/test/countRecords',
@@ -42,6 +40,14 @@
             addFaculty: 'http://dtapi.local/faculty/insertData',
             editFaculty: 'http://dtapi.local/faculty/update/',
             delFaculty: 'http://dtapi.local/faculty/del/',
+
+            getGroups: 'http://dtapi.local/group/getRecords',
+            getRangeOfGroups: 'http://dtapi.local/group/getRecordsRange',
+            getOneGroup: 'http://dtapi.local/group/getRecords/',
+            countGroups: 'http://dtapi.local/group/countRecords',
+            addGroup: 'http://dtapi.local/group/insertData',
+            editGroup: 'http://dtapi.local/group/update/',
+            delGroup: 'http://dtapi.local/group/del/',
 
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
