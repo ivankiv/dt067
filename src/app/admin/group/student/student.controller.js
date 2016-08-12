@@ -5,7 +5,7 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService",'adminService',"$state"];
+    StudentEditController.$inject = ["studentService","groupService","adminService"];
 
     function StudentEditController(studentService, groupService, adminService) {
         var self = this;
@@ -22,8 +22,6 @@
         self.showEdit = false;
         self.showCreate = false;
         self.alreadyExist = false;
-        self.password = "";
-        self.password1 = "";
         self.currentObj = {};
         self.currentUser = {};
         self.currentUserId = 0;
@@ -79,15 +77,6 @@
         }
 
         function update(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
             studentService.editStudent(self.currentObj,self.currentUserId)
                 .then(activate);
             hide("edit");
@@ -136,8 +125,8 @@
         function createStudentObj(userObj,studentObj){
             return {
                 username: userObj.username || "",
-                password: userObj.password ||"",
-                password_confirm:userObj.password_confirm || "",
+                password: userObj.plain_password  ||"",
+                password_confirm:userObj.plain_password || "",
                 email:userObj.email || "",
                 gradebook_id:studentObj.gradebook_id || "",
                 student_surname:studentObj.student_surname || "",

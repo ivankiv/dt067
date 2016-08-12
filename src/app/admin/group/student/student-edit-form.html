@@ -12,12 +12,12 @@
                     <table class="rwd-table create-student-table table-striped">
                         <tbody>
                         <tr>
-                            <td colspan="2">
+                            <td colspan="3" class = "text-center">
                                 <span>Фото</span>
                                 <input class="form-control add-photo-inp" file-load="students.currentObj.photo" ng-model="students.currentObj.photo" type="file"  accept="image/jpeg,image/png,image/gif/svg"/>
                                 <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250" alt="Зображення">
                             </td>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <label for="names">ПІБ</label>
                                 <div id="names">
                                     <input type="text" class="form-control" name="names"  ng-model="students.currentObj.student_surname" placeholder="Прізвище" required >
@@ -26,7 +26,7 @@
                                     <label for="group">Група</label>
                                 </div>
                                 <select ng-options="group.group_id as group.group_name for group  in students.groupList"  ng-model="students.currentObj.group_id" class="form-control" id="group" placeholder="Виберіть групу">
-                                    <option value="" disabled>Виберіть предмет</option>
+                                    <option value="" disabled>Виберіть групу</option>
                                 </select>
                             </td>
                         </tr>
