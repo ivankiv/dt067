@@ -1,10 +1,12 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"  ng-if = "students.showEdit" ng-include = "'app/admin/group/student/student-edit-form.html'"></div>
+            <div class= "col-xs-12 col-md-10 col-md-offset-1" ng-if = "students.showCreate" ng-include = "'app/admin/group/student/student-create-form.html'"></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!students.showEdit && !students.showCreate">
                 <div class='col-sm-2 col-xs-12 views-header'><h4>Студенти</h4></div>
                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-default add-btn" title="Додати факультет"
+                    <button type="button" class="btn btn-default add-btn" title="Додати студента" ng-click="students.showCreateForm()"
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
@@ -15,15 +17,19 @@
                         <th>Група</th>
                         <th colspan="2">Прізвище і ім'я</th>
                     </tr>
-                    <tr>
-                        <td data-th="Реєстр №">Реєстр №</td>
-                        <td data-th="Група">Група</td>
-                        <td data-th="Прізвище і ім'я">Прізвище і ім'я</td>
-                        <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"
-                        ><i class="glyphicon glyphicon-pencil"></i>
-                        </button>
-                            <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns"  title="Видалити">
-                                <i class="glyphicon glyphicon-remove"></i></button>
+                    <tr ng-repeat="student in students.list">
+                        <td>{{::student.user_id}}</td>
+                        <td>{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
+                        <td class="text-center">
+                                <button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати" ng-click="students.showEditForm(student)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Результати" ng-click="students.showResultForm(student)">
+                                    <i class="glyphicon glyphicon-registration-mark"></i>
+                                </button>
+                                <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns" title="Видалити" ng-click="students.remove(student.user_id)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
                         </td>
                     </tr>
                 </table>

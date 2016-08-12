@@ -1,1 +1,1 @@
-angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngDialog', 'ngMessages']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'ngAnimate', 'ngDialog', 'ngMessages', 'angular-toArrayFilter']);
