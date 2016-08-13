@@ -21,10 +21,10 @@
                     <tbody>
                     <tr ng-repeat="schedule in schedules.list">
                         <td data-th="Група">{{::schedules.associativeGroup[schedule.group_id]}}</td>
-                        <td data-th="Дата проведення">{{::schedule.event_date | date}}</td>
+                        <td data-th="Дата проведення">{{::schedule.event_date | date: "dd MMMM yyyy"}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                    ng-click="schedules.deleteSchedule(schedule.schedule_id)"><i class="glyphicon glyphicon-trash"></i>
+                                    ng-click="schedules.deleteSchedule(schedule.timetable_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                    ><i class="glyphicon glyphicon-pencil"></i>

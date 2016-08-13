@@ -52,7 +52,7 @@
                     template: 'app/partials/confirm-delete-dialog.html',
                     plain: false
                 }).then(function() {
-                    scheduleService.deleteSchedule(schedule_id).then(function() {
+                    scheduleService.deleteSchedule(schedule_id).then(function(response) {
                         if(response.data.response === 'ok') {
                             activate();
                         }
@@ -80,9 +80,11 @@
 
             function getScheduleForSubjectComplete(response) {
                 if(response.data.response === 'no records') {
+                    self.list = {};
                     self.showMessageNoEntity = true;
                 } else {
                     self.list = response.data;
+                    console.log(self.list);
                 }
             }
         }

@@ -14,6 +14,17 @@
             //self.currentSchedule = currentSchedule;
             self.gpoupList = {};
             self.alreadyExistInSchedule = false;
+
+            //->DatePicker
+            self.DatePickerOpened = false;
+            self.dateOptions = {
+                formatYear: 'yy',
+                maxDate: new Date(2020, 5, 22),
+                minDate: new Date(),
+                startingDay: 1
+            };
+            //<- the end of DatePicker
+
             //self.wasNotEditScheduleMessage = false;
 
             //methods
@@ -21,6 +32,7 @@
             //self.updateSchedule = updateSchedule;
             self.getGroups = getGroups;
             self.cancelForm = cancelForm;
+            self.openDatePicker = openDatePicker;
 
             activate();
 
@@ -44,6 +56,10 @@
                        self.alreadyExistInSchedule = true;
                     }
                 })
+            }
+
+            function openDatePicker() {
+                self.DatePickerOpened = true;
             }
 
             function cancelForm() {
