@@ -21,6 +21,7 @@
             getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/', // + id of subject
             deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of schedule
             addSchedule: 'http://dtapi.local/timeTable/insertData',
+            editSchedule: 'http://dtapi.local/timeTable/update/', // + id of subject
 
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',

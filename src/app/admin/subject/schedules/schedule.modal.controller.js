@@ -5,19 +5,20 @@
         .controller('ScheduleModalController', scheduleModalController);
     scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', '$uibModalInstance', 'currentSchedule', 'ngDialog'];
 
-        function scheduleModalController(scheduleService, groupService, $stateParams,  $uibModalInstance,  currentSchedule, ngDialog) {
+        function scheduleModalController(scheduleService, groupService, $stateParams,  $uibModalInstance,  currentSchedule,  ngDialog) {
             var self = this;
 
             //variables
             self.schedule = {};
             self.schedule.subject_id = $stateParams.currentSubjectId;
-            //self.currentSchedule = currentSchedule;
+            self.currentSchedule = currentSchedule;
             self.gpoupList = {};
             self.alreadyExistInSchedule = false;
 
             //->DatePicker
             self.DatePickerOpened = false;
             self.dateOptions = {
+                dateDisabled: disabled,
                 formatYear: 'yy',
                 maxDate: new Date(2020, 5, 22),
                 minDate: new Date(),
@@ -25,11 +26,9 @@
             };
             //<- the end of DatePicker
 
-            //self.wasNotEditScheduleMessage = false;
-
             //methods
             self.addSchedule = addSchedule;
-            //self.updateSchedule = updateSchedule;
+            self.updateSchedule = updateSchedule;
             self.getGroups = getGroups;
             self.cancelForm = cancelForm;
             self.openDatePicker = openDatePicker;
@@ -47,19 +46,39 @@
             }
 
             function addSchedule() {
-                scheduleService.addSchedule(self.schedule).then(function (response) {
-                    if(response.data.response === 'ok') {
-                        self.schedule = {};
-                        $uibModalInstance.close();
-                    }
-                    if(response.status === 400) {
-                       self.alreadyExistInSchedule = true;
-                    }
-                })
+                scheduleService.addSchedule(self.schedule).then(addScheduleComplete)
+            }
+
+            function updateSchedule() {
+                scheduleService.updateSchedule(currentSchedule.timetable_id, self.currentSchedule).then(updateScheduleComplete)
+            }
+
+            function addScheduleComplete (response) {
+                if(response.data.response === 'ok') {
+                    $uibModalInstance.close();
+                    self.schedule = {};
+                }
+                if(response.status === 400) {
+                    self.alreadyExistInSchedule = true;
+                }
+            }
+
+            function updateScheduleComplete(response) {
+                if(response.data.response === 'ok') {
+                    $uibModalInstance.close();
+                    self.currentSchedule = {};
+                }
             }
 
             function openDatePicker() {
                 self.DatePickerOpened = true;
+            }
+
+            // Disable weekend selection
+            function disabled(data) {
+                var date = data.date,
+                    mode = data.mode;
+                return mode === 'day' && date.getDay() === 0;
             }
 
             function cancelForm() {

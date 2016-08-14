@@ -2,7 +2,7 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-8 col-xs-12 views-header'><h4>Розклад предмету: &nbsp;{{schedules.currentSubjectName}}</h4></div>
+                <div class='col-sm-8 col-xs-12 views-header'><h4>Розклад тестування для предмету: &nbsp;{{schedules.currentSubjectName}}</h4></div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
@@ -15,7 +15,7 @@
                     <thead>
                     <tr>
                         <th>Група</th>
-                        <th>Дата проведення</th>
+                        <th>Дата проведення тесту</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -27,7 +27,7 @@
                                     ng-click="schedules.deleteSchedule(schedule.timetable_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
-                                   ><i class="glyphicon glyphicon-pencil"></i>
+                                    ng-click="schedules.showEditScheduleForm(schedule)"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
                         </td>
                     </tr>

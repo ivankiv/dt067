@@ -20,6 +20,7 @@
             self.getGroups = getGroups;
             self.deleteSchedule = deleteSchedule;
             self.showAddScheduleForm = showAddScheduleForm;
+            self.showEditScheduleForm = showEditScheduleForm;
 
             activate();
 
@@ -78,13 +79,29 @@
                 })
             }
 
+            function showEditScheduleForm(currentSchedule) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/schedules/edit-schedule.html',
+                    controller: 'ScheduleModalController as schedules',
+                    backdrop: false,
+                    resolve: {
+                        currentSchedule: currentSchedule,
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>'
+                    });
+                    activate();
+                })
+            }
+
             function getScheduleForSubjectComplete(response) {
                 if(response.data.response === 'no records') {
                     self.list = {};
                     self.showMessageNoEntity = true;
                 } else {
                     self.list = response.data;
-                    console.log(self.list);
                 }
             }
         }

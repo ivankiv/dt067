@@ -10,7 +10,8 @@
                 getScheduleForSubject: getScheduleForSubject,
                 getScheduleForGroup: getScheduleForGroup,
                 deleteSchedule: deleteSchedule,
-                addSchedule: addSchedule
+                addSchedule: addSchedule,
+                updateSchedule: updateSchedule
             };
 
             function getScheduleForSubject(subject_id) {
@@ -30,6 +31,11 @@
 
             function addSchedule(data) {
                 return $http.post(appConstants.addSchedule, data)
+                    .then(fulfilled, rejected);
+            }
+
+            function updateSchedule(currentScheduleId,data) {
+                return $http.post(appConstants.editSchedule + currentScheduleId, data)
                     .then(fulfilled, rejected);
             }
 

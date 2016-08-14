@@ -1,12 +1,12 @@
 <div class="modal-header">
-    <h3 class="modal-title">Додати новий запис до розкладу тестів</h3>
+    <h3 class="modal-title">Редагувати запис розкладу тестів</h3>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" name="newScheduleForm" role="form">
+    <form class="form-horizontal" name="editScheduleForm" role="form">
         <div class="form-group">
             <label class="control-label col-sm-4" for="group">Група: </label>
             <div class="col-sm-8">
-                <select class="form-control" name="group" id="group" ng-model="schedules.schedule.group_id"
+                <select class="form-control" name="group" id="group" ng-model="schedules.currentSchedule.group_id"
                         ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList" ng-required="true">
                 </select>
             </div>
@@ -17,7 +17,7 @@
                 <input type="text" class="form-control" id="event_date"
                        placeholder="Оберіть дату проведення тесту"
                        uib-datepicker-popup="dd MMMM yyyy"
-                       ng-model="schedules.schedule.event_date"
+                       ng-model="schedules.currentSchedule.event_date"
                        is-open="schedules.DatePickerOpened"
                        datepicker-options="schedules.dateOptions"
                        ng-required="true"
@@ -39,8 +39,8 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="schedules.addSchedule()"
-            ng-disabled="newScheduleForm.$invalid"> Додати
+    <button class="btn btn-primary" type="button" ng-click="schedules.updateSchedule()"
+            ng-disabled="newScheduleForm.$invalid"> Зберегти
     </button>
     <button class="btn btn-warning" type="button" ng-click="schedules.cancelForm()">Відмінити</button>
 </div>
