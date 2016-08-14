@@ -22,7 +22,7 @@
                     </tr>
                     <tr ng-repeat="student in students.list | toArray | filter: students.textSearch | limitTo: students.studentsPerPage : students.begin">
                         <td>{{::student.user_id}}</td>
-                        <td>{{::students.associativeGroup[student.group_id]}}</td>
+                        <td>{{::student.group_name}}</td>
                         <td>{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
 
                         <td class="text-center">

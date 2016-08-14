@@ -5,7 +5,7 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService",'adminService',"$state"];
+    StudentEditController.$inject = ["studentService","groupService","adminService"];
 
     function StudentEditController(studentService, groupService, adminService) {
         var self = this;
@@ -22,8 +22,6 @@
         self.showEdit = false;
         self.showCreate = false;
         self.alreadyExist = false;
-        self.password = "";
-        self.password1 = "";
         self.currentObj = {};
         self.currentUser = {};
         self.currentUserId = 0;
@@ -39,12 +37,13 @@
         activate();
 
         function activate() {
-            getGroups();
             studentService.getStudents().then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
                 self.password = "";
                 self.password1 = "";
+                getGroups();
+                console.log(self.list);
             });
 
         }
@@ -78,15 +77,6 @@
         }
 
         function update(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
             studentService.editStudent(self.currentObj,self.currentUserId)
                 .then(activate);
             hide("edit");
@@ -120,17 +110,23 @@
         function getGroups() {
             groupService.getGroups().then(function(response) {
                 self.groupList = response.data;
-                angular.forEach(response.data, function(group) {
-                    self.associativeGroup[group.group_id] = group.group_name;
-                });
+                self.groupList.forEach(
+                    function(group) {
+                        self.associativeGroup[group.group_id] = group.group_name;
+                    });
+                self.list = self.list.map(
+                    function(student) {
+                        student.group_name =  self.associativeGroup[student.group_id];
+                        return student;
+                    });
             })
         }
 
         function createStudentObj(userObj,studentObj){
             return {
                 username: userObj.username || "",
-                password: userObj.password ||"",
-                password_confirm:userObj.password_confirm || "",
+                password: userObj.plain_password  ||"",
+                password_confirm:userObj.plain_password || "",
                 email:userObj.email || "",
                 gradebook_id:studentObj.gradebook_id || "",
                 student_surname:studentObj.student_surname || "",

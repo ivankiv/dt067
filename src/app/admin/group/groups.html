@@ -44,11 +44,11 @@
                             <td>{{::groups.associativeFaculty[group.faculty_id]}}</td>
                             <td>{{::groups.associativeSpeciality[group.speciality_id]}}</td>
                             <td>
-                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
-                                        ng-click="groups.showEditGroupForm(group);"><i class="glyphicon glyphicon-pencil"></i>
-                                </button>
                                 <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
                                         ng-click="groups.deleteGroup(group.group_id)"><i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                        ng-click="groups.showEditGroupForm(group);"><i class="glyphicon glyphicon-pencil"></i>
                                 </button>
                                 <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
                                     <i class="fa fa-calendar" aria-hidden="true"></i></button>
