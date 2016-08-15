@@ -20,12 +20,11 @@
         self.begin = 0;
         self.totalGroups = 0;
         self.currentPage = 1;
-        self.groupsPerPage = 10;
+        self.groupsPerPage = 5;
         self.pageChanged = pageChanged;
 
 
         self.getGroups = getGroups;
-        self.countGroups = countGroups;
         self.deleteGroup = deleteGroup;
         self.showAddGroupForm = showAddGroupForm;
         self.showEditGroupForm = showEditGroupForm;
@@ -38,9 +37,9 @@
         activate();
 
         function activate() {
-            getGroups();
-            getFaculty();
-            getSpeciality();
+            getGroups()
+                .then(getFaculty)
+                .then(getSpeciality);
         }
 
         function getSpeciality() {
@@ -49,6 +48,10 @@
                 for (var i = 0; i < self.specialityList.length; i++) {
                     self.associativeSpeciality[+self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
                 }
+                self.list = self.list.map(function(speciality) {
+                    speciality.speciality_name =  self.associativeSpeciality[speciality.speciality_id];
+                    return speciality;
+                })
             });
         }
 
@@ -58,11 +61,15 @@
                 for (var i = 0; i < self.facultyList.length; i++) {
                     self.associativeFaculty[+self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
                 }
+                self.list = self.list.map(function(faculty) {
+                        faculty.faculty_name =  self.associativeFaculty[faculty.faculty_id];
+                        return faculty;
+                    })
             });
         }
 
         function getGroups() {
-            groupService.getGroups().then(function(response) {
+            return groupService.getGroups().then(function(response) {
                 self.list = response.data;
                 self.totalGroups = response.data.length;
             });
@@ -92,13 +99,8 @@
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Групу успішно додано!</div>'
                 });
-                countGroups();
+                activate();
                 pageChanged();
-            })
-        }
-        function countGroups() {
-            groupService.countGroups().then(function(response) {
-                self.totalGroups = response.data;
             })
         }
 
@@ -117,7 +119,7 @@
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Групу видалено!</div>'
                 });
-                countGroups();
+                activate();
                 pageChanged();
             }
         }
