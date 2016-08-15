@@ -39,6 +39,7 @@
                 <div class="subject-pagination pull-right">
                     <uib-pagination
                             ng-show="specialities.totalSpecialities > specialities.specialitiesPerPage"
+                            ng-hide="specialities.textSearch!=''"
                             total-items="specialities.totalSpecialities"
                             items-per-page="specialities.specialitiesPerPage"
                             ng-model="specialities.currentPage"
