@@ -243,7 +243,9 @@ body {
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #5D5393 !important;
   color: #fff !important; }
-
+div.row.schedule-form {
+  margin-left: 0;
+}
 /************************************************
                   ngMessage styles
 /*************************************************/
