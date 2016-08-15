@@ -7,7 +7,7 @@
 
     AdminEditController.$inject = ["adminService","$state", 'ngDialog'];
 
-    function AdminEditController(adminService,$state, ngDialog) {
+    function AdminEditController(adminService, ngDialog) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -22,7 +22,6 @@
         self.password = "";
         self.password1 = "";
         self.currentObj = {};
-
 
         activate();
 
