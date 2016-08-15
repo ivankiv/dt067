@@ -7,16 +7,21 @@
                 restrict: 'A',
                 scope: {
                     subjectsPerPage: '=',
-                    totalSubjects: '='
+                    totalSubjects: '=',
+                    textSearch: '='
                 },
                 require: 'ngModel',
                 link: function(scope, element, attrs, ngModel) {
                     element.bind('keydown', function() {
-                        scope.subjectsPerPage = scope.totalSubjects;
+                        scope.$apply(function() {
+                            scope.subjectsPerPage = scope.totalSubjects;
+                        })
                     });
                     element.bind('blur', function() {
-                        scope.subjectsPerPage = 5;
-                        console.log(scope.subjectsPerPage);
+                        scope.$apply(function() {
+                            scope.textSearch = "";
+                            scope.subjectsPerPage = 5;
+                        })
                     });
                 }
             }
