@@ -11,18 +11,20 @@
         self.list = {};
         self.facultyList = {};
         self.specialityList = {};
-
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
 
-
+        self.totalSubjects = 0;
+        self.showSearch = true;
+        self.textSearch = "";
+        self.begin = 0;
         self.totalGroups = 0;
         self.currentPage = 1;
         self.groupsPerPage = 10;
-        var firstGroupInList = 0;
         self.pageChanged = pageChanged;
 
-        self.getRecordsRange = getRecordsRange;
+
+        self.getGroups = getGroups;
         self.countGroups = countGroups;
         self.deleteGroup = deleteGroup;
         self.showAddGroupForm = showAddGroupForm;
@@ -30,13 +32,13 @@
         self.addNewGroup = addNewGroup;
         self.getFaculty = getFaculty;
         self.getSpeciality = getSpeciality;
+        self.pageChanged = pageChanged;
 
 
         activate();
 
         function activate() {
-            getRecordsRange();
-            countGroups();
+            getGroups();
             getFaculty();
             getSpeciality();
         }
@@ -59,11 +61,19 @@
             });
         }
 
-        function getRecordsRange() {
-            groupService.getRecordsRange(self.groupsPerPage, firstGroupInList).then(function(response) {
+        function getGroups() {
+            groupService.getGroups().then(function(response) {
                 self.list = response.data;
+                self.totalGroups = response.data.length;
             });
         }
+
+        function pageChanged() {
+            self.begin = ((self.currentPage - 1) * self.groupsPerPage);
+            self.showSearch = (self.currentPage == 1) ? true : false;
+            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
+        }
+
         function addNewGroup() {
             groupService.addGroup(self.group).then(function (response) {
                 self.list = response.data;
@@ -91,12 +101,7 @@
                 self.totalGroups = response.data;
             })
         }
-        function pageChanged() {
-            var begin = ((self.currentPage - 1) * self.groupsPerPage);
-            groupService.getRecordsRange(self.groupsPerPage, begin).then(function(response) {
-                self.list = response.data;
-            })
-        }
+
         function deleteGroup(group_id) {
             console.log(group_id);
             ngDialog.openConfirm({
