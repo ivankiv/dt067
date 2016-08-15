@@ -2,12 +2,12 @@
     <h3 class="modal-title">Редагувати групу</h3>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" name="editGropForm" role="form">
+    <form class="form-horizontal" name="editGroupForm" role="form">
         <div class="form-group">
             <label class="control-label col-sm-2" for="name">Назва групи: </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="name" name="name"
-                       ng-model="groups.group.group_name">
+                       ng-model="groups.group.group_name" required>
             </div>
         </div>
         <div class="form-group">
@@ -16,7 +16,7 @@
                 <select class="form-control"
                         ng-model="groups.group.faculty_id"
                         ng-options="facultyList.faculty_id as facultyList.faculty_name for facultyList in groups.facultyList"
-                        id="fadescription">
+                        id="fadescription" required>
                 </select>
             </div>
         </div>
@@ -27,7 +27,7 @@
                 <select class="form-control"
                         ng-model="groups.group.speciality_id"
                         ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList"
-                        id="specdescription">
+                        id="specdescription" required>
                 </select>
             </div>
         </div>
@@ -38,11 +38,6 @@
             <span class="text-danger" role="alert">Група із такою назвою вже існує в системі!</span>
         </div>
     </div>
-    <!--<div class="clearfix" ng-if="groups.incorrectEnteredDataMessage">
-        <div class="col-sm-10 col-sm-offset-2">
-            <span class="text-danger" role="alert">Назва повинна містити тільки букви кирилицею та латиницею!</span>
-        </div>
-    </div>-->
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="groups.updateGroup()"
