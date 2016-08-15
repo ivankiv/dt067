@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog"];
 
-    function StudentEditController(studentService, groupService, adminService) {
+    function StudentEditController(studentService, groupService, adminService, ngDialog) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -40,10 +40,7 @@
             studentService.getStudents().then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
-                self.password = "";
-                self.password1 = "";
                 getGroups();
-                console.log(self.list);
             });
 
         }
@@ -83,8 +80,14 @@
         }
 
         function remove(id) {
-            studentService.deleteStudent(id)
-                .then(activate);
+            ngDialog.openConfirm({
+                template: 'app/partials/confirm-delete-dialog.html',
+                plain: false
+            })
+                .then(function(){
+                    studentService.deleteStudent(id)
+                        .then(activate);
+                })
         }
 
         function create(){
@@ -101,7 +104,6 @@
             }
             self.currentObj.password = self.currentObj.plain_password;
             self.currentObj.password_confirm = self.currentObj.plain_password;
-            console.log(self.currentObj);
             studentService.createStudent(self.currentObj)
                 .then(activate);
             hide();
