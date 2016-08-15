@@ -85,7 +85,7 @@
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentSchedule: currentSchedule,
+                        currentSchedule: currentSchedule
                     }
                 });
                 modalInstance.result.then(function() {

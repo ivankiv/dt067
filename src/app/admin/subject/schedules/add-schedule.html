@@ -8,6 +8,7 @@
             <div class="col-sm-8">
                 <select class="form-control" name="group" id="group" ng-model="schedules.schedule.group_id"
                         ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList" ng-required="true">
+                    <option disabled selected value="">Виберіть спеціальність</option>
                 </select>
             </div>
         </div>
