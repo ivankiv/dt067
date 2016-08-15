@@ -60,7 +60,7 @@
 
         }
         function addError(response) {
-            alert("Oops!");
+            alert("Something went wrong");
             console.log(response)
         }
 
