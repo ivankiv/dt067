@@ -1,6 +1,11 @@
-
+$breakpoint-alpha: 820px;
+$white: #fff;
+$black: #000;
+$table-bg:#867DB0;
+$colom-title:yellow;
 //mixin
 @mixin table-mixin {
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: $table-bg;
   color: white;
   overflow: hidden;
@@ -231,6 +236,7 @@ body {
   }
 }
 .statistic-table{
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: $table-bg;
   color: $white;
   overflow: hidden;
@@ -288,7 +294,7 @@ body {
   margin: auto!important;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #5D5393!important;
+  background-color: #5D5393;
   color:$white!important;
 }
 div.row.schedule-form {
