@@ -2,36 +2,37 @@
     <h3 class="modal-title">Редагувати запис розкладу тестів</h3>
 </div>
 <div class="modal-body">
-    <form class="form-horizontal" name="editScheduleForm" role="form">
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="group">Група: </label>
-            <div class="col-sm-8">
-                <select class="form-control" name="group" id="group" ng-model="schedules.currentSchedule.group_id"
-                        ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList" ng-required="true">
-                </select>
+    <div class="row schedule-form">
+        <form class="form-horizontal" name="editScheduleForm" role="form">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <select class="form-control" name="group" id="group" ng-model="schedules.currentSchedule.group_id"
+                            ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList" ng-required="true">
+                        <option disabled selected value="">Виберіть групу</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-sm-4" for="event_date">Дата проведення тесту: </label>
-            <p class="input-group col-sm-8">
-                <input type="text" class="form-control" id="event_date"
-                       placeholder="Оберіть дату проведення тесту"
-                       uib-datepicker-popup="dd MMMM yyyy"
-                       ng-model="schedules.currentSchedule.event_date"
-                       is-open="schedules.DatePickerOpened"
-                       datepicker-options="schedules.dateOptions"
-                       ng-required="true"
-                       close-text="Закрити"
-                       current-text="Cьогодні"
-                       clear-text="Очистити"/>
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-primary" ng-click="schedules.openDatePicker()">
-                <i class="glyphicon glyphicon-calendar"></i>
-            </button>
-          </span>
-            </p>
-        </div>
-    </form>
+            <div class="col-md-6">
+                <p class="input-group">
+                    <input type="text" class="form-control" id="event_date"
+                           placeholder="Датa проведення тестування"
+                           uib-datepicker-popup="dd MMMM yyyy"
+                           ng-model="schedules.currentSchedule.event_date"
+                           is-open="schedules.DatePickerOpened"
+                           datepicker-options="schedules.dateOptions"
+                           ng-required="true"
+                           close-text="Закрити"
+                           current-text="Cьогодні"
+                           clear-text="Очистити"/>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="schedules.openDatePicker()"
+                            title="Дата проведення тестування"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+        </form>
+    </div>
     <div class="clearfix" ng-if="schedules.alreadyExistInSchedule">
         <div class="col-sm-8 col-sm-offset-4">
             <span class="text-danger" role="alert">Для даної групи вже призначено дату проведення тесту по даному предмету</span>

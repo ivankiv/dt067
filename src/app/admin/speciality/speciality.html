@@ -21,7 +21,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="speciality in specialities.list| filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
+                    <tr ng-repeat="speciality in specialities.list| toArray | filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
                         <td>
@@ -39,6 +39,7 @@
                 <div class="subject-pagination pull-right">
                     <uib-pagination
                             ng-show="specialities.totalSpecialities > specialities.specialitiesPerPage"
+                            ng-hide="specialities.textSearch!=''"
                             total-items="specialities.totalSpecialities"
                             items-per-page="specialities.specialitiesPerPage"
                             ng-model="specialities.currentPage"

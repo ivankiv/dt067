@@ -11,34 +11,35 @@
         self.list = {};
         self.facultyList = {};
         self.specialityList = {};
-
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
 
-
+        self.totalSubjects = 0;
+        self.showSearch = true;
+        self.textSearch = "";
+        self.begin = 0;
         self.totalGroups = 0;
         self.currentPage = 1;
-        self.groupsPerPage = 10;
-        var firstGroupInList = 0;
+        self.groupsPerPage = 5;
         self.pageChanged = pageChanged;
 
-        self.getRecordsRange = getRecordsRange;
-        self.countGroups = countGroups;
+
+        self.getGroups = getGroups;
         self.deleteGroup = deleteGroup;
         self.showAddGroupForm = showAddGroupForm;
         self.showEditGroupForm = showEditGroupForm;
         self.addNewGroup = addNewGroup;
         self.getFaculty = getFaculty;
         self.getSpeciality = getSpeciality;
+        self.pageChanged = pageChanged;
 
 
         activate();
 
         function activate() {
-            getRecordsRange();
-            countGroups();
-            getFaculty();
-            getSpeciality();
+            getGroups()
+                .then(getFaculty)
+                .then(getSpeciality);
         }
 
         function getSpeciality() {
@@ -47,6 +48,10 @@
                 for (var i = 0; i < self.specialityList.length; i++) {
                     self.associativeSpeciality[+self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
                 }
+                /*self.list = self.list.map(function(speciality) {
+                    speciality.speciality_name =  self.associativeSpeciality[speciality.speciality_id];
+                    return speciality;
+                })*/
             });
         }
 
@@ -56,14 +61,26 @@
                 for (var i = 0; i < self.facultyList.length; i++) {
                     self.associativeFaculty[+self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
                 }
+                /*self.list = self.list.map(function(faculty) {
+                        faculty.faculty_name =  self.associativeFaculty[faculty.faculty_id];
+                        return faculty;
+                })*/
             });
         }
 
-        function getRecordsRange() {
-            groupService.getRecordsRange(self.groupsPerPage, firstGroupInList).then(function(response) {
+        function getGroups() {
+            return groupService.getGroups().then(function(response) {
                 self.list = response.data;
+                self.totalGroups = response.data.length;
             });
         }
+
+        function pageChanged() {
+            self.begin = ((self.currentPage - 1) * self.groupsPerPage);
+            self.showSearch = (self.currentPage == 1) ? true : false;
+            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
+        }
+
         function addNewGroup() {
             groupService.addGroup(self.group).then(function (response) {
                 self.list = response.data;
@@ -82,23 +99,12 @@
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Групу успішно додано!</div>'
                 });
-                countGroups();
+                activate();
                 pageChanged();
             })
         }
-        function countGroups() {
-            groupService.countGroups().then(function(response) {
-                self.totalGroups = response.data;
-            })
-        }
-        function pageChanged() {
-            var begin = ((self.currentPage - 1) * self.groupsPerPage);
-            groupService.getRecordsRange(self.groupsPerPage, begin).then(function(response) {
-                self.list = response.data;
-            })
-        }
+
         function deleteGroup(group_id) {
-            console.log(group_id);
             ngDialog.openConfirm({
                 template: 'app/admin/group/delete-group.html',
                 plain: false
@@ -112,13 +118,13 @@
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Групу видалено!</div>'
                 });
-                countGroups();
+                activate();
                 pageChanged();
             }
         }
         function showEditGroupForm(group) {
-            //we need this to get current ID of subject and to pass it to SubjectModalController
-            // to edit current subject
+            //we need this to get current ID of group and to pass it to GroupModalController
+            // to edit current group
             appConstants.currentID = group.group_id;
 
             var modalInstance = $uibModal.open({
@@ -126,13 +132,14 @@
                 controller: 'groupModalController as groups',
                 backdrop: false,
                 resolve: {
-                    //the variable is needed to store data of current subject
-                    // to fill up the form of editing subject
+                    //the variable is needed to store data of current group
+                    // to fill up the form of editing group
                     currentGroup: group
 
                 }
             });
             modalInstance.result.then(function() {
+                activate();
                 pageChanged();
             })
         }

@@ -18,7 +18,7 @@
                         <th>Факультет</th>
                         <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr ng-repeat="faculty in faculties.list | filter:faculties.textSearch | limitTo: faculties.facultiesPerPage : faculties.begin ">
+                    <tr ng-repeat="faculty in faculties.list | toArray |filter:faculties.textSearch | limitTo: faculties.facultiesPerPage : faculties.begin ">
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
                         <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
                         <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"
