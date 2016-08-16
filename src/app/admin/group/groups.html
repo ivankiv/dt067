@@ -57,10 +57,10 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="group in groups.list | toArray | filter: groups.textSearch | limitTo: groups.groupsPerPage : groups.begin">
-                            <td>{{$index + (groups.currentPage - 1)*10 + 1}}</td>
-                            <td>{{::group.group_name}}</td>
-                            <td>{{::groups.associativeFaculty[group.faculty_id]}}</td>
-                            <td>{{::groups.associativeSpeciality[group.speciality_id]}}</td>
+                            <td  data-th="Номер">{{$index + (groups.currentPage - 1)*10 + 1}}</td>
+                            <td data-th="Назва">{{::group.group_name}}</td>
+                            <td data-th="Факультет">{{::groups.associativeFaculty[group.faculty_id]}}</td>
+                            <td data-th="Спеціальність">{{::groups.associativeSpeciality[group.speciality_id]}}</td>
                             <td>
                                 <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
                                         ng-click="groups.deleteGroup(group.group_id)"><i class="glyphicon glyphicon-trash"></i>

@@ -9,6 +9,9 @@
 
 .navbar-nav a {
   color: black !important; }
+  @media (max-width: 840px) {
+    .navbar-nav a {
+      padding: 17px 10px !important; } }
 
 .navbar-nav li {
   height: 55px; }
@@ -16,6 +19,16 @@
 .navbar-nav li:hover {
   background: #337ab7;
   border-bottom: 3px solid #ffffff; }
+
+.navbar-toggle {
+  background: transparent !important;
+  border: none !important; }
+  .navbar-toggle:hover {
+    background: #337ab7 !important; }
+    .navbar-toggle:hover span {
+      background-color: #ffffff !important; }
+  .navbar-toggle span {
+    background-color: #000000 !important; }
 
 .navbar-brand {
   color: black !important;
