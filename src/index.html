@@ -1,25 +1,71 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <head>
-	<title>Enter page</title>
+	<title>D-Tester</title>
 	<meta charset="utf-8">
-
-	<!-- bower:css -->
-	<!-- endbower -->
-
 	<!-- inject:css -->
-	<!-- endinject -->
+	<link rel="shortcut icon" type="image/ico" href="./img/favicon.ico" />
+	<link rel="stylesheet" href="sass/enter.css">
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog.css">
+	<link rel="stylesheet" href="../bower_components/ng-dialog/css/ngDialog-theme-default.css">
+	<link rel="stylesheet" href="sass/header.css">
+	<link rel="stylesheet" href="sass/fonts/elegant-icons-style.css">
+	<link rel="stylesheet" href="sass/fonts/font-awesome.css">
+	<link rel="stylesheet" href="sass/fonts/line-icons.css">
+	<link rel="stylesheet" href="sass/layout.css">
 
+	<!-- endinject -->
 </head>
-<body>
+<body ng-cloak>
 <ui-view></ui-view>
 
-<!-- bower:js -->
-<!-- endbower -->
-
 <!-- inject:js -->
+<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bower_components/angular/angular.min.js"></script>
+<script src="../bower_components/angular-route/angular-route.min.js"></script>
+<script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script src="../bower_components/angular-animate/angular-animate.js"></script>
+<script src="../bower_components/ng-dialog/js/ngDialog.min.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="../bower_components/angular-toArrayFilter/toArrayFilter.js"></script>
+<script src="../bower_components/angular-i18n/angular-locale_uk-ua.js"></script>
+<script src="app/app.module.js"></script>
+<script src="app/app.config.js"></script>
+<script src="app/app.constants.js"></script>
+<script src="app/auth/login.service.js"></script>
+<script src="app/auth/login.controller.js"></script>
+<script src="app/admin/subject/subject.service.js"></script>
+<script src="app/admin/group/group.service.js"></script>
+<script src="app/admin/subject/subject.controller.js"></script>
+<script src="app/admin/subject/subject.modal.controller.js"></script>
+<script src="app/admin/subject/schedules/schedule.controller.js"></script>
+<script src="app/admin/subject/schedules/schedule.modal.controller.js"></script>
+<script src="app/admin/subject/schedules/schedule.service.js"></script>
+<script src="app/admin/subject/test/test.controller.js"></script>
+<script src="app/admin/subject/test/test.modal.controller.js"></script>
+<script src="app/admin/subject/test/test.service.js"></script>
+<script src="app/directives/validateInputDirective.js"></script>
+<script src="app/directives/datePickerLocalDate.directive.js"></script>
+<script src="app/directives/searchItems.directive.js"></script>
+<script src="app/directives/stringToNumber.directive.js"></script>
+<script src="app/directives/fileLoad.directive.js"></script>
+<script src="app/admin/speciality/speciality.service.js"></script>
+<script src="app/admin/speciality/speciality.controller.js"></script>
+<script src="app/admin/speciality/speciality.modal.controller.js"></script>
+<script src="app/admin/faculty/faculty.service.js"></script>
+<script src="app/admin/faculty/faculty.controller.js"></script>
+<script src="app/admin/faculty/faculty.modal.controller.js"></script>
+<script src="app/admin/admin-info/admin.service.js"></script>
+<script src="app/admin/admin-info/admin.controller.js"></script>
+<script src="app/admin/group/group.controller.js"></script>
+<script src="app/admin/group/groupModal.controller.js"></script>
+<script src="app/admin/group/student/student.service.js"></script>
+<script src="app/admin/group/student/student.controller.js"></script>
+
 <!-- endinject -->
-
-
 </body>
 </html>
