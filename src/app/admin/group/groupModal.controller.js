@@ -65,12 +65,14 @@
         }
 
         function updateGroup() {
+            delete self.group.faculty_name;
+            delete self.group.speciality_name;
             groupService.editGroup(appConstants.currentID, self.group)
                 .then(updateComplete, addError);
         }
 
         function updateComplete(response) {
-            if(response.status == 400) {
+            if(response.status == 400 || (response.status === 200 && response.data.response == 'error')) {
                 self.duplicateGroupsMessage = true;
                 return;
             }

@@ -48,10 +48,10 @@
                 for (var i = 0; i < self.specialityList.length; i++) {
                     self.associativeSpeciality[+self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
                 }
-                /*self.list = self.list.map(function(speciality) {
+                self.list = self.list.map(function(speciality) {
                     speciality.speciality_name =  self.associativeSpeciality[speciality.speciality_id];
                     return speciality;
-                })*/
+                });
             });
         }
 
@@ -61,10 +61,10 @@
                 for (var i = 0; i < self.facultyList.length; i++) {
                     self.associativeFaculty[+self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
                 }
-                /*self.list = self.list.map(function(faculty) {
+                self.list = self.list.map(function(faculty) {
                         faculty.faculty_name =  self.associativeFaculty[faculty.faculty_id];
                         return faculty;
-                })*/
+                });
             });
         }
 
