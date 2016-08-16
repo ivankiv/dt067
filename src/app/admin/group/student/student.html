@@ -13,6 +13,9 @@
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці" ng-model="students.textSearch">
+                    <select ng-options="group.group_name as group.group_name for group  in students.groupList"  ng-model="students.textSearch" id="group" placeholder="Виберіть групу">
+                        <option value="" disabled>Виберіть групу</option>
+                    </select>
                 </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
