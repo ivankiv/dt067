@@ -115,6 +115,12 @@
         }
 
         function deleteGroupComplete(response) {
+            if(response.status == 400) {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Ви не можете видалити групу яка містить записи про студентів!</div>'
+                });
+            }
+
             if(response.data.response == "ok") {
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Групу видалено!</div>'
