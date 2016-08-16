@@ -4,10 +4,16 @@
 <div class="modal-body">
     <form class="form-horizontal" name="newGroupForm" role="form">
         <div class="form-group">
-            <label class="control-label col-sm-2" for="name">Назва групи: </label>
+            <label class="control-label col-sm-2" for="groupName">Назва групи: </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="name" required
-                       placeholder="Напиши назву групи" ng-model="groups.group.group_name">
+                <input type="text"
+                       name="groupname"
+                       class="form-control"
+                       id="groupName"
+                       placeholder="Напиши назву групи"
+                       ng-model="groups.group.group_name"
+                       ng-pattern="/^[А-ЯЇЄІ{2}+-\d{2}+-\d{1}]+$/"
+                       required>
             </div>
         </div>
         <div class="form-group">
@@ -16,7 +22,8 @@
                 <select class="form-control"
                         ng-model="groups.group.faculty_id"
                         ng-options="facultyList.faculty_id as facultyList.faculty_name for facultyList in groups.facultyList"
-                        id="fadescription">
+                        id="fadescription" required>
+                    <option disabled selected value="">Виберіть факультет </option>
                 </select>
             </div>
         </div>
@@ -27,7 +34,8 @@
                 <select class="form-control"
                         ng-model="groups.group.speciality_id"
                         id="specdescription"
-                        ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList">
+                        ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList" required>
+                    <option disabled selected value="">Виберіть спеціальність</option>
                 </select>
             </div>
         </div>
@@ -35,6 +43,11 @@
     <div class="clearfix"  ng-if="groups.duplicateGroupsMessage">
         <div class="col-sm-10 col-sm-offset-2" >
             <span class="text-danger">Група з такою назвою вже зареєстрована в системі!</span>
+        </div>
+    </div>
+    <div  class="clearfix">
+        <div class="col-sm-10 col-sm-offset-2">
+            <novalidate-messages field="newGroupForm.groupname" pattern="Імена груп повинні бути в такому форматі ББ-ЦЦ-Ц"></novalidate-messages>
         </div>
     </div>
 </div>

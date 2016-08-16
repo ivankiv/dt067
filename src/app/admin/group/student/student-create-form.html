@@ -43,11 +43,13 @@
                         <tr>
                             <td colspan="3" class="text-center">
                                 <label for="login">Логін</label>
-                                <input type="text" class="form-control" name="login" id = "login" ng-model="students.currentObj.username" placeholder="Введіть логін" required >
+                                <input type="text" class="form-control" name="login" id = "login" ng-model="students.currentObj.username" placeholder="Введіть логін"  ng-minlength="3" ng-maxlength="50" required >
+                                <novalidate-messages field="studentCreationForm.login"></novalidate-messages>
                             </td>
                             <td colspan="3" class="text-center">
-                                <label for="login">Email</label>
-                                <input type="email" class="form-control" name="email"  ng-model="students.currentObj.email" placeholder="Введіть email" required >
+                                <label for="email" >Email</label>
+                                <input type="email" class="form-control" name="email"  ng-model="students.currentObj.email" id="email"placeholder="Введіть email" required >
+                                <novalidate-messages field="studentCreationForm.email"></novalidate-messages>
                             </td>
                         </tr>
                         <tr>

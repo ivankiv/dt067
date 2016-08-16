@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog","$stateParams"];
 
-    function StudentEditController(studentService, groupService, adminService, ngDialog) {
+    function StudentEditController(studentService, groupService, adminService, ngDialog, $stateParams) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -28,7 +28,7 @@
         self.associativeGroup = {};
         self.totalStudents = 0;
         self.showSearch = true;
-        self.textSearch = "";
+        self.textSearch = $stateParams.group_name || "";
         self.begin = 0;
         self.currentPage = 1;
         self.studentsPerPage = 5;
@@ -41,6 +41,7 @@
                 self.list = data;
                 self.totalStudents = data.length;
                 getGroups();
+                console.log($stateParams.group_name);
             });
 
         }

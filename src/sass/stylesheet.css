@@ -251,9 +251,9 @@ div.row.schedule-form {
                   ngMessage styles
 /*************************************************/
 [ng-messages] {
-  color: #a94442;
+  color: red;
   font-size: 1em;
-  visibility: hidden; }
+  display: none; }
 
 [ng-messages].ng-active {
   opacity: 0;
@@ -265,6 +265,7 @@ div.row.schedule-form {
   transition: opacity .3s linear, top .3s linear, visibility .3s linear; }
 
 [ng-messages].show-messages {
+  display: block;
   visibility: visible;
   opacity: 1; }
 

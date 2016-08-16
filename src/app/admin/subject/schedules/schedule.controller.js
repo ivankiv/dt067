@@ -80,6 +80,7 @@
             }
 
             function showEditScheduleForm(currentSchedule) {
+                console.log(currentSchedule);
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/schedules/edit-schedule.html',
                     controller: 'ScheduleModalController as schedules',
