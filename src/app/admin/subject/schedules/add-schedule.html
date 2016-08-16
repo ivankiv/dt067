@@ -6,8 +6,10 @@
         <form class="form-horizontal" name="newScheduleForm" role="form">
             <div class="col-md-6">
                 <div class="form-group">
-                    <select class="form-control" name="group" id="group" ng-model="schedules.schedule.group_id"
-                            ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList" ng-required="true">
+                    <select class="form-control" name="group" id="group"
+                            ng-model="schedules.schedule.group_id"
+                            ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList"
+                            ng-required="true">
                         <option disabled selected value="">Виберіть групу</option>
                     </select>
                 </div>

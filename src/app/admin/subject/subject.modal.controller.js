@@ -41,7 +41,7 @@
 
                 if(response.data.response == "ok") {
                     self.subject = {};
-                    $uibModalInstance.close(response);
+                    $uibModalInstance.close();
                 }
             }
 
