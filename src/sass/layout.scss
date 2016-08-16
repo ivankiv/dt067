@@ -105,7 +105,6 @@ body {
   color: #fff;
   overflow: hidden;
   th, td {
-    text-align:center;
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
       padding: 1em !important;
@@ -213,6 +212,7 @@ body {
       margin-bottom: 5px;
     }
   }
+
   background: $table-bg;
   color: white;
   overflow: hidden;
@@ -228,6 +228,7 @@ body {
 
   }
   td{
+    text-align: center;
     &:before {
       content: attr(data-th)" ";
       font-weight: bold;
