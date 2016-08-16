@@ -38,15 +38,15 @@
     </div>
     <div  class="clearfix">
         <div class="col-sm-10 col-sm-offset-2">
-            <novalidate-messages field="editSubjectForm.name" minlength="3"  maxlength="50"></novalidate-messages>
-            <novalidate-messages field="editSubjectForm.description" minlength="3"  maxlength="100"></novalidate-messages>
+            <novalidate-messages field="editSubjectForm.name" maxlength="50"></novalidate-messages>
+            <novalidate-messages field="editSubjectForm.description"></novalidate-messages>
         </div>
     </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="subjects.updateSubject()"
-            ng-disabled="editSubjectForm.$invalid || (editSubjectForm.name.$pristine || editSubjectForm.description.$pristine)">
-        Редагувати предмет
+            ng-disabled="editSubjectForm.$invalid || (editSubjectForm.name.$pristine && editSubjectForm.description.$pristine)">
+        Зберегти
     </button>
     <button class="btn btn-warning" type="button" ng-click="subjects.cancelForm()">Відмінити</button>
 </div>

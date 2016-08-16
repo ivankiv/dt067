@@ -56,11 +56,16 @@
                specialityService.deleteSpeciality(speciality_id).then(deleteSpecialityComplete);
             });
         }
-        function deleteSpecialityComplete(response){
-            if(response.data.response == 'ok'){
+        function deleteSpecialityComplete(response) {
+            if (response.status == 400) {
                 ngDialog.open({
-                    template:'<div class="ngdialog-message">Спеціальність успішно видалена!</div>',
-                    plain:true
+                    template: '<div class="ngdialog-message">Спеціальність містить групи,неможливе видалення!</div>',
+                    plain: true
+                })
+            } else if (response.data.response == 'ok') {
+                ngDialog.open({
+                    template: '<div class="ngdialog-message">Спеціальність успішно видалена!</div>',
+                    plain: true
                 });
                 getSpecialities()
                     .then(countSpecialities)

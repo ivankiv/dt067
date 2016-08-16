@@ -27,7 +27,6 @@
 
          //methods
             self.getSubjects = getSubjects;
-            self.countSubjects = countSubjects;
             self.deleteSubject = deleteSubject;
             self.showAddSubjectForm = showAddSubjectForm;
             self.showEditSubjectForm = showEditSubjectForm;
@@ -35,20 +34,14 @@
             activate();
 
             function activate() {
-                countSubjects();
                 getSubjects()
             }
 
             function getSubjects() {
                 return subjectService.getSubjects().then(function(response) {
                     self.list = response.data;
+                    self.totalSubjects = response.data.length;
                 });
-            }
-
-            function countSubjects() {
-                subjectService.countSubjects().then(function(response) {
-                    self.totalSubjects = response.data.numberOfRecords;
-                })
             }
 
             function deleteSubject(subject_id) {
@@ -72,8 +65,12 @@
 						  Предмет успішно видалено!</div>'
                     });
                     getSubjects()
-                        .then(countSubjects)
                         .then(pageChanged);
+                }
+                if(response.status === 400) {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити предмет який містить тести або записи в розкладі тестувань!</div>'
+                    });
                 }
             }
 
@@ -92,7 +89,6 @@
                         });
 
                         getSubjects()
-                            .then(countSubjects)
                             .then(pageChanged);
                 })
             }
@@ -115,7 +111,6 @@
                 });
                 modalInstance.result.then(function() {
                     getSubjects()
-                        .then(countSubjects)
                         .then(pageChanged);
                 })
             }

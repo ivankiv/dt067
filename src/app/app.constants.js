@@ -14,13 +14,14 @@
             getRangeOfSubjects: 'http://dtapi.local/subject/getRecordsRange',
             countSubjects: 'http://dtapi.local/subject/countRecords',
             addSubject: 'http://dtapi.local/subject/insertData',
-            editSubject: 'http://dtapi.local/subject/update/',
-            delSubject: 'http://dtapi.local/subject/del/',
+            editSubject: 'http://dtapi.local/subject/update/', // + id of subject
+            delSubject: 'http://dtapi.local/subject/del/', // + id of subject
 
-            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/',
-            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/',
-
-            getGroups: 'http://dtapi.local/group/getRecords',
+            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/', // + id of group
+            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/', // + id of subject
+            deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of schedule
+            addSchedule: 'http://dtapi.local/timeTable/insertData',
+            editSchedule: 'http://dtapi.local/timeTable/update/', // + id of subject
 
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',
@@ -42,6 +43,14 @@
             addFaculty: 'http://dtapi.local/faculty/insertData',
             editFaculty: 'http://dtapi.local/faculty/update/',
             delFaculty: 'http://dtapi.local/faculty/del/',
+
+            getGroups: 'http://dtapi.local/group/getRecords',
+            getRangeOfGroups: 'http://dtapi.local/group/getRecordsRange',
+            getOneGroup: 'http://dtapi.local/group/getRecords/',
+            countGroups: 'http://dtapi.local/group/countRecords',
+            addGroup: 'http://dtapi.local/group/insertData',
+            editGroup: 'http://dtapi.local/group/update/',
+            delGroup: 'http://dtapi.local/group/del/',
 
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',

@@ -5,56 +5,73 @@
                 <div class='col-xs-12 views-header'><h4>Групи</h4></div>
                 <div class='col-md-11 col-xs-12 views-header-input-wrapper'>
                     <div class="col-md-4 search-groups-inpt">
-                    <input class="views-header-search-inpts-groups groups-input-search col-xs-12" type="text" placeholder="Пошук на сторінці">
+                        <input class="views-header-search-inpts-groups groups-input-search col-xs-12" type="text" placeholder="Пошук"
+                               ng-show="groups.showSearch" ng-model="groups.textSearch"/>
+
                     </div>
                     <div class="col-md-4">
-                    <select class="selectpicke col-xs-12 views-header-search-inpts-groups">
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                        <option>Виберіть факультет </option>
-                        <option>факультет</option>
-                    </select>
-                        </div>
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
+                            ng-model="groups.group.faculty_id"
+                            ng-options="facultyList.faculty_id as facultyList.faculty_name for facultyList in groups.facultyList">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            <option disabled selected value="">Виберіть факультет </option>
+                        </select>
+                    </div>
                     <div class="col-md-4">
-                    <select class="selectpicke col-xs-12 views-header-search-inpts-groups">
-                        <option>Виберіть спеціальність</option>
-                        <option>спеціальність</option>
-                    </select>
-                        </div>
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
+                                ng-model="groups.group.speciality_id"
+                                ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList">
+                            <option disabled selected value="">Виберіть спеціальність</option>
+                        </select>
+                    </div>
                 </div>
                 <div class='col-md-1 col-xs-12 views-header-input-wrapper views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-default add-btn" title="Додати факультет"
-                    ><i class="fa fa-plus" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-default add-btn" title="Додати групу"
+                            ng-click="groups.showAddGroupForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
                 <table class="rwd-table groups-table table-striped">
                     <thead>
                     <tr>
+                        <th>Номер</th>
                         <th>Назва</th>
                         <th>Факультет</th>
                         <th>Спеціальність</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td data-th="Назва">Назва</td>
-                        <td data-th="Факультет">Факультет</td>
-                        <td data-th="Спеціальність">Спеціальність</td>
-                        <td>
-                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати"
-                                   ><i class="glyphicon glyphicon-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-default views-remove-btn pull-right table-help-btns"  title="Видалити"><i class="glyphicon glyphicon-remove"></i>
-                            </button>
-                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Розклад">
-                                <i class="fa fa-calendar" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-default pull-right table-help-btns" title="Переглянути студентів">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                            </button>
-                        </td>
-
-                    </tr>
+                        <tr ng-repeat="group in groups.list | toArray | filter: groups.textSearch | limitTo: groups.groupsPerPage : groups.begin">
+                            <td>{{$index + (groups.currentPage - 1)*10 + 1}}</td>
+                            <td>{{::group.group_name}}</td>
+                            <td>{{::groups.associativeFaculty[group.faculty_id]}}</td>
+                            <td>{{::groups.associativeSpeciality[group.speciality_id]}}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                        ng-click="groups.deleteGroup(group.group_id)"><i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                        ng-click="groups.showEditGroupForm(group);"><i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
+                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів">
+                                    <i class="fa fa-users" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+                <div class="group-pagination pull-right">
+                    <uib-pagination
+                        ng-show="groups.totalGroups > groups.groupsPerPage"
+                        total-items="groups.totalGroups"
+                        items-per-page="groups.groupsPerPage"
+                        ng-model="groups.currentPage"
+                        ng-change="groups.pageChanged()"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
 
             </div>
 

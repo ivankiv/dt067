@@ -3,33 +3,28 @@
     angular.module('app')
         .factory('loginService', loginService);
 
-        loginService.$inject = ['$http', 'appConstants', '$state'];
+    loginService.$inject = ['$http', 'appConstants', 'ngDialog'];
 
-        function loginService($http, appConstants, $state ) {
-            return {
-                enterLogin: enterLogin,
-                logOut: logOut
-            };
+    function loginService($http, appConstants, ngDialog) {
+        return {
+            enterLogin: enterLogin
+        };
 
-            function enterLogin(data) {
-                return $http.post(appConstants.logInURL, data)
-                    .then(enterLoginComplete, enterLoginFailed)
-            }
-
-            function enterLoginComplete(response) {
-                return response;
-            }
-            function enterLoginFailed(response) {
-                return response;
-            }
-
-            function logOut() {
-                return $http.get(appConstants.logOutURL)
-                    .then(toLoginPage, toLoginPage)
-            }
-
-            function toLoginPage() {
-                $state.go("login");
-            }
+        function enterLogin(data) {
+            return $http.post(appConstants.logInURL, data)
+                .then(enterLoginComplete, enterLoginFailed)
         }
-})();
+
+        function enterLoginComplete(response) {
+            return response;
+        }
+        function enterLoginFailed(response) {
+            ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Логін або пароль введено неправильно.</div>',
+                plain: 'true',
+                closeByDocument: 'true'
+            });
+            return response;
+        }
+    }
+}());

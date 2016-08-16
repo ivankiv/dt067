@@ -153,6 +153,9 @@ body {
   .subject-table td .table-help-btns {
     margin-right: 10px !important; }
 
+.header-views-select-pages-search {
+  height: 32px; }
+
 .groups-table {
   background: #867DB0;
   color: white;
@@ -240,7 +243,9 @@ body {
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #5D5393 !important;
   color: #fff !important; }
-
+div.row.schedule-form {
+  margin-left: 0;
+}
 /************************************************
                   ngMessage styles
 /*************************************************/
@@ -277,3 +282,7 @@ body {
 /************************************************
                The end of ngMessage styles
 /*************************************************/
+
+.schedule-date {
+  width: 89%;
+}

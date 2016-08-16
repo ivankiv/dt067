@@ -31,7 +31,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="speciality in specialities.list| filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
+                    <tr ng-repeat="speciality in specialities.list| toArray | filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
                         <td>
@@ -47,6 +47,9 @@
                                     ng-click="specialities.deleteSpeciality(speciality.speciality_id)">
                                 <i class="glyphicon glyphicon-remove"></i>
                             </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                    ng-click="specialities.showEditSpecialityForm(speciality);"><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
@@ -55,6 +58,7 @@
                 <div class="subject-pagination pull-right">
                     <uib-pagination
                             ng-show="specialities.totalSpecialities > specialities.specialitiesPerPage"
+                            ng-hide="specialities.textSearch!=''"
                             total-items="specialities.totalSpecialities"
                             items-per-page="specialities.specialitiesPerPage"
                             ng-model="specialities.currentPage"

@@ -1,8 +1,7 @@
 <section id="main-content" class="wrapper">
     <section class="wrapper">
-        <div class="col-xs-12 edit-admin-wrapper" ng-if = "admins.showEdit" ng-include = "'app/admin/admin-info/admin-edit-form.html'"></div>
-
-        <div class="col-xs-12 create-admin-wrapper" ng-if = "admins.showCreate" ng-include = "'app/admin/admin-info/admin-create-form.html'"></div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1 edit-admin-wrapper" ng-if = "admins.showEdit" ng-include = "'app/admin/admin-info/admin-edit-form.html'"></div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1 create-admin-wrapper" ng-if = "admins.showCreate" ng-include = "'app/admin/admin-info/admin-create-form.html'"></div>
                                 <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!admins.showEdit && !admins.showCreate">
                                 <div class='col-sm-2 col-xs-12 views-header'><h4>Адміністратори</h4></div>
                                 <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
@@ -25,11 +24,11 @@
                                             <td data-th="Логін">{{::admin.username}}</td>
                                             <td  data-th="Поштова скринька">{{::admin.email}}</td>
                                             <td>
-                                                <button type="button" class="btn btn-default pull-right table-help-btns" title="Редагувати" ng-click="admins.showEditForm(admin)">
-                                                    <i class="glyphicon glyphicon-pencil"></i>
-                                                </button>
                                                 <button type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити" ng-click="admins.remove(admin.id)">
                                                     <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати" ng-click="admins.showEditForm(admin)">
+                                                    <i class="glyphicon glyphicon-pencil"></i>
                                                 </button>
                                             </td>
                                         </tr>

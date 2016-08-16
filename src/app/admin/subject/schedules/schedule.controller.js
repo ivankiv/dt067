@@ -18,6 +18,9 @@
             self.getOneSubject = getOneSubject;
             self.getScheduleForSubject = getScheduleForSubject;
             self.getGroups = getGroups;
+            self.deleteSchedule = deleteSchedule;
+            self.showAddScheduleForm = showAddScheduleForm;
+            self.showEditScheduleForm = showEditScheduleForm;
 
             activate();
 
@@ -44,12 +47,61 @@
                     });
                 })
             }
+
+            function deleteSchedule(schedule_id) {
+                ngDialog.openConfirm({
+                    template: 'app/partials/confirm-delete-dialog.html',
+                    plain: false
+                }).then(function() {
+                    scheduleService.deleteSchedule(schedule_id).then(function(response) {
+                        if(response.data.response === 'ok') {
+                            activate();
+                        }
+                    });
+                })
+            }
+
+            function showAddScheduleForm() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/schedules/add-schedule.html',
+                    controller: 'ScheduleModalController as schedules',
+                    backdrop: false,
+                    resolve: {
+                        currentSchedule: {}
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Додано новий запис!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    activate();
+                })
+            }
+
+            function showEditScheduleForm(currentSchedule) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/schedules/edit-schedule.html',
+                    controller: 'ScheduleModalController as schedules',
+                    backdrop: false,
+                    resolve: {
+                        currentSchedule: currentSchedule
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>'
+                    });
+                    activate();
+                })
+            }
+
             function getScheduleForSubjectComplete(response) {
                 if(response.data.response === 'no records') {
+                    self.list = {};
                     self.showMessageNoEntity = true;
                 } else {
                     self.list = response.data;
-                    console.log(self.list);
                 }
             }
         }

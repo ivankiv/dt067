@@ -219,6 +219,9 @@ body {
     }
   }
 }
+.header-views-select-pages-search{
+  height: 32px;
+}
 .groups-table{
   background: $table-bg;
   color: white;
@@ -339,7 +342,9 @@ body {
   background-color: #5D5393!important;
   color:$white!important;
 }
-
+div.row.schedule-form {
+  margin-left: 0;
+}
 
 /************************************************
                   ngMessage styles

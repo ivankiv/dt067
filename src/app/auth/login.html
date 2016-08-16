@@ -1,16 +1,15 @@
 <div class="login-wrapper">
-<section class="main">
-    <section  class="login-pass-inputs-wrapper">
-        <h1 class="welcome-to-d-tester">Welcome to "D-tester"</h1>
-        <form  class="login" ng-submit="login.toEnter()" novalidate>
-            <input type="text" placeholder="Username" required name="username" ng-model="login.user.username" />
+    <section class="main">
+        <section  class="login-pass-inputs-wrapper">
+            <form  class="login" ng-submit="login.toEnter()" novalidate>
+                <input type="text" class="val" placeholder="Username" name="username" ng-model="login.user.username" required />
 
-            <input type="password" placeholder="Password" required name="password" ng-model="login.user.password" />
+                <input type="password" class="val" placeholder="Password" name="password" ng-model="login.user.password" required />
 
 
-            <input type="submit" class="enter-submit" value="Log in" />
+                <input type="submit" class="enter-submit" value="Log in" />
 
-        </form><!-- form -->
-    </section><!-- content -->
-</section><!-- container -->
+            </form><!-- form -->
+        </section><!-- content -->
+    </section><!-- container -->
 </div>

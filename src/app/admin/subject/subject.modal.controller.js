@@ -30,7 +30,7 @@
             }
 
             function cancelForm () {
-                $uibModalInstance.dismiss('cancel');
+                $uibModalInstance.dismiss();
             }
 
             function addSubjectComplete(response) {

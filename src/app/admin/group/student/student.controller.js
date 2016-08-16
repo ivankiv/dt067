@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService",'adminService',"$state"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog"];
 
-    function StudentEditController(studentService, groupService, adminService) {
+    function StudentEditController(studentService, groupService, adminService, ngDialog) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -15,29 +15,34 @@
         self.update = update;
         self.remove = remove;
         self.create = create;
+        self.pageChanged = pageChanged;
         self.list = [];
         self.userList = [];
         self.groupList = [];
         self.showEdit = false;
         self.showCreate = false;
         self.alreadyExist = false;
-        self.password = "";
-        self.password1 = "";
         self.currentObj = {};
-        self.currentUser ={};
-        self.currentUserId =0;
+        self.currentUser = {};
+        self.currentUserId = 0;
+        self.associativeGroup = {};
+        self.totalStudents = 0;
+        self.showSearch = true;
+        self.textSearch = "";
+        self.begin = 0;
+        self.currentPage = 1;
+        self.studentsPerPage = 5;
+        self.numberToDisplayStudentsOnPage = [1,2,5,10,15,20];
 
         activate();
 
         function activate() {
-            groupService.getGroups().then(function (response) {
-                self.groupList =  response.data;
-            });
             studentService.getStudents().then(function (data) {
                 self.list = data;
-                self.password = "";
-                self.password1 = "";
+                self.totalStudents = data.length;
+                getGroups();
             });
+
         }
 
         function hide(param) {
@@ -56,6 +61,12 @@
 
         }
 
+        function pageChanged() {
+            self.begin = ((self.currentPage - 1) * self.studentsPerPage);
+            self.showSearch = (self.currentPage == 1) ? true : false;
+            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
+        }
+
         function showCreateForm() {
             self.showCreate = true;
 
@@ -63,23 +74,20 @@
         }
 
         function update(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
             studentService.editStudent(self.currentObj,self.currentUserId)
                 .then(activate);
             hide("edit");
         }
 
         function remove(id) {
-            studentService.deleteStudent(id)
-                .then(activate);
+            ngDialog.openConfirm({
+                template: 'app/partials/confirm-delete-dialog.html',
+                plain: false
+            })
+                .then(function(){
+                    studentService.deleteStudent(id)
+                        .then(activate);
+                })
         }
 
         function create(){
@@ -96,17 +104,31 @@
             }
             self.currentObj.password = self.currentObj.plain_password;
             self.currentObj.password_confirm = self.currentObj.plain_password;
-            console.log(self.currentObj);
             studentService.createStudent(self.currentObj)
                 .then(activate);
             hide();
         }
 
+        function getGroups() {
+            groupService.getGroups().then(function(response) {
+                self.groupList = response.data;
+                self.groupList.forEach(
+                    function(group) {
+                        self.associativeGroup[group.group_id] = group.group_name;
+                    });
+                self.list = self.list.map(
+                    function(student) {
+                        student.group_name =  self.associativeGroup[student.group_id];
+                        return student;
+                    });
+            })
+        }
+
         function createStudentObj(userObj,studentObj){
             return {
                 username: userObj.username || "",
-                password: userObj.password ||"",
-                password_confirm:userObj.password_confirm || "",
+                password: userObj.plain_password  ||"",
+                password_confirm:userObj.plain_password || "",
                 email:userObj.email || "",
                 gradebook_id:studentObj.gradebook_id || "",
                 student_surname:studentObj.student_surname || "",
@@ -118,4 +140,4 @@
             };
         }
     }
-})();
+}());

@@ -51,12 +51,16 @@
                         if(response.data.response === 'ok') {
                             getTestById();
                         }
+                        if(response.status === 400) {
+                            ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити тест в якому є завдання!</div>'
+                            });
+                        }
                     })
                 });
             }
 
             function showAddTestForm() {
-                console.log( $uibModal);
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/test/add-test.html',
                     controller: 'TestModalController as tests',
