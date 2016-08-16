@@ -28,6 +28,11 @@
             <span class="text-danger" role="alert">Факультет із такою назвою вже зареєстрований в системі!</span>
         </div>
     </div>
+    <div class="clearfix" ng-if="faculties.wasNotEditMessage">
+        <div class="col-sm-10 col-sm-offset-2">
+            <span class="text-danger" role="alert">Не внесено жодних змін! Щоб вийти із сторінки редагування натисніть "Відмінити"</span>
+        </div>
+    </div>
     <div  class="clearfix">
         <div class="col-sm-10 col-sm-offset-2">
             <div my-messages="editFacultyForm.name"></div>
@@ -37,7 +42,7 @@
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="faculties.updateFaculty()"
             ng-disabled="editFacultyForm.$invalid || (editFacultyForm.name.$pristine && editFacultyForm.description.$pristine)">
-        Редагувати предмет
+        Зберегти
     </button>
     <button class="btn btn-warning" type="button" ng-click="faculties.cancelForm()">Відмінити</button>
 </div>

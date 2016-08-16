@@ -12,6 +12,7 @@
             self.faculty = {faculty_name: "", faculty_description: ""};
             self.currentFaculty = currentFaculty;
             self.duplicateFacultysMessage = false;
+            self.wasNotEditMessage = false;
 
             //Methods
             self.addFaculty = addFaculty;
@@ -34,7 +35,7 @@
 
             function addFacultyComplete(response) {
                 if(response.status == 400) {
-                    self.duplicateFacultiesMessage = true;
+                    self.duplicateFacultysMessage = true;
                     return;
                 }
 
@@ -48,6 +49,10 @@
                 if(response.status == 400) {
                     self.duplicateFacultiesMessage = true;
                     return;
+                }
+
+                if(response.status == 200 && response.data.response == 'error') {
+                    self.wasNotEditMessage = true;
                 }
 
                 if(response.data.response == 'ok') {

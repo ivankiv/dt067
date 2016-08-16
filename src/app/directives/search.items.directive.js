@@ -6,21 +6,21 @@
             return {
                 restrict: 'A',
                 scope: {
-                    subjectsPerPage: '=',
-                    totalSubjects: '=',
+                    itemsPerPage: '=',
+                    totalItems: '=',
                     textSearch: '='
                 },
                 require: 'ngModel',
                 link: function(scope, element, attrs, ngModel) {
                     element.bind('keydown', function() {
                         scope.$apply(function() {
-                            scope.subjectsPerPage = scope.totalSubjects;
+                            scope.itemsPerPage = scope.totalItems;
                         })
                     });
                     element.bind('blur', function() {
                         scope.$apply(function() {
                             scope.textSearch = "";
-                            scope.subjectsPerPage = 5;
+                            scope.itemsPerPage = 5;
                         })
                     });
                 }
