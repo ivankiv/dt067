@@ -11,16 +11,16 @@
                     </div>
                     <div class="col-md-4">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
-                            ng-model="groups.group.faculty_id"
-                            ng-options="facultyList.faculty_id as facultyList.faculty_name for facultyList in groups.facultyList">
+                            ng-model="groups.textSearch"
+                            ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             <option disabled selected value="">Виберіть факультет </option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
-                                ng-model="groups.group.speciality_id"
-                                ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList">
+                                ng-model="groups.textSearch"
+                                ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList">
                             <option disabled selected value="">Виберіть спеціальність</option>
                         </select>
                     </div>
@@ -54,7 +54,7 @@
                                 </button>
                                 <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
                                     <i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів">
+                                <button type="button" class="btn btn-primary pull-right table-help-btns" ui-sref="admin-home.student" title="Переглянути студентів">
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </button>
                             </td>
