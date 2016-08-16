@@ -12,13 +12,21 @@
                                type="text"
                                placeholder="Пошук"
                                check-pagination
-                               ng-show="groups.showSearch"
+                               items-per-page="groups.groupsPerPage"
+                               total-items="groups.totalGroups"
+                               text-search="groups.textSearch"
                                ng-model="groups.textSearch"/>
+                               <!--ng-show="groups.showSearch"-->
+
                     </div>
                     <div class="col-md-4">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
                             ng-model="groups.textSearch"
-                            ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList">
+                            ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList"
+                            check-pagination
+                            items-per-page="groups.groupsPerPage"
+                            total-items="groups.totalGroups"
+                            text-search="groups.textSearch">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                             <option disabled selected value="">Виберіть факультет </option>
                         </select>
@@ -26,7 +34,11 @@
                     <div class="col-md-4">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
                                 ng-model="groups.textSearch"
-                                ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList">
+                                ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList"
+                                check-pagination
+                                items-per-page="groups.groupsPerPage"
+                                total-items="groups.totalGroups"
+                                text-search="groups.textSearch">
                             <option disabled selected value="">Виберіть спеціальність</option>
                         </select>
                     </div>
