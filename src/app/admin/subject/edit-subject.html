@@ -13,6 +13,7 @@
                        ng-model="subjects.currentSubject.subject_name"
                        ng-minlength="3"
                        ng-maxlength="50">
+                <novalidate-messages field="editSubjectForm.name" maxlength="50"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">
@@ -23,6 +24,7 @@
                        ng-model="subjects.currentSubject.subject_description"
                        ng-minlength="3"
                        ng-maxlength="100">
+                <novalidate-messages field="editSubjectForm.description"></novalidate-messages>
             </div>
         </div>
     </form>
@@ -34,12 +36,6 @@
     <div class="clearfix" ng-if="subjects.wasNotEditSubjectMessage">
         <div class="col-sm-10 col-sm-offset-2">
             <span class="text-danger" role="alert">Не внесено жодних змін! Щоб вийти із сторінки редагування натисніть "Відмінити"</span>
-        </div>
-    </div>
-    <div  class="clearfix">
-        <div class="col-sm-10 col-sm-offset-2">
-            <novalidate-messages field="editSubjectForm.name" maxlength="50"></novalidate-messages>
-            <novalidate-messages field="editSubjectForm.description"></novalidate-messages>
         </div>
     </div>
 </div>

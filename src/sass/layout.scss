@@ -7,6 +7,8 @@ $colom-title:yellow;
 @mixin table-mixin {
   -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  -o-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  -ms-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: $table-bg;
   color: white;
   overflow: hidden;
@@ -17,7 +19,7 @@ $colom-title:yellow;
       font-weight: bold;
 
       @media (min-width: $breakpoint-alpha) {
-        -webkit-display: none;
+        display: none;
       }
     }
     @media (max-width: $breakpoint-alpha) {
@@ -106,7 +108,6 @@ body {
   color: #fff;
   overflow: hidden;
   th, td {
-    text-align:center;
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
       padding: 1em !important;
@@ -214,6 +215,7 @@ body {
       margin-bottom: 5px;
     }
   }
+
   background: $table-bg;
   color: white;
   overflow: hidden;
@@ -229,6 +231,7 @@ body {
 
   }
   td{
+    text-align: center;
     &:before {
       content: attr(data-th)" ";
       font-weight: bold;
