@@ -41,7 +41,6 @@
                 self.list = data;
                 self.totalStudents = data.length;
                 getGroups();
-                console.log($stateParams.group_name);
             });
 
         }
