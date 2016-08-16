@@ -8,8 +8,12 @@
                 <div class='col-md-11 col-xs-12 views-header-input-wrapper'>
 
                     <div class="col-md-4 search-groups-inpt">
-                        <input class="views-header-search-inpts-groups groups-input-search col-xs-12" type="text" placeholder="Пошук"
-                               ng-show="groups.showSearch" ng-model="groups.textSearch"/>
+                        <input class="views-header-search-inpts-groups groups-input-search col-xs-12"
+                               type="text"
+                               placeholder="Пошук"
+                               check-pagination
+                               ng-show="groups.showSearch"
+                               ng-model="groups.textSearch"/>
                     </div>
                     <div class="col-md-4">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
