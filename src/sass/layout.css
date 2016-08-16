@@ -118,6 +118,7 @@ body {
     padding-left: 0; }
 
 .faculty-table {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   background: #867DB0;
   color: white;
   overflow: hidden;
@@ -136,6 +137,7 @@ body {
     margin-right: 10px !important; }
 
 .subject-table {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   background: #867DB0;
   color: white;
   overflow: hidden;
@@ -157,6 +159,7 @@ body {
   height: 32px; }
 
 .groups-table {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   background: #867DB0;
   color: white;
   overflow: hidden;
@@ -197,6 +200,7 @@ body {
     width: auto; }
 
 .statistic-table {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   background: #867DB0;
   color: #fff;
   overflow: hidden;
@@ -241,7 +245,7 @@ body {
   margin: auto !important; }
 
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #5D5393 !important;
+  background-color: #5D5393;
   color: #fff !important; }
 
 div.row.schedule-form {
@@ -253,7 +257,7 @@ div.row.schedule-form {
 [ng-messages] {
   color: red;
   font-size: 1em;
-  display: none; }
+  display:none; }
 
 [ng-messages].ng-active {
   opacity: 0;
@@ -265,8 +269,7 @@ div.row.schedule-form {
   transition: opacity .3s linear, top .3s linear, visibility .3s linear; }
 
 [ng-messages].show-messages {
-  display: block;
-  visibility: visible;
+  display:inline-block;
   opacity: 1; }
 
 [ng-message].ng-enter.ng-enter-active {
