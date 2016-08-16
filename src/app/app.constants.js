@@ -63,7 +63,5 @@
             delStudent: 'http://dtapi.local/student/del/',
             addStudents:'http://dtapi.local/student/insertData'
 
-        })
-
-    ;
+        });
 }());
