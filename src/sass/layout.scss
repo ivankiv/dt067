@@ -1,9 +1,30 @@
 
+//mixin
+@mixin table-mixin {
+  background: $table-bg;
+  color: white;
+  overflow: hidden;
+  font-weight: bold;
+  td:last-child{
+    &:before {
+      content: attr(data-th)" ";
+      font-weight: bold;
 
-$breakpoint-alpha: 820px;
-$white: #fff;
-$black: #000;
-$table-bg:#867DB0;
+      @media (min-width: $breakpoint-alpha) {
+        display: none;
+      }
+    }
+    @media (max-width: $breakpoint-alpha) {
+      margin-bottom: 15px;
+      float: left;
+    }
+  }
+  td{
+    .table-help-btns{
+      margin-right: 10px!important;
+    }
+  }
+}
 .collapse.in{
   @media (max-width: 768px) {
     clear: both!important;
@@ -12,12 +33,8 @@ $table-bg:#867DB0;
 .rwd-table {
   margin: 1em 0;
   min-width: 100%;
-  // adjust to your needs
-
-
-
   th {
-    display: none; // for accessibility, use a visually hidden method here instead! Thanks, reddit!
+    display: none;
   }
 
   td {
@@ -31,13 +48,11 @@ $table-bg:#867DB0;
     }
 
     &:before {
-      content: attr(data-th)": "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)": ";
       font-weight: bold;
       margin-right: 25px;
-      // optional stuff to make it look nicer
-      width: 6.5em; // magic number :( adjust according to your own content
+      width: 6.5em;
       display: inline-block;
-      // end options
 
       @media (min-width: $breakpoint-alpha) {
         display: none;
@@ -89,7 +104,7 @@ body {
     }
   }
   th, td:before {
-    color: yellow;
+    color: $colom-title;
   }
 }
 .views-header{
@@ -170,82 +185,16 @@ body {
 }
 
 .faculty-table{
-  background: $table-bg;
-  color: white;
-  overflow: hidden;
-  font-weight: bold;
-  td:last-child{
-    &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
-      font-weight: bold;
-
-      @media (min-width: $breakpoint-alpha) {
-        display: none;
-      }
-    }
-    @media (max-width: $breakpoint-alpha) {
-      margin-bottom: 15px;
-      float: left;
-    }
-  }
-  td{
-    .table-help-btns{
-      margin-right: 10px!important;
-    }
-  }
+  @include table-mixin;
 }
 .subject-table{
-  background: $table-bg;
-  color: white;
-  overflow: hidden;
-  font-weight: bold;
-  td:last-child{
-    &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
-      font-weight: bold;
-
-      @media (min-width: $breakpoint-alpha) {
-        display: none;
-      }
-    }
-    @media (max-width: $breakpoint-alpha) {
-      margin-bottom: 15px;
-      float: left;
-    }
-  }
-  td{
-    .table-help-btns{
-      margin-right: 10px!important;
-    }
-  }
+  @include table-mixin;
 }
 .header-views-select-pages-search{
   height: 32px;
 }
 .groups-table{
-  background: $table-bg;
-  color: white;
-  overflow: hidden;
-  font-weight: bold;
-  td:last-child{
-    &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
-      font-weight: bold;
-
-      @media (min-width: $breakpoint-alpha) {
-        display: none;
-      }
-    }
-    @media (max-width: $breakpoint-alpha) {
-      margin-bottom: 15px;
-      float: left;
-    }
-  }
-  td{
-    .table-help-btns{
-      margin-right: 10px!important;
-    }
-  }
+  @include table-mixin;
 }
 .create-student-table{
   #names{
