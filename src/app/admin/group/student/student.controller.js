@@ -137,7 +137,7 @@
                 student_fname:studentObj.student_fname || "",
                 group_id:studentObj.group_id || "",
                 plain_password:studentObj.plain_password || "",
-                photo: studentObj.photo || "http://www.hit4hit.org/img/login/user-icon-6.png"
+                photo: studentObj.photo || "img/user-default-icon.png"
             };
         }
     }
