@@ -16,7 +16,8 @@
                 <select class="form-control"
                         ng-model="groups.group.faculty_id"
                         ng-options="facultyList.faculty_id as facultyList.faculty_name for facultyList in groups.facultyList"
-                        id="fadescription">
+                        id="fadescription" required>
+                    <option disabled selected value="">Виберіть факультет </option>
                 </select>
             </div>
         </div>
@@ -27,7 +28,8 @@
                 <select class="form-control"
                         ng-model="groups.group.speciality_id"
                         id="specdescription"
-                        ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList">
+                        ng-options="specialityList.speciality_id as specialityList.speciality_name for specialityList in groups.specialityList" required>
+                    <option disabled selected value="">Виберіть спеціальність</option>
                 </select>
             </div>
         </div>

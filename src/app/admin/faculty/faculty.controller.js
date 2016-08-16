@@ -61,7 +61,7 @@
         }
 
         function pageChanged() {
-            var begin = ((self.currentPage - 1) * self.facultiesPerPage);
+            self.begin = ((self.currentPage - 1) * self.facultiesPerPage);
             self.showSearch = (self.currentPage == 1) ? true : false;
             self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
         }
@@ -72,8 +72,7 @@
                     template: '<div class="ngdialog-message"> \
                     Факультет видалено успішно!</div>'
                 });
-                countFaculties();
-                pageChanged();
+                activate();
             }
         }
 
@@ -90,8 +89,7 @@
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Факультет додано успішно!</div>'
                 });
-                countFaculties();
-                pageChanged();
+                activate();
             })
         }
 
@@ -108,6 +106,7 @@
             });
             modalInstance.result.then(function() {
                 pageChanged();
+                activate();
             })
         }
     } 
