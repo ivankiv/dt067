@@ -21,10 +21,6 @@
             self.numberToDisplaySubjectsOnPage = [5,10,15,20];
             self.pageChanged = pageChanged;
 
-         //variables to show error message
-            self.showErrorMessage = false;
-            self.message = "Loading...";
-
          //methods
             self.getSubjects = getSubjects;
             self.deleteSubject = deleteSubject;
@@ -34,7 +30,7 @@
             activate();
 
             function activate() {
-                getSubjects()
+                getSubjects().then(pageChanged);
             }
 
             function getSubjects() {
@@ -64,8 +60,7 @@
                     ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Предмет успішно видалено!</div>'
                     });
-                    getSubjects()
-                        .then(pageChanged);
+                    activate();
                 }
                 if(response.status === 400) {
                     ngDialog.open({template: '<div class="ngdialog-message"> \
@@ -83,13 +78,11 @@
                         currentSubject: {}
                     }
                 });
-                modalInstance.result.then(function(response) {
+                modalInstance.result.then(function() {
                         ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Предмет успішно додано!</div>'
                         });
-
-                        getSubjects()
-                            .then(pageChanged);
+                        activate();
                 })
             }
 
@@ -110,8 +103,7 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    getSubjects()
-                        .then(pageChanged);
+                    activate();
                 })
             }
         }
