@@ -20,7 +20,7 @@
               <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
 
                   <ul class="nav navbar-nav">
-                      <li remove-class-in ><a ui-sref="admin-home">Статистика системи</a></li>
+                      <li ng-click="navCollapsed = true" ><a ui-sref="admin-home">Статистика системи</a></li>
                       <li remove-class-in><a ui-sref="admin-home.faculty">Факультети</a></li>
                       <li remove-class-in><a ui-sref="admin-home.speciality">Спеціальності</a></li>
                       <li remove-class-in><a ui-sref="admin-home.groups">Групи</a></li>
