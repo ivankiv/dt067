@@ -3,6 +3,7 @@
     clear: both !important; } }
 
 .rwd-table {
+  table-layout: fixed;
   margin: 1em 0;
   min-width: 100%; }
   .rwd-table th {
@@ -42,10 +43,13 @@ body {
     color: #000; }
 
 .rwd-table {
+  width:100%;
+  table-layout: fixed;
   background: #34495E;
   color: #fff;
   overflow: hidden; }
   .rwd-table th, .rwd-table td {
+    text-align:center;
     margin: .5em 1em; }
     @media (min-width: 820px) {
       .rwd-table th, .rwd-table td {
@@ -269,7 +273,7 @@ div.row.schedule-form {
   transition: opacity .3s linear, top .3s linear, visibility .3s linear; }
 
 [ng-messages].show-messages {
-  display:inline-block;
+  display:inline;
   opacity: 1; }
 
 [ng-message].ng-enter.ng-enter-active {

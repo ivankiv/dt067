@@ -99,10 +99,13 @@ body {
 
 
 .rwd-table{
+  width:100%;
+  table-layout: fixed;
   background: #34495E;
   color: #fff;
   overflow: hidden;
   th, td {
+    text-align:center;
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
       padding: 1em !important;
@@ -322,7 +325,7 @@ div.row.schedule-form {
   transition: opacity .3s linear, top .3s linear, visibility .3s linear; }
 
 [ng-messages].show-messages {
-  display:inline-block;
+  display:inline;
   opacity: 1; }
 
 [ng-message].ng-enter.ng-enter-active {

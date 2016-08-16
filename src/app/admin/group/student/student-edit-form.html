@@ -12,17 +12,20 @@
                     <table class="rwd-table create-student-table table-striped">
                         <tbody>
                         <tr>
-                            <td colspan="3" class = "text-center">
+                            <td colspan="2" class = "text-center">
                                 <span>Фото</span>
                                 <input class="form-control add-photo-inp" file-load="students.currentObj.photo" ng-model="students.currentObj.photo" type="file"  accept="image/jpeg,image/png,image/gif/svg"/>
                                 <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250" alt="Зображення">
                             </td>
-                            <td colspan="3">
+                            <td colspan="4">
                                 <label for="names">ПІБ</label>
                                 <div id="names">
-                                    <input type="text" class="form-control" name="names"  ng-model="students.currentObj.student_surname" placeholder="Прізвище" required >
-                                    <input type="text" class="form-control" name="name-of-test" ng-model="students.currentObj.student_name" placeholder="Ім’я" required>
-                                    <input type="text" class="form-control" name="name-of-test" ng-model="students.currentObj.student_fname" placeholder="Побатькові" required>
+                                    <input type="text" class="form-control" name="surname"  ng-model="students.currentObj.student_surname" placeholder="Прізвище" ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i" required >
+                                    <novalidate-messages  field="studentEditForm.surname"></novalidate-messages></br>
+                                    <input type="text" class="form-control" name="name" ng-model="students.currentObj.student_name" placeholder="Ім’я" ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i" required>
+                                    <novalidate-messages  field="studentEditForm.name"></novalidate-messages></br>
+                                    <input type="text" class="form-control" name="f_name" ng-model="students.currentObj.student_fname" placeholder="Побатькові" ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i" required>
+                                    <novalidate-messages  field="studentEditForm.f_name"></novalidate-messages></br>
                                     <label for="group">Група</label>
                                 </div>
                                 <select ng-options="group.group_id as group.group_name for group  in students.groupList"  ng-model="students.currentObj.group_id" class="form-control" id="group" placeholder="Виберіть групу">
@@ -42,23 +45,27 @@
                         </tr>
                         <tr>
                             <td colspan="3" class="text-center">
-                                <label for="login">Логін</label>
-                                <input type="text" class="form-control" name="login" id = "login" ng-model="students.currentObj.username" placeholder="Введіть логін" required >
+                                <label for="login1">Логін</label>
+                                <input type="text" class="form-control" name="login" id = "login1" ng-model="students.currentObj.username" placeholder="Введіть логін"  ng-minlength="3" ng-maxlength="50" required >
+                                <novalidate-messages field="studentEditForm.login"></novalidate-messages>
                             </td>
                             <td colspan="3" class="text-center">
-                                <label for="login">Email</label>
-                                <input type="email" class="form-control" name="email"  ng-model="students.currentObj.email" placeholder="Введіть email" required >
+                                <label for="email" >Email</label>
+                                <input type="email" class="form-control" name="email"  ng-model="students.currentObj.email" id="email"placeholder="Введіть email" required >
+                                <novalidate-messages field="studentEditForm.email"></novalidate-messages>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center create-student-submit-btns-wrpr">
-                                <button type="button" class="btn btn-danger" title="Скасувати" ng-click="students.hide('edit')">
+                            <td colspan="2"></td>
+                            <td class="text-center create-student-submit-btns-wrpr" colspan="2" >
+                                <button type="button" class="btn btn-danger pull-right" title="Скасувати" ng-click="students.hide('edit')">
                                     <i class="glyphicon glyphicon-remove"></i>
                                 </button>
-                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="students.update()" ng-disabled="studentCreationForm.$invalid">
+                                <button type="button" class="btn btn-success pull-left" title="Підтвердити" ng-click="students.update()" ng-disabled="studentCreationForm.$invalid">
                                     <i class="glyphicon glyphicon-ok"></i>
                                 </button>
                             </td>
+                            <td colspan="2"></td>
                         </tr>
                         </tbody>
                     </table>
