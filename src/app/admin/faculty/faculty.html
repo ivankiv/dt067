@@ -18,14 +18,15 @@
                         <th>Факультет</th>
                         <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr ng-repeat="faculty in faculties.list | toArray |filter:faculties.textSearch | limitTo: faculties.facultiesPerPage : faculties.begin ">
+                    <tr ng-repeat="faculty in faculties.list | toArray | filter:faculties.textSearch | limitTo: faculties.facultiesPerPage : faculties.begin ">
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
                         <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
-                        <td><button type="button" class="btn btn-default  pull-right table-help-btns" title="Редагувати"
+                        <td>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                    ng-click="faculties.deleteFaculty(faculty.faculty_id)"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                     ng-click="faculties.showEditFacultyForm(faculty)"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-default views-remove-btn  pull-right table-help-btns"  title="Видалити"
-                                    ng-click="faculties.deleteFaculty(faculty.faculty_id)"><i class="glyphicon glyphicon-remove"></i></button>
                         </td>
                     </tr>
                 </table>

@@ -72,8 +72,7 @@
                     template: '<div class="ngdialog-message"> \
                     Факультет видалено успішно!</div>'
                 });
-                countFaculties();
-                pageChanged();
+                activate();
             }
         }
 
@@ -91,7 +90,6 @@
 						  Факультет додано успішно!</div>'
                 });
                 activate();
-                pageChanged();
             })
         }
 
@@ -108,6 +106,7 @@
             });
             modalInstance.result.then(function() {
                 pageChanged();
+                activate();
             })
         }
     } 
