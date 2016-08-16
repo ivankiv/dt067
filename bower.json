@@ -25,6 +25,7 @@
     "angular-messages": "^1.5.8",
     "ng-dialog": "^0.6.2",
     "angular-animate": "1.5.5",
-    "angular-toArrayFilter": "^1.0.1"
+    "angular-toArrayFilter": "^1.0.1",
+    "angular-i18n": "^1.5.8"
   }
 }
