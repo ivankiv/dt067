@@ -192,6 +192,9 @@ body {
 .faculty-table{
   @include table-mixin;
 }
+.student-table{
+  @include table-mixin;
+}
 .subject-table{
   @include table-mixin;
 }
