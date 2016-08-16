@@ -21,6 +21,7 @@
         self.totalGroups = 0;
         self.currentPage = 1;
         self.groupsPerPage = 5;
+        self.numberToDisplayGroupsOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 
 
