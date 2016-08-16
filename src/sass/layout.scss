@@ -16,7 +16,7 @@ $colom-title:yellow;
       font-weight: bold;
 
       @media (min-width: $breakpoint-alpha) {
-        display: none;
+        -webkit-display: none;
       }
     }
     @media (max-width: $breakpoint-alpha) {
@@ -229,7 +229,7 @@ body {
   }
   td{
     &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)" ";
       font-weight: bold;
 
       @media (min-width: $breakpoint-alpha) {
@@ -267,6 +267,7 @@ body {
 }
 
 .add-edit-admin-table{
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   background: $table-bg;
   color: $white;
   overflow: hidden;

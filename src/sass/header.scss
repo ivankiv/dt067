@@ -6,19 +6,34 @@
   }
 }
 .collapse.in{
-  border-top:none;
+    border-top:none;
 }
 .navbar-nav{
   a{
-      color:black!important;
+    color:black!important;
+    @media (max-width: 840px) {
+      padding: 17px 10px !important;
+    }
   }
   li{
     height: 55px;
-
   }
   li:hover{
     background: #337ab7;
     border-bottom: 3px solid #ffffff;
+  }
+}
+.navbar-toggle{
+  background: transparent !important;
+  border: none !important;
+  &:hover{
+    background: #337ab7!important;
+    span{
+      background-color: #ffffff !important;
+    }
+  }
+  span{
+    background-color: #000000 !important;
   }
 }
 .navbar-brand{
