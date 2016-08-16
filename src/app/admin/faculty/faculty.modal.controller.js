@@ -34,7 +34,7 @@
 
             function addFacultyComplete(response) {
                 if(response.status == 400) {
-                    self.duplicateFacultiesMessage = true;
+                    self.duplicateFacultysMessage = true;
                     return;
                 }
 
