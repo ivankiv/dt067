@@ -12,6 +12,7 @@ $colom-title:yellow;
   overflow: hidden;
   font-weight: bold;
   td:last-child{
+    width: 340px;
     &:before {
       content: attr(data-th)" ";
       font-weight: bold;
@@ -27,7 +28,11 @@ $colom-title:yellow;
   }
   td{
     .table-help-btns{
-      margin-right: 10px!important;
+      margin-right: 8px!important;
+      @media (max-width: $breakpoint-alpha) {
+        margin-left: 8px!important;
+        float: left !important;
+      }
     }
   }
 }
@@ -106,7 +111,7 @@ body {
   color: #fff;
   overflow: hidden;
   th, td {
-    text-align:center;
+    text-align:left;
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
       padding: 1em !important;
@@ -136,6 +141,7 @@ body {
     padding-left: 5px;
     @media (max-width: 768px) {
       float: left;
+      width: 147px;
     }
   }
   .views-header-search-inpts-groups{
@@ -252,17 +258,19 @@ body {
     &:nth-child(1){
       padding-top: 0px;
       width: 95%;
-      @media (max-width: $breakpoint-alpha) {
-        width: 80%;
-        display: block;
-        float: left;
-      }
     }
     &:before {
       content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
       font-weight: bold;
       width: 1px;
 
+    }
+    @media (max-width: $breakpoint-alpha) {
+      width: 100% !important;
+      display: block;
+      float: none;
+      text-align: left;
+      margin-left: 0px;
     }
   }
 }
