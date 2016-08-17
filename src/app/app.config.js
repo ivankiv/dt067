@@ -25,7 +25,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
 
         .state('admin-home', {
             url: '/admin',
-            templateUrl: 'app/admin/admin-home.html'
+            templateUrl: 'app/admin/admin-home.html',
+            controller: 'adminStatController as stat'
         })
 
         .state('admin-home.subject', {

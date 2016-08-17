@@ -21,8 +21,8 @@ gulp.task('image', function () {
 });
 
 gulp.task('copyFonts', function() {
-    return gulp.src(config.font)
-        .pipe($.copy(config.fontSrc));
+    return gulp.src(config.fontSrc)
+        .pipe(gulp.dest(config.font));
 });
 
 gulp.task('jshint', function() {
