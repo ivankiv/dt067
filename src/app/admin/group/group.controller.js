@@ -14,6 +14,7 @@
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
 
+        //Pagination variables and methods
         self.totalSubjects = 0;
         self.showSearch = true;
         self.textSearch = "";
@@ -24,7 +25,7 @@
         self.numberToDisplayGroupsOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 
-
+        //Controller methods
         self.getGroups = getGroups;
         self.deleteGroup = deleteGroup;
         self.showAddGroupForm = showAddGroupForm;
