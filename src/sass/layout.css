@@ -76,7 +76,7 @@ body {
     @media (max-width: 768px) {
       .views-header .views-header-search-inpts {
         float: left;
-        width: 147px; } }
+        width: 143px; } }
   .views-header .views-header-search-inpts-groups {
     float: left;
     height: 33px;
@@ -200,7 +200,8 @@ body {
         float: left !important; } }
 
 .header-views-select-pages-search {
-  height: 32px; }
+  height: 32px;
+  margin-right: 5px; }
 
 .groups-table {
   -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
@@ -288,6 +289,17 @@ body {
     content: attr(data-th) " ";
     font-weight: bold;
     width: 1px; }
+
+.views-header-students-view-wrpr {
+  padding-top: 0px;
+  height: auto; }
+  .views-header-students-view-wrpr .student-view-group-select {
+    margin-bottom: 20px;
+    width: 32%; }
+    @media (max-width: 470px) {
+      .views-header-students-view-wrpr .student-view-group-select {
+        width: 100%;
+        margin-top: 10px; } }
 
 .admin-views-header {
   background-color: #0f0f0f; }

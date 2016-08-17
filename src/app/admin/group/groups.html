@@ -5,7 +5,7 @@
                 <div class='col-xs-12 views-header'>
                     <h4>Групи</h4>
                 </div>
-                <div class='col-md-11 col-xs-12 views-header-input-wrapper'>
+                <div class='col-md-10 col-xs-12 views-header-input-wrapper'>
 
                     <div class="col-md-4 search-groups-inpt">
                         <input class="views-header-search-inpts-groups groups-input-search col-xs-12"
@@ -31,11 +31,11 @@
                         </select>
                     </div>
                 </div>
-                <div class='col-md-1 col-xs-12 views-header-input-wrapper views-header-wrapper-add-btn-and-search'>
+                <div class='col-md-2 col-xs-12 views-header-input-wrapper views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-default add-btn" title="Додати групу"
                             ng-click="groups.showAddGroupForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <div class="col-md-4">
+                    <!--<div class="col-md-4">-->
                         <select class="pull-right header-views-select-pages-search"
                                 ng-show="groups.showSearch"
                                 ng-model="groups.groupsPerPage"
@@ -44,7 +44,7 @@
                                 name="groupsPerPage"
                                 title="Кількість записів на сторінці">
                         </select>
-                    </div>
+                    <!--</div>-->
                 </div>
                 <table class="rwd-table groups-table table-striped">
                     <thead>
