@@ -13,6 +13,9 @@
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці" ng-model="students.textSearch">
+                    <select ng-options="group.group_name as group.group_name for group  in students.groupList"  ng-model="students.textSearch" id="group" placeholder="Виберіть групу">
+                        <option value="" disabled>Виберіть групу</option>
+                    </select>
                 </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
@@ -21,9 +24,9 @@
                         <th colspan="2">Прізвище і ім'я</th>
                     </tr>
                     <tr ng-repeat="student in students.list | toArray | filter: students.textSearch | limitTo: students.studentsPerPage : students.begin">
-                        <td>{{::student.user_id}}</td>
-                        <td>{{::student.group_name}}</td>
-                        <td>{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
+                        <td data-th="Реєстр №">{{::student.user_id}}</td>
+                        <td data-th="Група">{{::student.group_name}}</td>
+                        <td data-th="Прізвище і ім'я">{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
 
                         <td class="text-center">
                             <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns" title="Видалити" ng-click="students.remove(student.user_id)">

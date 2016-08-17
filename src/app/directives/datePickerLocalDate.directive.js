@@ -10,9 +10,11 @@
                     ngModel.$parsers.push(function(value) {
                         // undo the timezone adjustment we did during the formatting
                         value.setMinutes(value.getMinutes() - value.getTimezoneOffset());
-                        // we just want a local date in ISO format
-                        return value.toISOString();
+                        return value;
                     });
+                    ngModel.$formatters.push(function(modelValue) {
+                        return new Date(modelValue);
+                   })
                 }
             }
         });

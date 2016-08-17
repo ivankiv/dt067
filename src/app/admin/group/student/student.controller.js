@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog","$stateParams"];
 
-    function StudentEditController(studentService, groupService, adminService, ngDialog) {
+    function StudentEditController(studentService, groupService, adminService, ngDialog, $stateParams) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -28,7 +28,7 @@
         self.associativeGroup = {};
         self.totalStudents = 0;
         self.showSearch = true;
-        self.textSearch = "";
+        self.textSearch = $stateParams.group_name || "";
         self.begin = 0;
         self.currentPage = 1;
         self.studentsPerPage = 5;
@@ -136,7 +136,7 @@
                 student_fname:studentObj.student_fname || "",
                 group_id:studentObj.group_id || "",
                 plain_password:studentObj.plain_password || "",
-                photo: studentObj.photo || "http://www.hit4hit.org/img/login/user-icon-6.png"
+                photo: studentObj.photo || "img/user-default-icon.png"
             };
         }
     }
