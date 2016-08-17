@@ -107,7 +107,7 @@
 
         function deleteGroup(group_id) {
             ngDialog.openConfirm({
-                template: 'app/admin/group/delete-group.html',
+                template: 'app/partials/confirm-delete-dialog.html',
                 plain: false
             }).then(function() {
                 groupService.deleteGroup(group_id).then(deleteGroupComplete);
