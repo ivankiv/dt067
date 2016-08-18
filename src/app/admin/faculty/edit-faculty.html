@@ -18,7 +18,9 @@
         <div class="form-group">
             <label class="control-label col-sm-2" for="description">Опис факультету: </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="description" name="description"
+                <input type="text" class="form-control"
+                       id="description"
+                       name="description"
                        ng-model="faculties.currentFaculty.faculty_description">
             </div>
         </div>
@@ -30,7 +32,9 @@
     </div>
     <div class="clearfix" ng-if="faculties.wasNotEditMessage">
         <div class="col-sm-10 col-sm-offset-2">
-            <span class="text-danger" role="alert">Не внесено жодних змін! Щоб вийти із сторінки редагування натисніть "Відмінити"</span>
+            <span class="text-danger"
+                  role="alert">
+                Не внесено жодних змін! Щоб вийти із сторінки редагування натисніть "Відмінити"</span>
         </div>
     </div>
     <div  class="clearfix">
@@ -40,9 +44,13 @@
     </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="faculties.updateFaculty()"
-            ng-disabled="editFacultyForm.$invalid || (editFacultyForm.name.$pristine && editFacultyForm.description.$pristine)">
+    <button class="btn btn-primary" type="button"
+            ng-click="faculties.updateFaculty()"
+            ng-disabled="editFacultyForm.$invalid
+            || (editFacultyForm.name.$pristine
+            && editFacultyForm.description.$pristine)">
         Зберегти
     </button>
-    <button class="btn btn-warning" type="button" ng-click="faculties.cancelForm()">Відмінити</button>
+    <button class="btn btn-warning" type="button"
+            ng-click="faculties.cancelForm()">Відмінити</button>
 </div>

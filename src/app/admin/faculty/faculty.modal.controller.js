@@ -3,7 +3,8 @@
 
     angular.module('app')
         .controller('facultyModalController', facultyModalController);
-        facultyModalController.$inject = ['facultyService', 'appConstants', '$uibModalInstance', 'currentFaculty', 'ngDialog'];
+        facultyModalController.$inject = ['facultyService',
+            'appConstants', '$uibModalInstance', 'currentFaculty', 'ngDialog'];
 
         function facultyModalController(facultyService, appConstants, $uibModalInstance,  currentFaculty, ngDialog) {
             var self = this;

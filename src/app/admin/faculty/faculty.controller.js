@@ -74,6 +74,11 @@
                 });
                 activate();
             }
+            if(response.status === 400) {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити факультет, для якого зареестровані групи!</div>'
+                });
+            }
         }
 
         function showAddFacultyForm() {
