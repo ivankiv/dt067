@@ -19,9 +19,13 @@
 
             getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/', // + id of group
             getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/', // + id of subject
-            deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of schedule
+            deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of timeTable
             addSchedule: 'http://dtapi.local/timeTable/insertData',
-            editSchedule: 'http://dtapi.local/timeTable/update/', // + id of subject
+            editSchedule: 'http://dtapi.local/timeTable/update/', // + id of timeTable
+
+            getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
+            addTestDetails: 'http://dtapi.local/testDetail/insertData',
+            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of test
 
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',

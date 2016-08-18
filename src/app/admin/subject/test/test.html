@@ -14,6 +14,7 @@
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                     <tr>
+                        <th>Номер</th>
                         <th>Назва тесту</th>
                         <th>К-сть завдань</th>
                         <th>Тривалість тесту</th>
@@ -22,6 +23,7 @@
                     </thead>
                     <tbody ng-if="!tests.showMessageNoEntity">
                     <tr ng-repeat="test in tests.list">
+                        <td data-th="Номер">{{$index + 1}}</td>
                         <td data-th="Тест">{{::test.test_name}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
@@ -33,12 +35,13 @@
                             <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns" title="Редагувати"
                                      ng-click='tests.showEditTestForm(test) '><i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <!--<button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання">-->
-                                <!--<i class="glyphicon glyphicon-list-alt"></i>-->
-                            <!--</button>-->
-                            <!--<button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі">-->
-                                <!--<i class="glyphicon glyphicon-info-sign"></i>-->
-                            <!--</button>-->
+                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </button>
+                            <button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі"
+                                    ui-sref="admin-home.testDetails({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
+                                    <i class="glyphicon glyphicon-info-sign"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

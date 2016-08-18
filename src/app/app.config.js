@@ -69,6 +69,16 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             }
         })
 
+        .state('admin-home.testDetails', {
+            url: '/subject/:currentSubjectId/test/:currentTestId/details',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/subject/test/test-details/test-details.html',
+                    controller: 'TestDetailsController as details'
+                }
+            }
+        })
+
         .state('admin-home.speciality', {
             url: '/speciality',
             views: {
