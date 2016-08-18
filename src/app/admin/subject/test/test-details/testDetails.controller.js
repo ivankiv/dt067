@@ -3,16 +3,16 @@
 
     angular.module('app')
         .controller('TestDetailsController', testDetailsController);
-    testDetailsController.$inject = ['$stateParams', 'testDetailsService', 'testService', 'ngDialog'];
+        testDetailsController.$inject = ['$stateParams', 'testDetailsService', 'testService', '$uibModal', 'ngDialog'];
 
-        function testDetailsController($stateParams, testDetailsService, testService, ngDialog) {
+        function testDetailsController($stateParams, testDetailsService, testService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
             self.currentSubjectId = $stateParams.currentSubjectId;
             self.list = {};
             self.showMessageNoEntity = false;
-            self.currenTestName = "";
+            self.currentTestName = "";
 
             //methods
             self.getTestDetailsByTest = getTestDetailsByTest;
@@ -23,7 +23,7 @@
             activate();
 
             function activate() {
-                getOneTest();
+                // getOneTest();
                 getTestDetailsByTest();
             }
 
@@ -42,11 +42,11 @@
                 })
             }
 
-            function getOneTest() {
-                testService.getOneTest($stateParams.currentTestId).then(function(response) {
-                    self.currentTestName = response.data[0].test_name;
-                })
-            }
+            // function getOneTest() {
+            //     testService.getOneTest($stateParams.currentTestId).then(function(response) {
+            //         self.currentTestName = response.data[0].test_name;
+            //     })
+            // }
 
             function showAddTestDetailsForm() {
                 var modalInstance = $uibModal.open({

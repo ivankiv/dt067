@@ -23,17 +23,17 @@
             addSchedule: 'http://dtapi.local/timeTable/insertData',
             editSchedule: 'http://dtapi.local/timeTable/update/', // + id of timeTable
 
-            getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
-            addTestDetails: 'http://dtapi.local/testDetail/insertData',
-            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of test
-            deleteTestDetails: 'http://dtapi.local/testDetail/del/', // + id of testDetails
-
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',
             countTests: 'http://dtapi.local/test/countRecords',
             addTest: 'http://dtapi.local/test/insertData',
             editTest: 'http://dtapi.local/test/update/',
             delTest: 'http://dtapi.local/test/del/',
+
+            getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
+            addTestDetails: 'http://dtapi.local/testDetail/insertData',
+            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of test
+            deleteTestDetails: 'http://dtapi.local/testDetail/del/', // + id of testDetails
 
             getSpecialities: 'http://dtapi.local/speciality/getRecords',
             getRangeOfSpecialities: 'http://dtapi.local/speciality/getRecordsRange',

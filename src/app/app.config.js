@@ -74,7 +74,7 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             views: {
                 'content': {
                     templateUrl: 'app/admin/subject/test/test-details/test-details.html',
-                    controller: 'TestDetailsController as details'
+                    controller: 'TestDetailsController as testDetails'
                 }
             }
         })
