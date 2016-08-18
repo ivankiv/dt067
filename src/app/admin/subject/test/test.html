@@ -32,15 +32,16 @@
                             <button  type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити"
                                      ng-click="tests.deleteTest(test.test_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
-                            <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns" title="Редагувати"
-                                     ng-click='tests.showEditTestForm(test) '><i class="glyphicon glyphicon-pencil"></i>
+                            <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns"
+                                     title="Редагувати" ng-click='tests.showEditTestForm(test)'>
+                                     <i class="glyphicon glyphicon-pencil"></i>
                             </button>
                             <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання">
-                                <i class="glyphicon glyphicon-list-alt"></i>
+                                     <i class="glyphicon glyphicon-list-alt"></i>
                             </button>
                             <button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі"
-                                    ui-sref="admin-home.testDetails({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
-                                    <i class="glyphicon glyphicon-info-sign"></i>
+                                     ui-sref="admin-home.testDetails({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
+                                     <i class="glyphicon glyphicon-info-sign"></i>
                             </button>
                         </td>
                     </tr>

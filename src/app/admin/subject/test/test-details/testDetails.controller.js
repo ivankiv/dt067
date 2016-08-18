@@ -23,7 +23,7 @@
             activate();
 
             function activate() {
-                // getOneTest();
+                 getOneTest();
                 getTestDetailsByTest();
             }
 
@@ -42,11 +42,11 @@
                 })
             }
 
-            // function getOneTest() {
-            //     testService.getOneTest($stateParams.currentTestId).then(function(response) {
-            //         self.currentTestName = response.data[0].test_name;
-            //     })
-            // }
+             function getOneTest() {
+                 testService.getOneTest($stateParams.currentTestId).then(function(response) {
+                     self.currentTestName = response.data[0].test_name;
+                 })
+             }
 
             function showAddTestDetailsForm() {
                 var modalInstance = $uibModal.open({

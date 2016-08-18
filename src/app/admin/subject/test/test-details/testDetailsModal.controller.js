@@ -11,6 +11,7 @@
             //variables
             self.testDetails = {};
             self.testDetails.test_id = $stateParams.currentTestId;
+            self.duplicateTestLevelMessage = false;
 
             //methods
             self.addTestDetails = addTestDetails;
@@ -31,10 +32,13 @@
             }
 
             function addTestDetailsComplete(response) {
-                console.log(response);
                 if(response.data.response === "ok") {
                     self.testDetails = {};
                     $uibModalInstance.close();
+                }
+
+                if(response.status === 400) {
+                    self.duplicateTestLevelMessage = true;
                 }
             }
         }

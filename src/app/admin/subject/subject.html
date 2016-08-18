@@ -40,11 +40,13 @@
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
-                                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                        ng-click="subjects.deleteSubject(subject.subject_id)"><i class="glyphicon glyphicon-trash"></i>
+                                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                        title="Видалити" ng-click="subjects.deleteSubject(subject.subject_id)">
+                                        <i class="glyphicon glyphicon-trash"></i>
                                 </button>
                                 <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
-                                    ng-click="subjects.showEditSubjectForm(subject);"><i class="glyphicon glyphicon-pencil"></i>
+                                        ng-click="subjects.showEditSubjectForm(subject);">
+                                        <i class="glyphicon glyphicon-pencil"></i>
                                 </button>
                                 <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад"
                                         ui-sref="admin-home.schedule({currentSubjectId: subject.subject_id})">
