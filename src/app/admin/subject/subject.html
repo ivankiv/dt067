@@ -29,12 +29,14 @@
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                         <tr>
+                            <th>Номер</th>
                             <th>Предмет</th>
                             <th>Опис предмету</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="subject in subjects.list | toArray | filter: subjects.textSearch | limitTo: subjects.subjectsPerPage : subjects.begin">
+                            <td data-th="Номер">{{$index + (subjects.currentPage - 1)*subjects.subjectsPerPage + 1}}</td>
                             <td data-th="Предмет">{{::subject.subject_name}}</td>
                             <td data-th="Опис предмету">{{::subject.subject_description}}</td>
                             <td>
