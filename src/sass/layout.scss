@@ -6,20 +6,19 @@ $colom-title:yellow;
 //mixin
 @mixin table-mixin {
   -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  -o-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-  -ms-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: $table-bg;
   color: white;
   overflow: hidden;
   font-weight: bold;
   td:last-child{
+    width: 340px;
     &:before {
       content: attr(data-th)" ";
       font-weight: bold;
 
       @media (min-width: $breakpoint-alpha) {
-        display: none;
+        -webkit-display: none;
       }
     }
     @media (max-width: $breakpoint-alpha) {
@@ -29,7 +28,11 @@ $colom-title:yellow;
   }
   td{
     .table-help-btns{
-      margin-right: 10px!important;
+      margin-right: 8px!important;
+      @media (max-width: $breakpoint-alpha) {
+        margin-left: 8px!important;
+        float: left !important;
+      }
     }
   }
 }
@@ -108,6 +111,7 @@ body {
   color: #fff;
   overflow: hidden;
   th, td {
+    text-align:left;
     margin: .5em 1em;
     @media (min-width: $breakpoint-alpha) {
       padding: 1em !important;
@@ -137,6 +141,7 @@ body {
     padding-left: 5px;
     @media (max-width: 768px) {
       float: left;
+      width: 143px;
     }
   }
   .views-header-search-inpts-groups{
@@ -179,19 +184,19 @@ body {
     color: $black;
     margin-right: 30px;
     padding-left: 5px;
-  @media (max-width: 768px) {
-    float: left;
+    @media (max-width: 768px) {
+      float: left;
+    }
   }
-}
-.views-header-search-inpts-groups{
-  float: left;
-  height: 33px;
-  color: $black;
-  padding-left: 5px;
-}
-.search-groups-inpt{
-  padding-left: 0;
-}
+  .views-header-search-inpts-groups{
+    float: left;
+    height: 33px;
+    color: $black;
+    padding-left: 5px;
+  }
+  .search-groups-inpt{
+    padding-left: 0;
+  }
 }
 
 .faculty-table{
@@ -205,17 +210,19 @@ body {
 }
 .header-views-select-pages-search{
   height: 32px;
+  margin-right: 5px;
 }
 .groups-table{
   @include table-mixin;
 }
 .create-student-table{
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   #names{
     input{
       margin-bottom: 5px;
     }
   }
-
   background: $table-bg;
   color: white;
   overflow: hidden;
@@ -231,7 +238,6 @@ body {
 
   }
   td{
-    text-align: center;
     &:before {
       content: attr(data-th)" ";
       font-weight: bold;
@@ -241,12 +247,13 @@ body {
       }
     }
     .add-photo-inp{
-    width: auto;
+      width: auto;
     }
   }
 }
 .statistic-table{
   -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
   background: $table-bg;
   color: $white;
   overflow: hidden;
@@ -255,17 +262,19 @@ body {
     &:nth-child(1){
       padding-top: 0px;
       width: 95%;
-      @media (max-width: $breakpoint-alpha) {
-        width: 80%;
-        display: block;
-        float: left;
-      }
     }
     &:before {
       content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
       font-weight: bold;
       width: 1px;
 
+    }
+    @media (max-width: $breakpoint-alpha) {
+      width: 100% !important;
+      display: block;
+      float: none;
+      text-align: left;
+      margin-left: 0px;
     }
   }
 }
@@ -286,10 +295,22 @@ body {
       }
     }
     &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)" ";
       font-weight: bold;
       width: 1px;
 
+    }
+  }
+}
+.views-header-students-view-wrpr{
+  padding-top: 0px;
+  height: auto;
+  .student-view-group-select{
+    margin-bottom: 20px;
+    width: 32%;
+    @media (max-width: 470px) {
+      width: 100%;
+      margin-top: 10px;
     }
   }
 }
