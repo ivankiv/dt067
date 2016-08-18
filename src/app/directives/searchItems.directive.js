@@ -8,11 +8,17 @@
                 scope: {
                     itemsPerPage: '=',
                     totalItems: '=',
-                    textSearch: '='
+                    textSearch: '=',
+                    currentPage: '='
                 },
                 require: 'ngModel',
                 link: function(scope, element) {
-                    element.bind('keydown', function() {
+                    element.bind('keydown',  function() {
+                        scope.$apply(function() {
+                            scope.itemsPerPage = scope.totalItems;
+                        })
+                    });
+                    element.bind('change',  function() {
                         scope.$apply(function() {
                             scope.itemsPerPage = scope.totalItems;
                         })

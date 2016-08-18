@@ -12,12 +12,12 @@
                        id="groupName"
                        placeholder="Напиши назву групи"
                        ng-model="groups.group.group_name"
-                       ng-pattern="/^[А-ЯЇЄІ{2}]+\-[\d{3}]\-[\d{1}]$/"
+                       ng-pattern="/^[А-ЯІЄЇ]{2}?-\d{2}?-\d{1}?$/"
                        required />
             </div>
             <div  class="clearfix">
                 <div class="col-sm-10 col-sm-offset-2">
-                    <novalidate-messages field="newGroupForm.groupname" pattern="Імена груп повинні бути в такому форматі АА-0-0"></novalidate-messages>
+                    <novalidate-messages field="newGroupForm.groupname" pattern="Імена груп повинні бути в такому форматі АА-00-0"></novalidate-messages>
                 </div>
             </div>
         </div>
