@@ -2,10 +2,13 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-8 col-xs-12 views-header'><h4>Додаткові параметри для тесту: &nbsp;{{details.currentTestName}}</h4></div>
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Додаткові параметри для тесту: &nbsp;{{details.currentTestName}}</h4>
+                </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.test({currentSubjectId: details.currentSubjectId})">
-                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="admin-home.test({currentSubjectId: details.currentSubjectId})">
+                            <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
                     <button type="button" class="btn btn-success add-btn" title="Додати дату тесту"
                             ng-click="details.showAddTestDetailsForm()"><i class="fa fa-plus" aria-hidden="true"></i>
@@ -20,15 +23,16 @@
                         <th>Кількість балів</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody ng-if="!details.showMessageNoEntity">
                     <tr ng-repeat="detail in details.list">
                         <td data-th="Номер">{{$index + 1 }}</td>
                         <td data-th="Рівень">{{::detail.level}}</td>
                         <td data-th="Кількість завдань">{{::detail.tasks}}</td>
                         <td data-th="Дата проведення">{{::detail.rate}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                    ><i class="glyphicon glyphicon-trash"></i>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити" ng-click="details.deleteTestDetails(detail.id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                     ><i class="glyphicon glyphicon-pencil"></i>
@@ -37,8 +41,8 @@
                     </tr>
                     </tbody>
                 </table>
-                <div ng-if="schedules.showMessageNoEntity" class="text-center">
-                    <h1>В розкладі немає тестів для даного предмету!</h1>
+                <div ng-if="details.showMessageNoEntity" class="text-center">
+                    <h1>Немає деталей до даного тесту!</h1>
                 </div>
             </div>
         </div>

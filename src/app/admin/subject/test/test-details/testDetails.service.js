@@ -8,7 +8,8 @@
         function testDetailsService ($http, appConstants) {
             return {
                 getTestDetailsByTest: getTestDetailsByTest,
-                addTestDetails: addTestDetails
+                addTestDetails: addTestDetails,
+                deleteTestDetails: deleteTestDetails
             };
 
             function getTestDetailsByTest(test_id) {
@@ -18,6 +19,11 @@
 
             function addTestDetails(data) {
                 return $http.post(appConstants.addTestDetails, data)
+                    .then(fulfilled, rejected);
+            }
+
+            function deleteTestDetails(id) {
+                return $http.delete(appConstants.deleteTestDetails + id)
                     .then(fulfilled, rejected);
             }
 

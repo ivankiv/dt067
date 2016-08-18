@@ -26,6 +26,7 @@
             getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
             addTestDetails: 'http://dtapi.local/testDetail/insertData',
             editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of test
+            deleteTestDetails: 'http://dtapi.local/testDetail/del/', // + id of testDetails
 
             getTests: 'http://dtapi.local/test/getRecords',
             getTestsById: 'http://dtapi.local/test/getTestsBySubject/',

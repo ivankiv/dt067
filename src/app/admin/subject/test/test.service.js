@@ -11,7 +11,8 @@
             getTestById: getTestById,
             addTest: addTest,
             updateTest: updateTest,
-            deleteTest: deleteTest
+            deleteTest: deleteTest,
+            getOneTest: getOneTest
         };
 
         function getTests() {
@@ -36,6 +37,11 @@
 
         function updateTest(testId, data) {
             return $http.post(appConstants.editTest + testId, data)
+                .then(fulfilled, rejected);
+        }
+
+        function getOneTest(id) {
+            return $http.get(appConstants.getTests +"/" + id)
                 .then(fulfilled, rejected);
         }
 

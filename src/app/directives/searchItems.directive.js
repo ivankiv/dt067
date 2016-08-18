@@ -11,7 +11,7 @@
                     textSearch: '='
                 },
                 require: 'ngModel',
-                link: function(scope, element, attrs, ngModel) {
+                link: function(scope, element) {
                     element.bind('keydown', function() {
                         scope.$apply(function() {
                             scope.itemsPerPage = scope.totalItems;
