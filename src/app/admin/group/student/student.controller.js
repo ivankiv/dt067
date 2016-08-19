@@ -11,6 +11,7 @@
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
+        self.showInfoPage = showInfoPage;
         self.hide = hide;
         self.update = update;
         self.remove = remove;
@@ -21,6 +22,7 @@
         self.groupList = [];
         self.showEdit = false;
         self.showCreate = false;
+        self.showInfo = false;
         self.alreadyExist = false;
         self.currentObj = {};
         self.currentUser = {};
@@ -32,7 +34,7 @@
         self.begin = 0;
         self.currentPage = 1;
         self.studentsPerPage = 5;
-        self.numberToDisplayStudentsOnPage = [1,2,5,10,15,20];
+        self.numberToDisplayStudentsOnPage = [5,10,15,20];
 
         activate();
 
@@ -46,31 +48,49 @@
         }
 
         function hide(param) {
-            (param == "edit")? self.showEdit = false: self.showCreate = false;
+            if (param == "edit") {
+                self.showEdit = false;
+            }
+            else if (param == "info") {
+                self.showInfo = false;
+            }
+            else {
+                self.showCreate = false;
+            }
             activate();
         }
 
         function showEditForm(obj) {
             self.showEdit = true;
+            if (obj) {
+                self.currentUserId = obj.user_id;
+                adminService.getAdmins(self.currentUserId).then(function (data) {
+                    self.currentUser = data[0];
+                    self.currentObj = createStudentObj(self.currentUser, obj);
+                });
+            }
+        }
+
+
+        function showCreateForm() {
+            self.showCreate = true;
+            self.currentObj = createStudentObj({},{});
+        }
+
+        function showInfoPage(obj) {
+            self.showInfo = true;
             self.currentUserId = obj.user_id;
-            // self.currentUser = self.userList
             adminService.getAdmins(self.currentUserId).then(function (data) {
                 self.currentUser = data[0];
                 self.currentObj = createStudentObj(self.currentUser,obj);
             });
-
         }
+
 
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.studentsPerPage);
-            self.showSearch = (self.currentPage == 1) ? true : false;
-            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
-        }
-
-        function showCreateForm() {
-            self.showCreate = true;
-
-            self.currentObj = createStudentObj({},{});
+            self.showSearch = (self.currentPage === 1) ? true : false;
+            self.textSearch = (self.currentPage === 1) ? self.textSearch  : "";
         }
 
         function update(){
