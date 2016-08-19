@@ -18,26 +18,22 @@
         function getAdmins(id) {
             var addId =(id) ? "/"+ id: "";
             return $http.get(appConstants.getAdmins + addId)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function editAdmin(obj) {
             return $http.post(appConstants.editAdmins + obj.id, obj)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function deleteAdmin(id) {
             return $http.delete(appConstants.delAdmins + id)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function createAdmin(admin) {
             return $http.post(appConstants.addAdmins, admin)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function complete(response) {
