@@ -11,7 +11,7 @@
         //variables
             self.list = {};
 
-         //variables and methods for Pagination's panel
+         //variables and methods for search and Pagination's panel
             self.totalSubjects = 0;
             self.showSearch = true;
             self.textSearch = "";

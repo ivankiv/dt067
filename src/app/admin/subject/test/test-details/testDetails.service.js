@@ -9,6 +9,7 @@
             return {
                 getTestDetailsByTest: getTestDetailsByTest,
                 addTestDetails: addTestDetails,
+                editTestDetails: editTestDetails,
                 deleteTestDetails: deleteTestDetails
             };
 
@@ -24,6 +25,11 @@
 
             function deleteTestDetails(id) {
                 return $http.delete(appConstants.deleteTestDetails + id)
+                    .then(fulfilled, rejected);
+            }
+
+            function editTestDetails(id, data) {
+                return $http.post(appConstants.editTestDetails + id, data)
                     .then(fulfilled, rejected);
             }
 

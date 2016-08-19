@@ -18,6 +18,7 @@
             self.getTestDetailsByTest = getTestDetailsByTest;
             self.deleteTestDetails = deleteTestDetails;
             self.showAddTestDetailsForm = showAddTestDetailsForm;
+            self.showEditTestDetailsForm = showEditTestDetailsForm;
 
 
             activate();
@@ -62,6 +63,23 @@
 						  Деталі тесту успішно додано!</div>'
                     });
                     self.showMessageNoEntity = false;
+                    activate();
+                })
+            }
+
+            function showEditTestDetailsForm(currentTestDetails) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/test-details/edit-test-details.html',
+                    controller: 'TestDetailsModalController as testDetails',
+                    backdrop: false,
+                    resolve: {
+                        currentTestDetails: currentTestDetails
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>'
+                    });
                     activate();
                 })
             }

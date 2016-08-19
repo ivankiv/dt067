@@ -3,18 +3,20 @@
 
     angular.module('app')
         .controller('TestDetailsModalController', testDetailsModalController);
-        testDetailsModalController.$inject = ['testDetailsService', '$stateParams', '$uibModalInstance', 'ngDialog'];
+        testDetailsModalController.$inject = ['testDetailsService', '$stateParams', '$uibModalInstance', 'currentTestDetails'];
 
-        function testDetailsModalController(testDetailsService, $stateParams, $uibModalInstance, ngDialog) {
+        function testDetailsModalController(testDetailsService, $stateParams, $uibModalInstance, currentTestDetails) {
             var self = this;
 
             //variables
             self.testDetails = {};
+            self.currentTestDetails = currentTestDetails;
             self.testDetails.test_id = $stateParams.currentTestId;
             self.duplicateTestLevelMessage = false;
 
             //methods
             self.addTestDetails = addTestDetails;
+            self.updateTestDetails = updateTestDetails;
             self.cancelForm = cancelForm;
 
             activate();
@@ -25,6 +27,10 @@
 
             function addTestDetails() {
                 testDetailsService.addTestDetails(self.testDetails).then(addTestDetailsComplete)
+            }
+
+            function updateTestDetails() {
+                testDetailsService.editTestDetails($stateParams.currentTestId, self.currentTestDetails).then(editTestDetailsComplete)
             }
 
             function cancelForm () {
@@ -39,6 +45,13 @@
 
                 if(response.status === 400) {
                     self.duplicateTestLevelMessage = true;
+                }
+            }
+
+            function editTestDetailsComplete(response) {
+                if(response.data.response === "ok") {
+                    self.currentTestDetails = {};
+                    $uibModalInstance.close();
                 }
             }
         }
