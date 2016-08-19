@@ -13,6 +13,7 @@
             self.currentTestDetails = currentTestDetails;
             self.testDetails.test_id = $stateParams.currentTestId;
             self.duplicateTestLevelMessage = false;
+            self.wasNotEditTestMessage = false;
 
             //methods
             self.addTestDetails = addTestDetails;
@@ -30,7 +31,7 @@
             }
 
             function updateTestDetails() {
-                testDetailsService.editTestDetails($stateParams.currentTestId, self.currentTestDetails).then(editTestDetailsComplete)
+                testDetailsService.editTestDetails(currentTestDetails.id, self.currentTestDetails).then(editTestDetailsComplete)
             }
 
             function cancelForm () {
@@ -52,6 +53,14 @@
                 if(response.data.response === "ok") {
                     self.currentTestDetails = {};
                     $uibModalInstance.close();
+                }
+
+                if(response.status === 400 && response.data.response !== "Error when update") {
+                    self.duplicateTestLevelMessage = true;
+                }
+
+                if(response.status === 400 && response.data.response === "Error when update") {
+                    self.wasNotEditTestMessage = true;
                 }
             }
         }

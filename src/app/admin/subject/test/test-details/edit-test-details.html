@@ -47,6 +47,9 @@
             <span class="text-danger">Завдання обраного рівня вже додано!</span>
         </div>
     </div>
+    <div class="text-danger" role="alert" ng-if="testDetails.wasNotEditTestMessage">
+        <p>Не внесено жодних змін! Щоб вийти зі сторінки редагування натисніть "Відмінити"</p>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="testDetails.updateTestDetails()"
