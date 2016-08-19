@@ -78,8 +78,8 @@
 
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.groupsPerPage);
-            self.showSearch = (self.currentPage == 1) ? true : false;
-            self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
+            self.showSearch = (self.currentPage === 1) ? true : false;
+            self.textSearch = (self.currentPage === 1) ? self.textSearch  : "";
         }
 
         function addNewGroup() {
@@ -115,7 +115,7 @@
         }
 
         function deleteGroupComplete(response) {
-            if(response.status == 400) {
+            if(response.status === 400) {
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Ви не можете видалити групу яка містить записи про студентів!</div>'
                 });

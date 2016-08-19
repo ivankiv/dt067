@@ -5,22 +5,21 @@
                 <div class='col-xs-12 views-header'>
                     <h4>Групи</h4>
                 </div>
-                <div class='col-md-11 col-xs-12 views-header-input-wrapper'>
+                <div class='col-md-12 col-xs-12 views-header-input-wrapper'>
 
-                    <div class="col-md-4 search-groups-inpt">
+                    <div class="col-md-3 search-groups-inpt selct-search-group">
                         <input class="views-header-search-inpts-groups groups-input-search col-xs-12"
                                type="text"
                                placeholder="Пошук"
                                check-pagination
                                items-per-page="groups.groupsPerPage"
-                               currentPage="groups.currentPage"
                                total-items="groups.totalGroups"
                                text-search="groups.textSearch"
                                ng-model="groups.textSearch"/>
 
                     </div>
                     <div class="col-md-4">
-                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                             ng-model="groups.textSearch"
                             ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList"
                             check-pagination
@@ -32,7 +31,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups"
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                                 ng-model="groups.textSearch"
                                 ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList"
                                 check-pagination
@@ -42,13 +41,12 @@
                             <option disabled selected value="">Виберіть спеціальність</option>
                         </select>
                     </div>
-                </div>
-                <div class='col-md-1 col-xs-12 views-header-input-wrapper views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-success add-btn" title="Додати групу"
+
+                    <button type="button" class="btn btn-success add-btn selct-search-group" title="Додати групу"
                             ng-click="groups.showAddGroupForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <div class="col-md-4">
-                        <select class="pull-right header-views-select-pages-search"
+
+                        <select class="pull-right header-views-select-pages-search selct-search-group"
                                 ng-show="groups.showSearch"
                                 ng-model="groups.groupsPerPage"
                                 ng-options="groupPerPage for groupPerPage in groups.numberToDisplayGroupsOnPage"
@@ -56,7 +54,7 @@
                                 name="groupsPerPage"
                                 title="Кількість записів на сторінці">
                         </select>
-                    </div>
+
                 </div>
                 <table class="rwd-table groups-table table-striped">
                     <thead>
