@@ -17,26 +17,22 @@
 
         function getStudents() {
             return $http.get(appConstants.getStudents)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function editStudent(obj,id) {
             return $http.post(appConstants.editStudent + id, obj)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function deleteStudent(id) {
             return $http.delete(appConstants.delStudent + id)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function createStudent(student) {
             return $http.post(appConstants.addStudents, student)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function complete(response) {
