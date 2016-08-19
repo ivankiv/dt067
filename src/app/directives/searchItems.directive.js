@@ -8,8 +8,7 @@
                 scope: {
                     itemsPerPage: '=',
                     totalItems: '=',
-                    textSearch: '=',
-                    currentPage: '='
+                    textSearch: '='
                 },
                 require: 'ngModel',
                 link: function(scope, element) {

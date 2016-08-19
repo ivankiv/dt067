@@ -12,7 +12,13 @@
                     <button type="button" class="btn btn-success add-btn" title="Додати студента" ng-click="students.showCreateForm()"
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці" ng-model="students.textSearch">
+                    <input class="views-header-search-inpts" type="text"
+                           placeholder="Пошук на сторінці"
+                           check-pagination
+                           items-per-page="students.studentsPerPage"
+                           total-items="students.totalStudents"
+                           text-search="students.textSearch"
+                           ng-model="students.textSearch">
                     <select class="header-views-select-pages-search student-view-group-select" ng-options="group.group_name as group.group_name for group  in students.groupList"  ng-model="students.textSearch" id="group" placeholder="Виберіть групу">
                         <option value="" disabled>&nbsp;Виберіть групу&nbsp;</option>
                     </select>
