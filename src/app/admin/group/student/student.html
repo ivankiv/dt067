@@ -3,7 +3,8 @@
         <div class="row">
             <div class= "col-xs-12 col-md-10 col-md-offset-1"  ng-if = "students.showEdit" ng-include = "'app/admin/group/student/student-edit-form.html'"></div>
             <div class= "col-xs-12 col-md-10 col-md-offset-1" ng-if = "students.showCreate" ng-include = "'app/admin/group/student/student-create-form.html'"></div>
-            <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!students.showEdit && !students.showCreate">
+            <div class= "col-xs-12 col-md-10 col-md-offset-1" ng-if = "students.showInfo" ng-include = "'app/admin/group/student/student-info.html'"></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!students.showEdit && !students.showCreate && !students.showInfo">
                 <div class=' col-xs-12 views-header'><h4>Студенти</h4></div>
                 <div class=' col-xs-12 views-header views-header-students-view-wrpr views-header-wrapper-add-btn-and-search'>
                     <select class="pull-right header-views-select-pages-search" ng-show="students.showSearch"  ng-model="students.studentsPerPage"
@@ -12,7 +13,13 @@
                     <button type="button" class="btn btn-success add-btn" title="Додати студента" ng-click="students.showCreateForm()"
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
-                    <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці" ng-model="students.textSearch">
+                    <input class="views-header-search-inpts" type="text"
+                           placeholder="Пошук на сторінці"
+                           check-pagination
+                           items-per-page="students.studentsPerPage"
+                           total-items="students.totalStudents"
+                           text-search="students.textSearch"
+                           ng-model="students.textSearch">
                     <select class="header-views-select-pages-search student-view-group-select" ng-options="group.group_name as group.group_name for group  in students.groupList"  ng-model="students.textSearch" id="group" placeholder="Виберіть групу">
                         <option value="" disabled>&nbsp;Виберіть групу&nbsp;</option>
                     </select>
@@ -35,7 +42,7 @@
                             <button type="button" class="btn btn-warning   pull-right table-help-btns" title="Редагувати" ng-click="students.showEditForm(student)">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-info pull-right table-help-btns" title="Результати" ng-click="students.showResultForm(student)">
+                            <button type="button" class="btn btn-info pull-right table-help-btns" title="Результати" ng-click="students.showInfoPage(student)">
                                 <i class="glyphicon glyphicon-registration-mark"></i>
                             </button>
                         </td>
