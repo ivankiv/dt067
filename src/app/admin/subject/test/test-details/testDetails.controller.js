@@ -12,7 +12,6 @@
             self.currentSubjectId = $stateParams.currentSubjectId;
             self.list = {};
             self.showMessageNoEntity = false;
-            self.currentTestName = "";
 
             //methods
             self.getTestDetailsByTest = getTestDetailsByTest;
@@ -24,8 +23,7 @@
             activate();
 
             function activate() {
-                 getOneTest();
-                getTestDetailsByTest();
+                 getOneTest().then(getTestDetailsByTest);
             }
 
             function getTestDetailsByTest() {
@@ -44,8 +42,8 @@
             }
 
              function getOneTest() {
-                 testService.getOneTest($stateParams.currentTestId).then(function(response) {
-                     self.currentTestName = response.data[0].test_name;
+                 return testService.getOneTest($stateParams.currentTestId).then(function(response) {
+                     self.currentTest = response.data[0];
                  })
              }
 
@@ -55,7 +53,8 @@
                     controller: 'TestDetailsModalController as testDetails',
                     backdrop: false,
                     resolve: {
-                        currentTestDetails: {}
+                        currentTestDetails: {},
+                        amountOfTaskForCurrentTest: self.availableAmountofTaskForCurrentTest
                     }
                 });
                 modalInstance.result.then(function() {
@@ -73,7 +72,8 @@
                     controller: 'TestDetailsModalController as testDetails',
                     backdrop: false,
                     resolve: {
-                        currentTestDetails: currentTestDetails
+                        currentTestDetails: currentTestDetails,
+                        amountOfTaskForCurrentTest: self.availableAmountofTaskForCurrentTest
                     }
                 });
                 modalInstance.result.then(function() {
@@ -89,6 +89,20 @@
                     self.showMessageNoEntity = true;
                 } else {
                     self.list = response.data;
+
+                    //calculate amount of rate per current test
+                    self.amountOfRate = 0;
+                    angular.forEach(self.list, function(item) {
+                        self.amountOfRate += item.rate * item.tasks;
+                    });
+
+                    //calculate amount of tasks per current test
+                    self.amountOfTasks = 0;
+                    angular.forEach(self.list, function(item) {
+                        self.amountOfTasks += parseInt(item.tasks);
+                    });
+
+                    self.availableAmountofTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
                 }
             }
         }

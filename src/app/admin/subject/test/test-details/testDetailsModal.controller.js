@@ -3,15 +3,16 @@
 
     angular.module('app')
         .controller('TestDetailsModalController', testDetailsModalController);
-        testDetailsModalController.$inject = ['testDetailsService', '$stateParams', '$uibModalInstance', 'currentTestDetails'];
+        testDetailsModalController.$inject = ['testDetailsService', '$stateParams', '$uibModalInstance', 'currentTestDetails', 'amountOfTaskForCurrentTest'];
 
-        function testDetailsModalController(testDetailsService, $stateParams, $uibModalInstance, currentTestDetails) {
+        function testDetailsModalController(testDetailsService, $stateParams, $uibModalInstance, currentTestDetails, amountOfTaskForCurrentTest) {
             var self = this;
 
             //variables
             self.testDetails = {};
             self.currentTestDetails = currentTestDetails;
             self.testDetails.test_id = $stateParams.currentTestId;
+            self.amountOfTaskForCurrentTest = amountOfTaskForCurrentTest;
             self.duplicateTestLevelMessage = false;
             self.wasNotEditTestMessage = false;
 
@@ -20,11 +21,6 @@
             self.updateTestDetails = updateTestDetails;
             self.cancelForm = cancelForm;
 
-            activate();
-
-            function activate() {
-
-            }
 
             function addTestDetails() {
                 testDetailsService.addTestDetails(self.testDetails).then(addTestDetailsComplete)
