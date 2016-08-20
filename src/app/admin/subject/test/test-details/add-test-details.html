@@ -20,12 +20,10 @@
             <label class="control-label col-sm-2" for="tasks">Кількiсть завдань: </label>
             <div class="col-sm-10">
                 <input class="form-control" type="number" id="tasks" name="tasks" ng-model="testDetails.testDetails.tasks"
-                       placeholder="кількість завдань обраного рівню"
+                       placeholder="доступна кількість завдань: &nbsp;{{testDetails.amountOfTaskForCurrentTest}}"
                        required
-                       min="1"
-                       max="20">
-                <!--max value have to equal = amount of task which are avaible on the server -->
-                <novalidate-messages field="newTestDetailsForm.tasks" min="1" max="20"></novalidate-messages>
+                       max="{{testDetails.amountOfTaskForCurrentTest}}">
+                <novalidate-messages field="newTestDetailsForm.tasks" max="{{testDetails.amountOfTaskForCurrentTest}}"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">
@@ -35,8 +33,8 @@
                        placeholder="кількість балів за одне завдання"
                        required
                        min="1"
-                       max="50">
-                <novalidate-messages field="newTestDetailsForm.rate" min="1" max="50"></novalidate-messages>
+                       max="20">
+                <novalidate-messages field="newTestDetailsForm.rate" max="20" min="1"></novalidate-messages>
             </div>
         </div>
     </form>
