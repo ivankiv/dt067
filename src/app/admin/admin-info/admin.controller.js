@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module("app")
-        .controller("AdminEditController", AdminEditController);
+        .module('app')
+        .controller('AdminEditController', AdminEditController);
 
-    AdminEditController.$inject = ["adminService","$state", 'ngDialog'];
+    AdminEditController.$inject = ['adminService','$uibModal', 'ngDialog'];
 
-    function AdminEditController(adminService, ngDialog) {
+    function AdminEditController(adminService,$uibModal, ngDialog) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
@@ -26,8 +26,8 @@
         activate();
 
         function activate() {
-            adminService.getAdmins().then(function (data) {
-                self.list = data;
+            adminService.getAdmins().then(function (response) {
+                self.list = response.data;
                 self.password = "";
                 self.password1 = "";
             });
@@ -38,14 +38,52 @@
             activate();
         }
 
-        function showEditForm(obj) {
-            self.showEdit = true;
-            self.currentObj = obj;
+        function remove(id) {
+            if (id == 1){
+                alert("Цього адміна не дозволено видаляти");
+                return;
+            }
+            ngDialog.openConfirm({
+                template: 'app/partials/confirm-delete-dialog.html',
+                plain: false
+            }).
+            then(function(){
+                adminService.deleteAdmin(id).then(activate)
+            })
         }
 
         function showCreateForm() {
-            self.showCreate = true;
-            self.currentObj = {};
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/admin-info/admin-create-form.html',
+                controller: 'AdminModalController as admins',
+                backdrop: false,
+                resolve: {
+                    currentObject: {}
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Адміністратора створено!</div>'
+                });
+                activate();
+            })
+        }
+
+        function showEditForm(admin) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/subject/edit-subject.html',
+                controller: 'AdminModalController as admins',
+                backdrop: false,
+                resolve: {
+                    currentObject: admin
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни внесено!</div>'
+                });
+                activate();
+            })
         }
 
         function update(){
@@ -63,19 +101,7 @@
             hide("edit");
         }
 
-        function remove(id) {
-            if (id == 1){
-                alert("Цього адміна не дозволено видаляти");
-                return;
-            }
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            }).
-            then(function(){
-                adminService.deleteAdmin(id).then(activate)
-            })
-        }
+
 
         function create(){
             if (self.password != ""){

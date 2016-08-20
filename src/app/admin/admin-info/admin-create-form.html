@@ -1,53 +1,67 @@
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-xs-12 views-header'><h4>Створити Адміністратора</h4></div>
-                <form class="form-group" name="adminCreationForm">
-                    <input type="text" ng-hide = "true">
-                    <input type="password" ng-hide = "true">
-                    <table class="rwd-table add-edit-admin-table table-striped">
-                        <tbody>
-                        <tr>
-                            <td colspan="3">Ім'я</td>
-                            <td colspan="3">
-                                <input type="text" class="form-control" name="name" ng-model="admins.currentObj.username" placeholder="Введіть логін" ng-minlength="3"
-                                       ng-maxlength="50" required >
-                                <novalidate-messages field="adminCreationForm.name"></novalidate-messages>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">email</td>
-                            <td colspan="3">
-                                <input type="email" class="form-control" name="email" ng-model="admins.currentObj.email" placeholder="Ведіть адресу почтової скриньки" required>
-                                <novalidate-messages field="adminCreationForm.email"></novalidate-messages>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Введіть пароль</td>
-                            <td colspan="3">
-                                <input type="password" class="form-control" name="pass" ng-model="admins.password" placeholder="Пароль"  required></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">Підтвердження пароля</td>
-                            <td colspan="3">
-                                <input type="password" class="form-control" name="pass2" ng-model="admins.password1"   placeholder="Підтвердіть пароль" required>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" class="text-center create-student-submit-btns-wrpr">
-                                <button type="button" class="btn btn-success" title="Підтвердити" ng-click="admins.create()" ng-disabled="adminCreationForm.$invalid">
-                                    <i class="glyphicon glyphicon-ok"></i>
-                                </button>
-                                <button type="button" class="btn btn-danger pull-right" title="Скасувати" ng-click="admins.hide()">
-                                    <i class="glyphicon glyphicon-remove"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </form>
+<div class="modal-header">
+    <h3 class="modal-title">Створити нового адміністратора</h3>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" name="adminCreationForm" role="form">
+        <input type="text" ng-hide = "true">
+        <input type="password" ng-hide = "true">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Логін: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id ="name" name="name"
+                       ng-model="admins.currentObj.username"
+                       placeholder="Введіть логін"
+                       ng-minlength="3"
+                       ng-maxlength="50"
+                       required >
+                <novalidate-messages field="adminCreationForm.name"></novalidate-messages>
             </div>
         </div>
-    </section>
-</section>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email: </label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id = "email" name="email"
+                       ng-model="admins.currentObj.email"
+                       placeholder="Ведіть адресу почтової скриньки"
+                       required>
+                <novalidate-messages field="adminCreationForm.email"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pass">Пароль: </label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="pass" name="pass"
+                       ng-model="admins.password"
+                       placeholder="Пароль"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pass2">Повторіть пароль: </label>
+            <div class="col-sm-10">
+                    <input type="password" class="form-control" id="pass2" name="pass2"
+                           ng-model="admins.password1"
+                           placeholder="Пароль"
+                           required>
+            </div>
+        </div>
+
+    </form>
+    <div class="clearfix" ng-if="admins.duplicateAdminsMessage">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Адміністратор з таким логіном вже існує!</span>
+        </div>
+    </div>
+    <div class="clearfix" ng-if="admins.passwordConfirmation">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Паролі не співпадають!</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="admins.create()"
+            ng-disabled="adminCreationForm.$invalid"> створити
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="admins.cancelForm()">Відмінити</button>
+</div>
