@@ -98,7 +98,6 @@
             }
             adminService.editAdmin(self.currentObj)
                 .then(activate);
-            hide("edit");
         }
 
 

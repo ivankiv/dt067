@@ -23,9 +23,17 @@
         self.cancelForm = cancelForm;
 
         function create(){
+            if (self.password != ""){
+                if (self.password == self.password1){
+                    self.currentObj.password = self.password;
+                }
+                else {
+                    self.passwordConfirmation = true;
+                    return;
+                }
+            }
             adminService.createAdmin(self.currentObj)
                 .then(createComplete, rejected);
-            $uibModalInstance.close();
         }
 
         function cancelForm () {
@@ -33,21 +41,12 @@
         }
 
         function createComplete(response) {
-            if(response.status == 200 && response.data ==="Failed to validate array") {
+            if(response.status == 200 && response.data.response === "Failed to validate array") {
                 self.duplicateAdminsMessage = true;
                 return;
             }
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
 
-            if(response.data.response === "ok" && response.data !=="Failed to validate array") {
+            if(response.data.response === "ok" && response.data.response  !=="Failed to validate array") {
                 $uibModalInstance.close();
             }
         }
