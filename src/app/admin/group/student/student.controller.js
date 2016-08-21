@@ -66,7 +66,7 @@
                 self.currentUserId = obj.user_id;
                 adminService.getAdmins(self.currentUserId).then(function (data) {
                     self.currentUser = data[0];
-                    self.currentObj = createStudentObj(self.currentUser, obj);
+                    self.currentObj = studentService.createStudentObj(self.currentUser, obj);
                 });
             }
         }
@@ -74,7 +74,7 @@
 
         function showCreateForm() {
             self.showCreate = true;
-            self.currentObj = createStudentObj({},{});
+            self.currentObj = studentService.createStudentObj({},{});
         }
 
         function showInfoPage(obj) {
@@ -82,7 +82,7 @@
             self.currentUserId = obj.user_id;
             adminService.getAdmins(self.currentUserId).then(function (data) {
                 self.currentUser = data[0];
-                self.currentObj = createStudentObj(self.currentUser,obj);
+                self.currentObj = studentService.createStudentObj(self.currentUser,obj);
             });
         }
 
@@ -142,22 +142,6 @@
                         return student;
                     });
             })
-        }
-
-        function createStudentObj(userObj,studentObj){
-            return {
-                username: userObj.username || "",
-                password: userObj.plain_password  ||"",
-                password_confirm:userObj.plain_password || "",
-                email:userObj.email || "",
-                gradebook_id:studentObj.gradebook_id || "",
-                student_surname:studentObj.student_surname || "",
-                student_name:studentObj.student_name || "",
-                student_fname:studentObj.student_fname || "",
-                group_id:studentObj.group_id || "",
-                plain_password:studentObj.plain_password || "",
-                photo: studentObj.photo || "img/user-default-icon.png"
-            };
         }
     }
 }());

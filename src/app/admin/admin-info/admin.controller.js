@@ -2,19 +2,18 @@
     'use strict';
 
     angular
-        .module("app")
-        .controller("AdminEditController", AdminEditController);
+        .module('app')
+        .controller('AdminEditController', AdminEditController);
 
-    AdminEditController.$inject = ["adminService","$state", 'ngDialog'];
+    AdminEditController.$inject = ['adminService','$uibModal', 'ngDialog'];
 
-    function AdminEditController(adminService, ngDialog) {
+    function AdminEditController(adminService,$uibModal, ngDialog) {
         var self = this;
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
         self.hide = hide;
         self.update = update;
         self.remove = remove;
-        self.create = create;
         self.list = [];
         self.showEdit = false;
         self.showCreate = false;
@@ -25,9 +24,10 @@
 
         activate();
 
+
         function activate() {
-            adminService.getAdmins().then(function (data) {
-                self.list = data;
+            adminService.getAdmins().then(function (response) {
+                self.list = response.data;
                 self.password = "";
                 self.password1 = "";
             });
@@ -36,31 +36,6 @@
         function hide(param) {
             (param == "edit")? self.showEdit = false: self.showCreate = false;
             activate();
-        }
-
-        function showEditForm(obj) {
-            self.showEdit = true;
-            self.currentObj = obj;
-        }
-
-        function showCreateForm() {
-            self.showCreate = true;
-            self.currentObj = {};
-        }
-
-        function update(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
-            adminService.editAdmin(self.currentObj)
-                .then(activate);
-            hide("edit");
         }
 
         function remove(id) {
@@ -77,7 +52,41 @@
             })
         }
 
-        function create(){
+        function showCreateForm() {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/admin-info/admin-create-form.html',
+                controller: 'AdminModalController as admins',
+                backdrop: false,
+                resolve: {
+                    currentObject: {}
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template:
+                    '<div class="ngdialog-message">Адміністратора створено!</div>'
+                });
+                activate();
+            })
+        }
+
+        function showEditForm(admin) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/admin-info/admin-edit-form.html',
+                controller: 'AdminModalController as admins',
+                backdrop: false,
+                resolve: {
+                    currentObject: admin
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template:
+                    '<div class="ngdialog-message">Зміни внесено!</div>'
+                });
+                activate();
+            })
+        }
+
+        function update(){
             if (self.password != ""){
                 if (self.password == self.password1){
                     self.currentObj.password = self.password;
@@ -87,20 +96,8 @@
                     return;
                 }
             }
-            self.list.forEach(
-                function(x){
-                    if(x.username==self.currentObj.username){
-                        alert("Користувач з таким логіном вже існує");
-                        self.alreadyExist = true;
-                    }
-                });
-            if(self.alreadyExist) {
-                self.alreadyExist =false;
-                return;
-            }
-            adminService.createAdmin(self.currentObj)
+            adminService.editAdmin(self.currentObj)
                 .then(activate);
-            hide();
         }
     }
 }());

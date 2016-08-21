@@ -12,25 +12,12 @@
                             </td>
                             <td colspan="4">
                                 <p>ПІБ</p>
-                                <div id="names">
-                                    <p>{{students.currentObj.student_surname}}</p>
-                                    <p>{{students.currentObj.student_name}}</p>
-                                    <p>{{students.currentObj.student_fname}}</p>
-                                </div>
-                                    <p>Група</p>
-                                    <p>{{students.currentObj.student_groupname}}</p>
-                        </tr>
-                        <tr>
-                            <td colspan="3" class="text-center">
-                                <p>Пароль</p>
-                                <p>{{students.currentObj.plain_password}}</p>
-                            </td>
-                            <td colspan="3" class="text-center">
-                                <p>№ залікової книжки</p>
-                                <p>{{students.currentObj.gradebook_id}}</p>
+                                <p>{{students.currentObj.student_surname}}{{students.currentObj.student_name}}{{students.currentObj.student_fname}}</p>
+                                <p>Група:{{students.currentObj.student_groupname}}</p>
+                                <p>Пароль:{{students.currentObj.plain_password}}</p>
+                                <p>№ залікової книжки:{{students.currentObj.gradebook_id}}</p>
                             </td>
                         </tr>
-                        <tr>
                             <td colspan="3" class="text-center">
                                 <p>Логін</p>
                                 <p>{{students.currentObj.username}}</p>
