@@ -12,7 +12,8 @@
             getAdmins:getAdmins,
             deleteAdmin:deleteAdmin,
             editAdmin:editAdmin,
-            createAdmin:createAdmin
+            createAdmin:createAdmin,
+            duplicateLogin:duplicateLogin
         };
 
         function getAdmins(id) {
@@ -42,6 +43,21 @@
 
         function failed(error) {
             alert('XHR Failed. Error: ' + error.data);
+        }
+
+        function duplicateLogin(username) {
+            var alreadyExist = false;
+            getAdmins().then(
+                function (response) {
+                var list = response.data;
+                list.forEach(
+                    function(x){
+                        if(x.username===username){
+                            alreadyExist = true;
+                        }
+                    });
+            });
+            return alreadyExist;
         }
     }
 }());

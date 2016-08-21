@@ -12,7 +12,8 @@
             getStudents:getStudents,
             deleteStudent:deleteStudent,
             editStudent:editStudent,
-            createStudent:createStudent
+            createStudent:createStudent,
+            createStudentObj:createStudentObj
         };
 
         function getStudents() {
@@ -41,6 +42,22 @@
 
         function failed(error) {
             alert('XHR Failed. Error: ' + error.data);
+        }
+
+        function createStudentObj(userObj,studentObj){
+            return {
+                username: userObj.username || "",
+                password: userObj.plain_password  ||"",
+                password_confirm:userObj.plain_password || "",
+                email:userObj.email || "",
+                gradebook_id:studentObj.gradebook_id || "",
+                student_surname:studentObj.student_surname || "",
+                student_name:studentObj.student_name || "",
+                student_fname:studentObj.student_fname || "",
+                group_id:studentObj.group_id || "",
+                plain_password:studentObj.plain_password || "",
+                photo: studentObj.photo || "img/user-default-icon.png"
+            };
         }
     }
 }());

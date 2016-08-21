@@ -32,6 +32,10 @@
                     return;
                 }
             }
+            if(adminService.duplicateLogin(self.currentObject.username)){
+                self.duplicateAdminsMessage = true;
+                return;
+            }
             adminService.createAdmin(self.currentObj)
                 .then(createComplete, rejected);
         }
@@ -46,7 +50,7 @@
                 return;
             }
 
-            if(response.data.response === "ok" && response.data.response  !=="Failed to validate array") {
+            if(response.data.response === "ok") {
                 $uibModalInstance.close();
             }
         }
