@@ -1,7 +1,7 @@
-<div class="modal-header">
+<div class="modal-header custom-modal-header">
     <h3 class="modal-title">Створити нового адміністратора</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body custom-modal-body">
     <form class="form-horizontal" name="adminCreationForm" role="form">
         <input type="text" ng-hide = "true">
         <input type="password" ng-hide = "true">
@@ -9,7 +9,7 @@
             <label class="control-label col-sm-2" for="name">Логін: </label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id ="name" name="name"
-                       ng-model="admins.currentObj.username"
+                       ng-model="admins.currentObject.username"
                        placeholder="Введіть логін"
                        ng-minlength="3"
                        ng-maxlength="50"
@@ -21,7 +21,7 @@
             <label class="control-label col-sm-2" for="email">Email: </label>
             <div class="col-sm-10">
                 <input type="email" class="form-control" id = "email" name="email"
-                       ng-model="admins.currentObj.email"
+                       ng-model="admins.currentObject.email"
                        placeholder="Ведіть адресу почтової скриньки"
                        required>
                 <novalidate-messages field="adminCreationForm.email"></novalidate-messages>
@@ -59,9 +59,9 @@
         </div>
     </div>
 </div>
-<div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="admins.create()"
-            ng-disabled="adminCreationForm.$invalid"> створити
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-info" type="button" ng-click="admins.create()"
+            ng-disabled="adminCreationForm.$invalid"> Cтворити
     </button>
     <button class="btn btn-warning" type="button" ng-click="admins.cancelForm()">Відмінити</button>
 </div>

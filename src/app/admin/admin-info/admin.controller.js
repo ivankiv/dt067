@@ -14,7 +14,6 @@
         self.hide = hide;
         self.update = update;
         self.remove = remove;
-        self.create = create;
         self.list = [];
         self.showEdit = false;
         self.showCreate = false;
@@ -24,6 +23,7 @@
         self.currentObj = {};
 
         activate();
+
 
         function activate() {
             adminService.getAdmins().then(function (response) {
@@ -62,8 +62,8 @@
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Адміністратора створено!</div>'
+                ngDialog.open({template:
+                    '<div class="ngdialog-message">Адміністратора створено!</div>'
                 });
                 activate();
             })
@@ -71,7 +71,7 @@
 
         function showEditForm(admin) {
             var modalInstance = $uibModal.open({
-                templateUrl: 'app/admin/subject/edit-subject.html',
+                templateUrl: 'app/admin/admin-info/admin-edit-form.html',
                 controller: 'AdminModalController as admins',
                 backdrop: false,
                 resolve: {
@@ -79,8 +79,8 @@
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни внесено!</div>'
+                ngDialog.open({template:
+                    '<div class="ngdialog-message">Зміни внесено!</div>'
                 });
                 activate();
             })
@@ -98,34 +98,6 @@
             }
             adminService.editAdmin(self.currentObj)
                 .then(activate);
-        }
-
-
-
-        function create(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
-            self.list.forEach(
-                function(x){
-                    if(x.username==self.currentObj.username){
-                        alert("Користувач з таким логіном вже існує");
-                        self.alreadyExist = true;
-                    }
-                });
-            if(self.alreadyExist) {
-                self.alreadyExist =false;
-                return;
-            }
-            adminService.createAdmin(self.currentObj)
-                .then(activate);
-            hide();
         }
     }
 }());

@@ -335,6 +335,26 @@ div.row.schedule-form {
 .selct-search-group {
   margin: 5px;
 }
+/************************************************
+                  Modal styles
+/*************************************************/
+.custom-modal-header {
+  text-align: center;
+  background-color: #0D083B;
+  color: #ddd;
+}
+.custom-modal-body {
+  background-color: #867DB0;
+  color: #ddd;
+}
+.custom-modal-footer {
+  text-align: center !important;
+  background-color: #0D083B;
+  color: #fff;
+}
+/************************************************
+               The end of Modal styles
+/*************************************************/
 
 /************************************************
                   ngMessage styles

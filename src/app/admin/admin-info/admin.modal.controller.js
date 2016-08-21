@@ -20,6 +20,7 @@
 
         //Methods
         self.create = create;
+        self.update = update;
         self.cancelForm = cancelForm;
 
         function create(){
@@ -36,7 +37,7 @@
                 self.duplicateAdminsMessage = true;
                 return;
             }
-            adminService.createAdmin(self.currentObj)
+            adminService.createAdmin(self.currentObject)
                 .then(createComplete, rejected);
         }
 
@@ -55,24 +56,41 @@
             }
         }
 
-        function updateComplete(response) {
-            if(response.status == 400) {
-                self.duplicateSubjectsMessage = true;
+        function update(){
+            if (self.password != ""){
+                if (self.password == self.password1){
+                    self.currentObject.password = self.password;
+                }
+                else {
+                    self.passwordConfirmation = true;
+                    return;
+                }
+            }
+            if(adminService.duplicateLogin(self.currentObject.username)){
+                self.duplicateAdminsMessage = true;
                 return;
             }
-
-            if(response.status == 200 && response.data.response == 'error') {
-                self.wasNotEditSubjectMessage = true;
-            }
-            if(response.data.response == 'ok') {
-                self.currentSubject = {};
-                $uibModalInstance.close();
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>',
-                    plain: 'true'
-                });
-            }
+            adminService.editAdmin(self.currentObject)
+                .then(createComplete, rejected);
         }
+        // function updateComplete(response) {
+        //     if(response.status == 400) {
+        //         self.duplicateSubjectsMessage = true;
+        //         return;
+        //     }
+        //
+        //     if(response.status == 200 && response.data.response == 'error') {
+        //         self.wasNotEditSubjectMessage = true;
+        //     }
+        //     if(response.data.response == 'ok') {
+        //         self.currentSubject = {};
+        //         $uibModalInstance.close();
+        //         ngDialog.open({template: '<div class="ngdialog-message"> \
+			// 			  Зміни збережено!</div>',
+        //             plain: 'true'
+        //         });
+        //     }
+        // }
 
 
 
