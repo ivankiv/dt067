@@ -32,8 +32,11 @@
 
             getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
             addTestDetails: 'http://dtapi.local/testDetail/insertData',
-            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of test
+            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of testDetails
             deleteTestDetails: 'http://dtapi.local/testDetail/del/', // + id of testDetails
+
+            getQuestionsRangeByTest: 'http://dtapi.local/question/getRecordsRangeByTest/', // + id of test
+            countQuestionsByTest: 'http://dtapi.local/question/countRecordsByTest/', // + id of test
 
             getSpecialities: 'http://dtapi.local/speciality/getRecords',
             getRangeOfSpecialities: 'http://dtapi.local/speciality/getRecordsRange',
