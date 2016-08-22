@@ -9,33 +9,24 @@
 
     function AdminEditController(adminService,$uibModal, ngDialog) {
         var self = this;
+
+        //Methods
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
-        self.hide = hide;
-        self.update = update;
         self.remove = remove;
-        self.list = [];
-        self.showEdit = false;
-        self.showCreate = false;
-        self.alreadyExist = false;
+
+        //Variables
+        self.currentObj = {};
         self.password = "";
         self.password1 = "";
-        self.currentObj = {};
+        self.list = [];
 
         activate();
-
 
         function activate() {
             adminService.getAdmins().then(function (response) {
                 self.list = response.data;
-                self.password = "";
-                self.password1 = "";
             });
-        }
-
-        function hide(param) {
-            (param == "edit")? self.showEdit = false: self.showCreate = false;
-            activate();
         }
 
         function remove(id) {
@@ -80,24 +71,10 @@
             });
             modalInstance.result.then(function() {
                 ngDialog.open({template:
-                    '<div class="ngdialog-message">Зміни внесено!</div>'
+                    '<div class="ngdialog-message">Збережено!</div>'
                 });
                 activate();
             })
-        }
-
-        function update(){
-            if (self.password != ""){
-                if (self.password == self.password1){
-                    self.currentObj.password = self.password;
-                }
-                else {
-                    alert("Паролі не співпадають");
-                    return;
-                }
-            }
-            adminService.editAdmin(self.currentObj)
-                .then(activate);
         }
     }
 }());

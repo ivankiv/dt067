@@ -58,10 +58,18 @@
             <span class="text-danger">Паролі не співпадають!</span>
         </div>
     </div>
+    <div class="clearfix" ng-if="admins.wrongData">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Некоректні дані!</span>
+        </div>
+    </div>
 </div>
 <div class="modal-footer custom-modal-footer">
-    <button class="btn btn-info" type="button" ng-click="admins.create()"
-            ng-disabled="adminCreationForm.$invalid"> Cтворити
+    <button class="btn btn-success" type="button" ng-click="admins.create()"
+            ng-disabled="adminCreationForm.$invalid">
+        <i class="glyphicon glyphicon-ok"></i>
     </button>
-    <button class="btn btn-warning" type="button" ng-click="admins.cancelForm()">Відмінити</button>
+    <button class="btn btn-danger" type="button" ng-click="admins.cancelForm()">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
 </div>

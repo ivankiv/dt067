@@ -1,16 +1,24 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class= "col-xs-12 col-md-10 col-md-offset-1"  ng-if = "students.showEdit" ng-include = "'app/admin/group/student/student-edit-form.html'"></div>
-            <div class= "col-xs-12 col-md-10 col-md-offset-1" ng-if = "students.showCreate" ng-include = "'app/admin/group/student/student-create-form.html'"></div>
-            <div class= "col-xs-12 col-md-10 col-md-offset-1" ng-if = "students.showInfo" ng-include = "'app/admin/group/student/student-info.html'"></div>
-            <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!students.showEdit && !students.showCreate && !students.showInfo">
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showEdit" ng-include = "'app/admin/group/student/student-edit-form.html'"></div>
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showCreate" ng-include = "'app/admin/group/student/student-create-form.html'"></div>
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showInfo" ng-include = "'app/admin/group/student/student-info.html'"></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "!students.showEdit && !students.showCreate && !students.showInfo">
                 <div class=' col-xs-12 views-header'><h4>Студенти</h4></div>
                 <div class=' col-xs-12 views-header views-header-students-view-wrpr views-header-wrapper-add-btn-and-search'>
-                    <select class="pull-right header-views-select-pages-search" ng-show="students.showSearch"  ng-model="students.studentsPerPage"
-                            ng-options="studentsPerPage for studentsPerPage in students.numberToDisplayStudentsOnPage"  ng-change="students.pageChanged()"
+                    <select class="pull-right header-views-select-pages-search"
+                            ng-show="students.showSearch"
+                            ng-model="students.studentsPerPage"
+                            ng-options="studentsPerPage for studentsPerPage in students.numberToDisplayStudentsOnPage"
+                            ng-change="students.pageChanged()"
                             name="subjectsPerPage" title="Кількість записів на сторінці"></select>
-                    <button type="button" class="btn btn-success add-btn" title="Додати студента" ng-click="students.showCreateForm()"
+                    <button type="button" class="btn btn-success add-btn" title="Додати студента"
+                            ng-click="students.showCreateForm()"
                     ><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts" type="text"
@@ -28,21 +36,32 @@
                     <tr>
                         <th>Реєстр №</th>
                         <th>Група</th>
-                        <th colspan="2">Прізвище і ім'я</th>
+                        <th colspan="2">ПІБ</th>
                     </tr>
-                    <tr ng-repeat="student in students.list | toArray | filter: students.textSearch | limitTo: students.studentsPerPage : students.begin">
+                    <tr ng-repeat="student in students.list | toArray | filter: students.textSearch |limitTo: students.studentsPerPage : students.begin">
                         <td data-th="Реєстр №">{{::student.user_id}}</td>
                         <td data-th="Група">{{::student.group_name}}</td>
-                        <td data-th="Прізвище і ім'я">{{::student.student_name}}&nbsp;{{::student.student_surname}}&nbsp;{{::student.student_fname}}</td>
-
+                        <td data-th="ПIБ">
+                            {{::student.student_surname}}&nbsp;{{::student.student_name}}&nbsp;{{::student.student_fname}}</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns" title="Видалити" ng-click="students.remove(student.user_id)">
+                            <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns"
+                                    title="Видалити"
+                                    ng-click="students.remove(student.user_id)">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
-                            <button type="button" class="btn btn-warning   pull-right table-help-btns" title="Редагувати" ng-click="students.showEditForm(student)">
+                            <button type="button" class="btn btn-warning   pull-right table-help-btns"
+                                    title="Редагувати"
+                                    ng-click="students.showEditForm(student)">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-info pull-right table-help-btns" title="Результати" ng-click="students.showInfoPage(student)">
+                            <button type="button" class="btn btn-info pull-right table-help-btns"
+                                    title="Профіль"
+                                    ng-click="students.showInfoPage(student)">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </button>
+                            <button type="button" class="btn btn-info pull-right table-help-btns"
+                                    title="Результати"
+                                    ng-click="students.showInfoPage(student)">
                                 <i class="glyphicon glyphicon-registration-mark"></i>
                             </button>
                         </td>

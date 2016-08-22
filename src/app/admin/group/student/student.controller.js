@@ -61,11 +61,12 @@
         }
 
         function showEditForm(obj) {
+            hide('info');
             self.showEdit = true;
             if (obj) {
                 self.currentUserId = obj.user_id;
-                adminService.getAdmins(self.currentUserId).then(function (data) {
-                    self.currentUser = data[0];
+                adminService.getAdmins(self.currentUserId).then(function (response) {
+                    self.currentUser = response.data[0];
                     self.currentObj = studentService.createStudentObj(self.currentUser, obj);
                 });
             }
@@ -80,12 +81,11 @@
         function showInfoPage(obj) {
             self.showInfo = true;
             self.currentUserId = obj.user_id;
-            adminService.getAdmins(self.currentUserId).then(function (data) {
-                self.currentUser = data[0];
+            adminService.getAdmins(self.currentUserId).then(function (response) {
+                self.currentUser = response.data[0];
                 self.currentObj = studentService.createStudentObj(self.currentUser,obj);
             });
         }
-
 
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.studentsPerPage);

@@ -16,6 +16,7 @@
             createStudentObj:createStudentObj
         };
 
+
         function getStudents() {
             return $http.get(appConstants.getStudents)
                 .then(complete, failed);
@@ -47,8 +48,8 @@
         function createStudentObj(userObj,studentObj){
             return {
                 username: userObj.username || "",
-                password: userObj.plain_password  ||"",
-                password_confirm:userObj.plain_password || "",
+                password: studentObj.plain_password  ||"",
+                password_confirm:studentObj.plain_password || "",
                 email:userObj.email || "",
                 gradebook_id:studentObj.gradebook_id || "",
                 student_surname:studentObj.student_surname || "",
