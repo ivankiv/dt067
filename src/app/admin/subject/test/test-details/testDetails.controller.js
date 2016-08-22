@@ -54,7 +54,7 @@
                     backdrop: false,
                     resolve: {
                         currentTestDetails: {},
-                        amountOfTaskForCurrentTest: self.availableAmountofTaskForCurrentTest
+                        availableAmountOfTaskForCurrentTest: self.availableAmountOfTaskForCurrentTest
                     }
                 });
                 modalInstance.result.then(function() {
@@ -73,7 +73,7 @@
                     backdrop: false,
                     resolve: {
                         currentTestDetails: currentTestDetails,
-                        amountOfTaskForCurrentTest: self.availableAmountofTaskForCurrentTest
+                        availableAmountOfTaskForCurrentTest: self.availableAmountOfTaskForCurrentTest
                     }
                 });
                 modalInstance.result.then(function() {
@@ -85,24 +85,29 @@
             }
 
             function getTestDetailsByTestComplete(response) {
-                if(response.data.response === "no records") {
-                    self.showMessageNoEntity = true;
-                } else {
-                    self.list = response.data;
+                self.list = response.data;
+                calculateAvailableTask();
 
-                    //calculate amount of rate per current test
+                function calculateAvailableTask() {
                     self.amountOfRate = 0;
-                    angular.forEach(self.list, function(item) {
-                        self.amountOfRate += item.rate * item.tasks;
-                    });
-
-                    //calculate amount of tasks per current test
                     self.amountOfTasks = 0;
-                    angular.forEach(self.list, function(item) {
-                        self.amountOfTasks += parseInt(item.tasks);
-                    });
 
-                    self.availableAmountofTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
+                    if(response.data.response === "no records") {
+                        self.showMessageNoEntity = true;
+                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
+                    } else {
+                        //calculate amount of rate per current test
+                        angular.forEach(self.list, function(item) {
+                            self.amountOfRate += item.rate * item.tasks;
+                        });
+
+                        //calculate amount of tasks per current test
+                        angular.forEach(self.list, function(item) {
+                            self.amountOfTasks += parseInt(item.tasks);
+                        });
+
+                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
+                    }
                 }
             }
         }

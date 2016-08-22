@@ -46,11 +46,11 @@
             <div class="col-sm-10">
                 <select class="input-form form-control" name="status" id="status" ng-model="tests.currentTest.enabled" required>
                     <option value="0">Недоступно</option>
-                    <option value="1" ng-disabled="tests.amountOfTaskForCurrentTest !== tests.amountOfTaskForCurrentTest">
+                    <option value="1" ng-disabled="tests.amountOfTaskForCurrentTest !== tests.currentTest.tasks">
                         Доступно
                     </option>
                 </select>
-                <span class="text-danger" ng-if="tests.amountOfTaskForCurrentTest !== tests.amountOfTaskForCurrentTest">
+                <span class="text-danger" ng-if="tests.amountOfTaskForCurrentTest !== tests.currentTest.tasks">
                     Тест не містить достатньої кількості завдань!
                 </span>
             </div>

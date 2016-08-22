@@ -25,8 +25,12 @@
                     </thead>
                     <tfoot class="test-details">
                         <tr>
-                            <td colspan="2"> Загальна кількість завдань:&nbsp; {{testDetails.amountOfTasks}}&nbsp;(Залишилось додати: {{testDetails.availableAmountofTaskForCurrentTest}})</td>
-                            <td colspan="2">Загальна кількість балів за тест:&nbsp; {{testDetails.amountOfRate}}</td>
+                            <td colspan="2">
+                                Загальна кількість завдань:&nbsp; {{testDetails.amountOfTasks}}&nbsp;(Залишилось додати: {{testDetails.availableAmountOfTaskForCurrentTest}})
+                            </td>
+                            <td colspan="2">
+                                Загальна кількість балів за тест:&nbsp; {{testDetails.amountOfRate}}
+                            </td>
                         </tr>
                     </tfoot>
                     <tbody ng-if="!testDetails.showMessageNoEntity">
