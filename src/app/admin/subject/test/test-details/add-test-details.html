@@ -1,7 +1,7 @@
-<div class="modal-header">
+<div class="modal-header custom-modal-header">
     <h3 class="modal-title">Додати параметри для тесту: {{::testDetails.currentTestDetailsName}}</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body custom-modal-body">
     <form class="form-horizontal" name="newTestDetailsForm" role="form">
         <div class="form-group">
             <label class="control-label col-sm-2" for="level">Рівень </label>
@@ -45,7 +45,7 @@
         </div>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer custom-modal-footer">
     <button class="btn btn-primary" type="button" ng-click="testDetails.addTestDetails()"
             ng-disabled="newTestDetailsForm.$invalid"> Додати предмет
     </button>
