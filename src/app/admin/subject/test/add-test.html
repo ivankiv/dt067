@@ -57,13 +57,13 @@
     </form>
     <div class="clearfix" ng-if="subjects.duplicateSubjectsMessage">
         <div class="col-sm-10 col-sm-offset-2" >
-            <span class="text-danger">Предмет із такою назвою вже зареєстрований в системі!</span>
+            <span class="text-danger">Тест із такою назвою вже зареєстрований в системі!</span>
         </div>
     </div>
 </div>
 <div class="modal-footer custom-modal-footer">
     <button class="btn btn-primary" type="button" ng-click="tests.addTest()"
-            ng-disabled="newTestForm.$invalid"> Додати предмет
+            ng-disabled="newTestForm.$invalid"> Додати тест
     </button>
     <button class="btn btn-warning" type="button" ng-click="tests.cancelForm()">Відмінити</button>
 </div>
