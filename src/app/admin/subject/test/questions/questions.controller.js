@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['questionsService', '$stateParams', 'testService'];
+        questionsController.$inject = ['questionsService', '$stateParams', 'testService', 'ngDialog'];
 
-        function questionsController (questionsService, $stateParams, testService) {
+        function questionsController (questionsService, $stateParams, testService, ngDialog) {
             var self = this;
 
             //variables
@@ -24,13 +24,22 @@
             //methods
             self.getQuestionsRangeByTest = getQuestionsRangeByTest;
             self.countQuestionsByTest = countQuestionsByTest;
+            self.deleteQuestions = deleteQuestions;
+            // self.showAddQuestionForm = showAddQuestionForm;
 
             activate();
 
             function activate() {
                 getOneTest()
                     .then(getQuestionsRangeByTest)
-                    .then(countQuestionsByTest);
+                    .then(countQuestionsByTest)
+                    .then(pageChanged());
+            }
+
+            function getOneTest() {
+                return testService.getOneTest($stateParams.currentTestId).then(function(response) {
+                    self.currentTest = response.data[0];
+                })
             }
 
             function getQuestionsRangeByTest() {
@@ -41,9 +50,28 @@
             function countQuestionsByTest() {
                 return questionsService.countQuestionsByTest($stateParams.currentTestId).then(function(response) {
                     self.totalQuestions = response.data.numberOfRecords;
-                    console.log(response);
                 })
             }
+
+            function deleteQuestions(question_id) {
+                    ngDialog.openConfirm({
+                        template: 'app/partials/confirm-delete-dialog.html',
+                        plain: false
+                    }).then(function() {
+                        questionsService.deleteQuestions(question_id).then(function(response) {
+                            if(response.data.response === 'ok') {
+                                activate();
+                            }
+
+                            if(response.status === 400) {
+                                ngDialog.open({template: '<div class="ngdialog-message"> \
+						            Неможливо видалити завдання яке містить відповіді!</div>'
+                                });
+                            }
+                        });
+                    });
+            }
+
 
             function getRecordsRangeComplete(response) {
                 if(response.data.response === 'No records') {
@@ -51,12 +79,6 @@
                 } else {
                     self.list = response.data;
                 }
-            }
-
-            function getOneTest() {
-                return testService.getOneTest($stateParams.currentTestId).then(function(response) {
-                    self.currentTest = response.data[0];
-                })
             }
 
             function pageChanged() {

@@ -8,8 +8,8 @@
         function questionsService ($http, appConstants) {
             return {
                 getQuestionsRangeByTest: getQuestionsRangeByTest,
-                countQuestionsByTest: countQuestionsByTest
-
+                countQuestionsByTest: countQuestionsByTest,
+                deleteQuestions: deleteQuestions
             };
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
@@ -19,6 +19,11 @@
 
             function countQuestionsByTest(test_id) {
                 return $http.get(appConstants.countQuestionsByTest + test_id)
+                    .then(fulfilled, rejected);
+            }
+
+            function deleteQuestions(question_id) {
+                return $http.delete(appConstants.delQuestions + question_id)
                     .then(fulfilled, rejected);
             }
 

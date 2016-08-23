@@ -22,6 +22,7 @@
                 <input class="form-control" type="number" id="tasks" name="tasks" ng-model="testDetails.testDetails.tasks"
                        placeholder="доступна кількість завдань: &nbsp;{{testDetails.availableAmountOfTaskForCurrentTest}}"
                        required
+                       min="1"
                        max="{{testDetails.availableAmountOfTaskForCurrentTest}}"
                        ng-disabled="testDetails.availableAmountOfTaskForCurrentTest===0">
                 <novalidate-messages field="newTestDetailsForm.tasks" max="{{testDetails.availableAmountOfTaskForCurrentTest}}"></novalidate-messages>

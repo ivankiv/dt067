@@ -31,7 +31,7 @@
                         <td data-th="Тип">{{::question.type}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
-                                    title="Видалити">
+                                    title="Видалити" ng-click="questions.deleteQuestions(question.question_id)">
                                     <i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
