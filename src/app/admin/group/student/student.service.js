@@ -16,10 +16,15 @@
             createStudentObj:createStudentObj
         };
 
-
-        function getStudents() {
-            return $http.get(appConstants.getStudents)
-                .then(complete, failed);
+        function getStudents(group_id) {
+            if(group_id) {
+                return $http.get(appConstants.getStudentsByGroupId + group_id)
+                    .then(complete, failed);
+            }
+            else {
+                return $http.get(appConstants.getStudents)
+                    .then(complete, failed);
+            }
         }
 
         function editStudent(obj,id) {
