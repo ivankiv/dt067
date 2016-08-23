@@ -7,8 +7,10 @@
 
     function loginService($http, appConstants, ngDialog) {
         return {
-            enterLogin: enterLogin
+            enterLogin: enterLogin,
+            isLogged:isLogged
         };
+
 
         function enterLogin(data) {
             return $http.post(appConstants.logInURL, data)
@@ -24,6 +26,20 @@
                 plain: 'true',
                 closeByDocument: 'true'
             });
+            return response;
+        }
+        function isLogged() {
+            return $http.get(appConstants.IsLoggedURL)
+                .then(isLoggedComplete, isLoggedFailed)
+        }
+
+        function isLoggedComplete(response) {
+            if (response.data.response === "logged") {
+                return response;
+            }
+        }
+
+        function isLoggedFailed(response) {
             return response;
         }
     }

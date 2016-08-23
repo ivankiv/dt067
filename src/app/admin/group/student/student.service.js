@@ -13,7 +13,8 @@
             deleteStudent:deleteStudent,
             editStudent:editStudent,
             createStudent:createStudent,
-            createStudentObj:createStudentObj
+            createStudentObj:createStudentObj,
+            getStudentById:getStudentById
         };
 
         function getStudents(group_id) {
@@ -25,6 +26,11 @@
                 return $http.get(appConstants.getStudents)
                     .then(complete, failed);
             }
+        }
+
+        function getStudentById(id) {
+                return $http.get(appConstants.getStudents + "/" + id)
+                    .then(complete, failed);
         }
 
         function editStudent(obj,id) {

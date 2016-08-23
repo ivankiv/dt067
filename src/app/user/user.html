@@ -1,0 +1,59 @@
+<!-- container section start -->
+<section id="container" class="">
+    <header>
+        <nav class="navbar navbar-default" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" add-class-in class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand"><img src="img/dt-brand.png"></span>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+                <ul class="nav navbar-nav">
+                    <li ng-click="navCollapsed = true" ><a ui-sref="admin-home">Профіль</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="admin-home.subject">Предмети</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Результати</a></li>
+                    <!--<li class="dropdown">-->
+                    <!--<a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Користувачі<span class="caret"></span></a>-->
+                    <!--<ul class="dropdown-menu admin-users-drop-menu">-->
+                    <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>-->
+                    <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.student">Студенти</a></li>-->
+                    <!--</ul>-->
+                    <!--</li>-->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </header>
+    </div>
+    </aside>
+    <section ui-view="content" class="col-xs-12">
+        <div class="col-xs-12 col-md-10 col-md-offset-1">
+            <div class='col-xs-12 views-header'>
+                <h4>{{user.user.student_surname}}&nbsp;{{user.user.student_name}}&nbsp;{{user.user.student_fname}}
+                    <br>Ласкаво просимо!</h4>
+            </div>
+            <table class="rwd-table faculty-table table-striped ">
+                <tbody>
+                <tr>
+                    <td colspan="2" class = "text-center">
+                        <img ng-src="{{user.user.photo}}" id="studentImage" height="250" width="250"
+                             alt="Зображення">
+                    </td>
+                    <td colspan="4">
+                        <p>Група:&nbsp;{{user.group_name}}</p>
+                        <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
+                    </td>
+                <tr>
+                <tbody>
+            </table>
+        </div>
+    </section>
+</section>
