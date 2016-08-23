@@ -3,15 +3,16 @@
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class='col-sm-8 col-xs-12 views-header'>
-                    <h4>Завдання тесту: &nbsp;{{::questions.currentTest.test_name}}</h4>
+                    <h4>Завдання для тесту: &nbsp;{{::questions.currentTest.test_name}}</h4>
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right"
                             ui-sref="admin-home.test({currentSubjectId: questions.currentSubjectId})">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
-                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту"
+                            ng-click="questions.showAddQuestionForm()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
                 <table class="rwd-table subject-table table-striped">

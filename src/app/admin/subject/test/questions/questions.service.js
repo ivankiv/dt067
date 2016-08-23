@@ -9,7 +9,8 @@
             return {
                 getQuestionsRangeByTest: getQuestionsRangeByTest,
                 countQuestionsByTest: countQuestionsByTest,
-                deleteQuestions: deleteQuestions
+                deleteQuestions: deleteQuestions,
+                addQuestion: addQuestion
             };
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
@@ -24,6 +25,11 @@
 
             function deleteQuestions(question_id) {
                 return $http.delete(appConstants.delQuestions + question_id)
+                    .then(fulfilled, rejected);
+            }
+
+            function addQuestion(data) {
+                return $http.post(appConstants.addQuestion, data)
                     .then(fulfilled, rejected);
             }
 

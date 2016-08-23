@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['questionsService', '$stateParams', 'testService', 'ngDialog'];
+        questionsController.$inject = ['questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
 
-        function questionsController (questionsService, $stateParams, testService, ngDialog) {
+        function questionsController (questionsService, $stateParams, testService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
@@ -25,14 +25,13 @@
             self.getQuestionsRangeByTest = getQuestionsRangeByTest;
             self.countQuestionsByTest = countQuestionsByTest;
             self.deleteQuestions = deleteQuestions;
-            // self.showAddQuestionForm = showAddQuestionForm;
+            self.showAddQuestionForm = showAddQuestionForm;
 
             activate();
 
             function activate() {
-                getOneTest()
-                    .then(getQuestionsRangeByTest)
-                    .then(countQuestionsByTest)
+                getOneTest();
+                countQuestionsByTest()
                     .then(pageChanged());
             }
 
@@ -72,6 +71,23 @@
                     });
             }
 
+            function showAddQuestionForm() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/questions/add-question.html',
+                    controller: 'QuestionsModalController as questions',
+                    backdrop: false,
+                    resolve: {
+                        currentQuestion: {}
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Запитання успішно додано!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    activate();
+                })
+            }
 
             function getRecordsRangeComplete(response) {
                 if(response.data.response === 'No records') {

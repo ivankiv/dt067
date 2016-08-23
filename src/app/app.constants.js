@@ -38,6 +38,7 @@
             getQuestionsRangeByTest: 'http://dtapi.local/question/getRecordsRangeByTest/', // + id of test
             countQuestionsByTest: 'http://dtapi.local/question/countRecordsByTest/', // + id of test
             delQuestions: 'http://dtapi.local/question/del/', // + id of question
+            addQuestion: 'http://dtapi.local/question/insertData',
 
             getSpecialities: 'http://dtapi.local/speciality/getRecords',
             getRangeOfSpecialities: 'http://dtapi.local/speciality/getRecordsRange',

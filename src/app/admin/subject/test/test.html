@@ -27,7 +27,7 @@
                         <td data-th="Тест">{{::test.test_name}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
-                        <td data-th="Статус">{{::test.enabled}}</td>
+                        <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
                         <td>
                             <button  type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити"
                                      ng-click="tests.deleteTest(test.test_id)"><i class="glyphicon glyphicon-trash"></i>

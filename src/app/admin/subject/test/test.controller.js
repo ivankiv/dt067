@@ -10,6 +10,7 @@
 
             //variables
             self.list = {};
+            self.status = ["Недоступно", "Доступно"];
             self.currenSubjectName = '';
             self.showMessageNoEntity = false;
 
