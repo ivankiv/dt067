@@ -9,6 +9,8 @@
 
     function StudentEditController(studentService, groupService, adminService, ngDialog, $stateParams) {
         var self = this;
+
+        //Methods
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
         self.showInfoPage = showInfoPage;
@@ -17,9 +19,12 @@
         self.remove = remove;
         self.create = create;
         self.pageChanged = pageChanged;
+
+        //Variables
         self.list = [];
         self.userList = [];
         self.groupList = [];
+        self.group_id = $stateParams.group_id;
         self.showEdit = false;
         self.showCreate = false;
         self.showInfo = false;
@@ -30,21 +35,19 @@
         self.associativeGroup = {};
         self.totalStudents = 0;
         self.showSearch = true;
-        self.textSearch = $stateParams.group_name || "";
+        self.textSearch = "";
         self.begin = 0;
         self.currentPage = 1;
         self.studentsPerPage = 5;
         self.numberToDisplayStudentsOnPage = [5,10,15,20];
-
         activate();
 
         function activate() {
-            studentService.getStudents().then(function (data) {
+            studentService.getStudents(self.group_id).then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
                 getGroups();
             });
-
         }
 
         function hide(param) {
@@ -71,7 +74,6 @@
                 });
             }
         }
-
 
         function showCreateForm() {
             self.showCreate = true;

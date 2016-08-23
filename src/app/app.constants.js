@@ -69,7 +69,7 @@
             countStudents: 'http://dtapi.local/student/countRecords',
             editStudent: 'http://dtapi.local/student/update/',
             delStudent: 'http://dtapi.local/student/del/',
-            addStudents:'http://dtapi.local/student/insertData'
-
+            addStudents:'http://dtapi.local/student/insertData',
+            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/'
         });
 }());
