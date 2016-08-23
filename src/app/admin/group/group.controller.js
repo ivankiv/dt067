@@ -19,6 +19,7 @@
         self.textSearch = "";
         self.begin = 0;
         self.totalGroups = 0;
+        self.speciality_id = $stateParams.currentSpecialityId;
         self.currentPage = 1;
         self.groupsPerPage = 5;
         self.numberToDisplayGroupsOnPage = [5,10,15,20];
@@ -70,7 +71,7 @@
         }
 
         function getGroups() {
-            return groupService.getGroups().then(function(response) {
+            return groupService.getGroups(self.speciality_id).then(function(response) {
                 self.list = response.data;
                 self.totalGroups = response.data.length;
             });

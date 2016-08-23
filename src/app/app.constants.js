@@ -59,6 +59,7 @@
             addGroup: 'http://dtapi.local/group/insertData',
             editGroup: 'http://dtapi.local/group/update/',
             delGroup: 'http://dtapi.local/group/del/',
+            getGroupsBySpeciality: 'http://dtapi.local/group/getGroupsBySpeciality/',
 
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
