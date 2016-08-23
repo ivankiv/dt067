@@ -16,6 +16,7 @@
         self.studentsQuantity = 0;
         self.subjectsQuantity = 0;
         self.testsQuantity = 0;
+        self.tooManyStudents = false;
 
         activate();
 
@@ -49,6 +50,7 @@
         function getStudentsQuantity (){
             adminStatisticService.getStudentsQuantity().then(function (data) {
                 self.studentsQuantity = data.data.numberOfRecords;
+                self.tooManyStudents = 200 < self.studentsQuantity;
             });
         }
 
