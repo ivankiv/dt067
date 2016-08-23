@@ -4,9 +4,9 @@
 
     angular.module('app')
         .controller('GroupController', groupController);
-    groupController.$inject = ['groupService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', 'ngDialog'];
+    groupController.$inject = ['groupService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', 'ngDialog', '$stateParams'];
 
-    function groupController(groupService, facultyService, specialityService, appConstants, $uibModal, ngDialog ) {
+    function groupController(groupService, facultyService, specialityService, appConstants, $uibModal, ngDialog , $stateParams) {
         var self = this;
         self.list = {};
         self.facultyList = {};
