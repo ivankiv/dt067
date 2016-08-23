@@ -48,6 +48,12 @@
                                     ng-click="specialities.showEditSpecialityForm(speciality);">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </button>
+                            <button type="button"
+                                    class="btn btn-info pull-right table-help-btns"
+                                    title="Перехід на групи по спеціальності"
+                                    ui-sref="admin-home.groupsBySpeciality({currentSpecialityId: speciality.speciality_id})">
+                                <i class="fa fa-users"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>

@@ -16,9 +16,14 @@
             editGroup: editGroup
         };
 
-        function getGroups() {
-            return $http.get(appConstants.getGroups)
-                .then(fulfilled, rejected);
+        function getGroups(speciality_id) {
+            if (speciality_id){
+                return $http.get(appConstants.getGroupsBySpeciality + speciality_id)
+                    .then(fulfilled,rejected);
+            } else {
+                return $http.get(appConstants.getGroups)
+                    .then(fulfilled,rejected);
+            }
         }
         function getOneGroup(currentId) {
             return $http.get(appConstants.getOneGroup + currentId)

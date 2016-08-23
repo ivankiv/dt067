@@ -40,6 +40,8 @@
             delQuestions: 'http://dtapi.local/question/del/', // + id of question
             addQuestion: 'http://dtapi.local/question/insertData',
 
+            getAnswersByQuestionID: 'http://dtapi.local/answer/getAnswersByQuestion/',  // get answer id
+
             getSpecialities: 'http://dtapi.local/speciality/getRecords',
             getRangeOfSpecialities: 'http://dtapi.local/speciality/getRecordsRange',
             countSpecialities: 'http://dtapi.local/speciality/countRecords',
@@ -61,6 +63,7 @@
             addGroup: 'http://dtapi.local/group/insertData',
             editGroup: 'http://dtapi.local/group/update/',
             delGroup: 'http://dtapi.local/group/del/',
+            getGroupsBySpeciality: 'http://dtapi.local/group/getGroupsBySpeciality/',
 
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
@@ -71,7 +74,7 @@
             countStudents: 'http://dtapi.local/student/countRecords',
             editStudent: 'http://dtapi.local/student/update/',
             delStudent: 'http://dtapi.local/student/del/',
-            addStudents:'http://dtapi.local/student/insertData'
-
+            addStudents:'http://dtapi.local/student/insertData',
+            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/'
         });
 }());

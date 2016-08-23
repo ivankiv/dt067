@@ -46,7 +46,6 @@
             $uibModalInstance.dismiss();
         }
 
-
         function update(){
             if (self.password != ""){
                 if (self.password == self.password1){
@@ -68,7 +67,6 @@
                 .then(complete, rejected);
         }
 
-
         function complete(response) {
             if(response.status == 200 && response.data.response === "Failed to validate array") {
                 self.wrongData = true;
@@ -83,6 +81,5 @@
             console.log(response.data.response);
             console.log(response.status + " " + response.statusText);
         }
-
     }
 }());

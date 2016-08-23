@@ -3,7 +3,10 @@
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class='col-xs-12 views-header'>
-                    <h4>Групи</h4>
+                    <h4>
+                        Групи
+                        <span ng-if="groups.speciality_id">{{groups.associativeSpeciality[groups.speciality_id]}}</span>
+                    </h4>
                 </div>
                 <div class='col-md-12 col-xs-12 views-header-input-wrapper'>
 
@@ -80,7 +83,7 @@
                                 </button>
                                 <!--<button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
                                     <i class="fa fa-calendar" aria-hidden="true"></i></button>-->
-                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів" ui-sref="admin-home.student({group_name:group.group_name})">
+                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів" ui-sref="admin-home.studentByGroup({group_id:group.group_id})">
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </button>
                             </td>
