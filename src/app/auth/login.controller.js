@@ -17,7 +17,7 @@
                 if (response.data.response == "ok" && response.data.roles[1] == 'admin') {
                     $state.go('admin-home');
                 } else if(response.data.response == "ok" && response.data.roles[1] == 'student') {
-                    $state.go('student');
+                    $state.go('user');
                 }
             }
         }

@@ -23,6 +23,12 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             controller: 'loginController as login'
         })
 
+        .state('user', {
+            url: '/user',
+            templateUrl: 'app/user/user.html',
+            controller: 'UserController as user'
+        })
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',

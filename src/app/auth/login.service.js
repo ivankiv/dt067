@@ -26,6 +26,7 @@
             });
         }
 
+
         function enterLogin(data) {
             return $http.post(appConstants.logInURL, data)
                 .then(enterLoginComplete, enterLoginFailed)
