@@ -7,7 +7,7 @@
             currentID: '',
             logInURL: 'http://dtapi.local/login/index',
             logOutURL: 'http://dtapi.local/login/logout',
-            IsLoggedURL: 'http://dtapi.local/login/isLogged',
+            isLoggedURL: 'http://dtapi.local/login/isLogged',
 
             getSubjects: 'http://dtapi.local/subject/getRecords',
             getOneSubject: 'http://dtapi.local/subject/getRecords/', // + id of subject

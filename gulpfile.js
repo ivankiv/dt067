@@ -86,7 +86,7 @@ gulp.task('concatJS', ['templateCache'], function() {
 
 gulp.task('watch', function () {
     log("Watching application's css, js");
-    $.watch([config.alljs[0], config.alljs[1], config.html,config.sass], $.batch(function (events, done) {
+    $.watch([config.alljs[0], config.alljs[1], config.html, config.sass], $.batch(function (events, done) {
         gulp.start('inject', done);
     }));
 });

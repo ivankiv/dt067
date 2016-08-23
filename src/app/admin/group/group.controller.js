@@ -4,9 +4,9 @@
 
     angular.module('app')
         .controller('GroupController', groupController);
-    groupController.$inject = ['groupService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', 'ngDialog', '$stateParams'];
+    groupController.$inject = ['groupService', 'loginService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', 'ngDialog', '$stateParams'];
 
-    function groupController(groupService, facultyService, specialityService, appConstants, $uibModal, ngDialog , $stateParams) {
+    function groupController(groupService, loginService, facultyService, specialityService, appConstants, $uibModal, ngDialog , $stateParams) {
         var self = this;
         self.list = {};
         self.facultyList = {};
@@ -34,14 +34,19 @@
         self.getFaculty = getFaculty;
         self.getSpeciality = getSpeciality;
         self.pageChanged = pageChanged;
-
+        self.isLogged = isLogged;
 
         activate();
 
         function activate() {
+            isLogged();
             getGroups()
                 .then(getFaculty)
                 .then(getSpeciality);
+        }
+
+        function isLogged() {
+            loginService.isLog();
         }
 
         function getSpeciality() {

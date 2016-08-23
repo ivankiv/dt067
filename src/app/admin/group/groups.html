@@ -70,7 +70,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="group in groups.list | toArray | filter: groups.textSearch | limitTo: groups.groupsPerPage : groups.begin">
-                            <td  data-th="Номер">{{$index + (groups.currentPage - 1)*10 + 1}}</td>
+                            <td  data-th="Номер">{{$index + (groups.currentPage - 1) * groups.groupsPerPage + 1}}</td>
                             <td data-th="Назва">{{::group.group_name}}</td>
                             <td data-th="Факультет">{{::groups.associativeFaculty[group.faculty_id]}}</td>
                             <td data-th="Спеціальність">{{::groups.associativeSpeciality[group.speciality_id]}}</td>
@@ -81,8 +81,8 @@
                                 <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                                         ng-click="groups.showEditGroupForm(group);"><i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                                <!--<button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>-->
+                                <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
                                 <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів" ui-sref="admin-home.studentByGroup({group_id:group.group_id})">
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </button>
