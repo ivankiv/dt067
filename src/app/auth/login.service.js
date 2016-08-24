@@ -18,14 +18,13 @@
                 } else if (response.data.response == "non logged") {
                     $state.go('login');
                     $uibModal.open({
-                        template: '<div class="modal-login">Час сесії минув.</br> \ ' +
-                         'Введіть будь ласка логін та пароль.</p></div>',
+                        templateUrl: 'app/auth/islogged-dialog.html',
+                        controller: 'loginModalController as login',
                         backdrop: true
                     })
                 }
             });
         }
-
 
         function enterLogin(data) {
             return $http.post(appConstants.logInURL, data)
@@ -36,10 +35,10 @@
             return response;
         }
         function enterLoginFailed(response) {
-            ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Логін або пароль введено неправильно.</div>',
-                plain: 'true',
-                closeByDocument: 'true'
+            $uibModal.open({
+                templateUrl: 'app/auth/login-failed-dialog.html',
+                controller: 'loginModalController as login',
+                backdrop: true
             });
             return response;
         }
