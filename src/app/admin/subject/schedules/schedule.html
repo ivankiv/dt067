@@ -2,7 +2,12 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-8 col-xs-12 views-header'><h4>Розклад тестування для предмету: &nbsp;{{schedules.currentSubjectName}}</h4></div>
+                <div class='col-sm-8 col-xs-12 views-header' ng-if="schedules.group_id">
+                    <h4>Розклад тестування для групи: &nbsp;{{schedules.associativeGroup[schedules.group_id]}}</h4>
+                </div>
+                <div class='col-sm-8 col-xs-12 views-header' ng-if="!schedules.group_id">
+                    <h4>Розклад тестування для предмету: &nbsp;{{schedules.currentSubjectName}}</h4>
+                </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>

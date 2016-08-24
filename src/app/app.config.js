@@ -55,6 +55,16 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             }
         })
 
+        .state('admin-home.scheduleByGroupId', {
+            url: '/group/:group_id/schedule',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/subject/schedules/schedule.html',
+                    controller: 'ScheduleController as schedules'
+                }
+            }
+        })
+
         .state('admin-home.groups', {
             url: '/group',
             views: {

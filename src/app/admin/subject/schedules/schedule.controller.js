@@ -13,6 +13,7 @@
             self.showMessageNoEntity = false;
             self.list = {};
             self.associativeGroup = {};
+            self.group_id = $stateParams.group_id;
 
             //methods
             self.getOneSubject = getOneSubject;
@@ -21,13 +22,19 @@
             self.deleteSchedule = deleteSchedule;
             self.showAddScheduleForm = showAddScheduleForm;
             self.showEditScheduleForm = showEditScheduleForm;
+            self.getScheduleForGroup = getScheduleForGroup;
 
             activate();
 
             function activate() {
-                getOneSubject();
-                getScheduleForSubject();
-                getGroups();
+                if (self.group_id) {
+                    getGroups();
+                    getScheduleForGroup();
+                } else {
+                    getOneSubject();
+                    getScheduleForSubject();
+                    getGroups();
+                }
             }
 
             function getOneSubject() {
@@ -46,6 +53,12 @@
                         self.associativeGroup[group.group_id] = group.group_name;
                     });
                 })
+            }
+
+            function getScheduleForGroup() {
+                scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
+                    self.list = response.data;
+                });
             }
 
             function deleteSchedule(schedule_id) {
