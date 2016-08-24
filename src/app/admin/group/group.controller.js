@@ -8,11 +8,16 @@
 
     function groupController(groupService, loginService, facultyService, specialityService, appConstants, $uibModal, ngDialog , $stateParams) {
         var self = this;
+
+        //variables
+
         self.list = {};
         self.facultyList = {};
         self.specialityList = {};
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
+
+        //variables for pagination panel and search
 
         self.totalSubjects = 0;
         self.showSearch = true;
@@ -23,9 +28,10 @@
         self.currentPage = 1;
         self.groupsPerPage = 5;
         self.numberToDisplayGroupsOnPage = [5,10,15,20];
+
+        //methods
+
         self.pageChanged = pageChanged;
-
-
         self.getGroups = getGroups;
         self.deleteGroup = deleteGroup;
         self.showAddGroupForm = showAddGroupForm;
@@ -52,8 +58,9 @@
         function getSpeciality() {
             specialityService.getSpecialities().then( function(response) {
                 self.specialityList = response.data;
+                //we make substitute id and name
                 for (var i = 0; i < self.specialityList.length; i++) {
-                    self.associativeSpeciality[+self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
+                    self.associativeSpeciality[self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
                 }
                 self.list = self.list.map(function(speciality) {
                     speciality.speciality_name =  self.associativeSpeciality[speciality.speciality_id];
@@ -65,8 +72,9 @@
         function getFaculty() {
             facultyService.getFaculties().then( function(response) {
                 self.facultyList = response.data;
+                //we make substitute id and name
                 for (var i = 0; i < self.facultyList.length; i++) {
-                    self.associativeFaculty[+self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
+                    self.associativeFaculty[self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
                 }
                 self.list = self.list.map(function(faculty) {
                         faculty.faculty_name =  self.associativeFaculty[faculty.faculty_id];
