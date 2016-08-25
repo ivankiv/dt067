@@ -56,13 +56,13 @@
 
         function getSubjectsQuantity (){
             adminStatisticService.getSubjectsQuantity().then(function (data) {
-                self.studentsQuantity = data.data.numberOfRecords;
+                self.subjectsQuantity = data.data.numberOfRecords;
             });
         }
 
         function getTestsQuantity (){
             adminStatisticService.getSubjectsQuantity().then(function (data) {
-                self.studentsQuantity = data.data.numberOfRecords;
+                self.testsQuantity = data.data.numberOfRecords;
             });
         }
 
