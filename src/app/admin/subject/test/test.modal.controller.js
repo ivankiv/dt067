@@ -14,7 +14,7 @@
             self.test.subject_id = $stateParams.currentSubjectId;
             self.currentTest = currentTest;
             self.subjectList = {};
-            self.wasNotEditTestMessage = false;
+            self.wasNotEditEntityMessage = false;
 
             //methods
             self.addTest = addTest;
@@ -43,13 +43,8 @@
             }
 
             function updateTestComplete(response) {
-                if(response.status === 400) {
-                    ngDialog.open({template: '<div class="ngdialog-message"> На сервері вже є тест з такою назвою!</div>'
-                    });
-                }
-
-                if(response.data.response === 'error') {
-                    self.wasNotEditTestMessage = true;
+                if(response.status === 400 && response.data.response === "Error when update") {
+                    self.wasNotEditEntityMessage = true;
                 }
 
                 if(response.data.response === "ok") {

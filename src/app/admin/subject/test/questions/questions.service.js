@@ -10,7 +10,8 @@
                 getQuestionsRangeByTest: getQuestionsRangeByTest,
                 countQuestionsByTest: countQuestionsByTest,
                 deleteQuestions: deleteQuestions,
-                addQuestion: addQuestion
+                addQuestion: addQuestion,
+                editQuestion: editQuestion
             };
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
@@ -30,6 +31,11 @@
 
             function addQuestion(data) {
                 return $http.post(appConstants.addQuestion, data)
+                    .then(fulfilled, rejected);
+            }
+
+            function editQuestion(question_id, data) {
+                return $http.post(appConstants.editQuestion + question_id, data)
                     .then(fulfilled, rejected);
             }
 

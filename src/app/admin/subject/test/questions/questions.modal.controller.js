@@ -10,6 +10,7 @@
 
             //variables
             self.question = {};
+            self.currentQuestion = currentQuestion;
             self.question.attachment = "";
             self.question.test_id = $stateParams.currentTestId;
             self.duplicateEntityMessage = false;
@@ -18,10 +19,16 @@
             //methods
             self.addQuestion = addQuestion;
             self.cancelForm = cancelForm;
+            self.updateQuestion = updateQuestion;
+            self.clearImageSrc = clearImageSrc;
 
 
             function addQuestion() {
                 questionsService.addQuestion(self.question).then(addQuestionComplete)
+            }
+
+            function updateQuestion() {
+                questionsService.editQuestion(self.currentQuestion.question_id, self.currentQuestion ).then(updateQuestionComplete)
             }
 
             function cancelForm () {
@@ -33,10 +40,21 @@
                     self.question = {};
                     $uibModalInstance.close();
                 }
+            }
 
-                if(response.status === 400) {
-                    self.duplicateEntityMessage = true;
+            function updateQuestionComplete(response) {
+                if(response.data.response === "ok") {
+                    self.currentQuestion = {};
+                    $uibModalInstance.close();
                 }
+
+                if(response.status === 400 && response.data.response === "Error when update") {
+                    self.wasNotEditEntityMessage = true;
+                }
+            }
+
+            function clearImageSrc (obj) {
+                obj.attachment = ""
             }
         }
 }());

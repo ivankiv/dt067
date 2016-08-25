@@ -7,10 +7,18 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <select class="form-control" name="group" id="group"
+                            ng-if="!schedules.group_id"
                             ng-model="schedules.schedule.group_id"
                             ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList"
                             ng-required="true">
                         <option disabled selected value="">Виберіть групу</option>
+                    </select>
+                    <select class="form-control" name="subject" id="subject"
+                            ng-if="schedules.group_id"
+                            ng-model="schedules.schedule.subject_id"
+                            ng-options="subjectList.sybject_id as sybjectList.subject_name for subjectList in schedules.subjectList"
+                            ng-required="true">
+                        <option disabled selected value="">Виберіть пердмет</option>
                     </select>
                 </div>
             </div>

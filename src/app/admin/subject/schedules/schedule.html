@@ -2,7 +2,12 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-8 col-xs-12 views-header'><h4>Розклад тестування для предмету: &nbsp;{{schedules.currentSubjectName}}</h4></div>
+                <div class='col-sm-8 col-xs-12 views-header' ng-if="schedules.group_id">
+                    <h4>Розклад тестування для групи: &nbsp;{{schedules.associativeGroup[schedules.group_id]}}</h4>
+                </div>
+                <div class='col-sm-8 col-xs-12 views-header' ng-if="!schedules.group_id">
+                    <h4>Розклад тестування для предмету: &nbsp;{{schedules.currentSubjectName}}</h4>
+                </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
@@ -14,13 +19,15 @@
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                     <tr>
-                        <th>Група</th>
+                        <th ng-if="schedules.group_id">Предмет</th>
+                        <th ng-if="!schedules.group_id">Група</th>
                         <th>Дата проведення тесту</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="schedule in schedules.list">
-                        <td data-th="Група">{{::schedules.associativeGroup[schedule.group_id]}}</td>
+                        <td data-th="Група" ng-if="schedules.group_id">{{::schedules.associativeSubject[schedule.subject_id]}}</td>
+                        <td data-th="Група" ng-if="!schedules.group_id">{{::schedules.associativeGroup[schedule.group_id]}}</td>
                         <td data-th="Дата проведення">{{::schedule.event_date | date: "dd MMMM yyyy"}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"

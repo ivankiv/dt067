@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('ScheduleModalController', scheduleModalController);
-    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', '$uibModalInstance', 'currentSchedule', 'ngDialog'];
+    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'ngDialog'];
 
-        function scheduleModalController(scheduleService, groupService, $stateParams,  $uibModalInstance,  currentSchedule,  ngDialog) {
+        function scheduleModalController(scheduleService, groupService, $stateParams,  $uibModalInstance,  currentSchedule, currentGroupId,  ngDialog) {
             var self = this;
 
             //variables
@@ -14,6 +14,8 @@
             self.currentSchedule = currentSchedule;
             self.gpoupList = {};
             self.alreadyExistInSchedule = false;
+            self.group_id =  currentGroupId.group_id;
+
 
             //->DatePicker
             self.DatePickerOpened = false;

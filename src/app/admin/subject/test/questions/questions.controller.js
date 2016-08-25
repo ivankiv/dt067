@@ -9,9 +9,10 @@
             var self = this;
 
             //variables
-            self.currentSubjectId = $stateParams.currentSubjectId;
-            self.begin = 0;
             self.list = {};
+            self.currentSubjectId = $stateParams.currentSubjectId;
+            self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
+            self.begin = 0;
             self.showMessageNoEntity = false;
 
             //variables and methods for pagination
@@ -26,6 +27,7 @@
             self.countQuestionsByTest = countQuestionsByTest;
             self.deleteQuestions = deleteQuestions;
             self.showAddQuestionForm = showAddQuestionForm;
+            self.showEditQuestionForm = showEditQuestionForm;
 
             activate();
 
@@ -83,6 +85,24 @@
                 modalInstance.result.then(function() {
                     ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Запитання успішно додано!</div>'
+                    });
+                    self.showMessageNoEntity = false;
+                    activate();
+                })
+            }
+
+            function showEditQuestionForm(currentQuestion) {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/questions/edit-question.html',
+                    controller: 'QuestionsModalController as questions',
+                    backdrop: false,
+                    resolve: {
+                        currentQuestion: currentQuestion
+                    }
+                });
+                modalInstance.result.then(function() {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>'
                     });
                     self.showMessageNoEntity = false;
                     activate();

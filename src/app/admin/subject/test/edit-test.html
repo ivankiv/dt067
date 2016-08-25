@@ -61,10 +61,8 @@
             </div>
         </div>
     </form>
-    <div class="clearfix" ng-if="subjects.duplicateSubjectsMessage">
-        <div class="col-sm-10 col-sm-offset-2" >
-            <span class="text-danger">Тест із такою назвою вже зареєстрований в системі!</span>
-        </div>
+    <div class="text-danger" role="alert" ng-if="tests.wasNotEditEntityMessage">
+        <p>Не внесено жодних змін! Щоб вийти зі сторінки редагування натисніть "Відмінити"</p>
     </div>
 </div>
 <div class="modal-footer custom-modal-footer">
@@ -72,7 +70,4 @@
             ng-disabled="editTestForm.$invalid"> Зберегти
     </button>
     <button class="btn btn-warning" type="button" ng-click="tests.cancelForm()">Відмінити</button>
-    <div class="text-danger" role="alert" ng-if="tests.wasNotEditTestMessage">
-        <p>Не внесено жодних змін! Щоб вийти зі сторінки редагування натисніть "Відмінити"</p>
-    </div>
 </div>

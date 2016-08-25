@@ -12,22 +12,32 @@
             self.currentSubjectName = '';
             self.showMessageNoEntity = false;
             self.list = {};
+            self.associativeSubject = {};
             self.associativeGroup = {};
+            self.group_id = $stateParams.group_id;
 
             //methods
             self.getOneSubject = getOneSubject;
+            self.getSubjects = getSubjects;
             self.getScheduleForSubject = getScheduleForSubject;
             self.getGroups = getGroups;
             self.deleteSchedule = deleteSchedule;
             self.showAddScheduleForm = showAddScheduleForm;
             self.showEditScheduleForm = showEditScheduleForm;
+            self.getScheduleForGroup = getScheduleForGroup;
 
             activate();
 
             function activate() {
-                getOneSubject();
-                getScheduleForSubject();
-                getGroups();
+                if (self.group_id) {
+                    getGroups();
+                    getScheduleForGroup();
+                    getSubjects();
+                } else {
+                    getOneSubject();
+                    getScheduleForSubject();
+                    getGroups();
+                }
             }
 
             function getOneSubject() {
@@ -48,6 +58,20 @@
                 })
             }
 
+            function getSubjects() {
+                subjectService.getSubjects().then(function(response) {
+                    angular.forEach(response.data, function(subject) {
+                        self.associativeSubject[subject.subject_id] = subject.subject_name;
+                    });
+                });
+            }
+
+            function getScheduleForGroup() {
+                scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
+                    self.list = response.data;
+                });
+            }
+
             function deleteSchedule(schedule_id) {
                 ngDialog.openConfirm({
                     template: 'app/partials/confirm-delete-dialog.html',
@@ -62,12 +86,16 @@
             }
 
             function showAddScheduleForm() {
+                console.log(self.group_id);
+                var obj ={};
+                obj.group_id = self.group_id;
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/schedules/add-schedule.html',
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentSchedule: {}
+                        currentSchedule: {},
+                        currentGroupId: obj
                     }
                 });
                 modalInstance.result.then(function() {
@@ -85,7 +113,8 @@
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentSchedule: currentSchedule
+                        currentSchedule: currentSchedule,
+                        currentGroupId: {}
                     }
                 });
                 modalInstance.result.then(function() {
