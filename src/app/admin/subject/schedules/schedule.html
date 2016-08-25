@@ -19,13 +19,15 @@
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                     <tr>
-                        <th>Група</th>
+                        <th ng-if="schedules.group_id">Предмет</th>
+                        <th ng-if="!schedules.group_id">Група</th>
                         <th>Дата проведення тесту</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="schedule in schedules.list">
-                        <td data-th="Група">{{::schedules.associativeGroup[schedule.group_id]}}</td>
+                        <td data-th="Група" ng-if="schedules.group_id">{{::schedules.associativeSubject[schedule.subject_id]}}</td>
+                        <td data-th="Група" ng-if="!schedules.group_id">{{::schedules.associativeGroup[schedule.group_id]}}</td>
                         <td data-th="Дата проведення">{{::schedule.event_date | date: "dd MMMM yyyy"}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"

@@ -12,11 +12,13 @@
             self.currentSubjectName = '';
             self.showMessageNoEntity = false;
             self.list = {};
+            self.associativeSubject = {};
             self.associativeGroup = {};
             self.group_id = $stateParams.group_id;
 
             //methods
             self.getOneSubject = getOneSubject;
+            self.getSubjects = getSubjects;
             self.getScheduleForSubject = getScheduleForSubject;
             self.getGroups = getGroups;
             self.deleteSchedule = deleteSchedule;
@@ -30,6 +32,7 @@
                 if (self.group_id) {
                     getGroups();
                     getScheduleForGroup();
+                    getSubjects();
                 } else {
                     getOneSubject();
                     getScheduleForSubject();
@@ -53,6 +56,14 @@
                         self.associativeGroup[group.group_id] = group.group_name;
                     });
                 })
+            }
+
+            function getSubjects() {
+                subjectService.getSubjects().then(function(response) {
+                    angular.forEach(response.data, function(subject) {
+                        self.associativeSubject[subject.subject_id] = subject.subject_name;
+                    });
+                });
             }
 
             function getScheduleForGroup() {
@@ -80,7 +91,8 @@
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentSchedule: {}
+                        currentSchedule: {},
+                        currentGroupId: self.group_id
                     }
                 });
                 modalInstance.result.then(function() {
@@ -98,7 +110,8 @@
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
-                        currentSchedule: currentSchedule
+                        currentSchedule: currentSchedule,
+                        currentGroupId: {}
                     }
                 });
                 modalInstance.result.then(function() {
