@@ -8,10 +8,10 @@
     function loginService($http, appConstants, $uibModal, ngDialog, $state) {
         return {
             enterLogin: enterLogin,
-            isLog: isLog
+            isLogged: isLogged
         };
         
-        function isLog() {
+        function isLogged() {
             return $http.get(appConstants.isLoggedURL).then(function (response) {
                 if (response.data.response == "logged") {
                     return response;

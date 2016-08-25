@@ -46,7 +46,7 @@
         }
 
         function isLogged() {
-            loginService.isLog();
+            loginService.isLogged();
         }
 
         function getSpeciality() {
