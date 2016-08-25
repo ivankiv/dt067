@@ -17,8 +17,6 @@
 
         //Variables
         self.currentObj = {};
-        self.password = "";
-        self.password1 = "";
         self.list = [];
 
         activate();

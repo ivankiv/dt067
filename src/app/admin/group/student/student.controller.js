@@ -96,6 +96,8 @@
         }
 
         function update(){
+            self.currentObj.password = self.currentObj.plain_password;
+            self.currentObj.password_confirm = self.currentObj.plain_password;
             studentService.editStudent(self.currentObj,self.currentUserId)
                 .then(activate);
             hide("edit");
