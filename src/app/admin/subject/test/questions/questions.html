@@ -29,7 +29,7 @@
                         <td data-th="Номер">{{$index + (questions.currentPage - 1)* questions.questionsPerPage + 1 }}</td>
                         <td data-th="Завдання">{{::question.question_text}}</td>
                         <td data-th="Рівень">{{::question.level}}</td>
-                        <td data-th="Тип">{{::question.type}}</td>
+                        <td data-th="Тип">{{questions.nameOfType[question.type]}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити" ng-click="questions.deleteQuestions(question.question_id)">

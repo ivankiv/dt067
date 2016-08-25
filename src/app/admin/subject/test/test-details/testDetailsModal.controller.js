@@ -47,6 +47,7 @@
             }
 
             function editTestDetailsComplete(response) {
+                console.log(response);
                 if(response.data.response === "ok") {
                     self.currentTestDetails = {};
                     $uibModalInstance.close();

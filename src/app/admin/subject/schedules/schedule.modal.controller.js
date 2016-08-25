@@ -14,7 +14,7 @@
             self.currentSchedule = currentSchedule;
             self.gpoupList = {};
             self.alreadyExistInSchedule = false;
-            self.group_id =  currentGroupId;
+            self.group_id =  currentGroupId.group_id;
 
 
             //->DatePicker

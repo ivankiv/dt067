@@ -9,9 +9,10 @@
             var self = this;
 
             //variables
-            self.currentSubjectId = $stateParams.currentSubjectId;
-            self.begin = 0;
             self.list = {};
+            self.currentSubjectId = $stateParams.currentSubjectId;
+            self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
+            self.begin = 0;
             self.showMessageNoEntity = false;
 
             //variables and methods for pagination

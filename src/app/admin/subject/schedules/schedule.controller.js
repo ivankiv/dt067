@@ -86,13 +86,16 @@
             }
 
             function showAddScheduleForm() {
+                console.log(self.group_id);
+                var obj ={};
+                obj.group_id = self.group_id;
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/schedules/add-schedule.html',
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
                         currentSchedule: {},
-                        currentGroupId: self.group_id
+                        currentGroupId: obj
                     }
                 });
                 modalInstance.result.then(function() {
