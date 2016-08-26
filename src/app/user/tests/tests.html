@@ -1,0 +1,38 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-4 col-xs-12 views-header'><h4>Тести предмету: &nbsp;{{tests.currentSubjectName}}</h4></div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Номер</th>
+                        <th>Назва тесту</th>
+                        <th>К-сть завдань</th>
+                        <th>Тривалість тесту</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!tests.showMessageNoEntity">
+                    <tr ng-repeat="test in tests.list">
+                        <td data-th="Номер">{{$index + 1}}</td>
+                        <td data-th="Тест">{{::test.test_name}}</td>
+                        <td data-th="К-сть завдань">{{::test.tasks}}</td>
+                        <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
+                        <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання"
+                                    ui-sref="admin-home.questions({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
+                                <i class="glyphicon glyphicon-list-alt"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="tests.showMessageNoEntity" class="text-center">
+                    <h1>Немає тестів для даного предмету!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
