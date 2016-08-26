@@ -40,40 +40,47 @@
                     </select>
                 </div>
                 <table class="rwd-table faculty-table table-striped ">
-                    <tr>
-                        <th>Реєстр №</th>
-                        <th>Група</th>
-                        <th colspan="2">ПІБ</th>
-                    </tr>
-                    <tr ng-repeat="student in students.list | toArray | filter: students.textSearch |limitTo: students.studentsPerPage : students.begin">
-                        <td data-th="Реєстр №">{{::student.user_id}}</td>
-                        <td data-th="Група">{{::student.group_name}}</td>
-                        <td data-th="ПIБ">
-                            {{::student.student_surname}}&nbsp;{{::student.student_name}}&nbsp;{{::student.student_fname}}</td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns"
-                                    title="Видалити"
-                                    ng-click="students.remove(student.user_id)">
-                                <i class="glyphicon glyphicon-trash"></i>
-                            </button>
-                            <button type="button" class="btn btn-warning   pull-right table-help-btns"
-                                    title="Редагувати"
-                                    ng-click="students.showEditForm(student)">
-                                <i class="glyphicon glyphicon-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-info pull-right table-help-btns"
-                                    title="Профіль"
-                                    ng-click="students.showInfoPage(student)">
-                                <i class="glyphicon glyphicon-user"></i>
-                            </button>
-                            <button type="button" class="btn btn-info pull-right table-help-btns"
-                                    title="Результати"
-                                    ng-click="students.showInfoPage(student)">
-                                <i class="glyphicon glyphicon-registration-mark"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Реєстр №</th>
+                            <th>Група</th>
+                            <th colspan="2">ПІБ</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="!students.showMessageNoEntity"></tbody>
+                        <tr ng-repeat="student in students.list | toArray | filter: students.textSearch |limitTo: students.studentsPerPage : students.begin">
+                            <td data-th="Реєстр №">{{::student.user_id}}</td>
+                            <td data-th="Група">{{::student.group_name}}</td>
+                            <td data-th="ПIБ">
+                                {{::student.student_surname}}&nbsp;{{::student.student_name}}&nbsp;{{::student.student_fname}}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns"
+                                        title="Видалити"
+                                        ng-click="students.remove(student.user_id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning   pull-right table-help-btns"
+                                        title="Редагувати"
+                                        ng-click="students.showEditForm(student)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-info pull-right table-help-btns"
+                                        title="Профіль"
+                                        ng-click="students.showInfoPage(student)">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </button>
+                                <button type="button" class="btn btn-info pull-right table-help-btns"
+                                        title="Результати"
+                                        ng-click="students.showInfoPage(student)">
+                                    <i class="glyphicon glyphicon-registration-mark"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
+                <div ng-if="students.showMessageNoEntity" class="text-center">
+                    <h1>Не зареєстровано жодного студента для даної групи!</h1>
+                </div>
                 <div class="subject-pagination pull-right">
                     <uib-pagination
                             ng-show="students.totalStudents > students.studentsPerPage"
