@@ -16,8 +16,8 @@
             <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
                 <ul class="nav navbar-nav">
                     <li ng-click="navCollapsed = true" ><a ui-sref="admin-home">Профіль</a></li>
-                    <li ng-click="navCollapsed = true"><a ui-sref="admin-home.subject">Предмети</a></li>
-                    <li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Результати</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="">Предмети</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="">Результати</a></li>
                     <!--<li class="dropdown">-->
                     <!--<a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Користувачі<span class="caret"></span></a>-->
                     <!--<ul class="dropdown-menu admin-users-drop-menu">-->
@@ -54,6 +54,9 @@
                 <tr>
                 <tbody>
             </table>
+            <div class="user-date-picker">
+                <div uib-datepicker ng-model="users.dateEvent" class="well well-sm" datepicker-options="users.dateOptions"></div>
+            </div>
         </div>
     </section>
 </section>

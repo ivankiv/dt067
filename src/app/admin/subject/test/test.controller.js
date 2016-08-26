@@ -15,7 +15,7 @@
             self.showMessageNoEntity = false;
 
             //methods
-            self.getTestById = getTestById;
+            self.getTestBySubjectId = getTestBySubjectId;
             self.deleteTest = deleteTest;
             self.getOneSubject = getOneSubject;
             self.showAddTestForm = showAddTestForm;
@@ -25,7 +25,7 @@
 
             function activate() {
                 getOneSubject();
-                getTestById();
+                getTestBySubjectId();
             }
 
             function getOneSubject() {
@@ -33,8 +33,8 @@
                     self.currentSubjectName = response.data[0].subject_name;
                 })
             }
-            function getTestById() {
-                testService.getTestById($stateParams.currentSubjectId).then(function(response) {
+            function getTestBySubjectId() {
+                testService.getTestBySubjectId($stateParams.currentSubjectId).then(function(response) {
                     if(response.data.response === 'no records') {
                         self.showMessageNoEntity = true;
                     } else {

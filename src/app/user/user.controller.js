@@ -14,6 +14,14 @@
         self.user = {};
         self.group_name = "";
 
+        //->DatePicker options
+        self.dateOptions = {
+            customClass: getDayClass,
+            showWeeks: true,
+            minDate: new Date()
+        };
+        //<- the end of DatePicker options
+
         activate();
 
         function activate() {
@@ -33,5 +41,47 @@
                         });
                 });
         }
+
+        //->DatePicker
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date(tomorrow);
+        afterTomorrow.setDate(tomorrow.getDate() + 1);
+        self.events = [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'full'
+            }
+        ];
+        function getDayClass(data) {
+            var date = data.date,
+                mode = data.mode;
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                // self.events.forEach(function(event) {
+                //     var currentDay = new Date(event.date).setHours(0,0,0,0);
+                //
+                //     if (dayToCheck === currentDay) {
+                //         return event.status;
+                //     }
+                // });
+                for (var i = 0; i < self.events.length; i++) {
+                    var currentDay = new Date(self.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                        return self.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        }
+        //<- the end of DatePicker
+
     }
 }());

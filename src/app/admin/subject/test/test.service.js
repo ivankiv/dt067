@@ -8,7 +8,7 @@
         function testService ($http, appConstants) {
             return {
                 getTests: getTests,
-                getTestById: getTestById,
+                getTestBySubjectId: getTestBySubjectId,
                 addTest: addTest,
                 updateTest: updateTest,
                 deleteTest: deleteTest,
@@ -20,8 +20,8 @@
                     .then(fulfilled, rejected);
             }
 
-            function getTestById(currentSubjectId) {
-                return $http.get(appConstants.getTestsById + currentSubjectId)
+            function getTestBySubjectId(currentSubjectId) {
+                return $http.get(appConstants.getTestBySubjectId + currentSubjectId)
                     .then(fulfilled, rejected);
             }
 

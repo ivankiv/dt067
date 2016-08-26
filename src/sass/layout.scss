@@ -413,3 +413,13 @@ div.row.schedule-form {
   border-radius: 5px;
   border: 5px solid #f0f0f0;
 }
+
+.user-date-picker {
+  display:inline-block;
+  min-height:290px;
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+}
