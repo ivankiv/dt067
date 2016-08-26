@@ -2,10 +2,10 @@
     'use strict';
 
     angular.module('app')
-        .controller('TestController', testController);
-    testController.$inject = ['testService', 'subjectService', 'scheduleService', '$stateParams', 'ngDialog'];
+        .controller('TestsController', testsController);
+    testsController.$inject = ['testService', 'subjectService', 'scheduleService', '$stateParams', 'ngDialog'];
 
-    function testController (testService, subjectService, scheduleService, $stateParams, group_id) {
+    function testsController (testService, subjectService, scheduleService, $stateParams, group_id) {
         var self = this;
 
         //variables

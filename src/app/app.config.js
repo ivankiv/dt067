@@ -176,7 +176,7 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
         })
 
         .state('user.tests', {
-                url: '/user/tests',
+                url: '/tests',
                 templateUrl: 'app/user/tests/tests.html',
                 controller: 'TestsController as tests'
             });

@@ -13,8 +13,10 @@
         self.userId = 0;
         self.user = {};
         self.group_name = "";
+        // self.isEvent = isEvent;
 
         //->DatePicker options
+        self.dateEvent = {};
         self.dateOptions = {
             customClass: getDayClass,
             showWeeks: true,
@@ -57,6 +59,19 @@
                 status: 'full'
             }
         ];
+
+        // function isEvent() {
+        //         var dayToCheck = self.dateEvent;
+        //         var d = dayToCheck.setHours(0,0,0,0);
+        //
+        //         for (var i = 0; i < self.events.length; i++) {
+        //             var currentDay = new Date(self.events[i].date).setHours(0,0,0,0);
+        //             if (d === currentDay) {
+        //                 return true;
+        //             }
+        //         }
+        // }
+
         function getDayClass(data) {
             var date = data.date,
                 mode = data.mode;
@@ -64,7 +79,7 @@
                 var dayToCheck = new Date(date).setHours(0,0,0,0);
 
                 for (var i = 0; i < self.events.length; i++) {
-                    var currentDay = new Date(self.events[i].date).setHours(0,0,0,0);
+                   var currentDay = new Date(self.events[i].date).setHours(0,0,0,0);
 
                     if (dayToCheck === currentDay) {
                         return self.events[i].status;
