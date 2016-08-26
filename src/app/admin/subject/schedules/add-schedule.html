@@ -16,7 +16,7 @@
                     <select class="form-control" name="subject" id="subject"
                             ng-if="schedules.group_id"
                             ng-model="schedules.schedule.subject_id"
-                            ng-options="subjectList.sybject_id as sybjectList.subject_name for subjectList in schedules.subjectList"
+                            ng-options="subjectList.subject_id as subjectList.subject_name for subjectList in schedules.subjectList"
                             ng-required="true">
                         <option disabled selected value="">Виберіть пердмет</option>
                     </select>

@@ -3,16 +3,17 @@
 
     angular.module('app')
         .controller('ScheduleModalController', scheduleModalController);
-    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'ngDialog'];
+    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'ngDialog'];
 
-        function scheduleModalController(scheduleService, groupService, $stateParams,  $uibModalInstance,  currentSchedule, currentGroupId,  ngDialog) {
+        function scheduleModalController(scheduleService, groupService, $stateParams, subjectService,  $uibModalInstance,  currentSchedule, currentGroupId,  ngDialog) {
             var self = this;
 
             //variables
             self.schedule = {};
             self.schedule.subject_id = $stateParams.currentSubjectId;
             self.currentSchedule = currentSchedule;
-            self.gpoupList = {};
+            self.groupList = {};
+            self.subjectList = {};
             self.alreadyExistInSchedule = false;
             self.group_id =  currentGroupId.group_id;
 
@@ -34,11 +35,13 @@
             self.getGroups = getGroups;
             self.cancelForm = cancelForm;
             self.openDatePicker = openDatePicker;
+            self.getSubjects = getSubjects;
 
             activate();
 
             function activate() {
                 getGroups();
+                getSubjects();
             }
 
             function getGroups() {
@@ -47,7 +50,14 @@
                 })
             }
 
+            function getSubjects() {
+                subjectService.getSubjects().then(function(response) {
+                    self.subjectList = response.data;
+                });
+            }
+
             function addSchedule() {
+                self.schedule.group_id = self.group_id;
                 scheduleService.addSchedule(self.schedule).then(addScheduleComplete)
             }
 
