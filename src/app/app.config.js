@@ -163,5 +163,11 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'StudentEditController as students'
                 }
             }
-        });
+        })
+
+        .state('user.tests', {
+                url: '/user/tests',
+                templateUrl: 'app/user/tests/tests.html',
+                controller: 'TestsController as tests'
+            });
 }
