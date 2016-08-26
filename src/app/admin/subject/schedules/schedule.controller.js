@@ -70,6 +70,9 @@
             function getScheduleForGroup() {
                 scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
                     self.list = response.data;
+                    console.log(response);
+                    (response.data.response === "no records") ? self.showMessageNoEntity = true : self.showMessageNoEntity = false;
+                    console.log(self.showMessageNoEntity);
                 });
             }
 
@@ -107,13 +110,14 @@
             }
 
             function showEditScheduleForm(currentSchedule) {
+                self.currentGroup.group_id = self.group_id;
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/schedules/edit-schedule.html',
                     controller: 'ScheduleModalController as schedules',
                     backdrop: false,
                     resolve: {
                         currentSchedule: currentSchedule,
-                        currentGroupId: {}
+                        currentGroupId: self.currentGroup
                     }
                 });
                 modalInstance.result.then(function() {

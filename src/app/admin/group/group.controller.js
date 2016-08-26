@@ -93,7 +93,7 @@
             return groupService.getGroups(self.speciality_id, self.faculty_id).then(function(response) {
                 self.list = response.data;
                 self.totalGroups = response.data.length;
-                (response.data.response == "no records") ? self.showMessageNoEntity = true : self.showMessageNoEntity = false;
+                (response.data.response === "no records") ? self.showMessageNoEntity = true : self.showMessageNoEntity = false;
             });
         }
 
