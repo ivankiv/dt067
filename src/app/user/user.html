@@ -55,7 +55,7 @@
                          class="well well-sm"
                          datepicker-options="user.dateOptions"></div>
                 </div>
-                <div class="dateEvent" ng-class="{'dateEventVisible': user.isEvent()}">
+                <div class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
                     <h5>Tест: {Some test}</h5>
                     <p>Предмет: {Some subject}</p>
                     <p>Дата проведення: {Date}</p>
