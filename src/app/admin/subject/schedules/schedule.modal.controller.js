@@ -57,8 +57,12 @@
             }
 
             function addSchedule() {
-                self.schedule.group_id = self.group_id;
-                scheduleService.addSchedule(self.schedule).then(addScheduleComplete)
+                if(self.group_id) {
+                    self.schedule.group_id = self.group_id;
+                    scheduleService.addSchedule(self.schedule).then(addScheduleComplete)
+                } else {
+                    scheduleService.addSchedule(self.schedule).then(addScheduleComplete)
+                }
             }
 
             function updateSchedule() {
