@@ -40,12 +40,14 @@
         self.currentPage = 1;
         self.studentsPerPage = 5;
         self.numberToDisplayStudentsOnPage = [5,10,15,20];
+        self.showMessageNoEntity = false;
         activate();
 
         function activate() {
             studentService.getStudents(self.group_id).then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
+                (data.response == "no records")? self.showMessageNoEntity = true:self.showMessageNoEntity = false;
                 getGroups();
             });
         }
@@ -115,6 +117,7 @@
         }
 
         function create(){
+            if(self.showMessageNoEntity)self.list = [];
             self.list.forEach(
                 function(x){
                     if(x.username==self.currentObj.username){
@@ -136,15 +139,17 @@
         function getGroups() {
             groupService.getGroups().then(function(response) {
                 self.groupList = response.data;
-                self.groupList.forEach(
-                    function(group) {
-                        self.associativeGroup[group.group_id] = group.group_name;
-                    });
-                self.list = self.list.map(
-                    function(student) {
-                        student.group_name =  self.associativeGroup[student.group_id];
-                        return student;
-                    });
+                    self.groupList.forEach(
+                        function (group) {
+                            self.associativeGroup[group.group_id] = group.group_name;
+                        });
+                if(!self.showMessageNoEntity) {
+                    self.list = self.list.map(
+                        function (student) {
+                            student.group_name = self.associativeGroup[student.group_id];
+                            return student;
+                        });
+                }
             })
         }
     }

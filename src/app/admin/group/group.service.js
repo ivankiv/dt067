@@ -16,10 +16,13 @@
             editGroup: editGroup
         };
 
-        function getGroups(speciality_id) {
+        function getGroups(speciality_id, faculty_id) {
             if (speciality_id){
                 return $http.get(appConstants.getGroupsBySpeciality + speciality_id)
                     .then(fulfilled,rejected);
+            } else if (faculty_id) {
+                return $http.get(appConstants.getGroupsByFaculty + faculty_id)
+                    .then(fulfilled, rejected);
             } else {
                 return $http.get(appConstants.getGroups)
                     .then(fulfilled,rejected);

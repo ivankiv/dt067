@@ -5,7 +5,8 @@
                 <div class='col-xs-12 views-header'>
                     <h4>
                         Групи
-                        <span ng-if="groups.speciality_id">{{groups.associativeSpeciality[groups.speciality_id]}}</span>
+                        <span ng-if="groups.speciality_id"> спеціальності {{groups.associativeSpeciality[groups.speciality_id]}}</span>
+                        <span ng-if="groups.faculty_id"> факультету {{groups.associativeFaculty[groups.faculty_id]}}</span>
                     </h4>
                 </div>
                 <div class='col-md-12 col-xs-12 views-header-input-wrapper'>
@@ -21,7 +22,7 @@
                                ng-model="groups.textSearch"/>
 
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                             ng-model="groups.textSearch"
                             ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList"
@@ -33,7 +34,7 @@
                             <option disabled selected value="">Виберіть факультет </option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                                 ng-model="groups.textSearch"
                                 ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList"
@@ -75,21 +76,41 @@
                             <td data-th="Факультет">{{::groups.associativeFaculty[group.faculty_id]}}</td>
                             <td data-th="Спеціальність">{{::groups.associativeSpeciality[group.speciality_id]}}</td>
                             <td>
-                                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
-                                        ng-click="groups.deleteGroup(group.group_id)"><i class="glyphicon glyphicon-trash"></i>
+                                <button type="button"
+                                        class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                        title="Видалити"
+                                        ng-click="groups.deleteGroup(group.group_id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
                                 </button>
-                                <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
-                                        ng-click="groups.showEditGroupForm(group);"><i class="glyphicon glyphicon-pencil"></i>
+                                <button type="button"
+                                        class="btn btn-warning pull-right table-help-btns"
+                                        title="Редагувати"
+                                        ng-click="groups.showEditGroupForm(group);">
+                                    <i class="glyphicon glyphicon-pencil"></i>
                                 </button>
-                                <button type="button" class="btn btn-info pull-right table-help-btns" title="Розклад">
-                                    <i class="fa fa-calendar" aria-hidden="true"></i></button>
-                                <button type="button" class="btn btn-primary pull-right table-help-btns" title="Переглянути студентів" ui-sref="admin-home.studentByGroup({group_id:group.group_id})">
+                                <button type="button"
+                                        class="btn btn-info pull-right table-help-btns"
+                                        title="Розклад"
+                                        ui-sref="admin-home.scheduleByGroupId({group_id:group.group_id})">
+                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary pull-right table-help-btns"
+                                        title="Переглянути студентів"
+                                        ui-sref="admin-home.studentByGroup({group_id:group.group_id})">
                                     <i class="fa fa-users" aria-hidden="true"></i>
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                <div ng-if="groups.showMessageNoEntity" class="text-center">
+                    <h1>
+                        <span ng-if="groups.speciality_id">Для спеціальності <strong>&rdquo;{{groups.associativeSpeciality[groups.speciality_id]}}&rdquo;</strong></span>
+                        <span ng-if="groups.faculty_id"> Для факультету <strong>&rdquo;{{groups.associativeFaculty[groups.faculty_id]}}&rdquo;</strong></span>
+                        не зареєстровано жодної групи!
+                    </h1>
+                </div>
                 <div class="group-pagination pull-right">
                     <uib-pagination
                         ng-show="groups.totalGroups > groups.groupsPerPage"
