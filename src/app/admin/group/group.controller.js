@@ -16,6 +16,7 @@
         self.specialityList = {};
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
+        self.showMessageNoEntity = false;
 
         //variables for pagination panel and search
 
@@ -63,10 +64,12 @@
                 for (var i = 0; i < self.specialityList.length; i++) {
                     self.associativeSpeciality[self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
                 }
-                self.list = self.list.map(function(speciality) {
-                    speciality.speciality_name =  self.associativeSpeciality[speciality.speciality_id];
-                    return speciality;
-                });
+                if(!self.showMessageNoEntity) {
+                    self.list = self.list.map(function (speciality) {
+                        speciality.speciality_name = self.associativeSpeciality[speciality.speciality_id];
+                        return speciality;
+                    });
+                }
             });
         }
 
@@ -77,10 +80,12 @@
                 for (var i = 0; i < self.facultyList.length; i++) {
                     self.associativeFaculty[self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
                 }
-                self.list = self.list.map(function(faculty) {
-                        faculty.faculty_name =  self.associativeFaculty[faculty.faculty_id];
+                if(!self.showMessageNoEntity) {
+                    self.list = self.list.map(function (faculty) {
+                        faculty.faculty_name = self.associativeFaculty[faculty.faculty_id];
                         return faculty;
-                });
+                    });
+                }
             });
         }
 
@@ -88,6 +93,7 @@
             return groupService.getGroups(self.speciality_id, self.faculty_id).then(function(response) {
                 self.list = response.data;
                 self.totalGroups = response.data.length;
+                (response.data.response == "no records") ? self.showMessageNoEntity = true : self.showMessageNoEntity = false;
             });
         }
 
