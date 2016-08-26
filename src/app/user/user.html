@@ -40,22 +40,26 @@
                 <h4>{{user.user.student_surname}}&nbsp;{{user.user.student_name}}&nbsp;{{user.user.student_fname}}
                     <br>Ласкаво просимо!</h4>
             </div>
-            <table class="rwd-table faculty-table table-striped ">
-                <tbody>
-                <tr>
-                    <td colspan="2" class = "text-center">
-                        <img ng-src="{{user.user.photo}}" id="studentImage" height="250" width="250"
-                             alt="Зображення">
-                    </td>
-                    <td colspan="4">
-                        <p>Група:&nbsp;{{user.group_name}}</p>
-                        <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
-                    </td>
-                <tr>
-                <tbody>
-            </table>
-            <div class="user-date-picker">
-                <div uib-datepicker ng-model="users.dateEvent" class="well well-sm" datepicker-options="users.dateOptions"></div>
+            <div class="col-xs-12 col-md-3">
+                <img ng-src="{{user.user.photo}}" id="studentImage" height="250" width="250"
+                alt="Зображення">
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <p>Група:&nbsp;{{user.group_name}}</p>
+                <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
+            </div>
+            <div class="col-xs-12 col-md-4 pull-right">
+                <div class="user-date-picker">
+                    <div uib-datepicker
+                         ng-model="user.dateEvent"
+                         class="well well-sm"
+                         datepicker-options="user.dateOptions"></div>
+                </div>
+                <div class="dateEvent" ng-class="dateEventVisible: user.dateEvent">
+                    <h5>Tест: {Some test}</h5>
+                    <p>Предмет: {Some subject}</p>
+                    <p>Дата проведення: {Date}</p>
+                </div>
             </div>
         </div>
     </section>
