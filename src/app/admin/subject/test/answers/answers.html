@@ -1,54 +1,55 @@
-<!--<section id="main-content">-->
-    <!--<section class="wrapper">-->
-        <!--<div class="row">-->
-            <!--<div class="col-xs-12 col-md-10 col-md-offset-1">-->
-                <!--<div class='col-sm-8 col-xs-12 views-header'>-->
-                    <!--<h4>Завдання тесту: &nbsp;{{::questions.currentTest.test_name}}</h4>-->
-                <!--</div>-->
-                <!--<div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>-->
-                    <!--<button type="button" class="btn btn-danger pull-right"-->
-                            <!--ui-sref="admin-home.test({currentSubjectId: questions.currentSubjectId})">-->
-                        <!--<i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>-->
-                    <!--</button>-->
-                    <!--<button type="button" class="btn btn-success add-btn" title="Додати дату тесту">-->
-                        <!--<i class="fa fa-plus" aria-hidden="true"></i>-->
-                    <!--</button>-->
-                <!--</div>-->
-                <!--<table class="rwd-table subject-table table-striped">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th>Номер</th>-->
-                        <!--<th>Завдання</th>-->
-                        <!--<th>Рівень</th>-->
-                        <!--<th>Тип</th>-->
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody ng-if="!questions.showMessageNoEntity">-->
-                    <!--<tr ng-repeat="question in questions.list">-->
-                        <!--<td data-th="Номер">{{$index + 1 }}</td>-->
-                        <!--<td data-th="Завдання">{{::question.question_text}}</td>-->
-                        <!--<td data-th="Рівень">{{::question.level}}</td>-->
-                        <!--<td data-th="Тип">{{::question.type}}</td>-->
-                        <!--<td>-->
-                            <!--<button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"-->
-                                    <!--title="Видалити">-->
-                                <!--<i class="glyphicon glyphicon-trash"></i>-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"-->
-                            <!--&gt;<i class="glyphicon glyphicon-pencil"></i>-->
-                            <!--</button>-->
-                            <!--<button type="button" class="btn btn-primary pull-right table-help-btns" title="Відповіді"-->
-                            <!--&gt;<i class="glyphicon glyphicon-list"></i>-->
-                            <!--</button>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Завдання тесту: &nbsp;{{::question.question_id}}</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="admin-home.test({currentSubjectId: questions.currentSubjectId})">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Зображення</th>
+                        <th>Текст відповіді</th>
+                        <th>Рівень</th>
+                        <th>Тип</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!questions.showMessageNoEntity">
+                    <tr ng-repeat="question in questions.list">
+                        <td data-th="Номер">{{$index + 1 }}</td>
+                        <td data-th="Завдання">{{::question.question_text}}qwertyu123456</td>
+                        <td data-th="Завдання">{{::question.question_text}}qwertyu123456</td>
+                        <td data-th="Рівень">{{::question.level}}</td>
+                        <td data-th="Тип">{{::question.type}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                            ><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Відповіді"
+                            ><i class="glyphicon glyphicon-list"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                <!--<div ng-if="answers.showMessageNoEntity" class="text-center">-->
-                    <!--<h1>Немає завдань до даного тесту!</h1>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</section>-->
-<!--</section>-->
+                <div ng-if="answers.showMessageNoEntity" class="text-center">
+                    <h1>Немає завдань до даного тесту!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

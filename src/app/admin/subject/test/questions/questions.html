@@ -39,7 +39,7 @@
                                     ng-click="questions.showEditQuestionForm(question)"><i class="glyphicon glyphicon-pencil"></i>
                             </button>
                             <button type="button" class="btn btn-primary pull-right table-help-btns" title="Відповіді"
-                                    ><i class="glyphicon glyphicon-list"></i>
+                                    ui-sref="admin-home.answers({questionId: question.question_id})"><i class="glyphicon glyphicon-list"></i>
                             </button>
                         </td>
                     </tr>
