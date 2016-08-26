@@ -35,14 +35,14 @@
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити"
                                     ng-click="faculties.deleteFaculty(faculty.faculty_id)">
-                                    <i class="glyphicon glyphicon-remove"></i></button>
+                                    <i class="glyphicon glyphicon-trash"></i></button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns"
                                     title="Редагувати"
                                     ng-click="faculties.showEditFacultyForm(faculty)">
                                     <i class="glyphicon glyphicon-pencil"></i></button>
                             <button type="button" class="btn btn-primary pull-right table-help-btns"
                                     title="Перейти до груп факультету"
-                                    ui-sref="admin-home.groups">
+                                    ui-sref="admin-home.groupsByFaculty({faculty_id: faculty.faculty_id})">
                                     <i class="fa fa-users"></i>
                             </button>
                         </td>

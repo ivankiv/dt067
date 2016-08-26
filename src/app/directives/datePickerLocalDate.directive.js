@@ -8,9 +8,10 @@
                 require: 'ngModel',
                 link: function(scope, element, attrs, ngModel) {
                     ngModel.$parsers.push(function(value) {
+                        var date = new Date(value);
                         // undo the timezone adjustment we did during the formatting
-                        value.setMinutes(value.getMinutes() - value.getTimezoneOffset());
-                        return value;
+                        date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+                        return date;
                     });
                     ngModel.$formatters.push(function(modelValue) {
                         return new Date(modelValue);

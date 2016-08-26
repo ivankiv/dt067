@@ -55,6 +55,16 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             }
         })
 
+        .state('admin-home.scheduleByGroupId', {
+            url: '/group/:group_id/schedule',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/subject/schedules/schedule.html',
+                    controller: 'ScheduleController as schedules'
+                }
+            }
+        })
+
         .state('admin-home.groups', {
             url: '/group',
             views: {
@@ -67,6 +77,16 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
 
         .state('admin-home.groupsBySpeciality',{
             url:'/speciality/:currentSpecialityId/groups',
+            views:{
+                'content':{
+                    templateUrl:'app/admin/group/groups.html',
+                    controller:'GroupController as groups'
+                }
+            }
+        })
+
+        .state('admin-home.groupsByFaculty',{
+            url:'/faculty/:faculty_id/groups',
             views:{
                 'content':{
                     templateUrl:'app/admin/group/groups.html',

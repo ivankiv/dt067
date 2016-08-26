@@ -59,12 +59,13 @@
 
             getGroups: 'http://dtapi.local/group/getRecords',
             getRangeOfGroups: 'http://dtapi.local/group/getRecordsRange',
-            getOneGroup: 'http://dtapi.local/group/getRecords/',
+            getOneGroup: 'http://dtapi.local/group/getRecords/',                      // + id of group
             countGroups: 'http://dtapi.local/group/countRecords',
             addGroup: 'http://dtapi.local/group/insertData',
-            editGroup: 'http://dtapi.local/group/update/',
-            delGroup: 'http://dtapi.local/group/del/',
-            getGroupsBySpeciality: 'http://dtapi.local/group/getGroupsBySpeciality/',
+            editGroup: 'http://dtapi.local/group/update/',                            // + id of group
+            delGroup: 'http://dtapi.local/group/del/',                                // + id of group
+            getGroupsBySpeciality: 'http://dtapi.local/group/getGroupsBySpeciality/', // + id of speciality
+            getGroupsByFaculty: 'http://dtapi.local/group/getGroupsByFaculty/',       // + id of faculty
 
             getAdmins: 'http://dtapi.local/AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
