@@ -24,7 +24,7 @@
             editSchedule: 'http://dtapi.local/timeTable/update/', // + id of timeTable
 
             getTests: 'http://dtapi.local/test/getRecords',
-            getTestsById: 'http://dtapi.local/test/getTestsBySubject/',
+            getTestBySubjectId: 'http://dtapi.local/test/getTestsBySubject/',
             countTests: 'http://dtapi.local/test/countRecords',
             addTest: 'http://dtapi.local/test/insertData',
             editTest: 'http://dtapi.local/test/update/',
