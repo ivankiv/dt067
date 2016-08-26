@@ -85,6 +85,16 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             }
         })
 
+        .state('admin-home.groupsByFaculty',{
+            url:'/faculty/:faculty_id/groups',
+            views:{
+                'content':{
+                    templateUrl:'app/admin/group/groups.html',
+                    controller:'GroupController as groups'
+                }
+            }
+        })
+
         .state('admin-home.test', {
             url: '/subject/:currentSubjectId/test',
             views: {
