@@ -16,13 +16,12 @@
          self.isEvent = isEvent;
 
         //->DatePicker options
-        self.testDays = [];
+        self.userEvents = [];
         self.calendarLoad = false;
         self.dateEvent = new Date();
         self.dateOptions = {
             customClass: getDayClass,
             showWeeks: true,
-            minDate: new Date(),
             startingDay: 1
         };
         //<- the end of DatePicker options
@@ -54,7 +53,7 @@
 
         function getScheduleForGroupComplete(response) {
            response.data.forEach(function(schedule, index) {
-               self.testDays[index] = {
+               self.userEvents[index] = {
                    date: new Date(schedule.event_date),
                    status: 'full'
                };
@@ -65,7 +64,7 @@
 
         function getOneSubject(schedule, index) {
              subjectService.getOneSubject(schedule.subject_id).then(function(response) {
-                self.testDays[index].subject_name = response.data[0].subject_name;
+                self.userEvents[index].subject_name = response.data[0].subject_name;
             });
         }
 
@@ -73,11 +72,11 @@
          function isEvent(data) {
                  var dayToCheck = new Date(data).setHours(0,0,0,0);
 
-                 for (var i = 0; i < self.testDays.length; i++) {
-                     var currentDay = new Date(self.testDays[i].date).setHours(0,0,0,0);
+                 for (var i = 0; i < self.userEvents.length; i++) {
+                     var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
                      if (dayToCheck === currentDay) {
-                         self.subject_name = self.testDays[i].subject_name;
-                         self.event = self.testDays[i].date;
+                         self.subject_name = self.userEvents[i].subject_name;
+                         self.event = self.userEvents[i].date;
                          return true;
                      }
                  }
@@ -90,10 +89,10 @@
             if (mode === 'day') {
                 var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-                for (var i = 0; i < self.testDays.length; i++) {
-                   var currentDay = new Date(self.testDays[i].date).setHours(0,0,0,0);
+                for (var i = 0; i < self.userEvents.length; i++) {
+                   var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
                     if (dayToCheck === currentDay) {
-                        return self.testDays[i].status;
+                        return self.userEvents[i].status;
                     }
                 }
             }
@@ -101,5 +100,8 @@
         }
         //<- the end of DatePicker
 
+        function sortEventsList(a, b) {
+            return a - b;
+        }
     }
 }());

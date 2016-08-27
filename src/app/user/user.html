@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
                 <ul class="nav navbar-nav">
                     <li ng-click="navCollapsed = true" ><a >Профіль</a></li>
-                    <li ng-click="navCollapsed = true"><a ui-sref="user.tests">Предмети</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="user.tests">Тести</a></li>
                     <li ng-click="navCollapsed = true"><a>Результати</a></li>
                     <!--<li class="dropdown">-->
                     <!--<a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Користувачі<span class="caret"></span></a>-->
@@ -55,10 +55,10 @@
                          class="well well-sm"
                          datepicker-options="user.dateOptions">
                     </div>
-                    <div class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
+                    <div  class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
                         <h5>Деталі тесту:</h5>
-                        <p>Предмет: {{user.subject_name}}</p>
-                        <p>Дата проведення: {{user.event | date: "dd MMMM yyyy"}}</p>
+                        <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
+                        <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
                     </div>
                 </div>
             </div>
