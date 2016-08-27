@@ -46,6 +46,42 @@
             }));
         }
 
+        function getAnswersForQuestions(questionsList) {
+            var urlCallsAnswersByQuestion = [];
+            angular.forEach(questionsList,function (item) {
+                urlCallsAnswersByQuestion[item.question_id] = $http.get(appConstants.getAnswersByQuestionID +
+                item.question_id)
+            }).then(function (response) {
+                var answersList = [];
+                angular.forEach(response,function (answersByQuestion) {
+                    if(!answersByQuestion.data.response){
+                        var i = +(answersByQuestion.data[0]).question_id;
+                        answersList[i] = shuffleArray(answersByQuestion.data);
+                        angular.forEach(answersList[i],function (answer) {
+                            answer.checked = false;
+                        });
+                    }
+                });
+            }).then(success(function (answerList) {
+                return answerList;
+            }),error(function (response) {
+                return response;
+            }))
+        }
+
+        function shuffleArray(array) {
+            var currentIndex = array.length,temporaryValue,randomIndex;
+
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+            return array;
+        }
+
         function fulfilled(response) {
             return response;
         }
