@@ -75,7 +75,7 @@
 						  Тест успішно додано!</div>'
                     });
                     self.showMessageNoEntity = false;
-                    getTestById();
+                    getTestBySubjectId();
                 })
             }
 
@@ -93,7 +93,7 @@
 						  Зміни збережено!</div>'
                     });
                     self.showMessageNoEntity = false;
-                    getTestById();
+                    getTestBySubjectId();
                 })
             }
         }

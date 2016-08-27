@@ -48,17 +48,18 @@
                 <p>Група:&nbsp;{{user.group_name}}</p>
                 <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
             </div>
-            <div class="col-xs-12 col-md-4 pull-right">
+            <div class="col-xs-12 col-md-4 pull-right" ng-if="user.calendarLoad">
                 <div class="user-date-picker">
                     <div uib-datepicker
                          ng-model="user.dateEvent"
                          class="well well-sm"
-                         datepicker-options="user.dateOptions"></div>
-                </div>
-                <div class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
-                    <h5>Tест: {Some test}</h5>
-                    <p>Предмет: {Some subject}</p>
-                    <p>Дата проведення: {Date}</p>
+                         datepicker-options="user.dateOptions">
+                    </div>
+                    <div class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
+                        <h5>Деталі тесту:</h5>
+                        <p>Предмет: {{user.subject_name}}</p>
+                        <p>Дата проведення: {{user.event | date: "dd MMMM yyyy"}}</p>
+                    </div>
                 </div>
             </div>
         </div>
