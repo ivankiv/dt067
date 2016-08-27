@@ -39,6 +39,40 @@
             function rejected(response) {
                 return response;
             }
+
+            //This function filtered available level for select tag
+
+            function getLevel(arrTestDetail){
+                var level = [];
+                var usedLevel = [];
+                if (Array.isArray(arrTestDetail)){
+                    arrTestDetail.forEach(function(item){
+                        usedLevel.push(item.level);
+                    })
+                }
+                for(var i = 1;i <= 7;i++){
+                    level.push(i);
+                }
+                var availableLevel = level.filter(function (itemLevel) {
+                    return usedLevel.every(function(usedItem){
+                        return usedItem != itemLevel;     
+                    });
+                });
+                
+                return availableLevel;
+            }
+            
+            //This function count how many tasks are available
+
+            function availableTasks(arrTestDetail,maxQuantityOfTasks) {
+                var countOfUsedTasks = 0;
+                if(Array.isArray(arrTestDetail)){
+                    arrTestDetail.forEach(function (item) {
+                       countOfUsedTasks += parseInt(item.tasks);
+                    });
+                }
+                return (parseInt(maxQuantityOfTasks) - countOfUsedTasks);
+            }
     }
 }());
 
