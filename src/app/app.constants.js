@@ -40,6 +40,7 @@
             delQuestions: 'http://dtapi.local/question/del/', // + id of question
             addQuestion: 'http://dtapi.local/question/insertData',
             editQuestion: 'http://dtapi.local/question/update/',
+            getQuestionsByLevelRand: 'http://dtapi.local/question/getQuestionsByLevelRand/', // + id
 
             getAnswersByQuestionID: 'http://dtapi.local/answer/getAnswersByQuestion/',  // get answer id
 
