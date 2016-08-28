@@ -82,6 +82,36 @@
             return array;
         }
 
+        function getTest(test_id) {
+            return _getTestDetailsByTest(test_id).then(function (arrayTestDetails) {
+                return getQuestionsForTest(test_id,arrayTestDetails).then(function (questionsList) {
+                    return getAnswersForQuestions(questionsList).then(function (answersList) {
+                        var test = questionsList;
+                        angular.forEach(answersList,function (item) {
+                            var question_id = item[0].question_id;
+                            var questionPosition = questionsList.map(function (item) {
+                                return item.question_id;
+                            }).indexOf(question_id);
+                            test[questionPosition].answers = answersList[(test[questionPosition]).question_id];
+                        });
+                        return saveData(test).then(function (response) {
+                            return test;
+                        },rejected);
+                    });
+                });
+            });
+        }
+
+        function saveData(test) {
+            return $http.post(appConstants.saveTestPlayerData,test)
+                .then(fulfilled,rejected);
+        }
+
+        function getData() {
+            return $http.get(appConstants.getTestPlayerData)
+                .then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }

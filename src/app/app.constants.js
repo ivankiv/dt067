@@ -78,6 +78,9 @@
             editStudent: 'http://dtapi.local/student/update/',
             delStudent: 'http://dtapi.local/student/del/',
             addStudents:'http://dtapi.local/student/insertData',
-            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/'
+            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/',
+
+            saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
+            getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/'
         });
 }());
