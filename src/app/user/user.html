@@ -15,16 +15,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
                 <ul class="nav navbar-nav">
-                    <li ng-click="navCollapsed = true" ><a >Профіль</a></li>
+                    <li ng-click="navCollapsed = true" ><a ui-sref="user">Профіль</a></li>
                     <li ng-click="navCollapsed = true"><a ui-sref="user.tests">Тести</a></li>
                     <li ng-click="navCollapsed = true"><a>Результати</a></li>
-                    <!--<li class="dropdown">-->
-                    <!--<a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Користувачі<span class="caret"></span></a>-->
-                    <!--<ul class="dropdown-menu admin-users-drop-menu">-->
-                    <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>-->
-                    <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.student">Студенти</a></li>-->
-                    <!--</ul>-->
-                    <!--</li>-->
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>

@@ -99,9 +99,5 @@
             return '';
         }
         //<- the end of DatePicker
-
-        function sortEventsList(a, b) {
-            return a - b;
-        }
     }
 }());

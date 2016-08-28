@@ -40,6 +40,7 @@
             delQuestions: 'http://dtapi.local/question/del/', // + id of question
             addQuestion: 'http://dtapi.local/question/insertData',
             editQuestion: 'http://dtapi.local/question/update/',
+            getQuestionsByLevelRand: 'http://dtapi.local/question/getQuestionsByLevelRand/', // + id
 
             getAnswersByQuestionID: 'http://dtapi.local/answer/getAnswersByQuestion/',  // get answer id
 
@@ -77,6 +78,16 @@
             editStudent: 'http://dtapi.local/student/update/',
             delStudent: 'http://dtapi.local/student/del/',
             addStudents:'http://dtapi.local/student/insertData',
-            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/'
+            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/',
+
+            saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
+            getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/',
+            resetSessionData: 'http://dtapi.local/TestPlayer/resetSessionData/',
+            getTimeStamp: 'http://dtapi.local/TestPlayer/getTimeStamp/',
+            getEndTime: 'http://dtapi.local/TestPlayer/getEndTime/',
+            saveEndTime: 'http://dtapi.local/TestPlayer/saveEndTime/',
+
+            checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/',
+            addTestResult: 'http://dtapi.local/result/insertData/'
         });
 }());
