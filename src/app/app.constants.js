@@ -85,7 +85,9 @@
             resetSessionData: 'http://dtapi.local/TestPlayer/resetSessionData/',
             getTimeStamp: 'http://dtapi.local/TestPlayer/getTimeStamp/',
             getEndTime: 'http://dtapi.local/TestPlayer/getEndTime/',
+            saveEndTime: 'http://dtapi.local/TestPlayer/saveEndTime/',
 
-            checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/'
+            checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/',
+            addTestResult: 'http://dtapi.local/result/insertData/'
         });
 }());

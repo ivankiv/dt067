@@ -159,6 +159,16 @@
                 .then(fulfilled,rejected);
         }
 
+        function saveEndTime(endTime) {
+            return $http.post(appConstants.saveEndTime,endTime)
+                .then(fulfilled,rejected);
+        }
+
+        function submitTest(testResult) {
+            return $http.post(appConstants.addTestResult,testResult)
+                .then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }
