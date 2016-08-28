@@ -144,6 +144,21 @@
                 .then(fulfilled,rejected);
         }
 
+        function resetSessionData() {
+            return $http.get(appConstants.resetSessionData)
+                .then(fulfilled,rejected);
+        }
+
+        function getTimeStamp(){
+            return $http.post(appConstants.getTimeStamp)
+                .then(fulfilled,rejected);
+        }
+
+        function getEndTime() {
+            return $http.get(appConstants.getEndTime)
+                .then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }
