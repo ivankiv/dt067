@@ -112,6 +112,38 @@
                 .then(fulfilled,rejected);
         }
 
+        function uncheckOtherAnswers(choseAnswer, question){
+            angular.forEach(question.answers,function (answer) {
+                if (choseAnswer.answer_id !== answer.answer_id) {
+                    answer.checked = false;
+                }
+            });
+        }
+
+        function finishTest(test) {
+            var checkAnswers = [];
+            angular.forEach(test,function (question) {
+                var checkQuestion = {};
+                checkQuestion.question_id = question.question_id;
+                checkQuestion.answer_ids = [];
+                angular.forEach(question.answers,function (answer) {
+                    if(answer.checked === true){
+                        checkQuestion.answer_ids.push(answer.answer_id);
+                    }
+                });
+                if (checkQuestion.answer_ids.length ===0){
+                    checkQuestion.answer_ids.push(0);
+                }
+                checkAnswers.push(checkQuestion);
+            });
+            return _checkAnswers(checkAnswers).then(fulfilled,rejected);
+        }
+
+        function _checkAnswers(answers) {
+            return $http.post(appConstants.checkAnswers,answers)
+                .then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }

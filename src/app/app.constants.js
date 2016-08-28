@@ -81,6 +81,8 @@
             getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/',
 
             saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
-            getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/'
+            getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/',
+
+            checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/'
         });
 }());
