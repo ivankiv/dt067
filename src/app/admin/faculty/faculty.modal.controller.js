@@ -47,12 +47,12 @@
             }
 
             function updateComplete(response) {
-                if(response.status == 400) {
+                if(response.status == 400 && response.data.response !== 'Error when update') {
                     self.duplicateFacultiesMessage = true;
                     return;
                 }
 
-                if(response.status == 200 && response.data.response == 'error') {
+                if(response.status == 400 && response.data.response == 'Error when update') {
                     self.wasNotEditMessage = true;
                 }
 
