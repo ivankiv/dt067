@@ -70,9 +70,7 @@
             function getScheduleForGroup() {
                 scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
                     self.list = response.data;
-                    console.log(response);
                     (response.data.response === "no records") ? self.showMessageNoEntity = true : self.showMessageNoEntity = false;
-                    console.log(self.showMessageNoEntity);
                 });
             }
 
