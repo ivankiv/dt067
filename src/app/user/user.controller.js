@@ -5,9 +5,9 @@
         .module("app")
         .controller("UserController", UserController);
 
-    UserController.$inject = ["studentService","groupService","loginService", "scheduleService", "subjectService"];
+    UserController.$inject = ["userService", "studentService","groupService","loginService"];
 
-    function UserController(studentService, groupService, loginService, scheduleService, subjectService) {
+    function UserController(userService, studentService, groupService, loginService) {
         var self = this;
 
         self.userId = 0;
@@ -19,17 +19,12 @@
         self.userEvents = [];
         self.calendarLoad = false;
         self.dateEvent = new Date();
-        self.dateOptions = {
-            customClass: getDayClass,
-            showWeeks: true,
-            startingDay: 1
-        };
         //<- the end of DatePicker options
 
         activate();
 
         function activate() {
-            getUserInfo().then(getScheduleForGroup);
+            getUserInfo().then(getEventsForUser);
         }
 
         function getUserInfo() {
@@ -46,34 +41,26 @@
                 });
         }
 
-        function getScheduleForGroup() {
-            scheduleService.getScheduleForGroup(self.user.group_id)
-                .then(getScheduleForGroupComplete)
-        }
-
-        function getScheduleForGroupComplete(response) {
-           response.data.forEach(function(schedule, index) {
-               self.userEvents[index] = {
-                   date: new Date(schedule.event_date),
-                   status: 'full'
-               };
-               getOneSubject(schedule, index);
-           });
-            self.calendarLoad = true;
-        }
-
-        function getOneSubject(schedule, index) {
-             subjectService.getOneSubject(schedule.subject_id).then(function(response) {
-                self.userEvents[index].subject_name = response.data[0].subject_name;
+        function getEventsForUser() {
+            userService.getEventsForUser(self.user.group_id).then(function(response) {
+                self.userEvents = response;
+                self.calendarLoad = true;
             });
         }
 
         //->DatePicker
+        self.dateOptions = {
+            customClass: getDayClass,
+            showWeeks: true,
+            startingDay: 1
+        };
+
          function isEvent(data) {
                  var dayToCheck = new Date(data).setHours(0,0,0,0);
 
                  for (var i = 0; i < self.userEvents.length; i++) {
                      var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
+
                      if (dayToCheck === currentDay) {
                          self.subject_name = self.userEvents[i].subject_name;
                          self.event = self.userEvents[i].date;
@@ -83,21 +70,21 @@
              return '';
          }
 
-        function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0,0,0,0);
+         function getDayClass(data) {
+                var date = data.date,
+                    mode = data.mode;
+                if (mode === 'day') {
+                    var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-                for (var i = 0; i < self.userEvents.length; i++) {
-                   var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
-                    if (dayToCheck === currentDay) {
-                        return self.userEvents[i].status;
+                    for (var i = 0; i < self.userEvents.length; i++) {
+                        var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
+                        if (dayToCheck === currentDay) {
+                            return self.userEvents[i].status;
+                        }
                     }
                 }
-            }
-            return '';
-        }
+                return '';
+         }
         //<- the end of DatePicker
     }
 }());
