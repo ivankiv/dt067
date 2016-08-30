@@ -50,7 +50,7 @@
                 }).then(function() {
                     testService.deleteTest(testId).then(function(response) {
                         if(response.data.response === 'ok') {
-                            getTestById();
+                            getTestBySubjectId();
                         }
                         if(response.status === 400) {
                             ngDialog.open({template: '<div class="ngdialog-message"> \
