@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('ScheduleController', scheduleController);
-        scheduleController.$inject = ['subjectService', 'scheduleService', 'groupService', '$stateParams', '$uibModal', 'ngDialog'];
+        scheduleController.$inject = ['loginService', 'subjectService', 'scheduleService', 'groupService', '$stateParams', '$uibModal', 'ngDialog'];
 
-        function scheduleController(subjectService, scheduleService, groupService, $stateParams, $uibModal, ngDialog) {
+        function scheduleController(loginService, subjectService, scheduleService, groupService, $stateParams, $uibModal, ngDialog) {
             var self = this;
 
             //varibles
@@ -30,6 +30,7 @@
             activate();
 
             function activate() {
+                isLogged();
                 if (self.group_id) {
                     getGroups();
                     getScheduleForGroup();
@@ -41,6 +42,10 @@
                 }
             }
 
+            function isLogged() {
+                loginService.isLogged();
+            }
+
             function getOneSubject() {
                 subjectService.getOneSubject($stateParams.currentSubjectId).then(function(response) {
                     self.currentSubjectName = response.data[0].subject_name;
@@ -49,6 +54,14 @@
 
             function getScheduleForSubject() {
                 scheduleService.getScheduleForSubject($stateParams.currentSubjectId).then(getScheduleForSubjectComplete)
+            }
+            function getScheduleForSubjectComplete(response) {
+                if(response.data.response === 'no records') {
+                    self.list = {};
+                    self.showMessageNoEntity = true;
+                } else {
+                    self.list = response.data;
+                }
             }
 
             function getGroups() {
@@ -124,15 +137,6 @@
                     });
                     activate();
                 })
-            }
-
-            function getScheduleForSubjectComplete(response) {
-                if(response.data.response === 'no records') {
-                    self.list = {};
-                    self.showMessageNoEntity = true;
-                } else {
-                    self.list = response.data;
-                }
             }
         }
 }());

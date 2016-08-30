@@ -20,7 +20,6 @@
             self.addQuestion = addQuestion;
             self.cancelForm = cancelForm;
             self.updateQuestion = updateQuestion;
-            self.clearImageSrc = clearImageSrc;
 
 
             function addQuestion() {
@@ -51,10 +50,6 @@
                 if(response.status === 400 && response.data.response === "Error when update") {
                     self.wasNotEditEntityMessage = true;
                 }
-            }
-
-            function clearImageSrc (obj) {
-                obj.attachment = ""
             }
         }
 }());

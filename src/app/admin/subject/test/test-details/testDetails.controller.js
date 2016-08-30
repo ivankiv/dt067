@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestDetailsController', testDetailsController);
-        testDetailsController.$inject = ['$stateParams', 'testDetailsService', 'testService', '$uibModal', 'ngDialog'];
+        testDetailsController.$inject = ['loginService', '$stateParams', 'testDetailsService', 'testService', '$uibModal', 'ngDialog'];
 
-        function testDetailsController($stateParams, testDetailsService, testService, $uibModal, ngDialog) {
+        function testDetailsController(loginService, $stateParams, testDetailsService, testService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
@@ -23,7 +23,12 @@
             activate();
 
             function activate() {
+                 isLogged();
                  getOneTest().then(getTestDetailsByTest);
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getTestDetailsByTest() {
@@ -96,13 +101,12 @@
                         self.showMessageNoEntity = true;
                         self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
                     } else {
-                        //calculate amount of rate per current test
-                        angular.forEach(self.list, function(item) {
-                            self.amountOfRate += item.rate * item.tasks;
-                        });
 
-                        //calculate amount of tasks per current test
                         angular.forEach(self.list, function(item) {
+                            //calculate amount of rate per current test
+                            self.amountOfRate += item.rate * item.tasks;
+
+                            //calculate amount of tasks per current test
                             self.amountOfTasks += parseInt(item.tasks);
                         });
 

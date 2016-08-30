@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
+        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
 
-        function questionsController (questionsService, $stateParams, testService, $uibModal, ngDialog) {
+        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
@@ -32,9 +32,14 @@
             activate();
 
             function activate() {
+                isLogged();
                 getOneTest();
                 countQuestionsByTest()
                     .then(pageChanged());
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getOneTest() {
@@ -58,7 +63,9 @@
                     ngDialog.openConfirm({
                         template: 'app/partials/confirm-delete-dialog.html',
                         plain: false
-                    }).then(function() {
+                    }).then(deleteQuestion);
+
+                    function deleteQuestion() {
                         questionsService.deleteQuestions(question_id).then(function(response) {
                             if(response.data.response === 'ok') {
                                 activate();
@@ -66,11 +73,11 @@
 
                             if(response.status === 400) {
                                 ngDialog.open({template: '<div class="ngdialog-message"> \
-						            Неможливо видалити завдання яке містить відповіді!</div>'
+                                        Неможливо видалити завдання яке містить відповіді!</div>'
                                 });
                             }
                         });
-                    });
+                    }
             }
 
             function showAddQuestionForm() {

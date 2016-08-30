@@ -29,6 +29,12 @@ function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngD
             controller: 'UserController as user'
         })
 
+        .state('test-player', {
+            url: '/test-player/:currentTestId',
+            templateUrl: 'app/user/tests/test-player/test-player.html',
+            controller: 'TestPlayerController as player'
+        })
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
@@ -242,7 +248,7 @@ function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngD
         })
 
         .state('user.tests', {
-                url: '/tests',
+                url: '/:groupId/tests',
                 views: {
                     'content': {
                         templateUrl: 'app/user/tests/tests.html',

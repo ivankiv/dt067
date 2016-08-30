@@ -4,6 +4,7 @@
     angular.module('app')
 
         .constant('appConstants', {
+
             currentID: '',
             logInURL: baseUrl + 'login/index',
             logOutURL: baseUrl + 'login/logout',
@@ -87,7 +88,10 @@
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
 
+
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
-            addTestResult: baseUrl + 'result/insertData/'
+            addTestResult: baseUrl + 'result/insertData/',
+            countTestPassesByStudent: baseUrl + 'countTestPassesByStudent/' // + id`s of student and test
+
         });
 }());

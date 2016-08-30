@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectModalController', subjectModalController);
-        subjectModalController.$inject = ['subjectService', 'appConstants', '$uibModalInstance', 'currentSubject', 'ngDialog'];
+        subjectModalController.$inject = ['subjectService', '$uibModalInstance', 'currentSubject', 'ngDialog'];
 
-        function subjectModalController(subjectService, appConstants, $uibModalInstance,  currentSubject, ngDialog) {
+        function subjectModalController(subjectService, $uibModalInstance,  currentSubject, ngDialog) {
             var self = this;
 
         //Variables
@@ -25,7 +25,7 @@
             }
 
             function updateSubject() {
-                subjectService.editSubject(appConstants.currentID, self.currentSubject)
+                subjectService.editSubject(currentSubject.subject_id, self.currentSubject)
                     .then(updateComplete, rejected);
             }
 
