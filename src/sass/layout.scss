@@ -261,7 +261,12 @@ body {
   td{
     &:nth-child(1){
       padding-top: 0px;
-      width: 95%;
+      width: 85%;
+      margin: 0px;
+    }
+    &:nth-child(even){
+      width: 15%;
+      text-align: left;
     }
     &:before {
       content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
@@ -270,11 +275,29 @@ body {
 
     }
     @media (max-width: $breakpoint-alpha) {
-      width: 100% !important;
-      display: block;
+      display: inline-block;
       float: none;
       text-align: left;
       margin-left: 0px;
+      margin-right: 0px;
+      padding-left: 0px;
+    }
+    @media (max-width: 410px) {
+      font-size: 13px;
+      margin: 6px 0;
+      text-align: left;
+      &:nth-child(even){
+        text-align: left;
+      }
+    }
+    @media (max-width: 340px) {
+      font-size: 12px;
+      &:nth-child(even){
+        width: 10%;
+        text-align: left;
+        vertical-align: middle;
+        padding: 0px 0px 10px 0;
+      }
     }
   }
 }

@@ -34,7 +34,17 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             templateUrl: 'app/admin/admin-home.html',
             controller: 'adminStatController as stat'
         })
-
+//////////////
+        .state('admin-home.test_player', {
+            url: '/test_player',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/tests/test-player/test-player.html',
+                    controller: 'TestPlayerController as testPlayer'
+                }
+            }
+        })
+///////////////
         .state('admin-home.subject', {
             url: '/subject',
             views: {
@@ -196,12 +206,13 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
         })
 
         .state('user.tests', {
-                url: '/tests',
-                views: {
-                    'content': {
-                        templateUrl: 'app/user/tests/tests.html',
-                        controller: 'TestsController as tests'
-                    }
+            url: '/tests',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/tests/tests.html',
+                    controller: 'TestsController as tests'
                 }
-            });
+            }
+        })
+        ;
 }

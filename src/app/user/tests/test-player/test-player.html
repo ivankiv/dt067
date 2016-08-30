@@ -1,0 +1,21 @@
+<section ui-view="content" class="col-xs-12">
+    <div class="col-xs-12 col-md-10 col-md-offset-1">
+        <div class="col-xs-12 views-header"><h4>Тест {{2 + 2}}</h4></div>
+
+            <div class="col-xs-12 test-player-box">
+                <div class="timer-box">
+                    <div class="timer">{{testPlayer.timerValue | date:'mm:ss'}}</div>
+                </div>
+                <div class="questions-list-box">
+                    <div class="questions-button" ng-repeat="questions in testPlayer.questionsArray">
+                        {{2 + 2}}
+                    </div>
+                </div>
+                <div class="main-test-box">
+                    тут буде завдання
+                </div>
+                <button type="button" class="btn btn-default end-test-btn">Завершити тест</button>
+    </div>
+
+    </div>
+</section>

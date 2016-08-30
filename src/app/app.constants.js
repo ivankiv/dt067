@@ -80,7 +80,8 @@
             addStudents:'http://dtapi.local/student/insertData',
             getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/',
 
-            saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
+
+            /*saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
             getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/',
             resetSessionData: 'http://dtapi.local/TestPlayer/resetSessionData/',
             getTimeStamp: 'http://dtapi.local/TestPlayer/getTimeStamp/',
@@ -88,6 +89,9 @@
             saveEndTime: 'http://dtapi.local/TestPlayer/saveEndTime/',
 
             checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/',
-            addTestResult: 'http://dtapi.local/result/insertData/'
+            addTestResult: 'http://dtapi.local/result/insertData/',*/
+
+            getServerTime: 'http://dtapi.local/TestPlayer/getTimeStamp'
+
         });
 }());
