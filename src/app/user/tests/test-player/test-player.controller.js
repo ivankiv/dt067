@@ -12,6 +12,7 @@
 
         //variables
         self.user_id = 2;
+        self.groupId = $stateParams.groupId;
         self.test_id = $stateParams.currentTestId;
         self.listOfQuestions = [];
         self.checked;
@@ -47,14 +48,17 @@
                 angular.forEach(response.data, function(testDetail) {
                     getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
                 });
-            console.log(self.listOfQuestions);
         }
 
         function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
             questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
                 .then(function(response) {
-                    angular.forEach(response.data, function(question) {
+                    angular.forEach(response.data, function(question, index) {
                         self.listOfQuestions.push(question);
+                    });
+
+                    angular.forEach(self.listOfQuestions, function(question, index) {
+                        question.index = index + 1;
                     });
                 });
         }

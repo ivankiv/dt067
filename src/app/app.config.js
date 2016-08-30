@@ -30,7 +30,7 @@ function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, *
         })
 
         .state('test', {
-            url: '/tests/test/:currentTestId',
+            url: '/:groupId/tests/test/:currentTestId',
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player'
         })

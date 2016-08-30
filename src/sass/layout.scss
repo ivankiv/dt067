@@ -435,3 +435,17 @@ div.row.schedule-form {
 .dateEventVisible {
   display: block;
 }
+
+aside.wrapForQuestions {
+  width: 300px;
+  height: auto;
+  .allOfQuestions {
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    background-color: lightgray;
+    color: green;
+    border: 1px solid gray;
+  }
+}

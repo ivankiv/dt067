@@ -1,14 +1,24 @@
-<section id="container" class="">
-    <header>
-        <h1>Test player!!!</h1>
-    </header>
-    <section ui-view="content" class="col-xs-12">
-        <div class="col-xs-12 col-md-10 col-md-offset-1">
-            <div class='col-xs-12 views-header'><h4>Статистика системи</h4></div>
-        </div>
-        <div>
-            <button onclick="">check</button>
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Тест: &nbsp;{{::questions.currentTest.test_name}}</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="user.tests({groupId: player.groupId, currentTestId: player.test_id})">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                </div>
+                <aside class="wrapForQuestions">
+                    <div class="allOfQuestions" ng-repeat="question in player.listOfQuestions">
+                        <span>{{::question.index}}</span>
+                    </div>
+                </aside>
+            </div>
         </div>
     </section>
 </section>
+
 
