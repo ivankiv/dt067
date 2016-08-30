@@ -13,8 +13,9 @@
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                     <tr>
-                        <th>Номер</th>
+                        <th>Назва предмету</th>
                         <th>Назва тесту</th>
+                        <th>Дата проведення</th>
                         <th>К-сть завдань</th>
                         <th>Тривалість тесту</th>
                         <th>Статус</th>
@@ -22,14 +23,15 @@
                     </thead>
                     <tbody ng-if="!tests.showMessageNoEntity">
                     <tr ng-repeat="test in tests.listOfTests">
-                        <td data-th="Номер">{{$index + 1}}</td>
+                        <td data-th="Предмет">{{::test.subject_name}}</td>
                         <td data-th="Тест">{{::test.test_name}}</td>
+                        <td data-th="Дата">{{::test.date}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
                         <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
                         <td>
                             <button type="button" class="btn btn-primary pull-right table-help-btns" title="Здавати"
-                                    ui-sref="user.test-player({currentTestId: test.test_id})">
+                                    ui-sref="test-player({currentTestId: test.test_id})">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                             </button>
                         </td>
