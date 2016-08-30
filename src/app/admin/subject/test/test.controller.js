@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestController', testController);
-        testController.$inject = ['testService', 'subjectService', '$uibModal', '$stateParams', 'ngDialog'];
+        testController.$inject = ['loginService', 'testService', 'subjectService', '$uibModal', '$stateParams', 'ngDialog'];
 
-        function testController (testService, subjectService, $uibModal, $stateParams, ngDialog) {
+        function testController (loginService, testService, subjectService, $uibModal, $stateParams, ngDialog) {
             var self = this;
 
             //variables
@@ -24,8 +24,13 @@
             activate();
 
             function activate() {
+                isLogged();
                 getOneSubject();
                 getTestBySubjectId();
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getOneSubject() {
