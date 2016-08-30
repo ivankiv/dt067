@@ -15,15 +15,12 @@
 
 
 
-        function checkAttemptsOfUser(user_id,test_id) {
+        function checkAttemptsOfUser(user_id,test_id,checked) {
             testService.getOneTest(test_id).then(function (response) {
-                console.log(response);
                 self.currentTest = response.data;
             }).then(function (response) {
-                    console.log(response);
                     $http.get(appConstants.countTestPassesByStudent + user_id + "/" + test_id).then(function (response) {
-                                    console.log(response);
-                                    return response.data.numberOfRecords >= currentTest.attempts;
+                                    checked = response.data.numberOfRecords >= self.currentTest.attempts;
                             })
                     })
         }

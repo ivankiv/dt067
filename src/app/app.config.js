@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider','breadcrumbsDirective' ];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'/*,'breadcrumbsDirective'*/ ];
 
-function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngDialogProvider) {
+function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, */ngDialogProvider) {
 
     ngDialogProvider.setDefaults({
         plain: true,
