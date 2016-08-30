@@ -29,6 +29,12 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             controller: 'UserController as user'
         })
 
+        .state('test-player', {
+            url: '/test-player/:currentTestId',
+            templateUrl: 'app/user/tests/test-player/test-player.html',
+            controller: 'TestPlayerController as player'
+        })
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
