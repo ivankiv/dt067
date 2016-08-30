@@ -10,6 +10,7 @@
 
         //variables
         self.currentSubjectId = $stateParams.currentSubjectId;
+        self.currentTestId = $stateParams.currentTestId;
         self.list = {};
         self.showMessageNoEntity = false;
 
@@ -19,8 +20,9 @@
         activate();
 
         function activate() {
-
+            getQuestionsRangeByTest();
         }
+
 
         function getQuestionsRangeByTest() {
             answersService.getAnswersByQuestion($stateParams.currentQuestionId)
@@ -29,11 +31,35 @@
 
 
         function getAnswersByQuestionComplete(response) {
-            if(response.data.response === 'No records') {
+            console.log(response,'response');
+            if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
                 self.list = response.data;
+                console.log(self.list,'self-list');
             }
         }
+
+        function deleteAnswers(answer_id) {
+            ngDialog.openConfirm({
+                template: 'app/partials/confirm-delete-dialog.html',
+                plain: false
+            }).then(deleteAnswers);
+
+            function deleteAnswers(answer_id) {
+                answersService.deleteAnswers(answer_id).then(function(response) {
+                    if(response.data.response === 'ok') {
+                        activate();
+                    }
+
+                    if(response.status === 400) {
+                        ngDialog.open({template: '<div class="ngdialog-message"> \
+                                        Неможливо видалити завдання яке містить відповіді!</div>'
+                        });
+                    }
+                });
+            }
+        }
+
     }
 }());

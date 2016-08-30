@@ -21,5 +21,10 @@
             return response;
         }
 
+        function deleteAnswers(answer_id) {
+            return $http.delete(appConstants.deleteAnswers + answer_id)
+                .then(fulfilled, rejected);
+        }
+
     }
 }());
