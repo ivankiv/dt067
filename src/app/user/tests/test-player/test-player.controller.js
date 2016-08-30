@@ -24,15 +24,13 @@
         }
 
         function checkAttempts(user_id,test_id){
-            testPlayerService.checkAttemptsOfUser(user_id,test_id)
-                .then(function (response) {
-                    if(response.data){
-                        ngDialog.open({
-                            template:'<div class="ngdialog-message">Перевищена кількість спроб здати тест!</div>',
-                            plain:true
-                        })
-                    }
-                })
+            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id)
+                if(checked){
+                    ngDialog.open({
+                                template:'<div class="ngdialog-message">Перевищена кількість спроб здати тест!</div>',
+                                plain:true
+                    })
+                }
         }
     }
 }());
