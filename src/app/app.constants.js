@@ -89,7 +89,7 @@
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',
-            countTestPassesByStudent: baseUrl + 'countTestPassesByStudent/' // + id`s of student and test
+            countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/' // + id`s of student and test
 
         });
 }());

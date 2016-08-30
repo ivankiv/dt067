@@ -24,7 +24,8 @@
         }
 
         function checkAttempts(user_id,test_id){
-            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id)
+            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id);
+            console.log(checked);
                 if(checked){
                     ngDialog.open({
                                 template:'<div class="ngdialog-message">Перевищена кількість спроб здати тест!</div>',
