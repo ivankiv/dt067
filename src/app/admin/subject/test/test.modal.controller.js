@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestModalController', testModalController);
-        testModalController.$inject = ['testService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentTest', 'ngDialog'];
+        testModalController.$inject = ['testService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentTest'];
 
-        function testModalController(testService, $stateParams, subjectService,  $uibModalInstance,  currentTest, ngDialog) {
+        function testModalController(testService, $stateParams, subjectService,  $uibModalInstance,  currentTest) {
             var self = this;
 
             //variables

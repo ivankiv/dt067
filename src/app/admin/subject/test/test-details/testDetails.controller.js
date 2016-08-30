@@ -101,13 +101,12 @@
                         self.showMessageNoEntity = true;
                         self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
                     } else {
-                        //calculate amount of rate per current test
-                        angular.forEach(self.list, function(item) {
-                            self.amountOfRate += item.rate * item.tasks;
-                        });
 
-                        //calculate amount of tasks per current test
                         angular.forEach(self.list, function(item) {
+                            //calculate amount of rate per current test
+                            self.amountOfRate += item.rate * item.tasks;
+
+                            //calculate amount of tasks per current test
                             self.amountOfTasks += parseInt(item.tasks);
                         });
 
