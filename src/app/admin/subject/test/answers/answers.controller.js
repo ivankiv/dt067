@@ -23,6 +23,7 @@
             getQuestionsRangeByTest();
         }
 
+
         function getQuestionsRangeByTest() {
             answersService.getAnswersByQuestion($stateParams.currentQuestionId)
                 .then(getAnswersByQuestionComplete)
@@ -38,5 +39,27 @@
                 console.log(self.list,'self-list');
             }
         }
+
+        function deleteAnswers(answer_id) {
+            ngDialog.openConfirm({
+                template: 'app/partials/confirm-delete-dialog.html',
+                plain: false
+            }).then(deleteAnswers);
+
+            function deleteAnswers(answer_id) {
+                answersService.deleteAnswers(answer_id).then(function(response) {
+                    if(response.data.response === 'ok') {
+                        activate();
+                    }
+
+                    if(response.status === 400) {
+                        ngDialog.open({template: '<div class="ngdialog-message"> \
+                                        Неможливо видалити завдання яке містить відповіді!</div>'
+                        });
+                    }
+                });
+            }
+        }
+
     }
 }());

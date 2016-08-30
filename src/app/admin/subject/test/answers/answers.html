@@ -28,7 +28,7 @@
                         <td data-th="Текст відповіді">{{:: answers.answer_text}}</td>
                         <td data-th="Результат">{{::answers.true_answer}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                            <button type="button" ng-click="answers.deleteAnswers(answer.answer_id)" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
