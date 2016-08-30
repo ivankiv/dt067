@@ -41,7 +41,7 @@
             editQuestion: baseUrl + 'question/update/',
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
-            getAnswersByQuestionID: baseUrl + 'answer/getAnswersByQuestion/',  // get answer id
+            getAnswersByQuestionID: baseUrl + 'answer/getRecords/',  // get answer id
 
             getSpecialities: baseUrl + 'speciality/getRecords',
             getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',
