@@ -31,7 +31,8 @@
         function checkAttempts(user_id,test_id){
             testPlayerService.checkAttemptsOfUser(user_id,test_id)
                 .then(function(response) {
-                    self.checked = response.data;
+                    console.log("response",response);
+                    self.checked = response;
                 });
                 if(self.checked){
                     ngDialog.open({
