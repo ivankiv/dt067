@@ -88,6 +88,7 @@
             saveEndTime: 'http://dtapi.local/TestPlayer/saveEndTime/',
 
             checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/',
-            addTestResult: 'http://dtapi.local/result/insertData/'
+            addTestResult: 'http://dtapi.local/result/insertData/',
+            countTestPassesByStudent: 'http://dtapi.local/countTestPassesByStudent/' // + id`s of student and test
         });
 }());
