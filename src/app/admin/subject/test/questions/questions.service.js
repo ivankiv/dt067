@@ -8,6 +8,7 @@
         function questionsService ($http, appConstants) {
             return {
                 getQuestionsRangeByTest: getQuestionsRangeByTest,
+                getQuestionsByLevelRand: getQuestionsByLevelRand,
                 countQuestionsByTest: countQuestionsByTest,
                 deleteQuestions: deleteQuestions,
                 addQuestion: addQuestion,
@@ -16,6 +17,11 @@
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
                 return $http.get(appConstants.getQuestionsRangeByTest + test_id + "/" + limit + "/" + offset)
+                    .then(fulfilled, rejected);
+            }
+
+            function getQuestionsByLevelRand(test_id, level, number) {
+                return $http.get(appConstants.getQuestionsByLevelRand + test_id + "/" + level + "/" + number)
                     .then(fulfilled, rejected);
             }
 
