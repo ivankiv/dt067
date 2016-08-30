@@ -11,6 +11,7 @@
             //variables
             self.list = {};
             self.currentSubjectId = $stateParams.currentSubjectId;
+            self.currentTestId = $stateParams.currentTestId;
             self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
             self.begin = 0;
             self.showMessageNoEntity = false;

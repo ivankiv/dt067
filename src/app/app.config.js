@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider','breadcrumbsDirective' ];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'/*,'breadcrumbsDirective'*/ ];
 
-function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngDialogProvider) {
+function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective,*/ ngDialogProvider) {
 
     ngDialogProvider.setDefaults({
         plain: true,
@@ -30,7 +30,7 @@ function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngD
         })
 
         .state('test-player', {
-            url: '/test-player/:currentTestId',
+            url: '/test/:currentTestId/test-player',
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player'
         })
@@ -150,7 +150,7 @@ function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngD
         })
 
         .state('admin-home.answers', {
-            url: '/subject/:currentSubjectId/test/:currentTestId/questions/:questionsId/answers',
+            url: '/subject/:currentSubjectId/test/:currentTestId/questions/:questionId/answers',
             views: {
                 'content': {
                     templateUrl: 'app/admin/subject/test/answers/answers.html',

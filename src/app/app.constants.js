@@ -4,8 +4,6 @@
     angular.module('app')
 
         .constant('appConstants', {
-
-            currentID: '',
             logInURL: baseUrl + 'login/index',
             logOutURL: baseUrl + 'login/logout',
             isLoggedURL: baseUrl + 'login/isLogged',
