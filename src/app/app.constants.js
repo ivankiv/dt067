@@ -1,93 +1,97 @@
 (function(){
     'use strict';
-
+        var baseUrl = 'http://dtapi.local/';
     angular.module('app')
 
         .constant('appConstants', {
-            logInURL: 'http://dtapi.local/login/index',
-            logOutURL: 'http://dtapi.local/login/logout',
-            isLoggedURL: 'http://dtapi.local/login/isLogged',
 
-            getSubjects: 'http://dtapi.local/subject/getRecords',
-            getOneSubject: 'http://dtapi.local/subject/getRecords/', // + id of subject
-            getRangeOfSubjects: 'http://dtapi.local/subject/getRecordsRange',
-            countSubjects: 'http://dtapi.local/subject/countRecords',
-            addSubject: 'http://dtapi.local/subject/insertData',
-            editSubject: 'http://dtapi.local/subject/update/', // + id of subject
-            delSubject: 'http://dtapi.local/subject/del/', // + id of subject
+            currentID: '',
+            logInURL: baseUrl + 'login/index',
+            logOutURL: baseUrl + 'login/logout',
+            isLoggedURL: baseUrl + 'login/isLogged',
 
-            getScheduleForGroup: 'http://dtapi.local/timeTable/getTimeTablesForGroup/', // + id of group
-            getScheduleForSubject: 'http://dtapi.local/timeTable/getTimeTablesForSubject/', // + id of subject
-            deleteSchedule: 'http://dtapi.local/timeTable/del/', // + id of timeTable
-            addSchedule: 'http://dtapi.local/timeTable/insertData',
-            editSchedule: 'http://dtapi.local/timeTable/update/', // + id of timeTable
+            getSubjects: baseUrl + 'subject/getRecords',
+            getOneSubject: baseUrl + 'subject/getRecords/', // + id of subject
+            getRangeOfSubjects: baseUrl + 'subject/getRecordsRange',
+            countSubjects: baseUrl + 'subject/countRecords',
+            addSubject: baseUrl + 'subject/insertData',
+            editSubject: baseUrl + 'subject/update/', // + id of subject
+            delSubject: baseUrl + 'subject/del/', // + id of subject
 
-            getTests: 'http://dtapi.local/test/getRecords',
-            getTestBySubjectId: 'http://dtapi.local/test/getTestsBySubject/',
-            countTests: 'http://dtapi.local/test/countRecords',
-            addTest: 'http://dtapi.local/test/insertData',
-            editTest: 'http://dtapi.local/test/update/',
-            delTest: 'http://dtapi.local/test/del/',
+            getScheduleForGroup: baseUrl + 'timeTable/getTimeTablesForGroup/', // + id of group
+            getScheduleForSubject: baseUrl + 'timeTable/getTimeTablesForSubject/', // + id of subject
+            deleteSchedule: baseUrl + 'timeTable/del/', // + id of timeTable
+            addSchedule: baseUrl + 'timeTable/insertData',
+            editSchedule: baseUrl + 'timeTable/update/', // + id of timeTable
 
-            getTestDetailsByTest: 'http://dtapi.local/testDetail/getTestDetailsByTest/', // + id of test
-            addTestDetails: 'http://dtapi.local/testDetail/insertData',
-            editTestDetails: 'http://dtapi.local/testDetail/update/', // + id of testDetails
-            deleteTestDetails: 'http://dtapi.local/testDetail/del/', // + id of testDetails
+            getTests: baseUrl + 'test/getRecords',
+            getTestBySubjectId: baseUrl + 'test/getTestsBySubject/',
+            countTests: baseUrl + 'test/countRecords',
+            addTest: baseUrl + 'test/insertData',
+            editTest: baseUrl +  'test/update/',
+            delTest: baseUrl + 'test/del/',
 
-            getQuestionsRangeByTest: 'http://dtapi.local/question/getRecordsRangeByTest/', // + id of test
-            countQuestionsByTest: 'http://dtapi.local/question/countRecordsByTest/', // + id of test
-            delQuestions: 'http://dtapi.local/question/del/', // + id of question
-            addQuestion: 'http://dtapi.local/question/insertData',
-            editQuestion: 'http://dtapi.local/question/update/',
-            getQuestionsByLevelRand: 'http://dtapi.local/question/getQuestionsByLevelRand/', // + id
+            getTestDetailsByTest: baseUrl + 'testDetail/getTestDetailsByTest/', // + id of test
+            addTestDetails: baseUrl + 'testDetail/insertData',
+            editTestDetails: baseUrl + 'testDetail/update/', // + id of testDetails
+            deleteTestDetails: baseUrl + 'testDetail/del/', // + id of testDetails
 
-            getAnswersByQuestionID: 'http://dtapi.local/answer/getAnswersByQuestion/',  // get answer id
+            getQuestionsRangeByTest: baseUrl +  'question/getRecordsRangeByTest/', // + id of test
+            countQuestionsByTest: baseUrl + 'question/countRecordsByTest/', // + id of test
+            delQuestions: baseUrl + 'question/del/', // + id of question
+            addQuestion: baseUrl + 'question/insertData',
+            editQuestion: baseUrl + 'question/update/',
+            getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
-            getSpecialities: 'http://dtapi.local/speciality/getRecords',
-            getRangeOfSpecialities: 'http://dtapi.local/speciality/getRecordsRange',
-            countSpecialities: 'http://dtapi.local/speciality/countRecords',
-            addSpeciality: 'http://dtapi.local/speciality/insertData',
-            editSpeciality: 'http://dtapi.local/speciality/update/',
-            delSpeciality: 'http://dtapi.local/speciality/del/',
+            getAnswersByQuestionID: baseUrl + 'answer/getAnswersByQuestion/',  // get answer id
 
-            getFaculties: 'http://dtapi.local/faculty/getRecords',
-            getRangeOfFaculties: 'http://dtapi.local/faculty/getRecordsRange',
-            countFaculties: 'http://dtapi.local/faculty/countRecords',
-            addFaculty: 'http://dtapi.local/faculty/insertData',
-            editFaculty: 'http://dtapi.local/faculty/update/',
-            delFaculty: 'http://dtapi.local/faculty/del/',
+            getSpecialities: baseUrl + 'speciality/getRecords',
+            getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',
+            countSpecialities: baseUrl + 'speciality/countRecords',
+            addSpeciality: baseUrl +  'speciality/insertData',
+            editSpeciality: baseUrl + 'speciality/update/',
+            delSpeciality: baseUrl + 'speciality/del/',
 
-            getGroups: 'http://dtapi.local/group/getRecords',
-            getRangeOfGroups: 'http://dtapi.local/group/getRecordsRange',
-            getOneGroup: 'http://dtapi.local/group/getRecords/',                      // + id of group
-            countGroups: 'http://dtapi.local/group/countRecords',
-            addGroup: 'http://dtapi.local/group/insertData',
-            editGroup: 'http://dtapi.local/group/update/',                            // + id of group
-            delGroup: 'http://dtapi.local/group/del/',                                // + id of group
-            getGroupsBySpeciality: 'http://dtapi.local/group/getGroupsBySpeciality/', // + id of speciality
-            getGroupsByFaculty: 'http://dtapi.local/group/getGroupsByFaculty/',       // + id of faculty
+            getFaculties: baseUrl + 'faculty/getRecords',
+            getRangeOfFaculties: baseUrl + 'faculty/getRecordsRange',
+            countFaculties: baseUrl + 'faculty/countRecords',
+            addFaculty: baseUrl + 'faculty/insertData',
+            editFaculty: baseUrl + 'faculty/update/',
+            delFaculty: baseUrl + 'faculty/del/',
 
-            getAdmins: 'http://dtapi.local/AdminUser/getRecords',
+            getGroups: baseUrl + 'group/getRecords',
+            getRangeOfGroups: baseUrl + 'group/getRecordsRange',
+            getOneGroup: baseUrl + 'group/getRecords/',                      // + id of group
+            countGroups: baseUrl + 'group/countRecords',
+            addGroup: baseUrl + 'group/insertData',
+            editGroup: baseUrl + 'group/update/',                            // + id of group
+            delGroup: baseUrl + 'group/del/',                                // + id of group
+            getGroupsBySpeciality: baseUrl + 'group/getGroupsBySpeciality/', // + id of speciality
+            getGroupsByFaculty: baseUrl + 'group/getGroupsByFaculty/',       // + id of faculty
+
+            getAdmins: baseUrl + 'AdminUser/getRecords',
             editAdmins: '/AdminUser/update/',
             delAdmins: '/AdminUser/del/',
             addAdmins:'/AdminUser/insertData',
 
-            getStudents: 'http://dtapi.local/student/getRecords',
-            countStudents: 'http://dtapi.local/student/countRecords',
-            editStudent: 'http://dtapi.local/student/update/',
-            delStudent: 'http://dtapi.local/student/del/',
-            addStudents:'http://dtapi.local/student/insertData',
-            getStudentsByGroupId:'http://dtapi.local/student/getStudentsByGroup/',
+            getStudents: baseUrl + 'student/getRecords',
+            countStudents: baseUrl + 'student/countRecords',
+            editStudent: baseUrl + 'student/update/',
+            delStudent: baseUrl + 'student/del/',
+            addStudents: baseUrl + 'student/insertData',
+            getStudentsByGroupId:baseUrl + 'student/getStudentsByGroup/',
 
-            saveTestPlayerData: 'http://dtapi.local/TestPlayer/saveData/',
-            getTestPlayerData: 'http://dtapi.local/TestPlayer/getData/',
-            resetSessionData: 'http://dtapi.local/TestPlayer/resetSessionData/',
-            getTimeStamp: 'http://dtapi.local/TestPlayer/getTimeStamp/',
-            getEndTime: 'http://dtapi.local/TestPlayer/getEndTime/',
-            saveEndTime: 'http://dtapi.local/TestPlayer/saveEndTime/',
+            saveTestPlayerData: baseUrl + 'TestPlayer/saveData/',
+            getTestPlayerData: baseUrl + 'TestPlayer/getData/',
+            resetSessionData: baseUrl + 'TestPlayer/resetSessionData/',
+            getTimeStamp: baseUrl + 'TestPlayer/getTimeStamp/',
+            getEndTime: baseUrl + 'TestPlayer/getEndTime/',
+            saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
 
-            checkAnswers: 'http://dtapi.local/SAnswer/checkAnswers/',
-            addTestResult: 'http://dtapi.local/result/insertData/',
-            countTestPassesByStudent: 'http://dtapi.local/countTestPassesByStudent/' // + id`s of student and test
+
+            checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
+            addTestResult: baseUrl + 'result/insertData/',
+            countTestPassesByStudent: baseUrl + 'countTestPassesByStudent/' // + id`s of student and test
+
         });
 }());

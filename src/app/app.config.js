@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider' ];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider','breadcrumbsDirective' ];
 
-function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
+function configApp($stateProvider, $urlRouterProvider, breadcrumbsDirective, ngDialogProvider) {
 
     ngDialogProvider.setDefaults({
         plain: true,
@@ -38,7 +38,11 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
-            controller: 'adminStatController as stat'
+            controller: 'adminStatController as stat',
+            data: {
+                displayName: 'Головна'
+
+            }
         })
 
         .state('admin-home.subject', {
@@ -48,6 +52,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/subject.html',
                     controller: 'SubjectController as subjects'
                 }
+            },
+            data: {
+                displayName: 'Предмети'
             }
         })
 
@@ -58,6 +65,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/schedules/schedule.html',
                     controller: 'ScheduleController as schedules'
                 }
+            },
+            data: {
+                displayName: 'Розклад'
             }
         })
 
@@ -68,6 +78,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/schedules/schedule.html',
                     controller: 'ScheduleController as schedules'
                 }
+            },
+            data: {
+                displayName: 'Розклад'
             }
         })
 
@@ -78,6 +91,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/group/groups.html',
                     controller: 'GroupController as groups'
                 }
+            },
+            data: {
+                displayName: 'Групи'
             }
         })
 
@@ -88,6 +104,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl:'app/admin/group/groups.html',
                     controller:'GroupController as groups'
                 }
+            },
+            data: {
+                displayName: 'Групи'
             }
         })
 
@@ -98,6 +117,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl:'app/admin/group/groups.html',
                     controller:'GroupController as groups'
                 }
+            },
+            data: {
+                displayName: 'Групи'
             }
         })
 
@@ -108,6 +130,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/test/test.html',
                     controller: 'TestController as tests'
                 }
+            },
+            data: {
+                displayName: 'Тести'
             }
         })
 
@@ -118,6 +143,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/test/questions/questions.html',
                     controller: 'QuestionsController as questions'
                 }
+            },
+            data: {
+                displayName: 'Питання'
             }
         })
 
@@ -128,6 +156,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/subject/test/answers/answers.html',
                     controller: 'AnswersController as answers'
                 }
+            },
+            data: {
+                displayName: 'Відповіді'
             }
         })
 
@@ -148,6 +179,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/speciality/speciality.html',
                     controller: 'SpecialityController as specialities'
                 }
+            },
+            data: {
+                displayName: 'Спеціальності'
             }
         })
 
@@ -158,6 +192,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/faculty/faculty.html',
                     controller: 'facultyController as faculties'
                 }
+            },
+            data: {
+                displayName: 'Факультет'
             }
         })
 
@@ -178,6 +215,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/admin-info/admin.html',
                     controller: 'AdminEditController as admins'
                 }
+            },
+            data: {
+                displayName: 'Адміни'
             }
         })
 
@@ -188,6 +228,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/group/student/student.html',
                     controller: 'StudentEditController as students'
                 }
+            },
+            data: {
+                displayName: 'Студенти'
             }
         })
 
@@ -198,6 +241,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/admin/group/student/student.html',
                     controller: 'StudentEditController as students'
                 }
+            },
+            data: {
+                displayName: 'Студенти'
             }
         })
 
@@ -208,6 +254,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                         templateUrl: 'app/user/tests/tests.html',
                         controller: 'TestsController as tests'
                     }
+                },
+                data: {
+                    displayName: 'Тести'
                 }
             });
 }
