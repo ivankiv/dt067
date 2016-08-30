@@ -11,6 +11,7 @@
             //variables
             self.list = {};
             self.currentSubjectId = $stateParams.currentSubjectId;
+            self.currentTestId = $stateParams.currentTestId;
             self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
             self.begin = 0;
             self.showMessageNoEntity = false;
@@ -63,7 +64,9 @@
                     ngDialog.openConfirm({
                         template: 'app/partials/confirm-delete-dialog.html',
                         plain: false
-                    }).then(function() {
+                    }).then(deleteQuestion);
+
+                    function deleteQuestion() {
                         questionsService.deleteQuestions(question_id).then(function(response) {
                             if(response.data.response === 'ok') {
                                 activate();
@@ -71,11 +74,11 @@
 
                             if(response.status === 400) {
                                 ngDialog.open({template: '<div class="ngdialog-message"> \
-						            Неможливо видалити завдання яке містить відповіді!</div>'
+                                        Неможливо видалити завдання яке містить відповіді!</div>'
                                 });
                             }
                         });
-                    });
+                    }
             }
 
             function showAddQuestionForm() {

@@ -10,6 +10,7 @@
 
         //variables
         self.currentSubjectId = $stateParams.currentSubjectId;
+        self.currentTestId = $stateParams.currentTestId;
         self.list = {};
         self.showMessageNoEntity = false;
 

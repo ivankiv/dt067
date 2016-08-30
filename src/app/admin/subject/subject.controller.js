@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['loginService', 'subjectService', 'appConstants', '$uibModal', 'ngDialog'];
+        subjectController.$inject = ['loginService', 'subjectService', '$uibModal', 'ngDialog'];
 
-        function subjectController(loginService, subjectService, appConstants, $uibModal, ngDialog) {
+        function subjectController(loginService, subjectService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
