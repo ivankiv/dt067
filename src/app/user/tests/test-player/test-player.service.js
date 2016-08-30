@@ -9,20 +9,33 @@
 
         var self = this;
         self.currentTest = {};
+        self.pastAttemps = undefined;
         return{
             checkAttemptsOfUser: checkAttemptsOfUser
         };
 
+        function checkAttemptsOfUser(user_id,test_id) {
+            return getCurrentTest(test_id)
+                .then(function () {
+                    return getPastAttempts(user_id, test_id)
+                        .then(function () {
+                            return self.pastAttemps >= self.currentTest.attempts;
+                        });
+                    });
+        }
 
+        function getCurrentTest(test_id) {
+            return testService.getOneTest(test_id)
+                .then(function (response) {
+                    self.currentTest = response.data[0];
+                });
+        }
 
-        function checkAttemptsOfUser(user_id,test_id,checked) {
-            testService.getOneTest(test_id).then(function (response) {
-                self.currentTest = response.data;
-            }).then(function (response) {
-                    $http.get(appConstants.countTestPassesByStudent + user_id + "/" + test_id).then(function (response) {
-                                    checked = response.data.numberOfRecords >= self.currentTest.attempts;
-                            })
-                    })
+        function getPastAttempts(user_id, test_id) {
+            return $http.get(appConstants.countTestPassesByStudent + user_id + "/" + test_id)
+                .then(function (response) {
+                    self.pastAttemps = response.data.numberOfRecords;
+                });
         }
 
         function fulfilled(response) {

@@ -16,6 +16,7 @@
         self.levelOfQuestion = 1;
         self.numberOfQuestions = 5;
         self.listOfQuestions = [];
+        self.checked;
 
         //methods
 
@@ -28,9 +29,11 @@
         }
 
         function checkAttempts(user_id,test_id){
-            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id);
-            console.log(checked);
-                if(checked){
+            testPlayerService.checkAttemptsOfUser(user_id,test_id)
+                .then(function(response) {
+                    self.checked = response.data;
+                });
+                if(self.checked){
                     ngDialog.open({
                                 template:'<div class="ngdialog-message">Перевищена кількість спроб здати тест!</div>',
                                 plain:true
@@ -44,7 +47,6 @@
                     console.log('from questionsController', response.data);
                     self.listOfQuestions = response.data;
                 });
-            console.log('from questionsController', self.listOfQuestions);
         }
 
     }
