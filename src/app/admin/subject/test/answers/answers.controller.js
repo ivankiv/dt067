@@ -19,7 +19,7 @@
         activate();
 
         function activate() {
-
+            getQuestionsRangeByTest();
         }
 
         function getQuestionsRangeByTest() {
@@ -29,10 +29,12 @@
 
 
         function getAnswersByQuestionComplete(response) {
-            if(response.data.response === 'No records') {
+            console.log(response,'response');
+            if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
                 self.list = response.data;
+                console.log(self.list,'self-list');
             }
         }
     }
