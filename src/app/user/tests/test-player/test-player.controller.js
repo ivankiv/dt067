@@ -14,6 +14,7 @@
         self.user_id = 2;
         self.test_id = $stateParams.currentTestId;
         self.listOfQuestions = [];
+        self.checked;
 
         //methods
 
@@ -26,9 +27,12 @@
         }
 
         function checkAttempts(user_id,test_id){
-            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id);
-            console.log(checked);
-                if(checked){
+            testPlayerService.checkAttemptsOfUser(user_id,test_id)
+                .then(function(response) {
+                    console.log("response",response);
+                    self.checked = response;
+                });
+                if(self.checked){
                     ngDialog.open({
                                 template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
                                 plain:true
