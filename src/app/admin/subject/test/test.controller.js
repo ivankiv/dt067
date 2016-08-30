@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestController', testController);
-        testController.$inject = ['testService', 'subjectService', '$uibModal', '$stateParams', 'ngDialog'];
+        testController.$inject = ['loginService', 'testService', 'subjectService', '$uibModal', '$stateParams', 'ngDialog'];
 
-        function testController (testService, subjectService, $uibModal, $stateParams, ngDialog) {
+        function testController (loginService, testService, subjectService, $uibModal, $stateParams, ngDialog) {
             var self = this;
 
             //variables
@@ -24,8 +24,13 @@
             activate();
 
             function activate() {
+                isLogged();
                 getOneSubject();
                 getTestBySubjectId();
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getOneSubject() {
@@ -50,7 +55,7 @@
                 }).then(function() {
                     testService.deleteTest(testId).then(function(response) {
                         if(response.data.response === 'ok') {
-                            getTestById();
+                            getTestBySubjectId();
                         }
                         if(response.status === 400) {
                             ngDialog.open({template: '<div class="ngdialog-message"> \

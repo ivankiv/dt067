@@ -16,7 +16,7 @@
             <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
                 <ul class="nav navbar-nav">
                     <li ng-click="navCollapsed = true" ><a ui-sref="user">Профіль</a></li>
-                    <li ng-click="navCollapsed = true"><a ui-sref="user.tests">Тести</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="user.tests({groupId: user.user.group_id})">Тести</a></li>
                     <li ng-click="navCollapsed = true"><a>Результати</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
@@ -37,23 +37,23 @@
                 <img ng-src="{{user.user.photo}}" id="studentImage" height="250" width="250"
                 alt="Зображення">
             </div>
-            <div class="col-xs-12 col-md-4">
+            <div class="col-xs-12 col-md-3">
                 <p>Група:&nbsp;{{user.group_name}}</p>
                 <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
             </div>
-            <div class="col-xs-12 col-md-4 pull-right" ng-if="user.calendarLoad">
+            <div class="col-xs-12 col-md-3 pull-right" ng-if="user.calendarLoad">
                 <div class="user-date-picker">
                     <div uib-datepicker
                          ng-model="user.dateEvent"
                          class="well well-sm"
                          datepicker-options="user.dateOptions">
                     </div>
-                    <div  class="dateEvent" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
-                        <h5>Деталі тесту:</h5>
-                        <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
-                        <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
-                    </div>
                 </div>
+            </div>
+            <div  class="dateEvent col-xs-12 col-md-3 pull-right" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
+                <h5>Деталі тесту:</h5>
+                <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
+                <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
             </div>
         </div>
     </section>

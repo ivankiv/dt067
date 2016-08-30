@@ -1,10 +1,9 @@
 <!-- container section start -->
   <section id="container" class="">
-     
-      
       <header>
           <nav class="navbar navbar-default" role="navigation">
               <!-- Brand and toggle get grouped for better mobile display -->
+
               <div class="navbar-header">
 
                   <button type="button" add-class-in class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
@@ -15,7 +14,6 @@
                   </button>
                   <span class="navbar-brand"><img src="img/dt-brand.png"></span>
               </div>
-
               <!-- Collect the nav links, forms, and other content for toggling -->
               <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
 
@@ -26,19 +24,12 @@
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.groups">Групи</a></li>
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.subject">Предмети</a></li>
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>
-                      <li ng-click="navCollapsed = true" ng-if = "!tooManyStudents"><a ui-sref="admin-home.student">Студенти</a></li>
-                      <!--<li class="dropdown">-->
-                          <!--<a  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Користувачі<span class="caret"></span></a>-->
-                          <!--<ul class="dropdown-menu admin-users-drop-menu">-->
-                              <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>-->
-                              <!--<li ng-click="navCollapsed = true"><a ui-sref="admin-home.student">Студенти</a></li>-->
-                          <!--</ul>-->
-                      <!--</li>-->
+                      <li ng-if="!stat.tooManyStudents" ng-click="navCollapsed = true" ><a ui-sref="admin-home.student">Студенти</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                       <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
                   </ul>
-              </div><!-- /.navbar-collapse -->
+              </div>
           </nav>
 
 
@@ -78,8 +69,4 @@
           </table>
           </div>
       </section>
-
-
-
-
   </section>

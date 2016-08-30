@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('facultyController', facultyController);
-        facultyController.$inject = ['facultyService', 'appConstants', '$uibModal', 'ngDialog'];
+        facultyController.$inject = ['loginService','facultyService', 'appConstants', '$uibModal', 'ngDialog'];
 
-    function facultyController(facultyService, appConstants, $uibModal, ngDialog) {
+    function facultyController(loginService, facultyService, appConstants, $uibModal, ngDialog) {
         var self = this;
 
         //variables
@@ -35,8 +35,13 @@
         activate();
 
         function activate() {
+            isLogged();
             countFaculties();
-            getFaculties()
+            getFaculties();
+        }
+
+        function isLogged() {
+            loginService.isLogged();
         }
 
         function getFaculties() {
