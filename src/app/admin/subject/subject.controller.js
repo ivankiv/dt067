@@ -3,15 +3,15 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['subjectService', 'appConstants', '$uibModal', 'ngDialog'];
+        subjectController.$inject = ['loginService', 'subjectService', 'appConstants', '$uibModal', 'ngDialog'];
 
-        function subjectController(subjectService, appConstants, $uibModal, ngDialog) {
+        function subjectController(loginService, subjectService, appConstants, $uibModal, ngDialog) {
             var self = this;
 
-        //variables
+            //variables
             self.list = {};
 
-         //variables and methods for search and Pagination's panel
+             //variables and methods for search and Pagination's panel
             self.totalSubjects = 0;
             self.showSearch = true;
             self.textSearch = "";
@@ -21,7 +21,7 @@
             self.numberToDisplaySubjectsOnPage = [5,10,15,20];
             self.pageChanged = pageChanged;
 
-         //methods
+            //methods
             self.getSubjects = getSubjects;
             self.deleteSubject = deleteSubject;
             self.showAddSubjectForm = showAddSubjectForm;
@@ -30,7 +30,12 @@
             activate();
 
             function activate() {
+                isLogged();
                 getSubjects().then(pageChanged);
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getSubjects() {
@@ -87,10 +92,6 @@
             }
 
             function showEditSubjectForm(subject) {
-            //we need this to get current ID of subject and to pass it to SubjectModalController
-            // to edit current subject
-                appConstants.currentID = subject.subject_id;
-
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/edit-subject.html',
                     controller: 'SubjectModalController as subjects',

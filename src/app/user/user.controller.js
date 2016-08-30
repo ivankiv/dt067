@@ -5,9 +5,9 @@
         .module("app")
         .controller("UserController", UserController);
 
-    UserController.$inject = ["userService", "studentService","groupService","loginService"];
+    UserController.$inject = ["scheduleService", "subjectService", "studentService","groupService","loginService"];
 
-    function UserController(userService, studentService, groupService, loginService) {
+    function UserController(scheduleService, subjectService, studentService, groupService, loginService) {
         var self = this;
 
         self.userId = 0;
@@ -42,9 +42,28 @@
         }
 
         function getEventsForUser() {
-            userService.getEventsForUser(self.user.group_id).then(function(response) {
-                self.userEvents = response;
-                self.calendarLoad = true;
+            return scheduleService.getScheduleForGroup(self.user.group_id)
+                .then(getScheduleForGroupComplete);
+        }
+
+        function getScheduleForGroupComplete(response) {
+            angular.forEach(response.data, function(schedule, index) {
+
+                //we use this variable for datepicker to display info when current date was clicked
+                self.userEvents[index] = {
+                    date: new Date(schedule.event_date),
+                    status: 'full'
+                };
+
+                getOneSubject(schedule, index);
+            });
+
+            self.calendarLoad = true;
+        }
+
+        function getOneSubject(schedule, index) {
+            subjectService.getOneSubject(schedule.subject_id).then(function(response) {
+                self.userEvents[index].subject_name = response.data[0].subject_name;
             });
         }
 

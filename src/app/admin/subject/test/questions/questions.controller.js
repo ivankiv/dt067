@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
+        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
 
-        function questionsController (questionsService, $stateParams, testService, $uibModal, ngDialog) {
+        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, ngDialog) {
             var self = this;
 
             //variables
@@ -32,9 +32,14 @@
             activate();
 
             function activate() {
+                isLogged();
                 getOneTest();
                 countQuestionsByTest()
                     .then(pageChanged());
+            }
+
+            function isLogged() {
+                loginService.isLogged();
             }
 
             function getOneTest() {
