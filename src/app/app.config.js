@@ -1,9 +1,11 @@
 angular.module('app')
     .config(configApp);
 
+
 configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'];
 
 function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
+
 
     ngDialogProvider.setDefaults({
         plain: true,
@@ -29,10 +31,21 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             controller: 'UserController as user'
         })
 
-        .state('test-player', {
-            url: '/test-player/:currentTestId',
+        .state('test', {
+            url: '/:groupId/tests/test/:currentTestId',
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player'
+        })
+
+        .state('test.question', {
+            url: '/:currentQuestionId',
+            views: {
+                'question': {
+                    templateUrl: 'app/user/tests/test-player/question.html',
+                    controller: 'TestPlayerController as player'
+                }
+
+            }
         })
 
         .state('admin-home', {
@@ -149,7 +162,7 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
         })
 
         .state('admin-home.answers', {
-            url: '/subject/:currentSubjectId/test/:currentTestId/questions/:questionsId/answers',
+            url: '/subject/:currentSubjectId/test/:currentTestId/questions/:questionId/answers',
             views: {
                 'content': {
                     templateUrl: 'app/admin/subject/test/answers/answers.html',

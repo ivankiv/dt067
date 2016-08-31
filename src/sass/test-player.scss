@@ -1,0 +1,29 @@
+.test-player-box{
+  width: 100%;
+  border: 1px solid black;
+  padding: 0;
+  .timer-box{
+    border: 1px solid black;
+    .timer{
+      width: 25%;
+      min-width: 80px;
+      margin: 0 auto;
+      text-align: center;
+      border: 1px solid black;
+    }
+  }
+  /*.questions-list-box{
+    .questions-button{
+      border: 1px solid black;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+    }
+  }*/
+  .main-test-box{
+    border: 1px solid black;
+  }
+  .end-test-btn{
+    margin: 0 auto;
+  }
+}

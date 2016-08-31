@@ -11,6 +11,7 @@
             //variables
             self.list = {};
             self.currentSubjectId = $stateParams.currentSubjectId;
+            self.currentTestId = $stateParams.currentTestId;
             self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
             self.begin = 0;
             self.showMessageNoEntity = false;
@@ -42,6 +43,12 @@
                 loginService.isLogged();
             }
 
+            function pageChanged() {
+                self.begin = ((self.currentPage - 1) * self.questionsPerPage);
+                questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, self.begin)
+                    .then(getRecordsRangeComplete)
+            }
+
             function getOneTest() {
                 return testService.getOneTest($stateParams.currentTestId).then(function(response) {
                     self.currentTest = response.data[0];
@@ -51,6 +58,13 @@
             function getQuestionsRangeByTest() {
                 questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, self.begin)
                     .then(getRecordsRangeComplete)
+            }
+            function getRecordsRangeComplete(response) {
+                if(response.data.response === 'No records') {
+                    self.showMessageNoEntity = true;
+                } else {
+                    self.list = response.data;
+                }
             }
 
             function countQuestionsByTest() {
@@ -114,20 +128,6 @@
                     self.showMessageNoEntity = false;
                     activate();
                 })
-            }
-
-            function getRecordsRangeComplete(response) {
-                if(response.data.response === 'No records') {
-                    self.showMessageNoEntity = true;
-                } else {
-                    self.list = response.data;
-                }
-            }
-
-            function pageChanged() {
-                self.begin = ((self.currentPage - 1) * self.questionsPerPage);
-                questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, self.begin)
-                    .then(getRecordsRangeComplete)
             }
         }
 }());

@@ -7,7 +7,8 @@
 
     function answersService ($http, appConstants) {
         return {
-            getAnswersByQuestion: getAnswersByQuestion
+            getAnswersByQuestion: getAnswersByQuestion,
+            deleteAnswers: deleteAnswers
         };
 
         function getAnswersByQuestion(question_id) {
@@ -19,6 +20,11 @@
         }
         function rejected(response) {
             return response;
+        }
+
+        function deleteAnswers(answer_id) {
+            return $http.delete(appConstants.deleteAnswers + answer_id)
+                .then(fulfilled, rejected);
         }
 
     }

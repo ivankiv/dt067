@@ -8,24 +8,28 @@
     function testPlayerService($http ,appConstants ,testService ,testDetailsService) {
 
         var self = this;
-        self.currentTest = {};
-        return{
+        self.pastAttemps = undefined;
+        return {
             checkAttemptsOfUser: checkAttemptsOfUser
         };
 
+        function checkAttemptsOfUser(user_id,currentTest) {
+                    return getPastAttempts(user_id, currentTest.test_id)
+                        .then(function () {
+                            return self.pastAttemps >= currentTest.attempts;
+                    });
+        }
 
+        function getPastAttempts(user_id, test_id) {
+            return $http.get(appConstants.countTestPassesByStudent + user_id + "/" + test_id)
+                .then(function (response) {
+                    self.pastAttemps = response.data.numberOfRecords;
+                });
+        }
 
-        function checkAttemptsOfUser(user_id,test_id) {
-            testService.getOneTest(test_id).then(function (response) {
-                console.log(response);
-                self.currentTest = response.data;
-            }).then(function (response) {
-                    console.log(response);
-                    $http.get(appConstants.countTestPassesByStudent + user_id + "/" + test_id).then(function (response) {
-                                    console.log(response);
-                                    return response.data.numberOfRecords >= currentTest.attempts;
-                            })
-                    })
+        function startTestInfoInLog(user_id,test_id) {
+            return $http.post(appConstants.startTestInfoInLog + user_id + "/" + test_id)
+                .then(fulfilled,rejected);
         }
 
         function fulfilled(response) {

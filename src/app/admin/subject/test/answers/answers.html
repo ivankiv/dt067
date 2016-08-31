@@ -7,10 +7,10 @@
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right"
-                            ui-sref="admin-home.test({currentSubjectId: questions.currentSubjectId})">
+                            ui-sref="admin-home.questions({currentSubjectId: answers.currentSubjectId, currentTestId: answers.currentTestId})">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
-                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту">
+                    <button type="button" class="btn btn-success add-btn" ng-click="answers.showAddAnswerForm()" title="Додати дату тесту">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -19,27 +19,21 @@
                     <tr>
                         <th>Зображення</th>
                         <th>Текст відповіді</th>
-                        <th>Рівень</th>
-                        <th>Тип</th>
+                        <th>Результат</th>
                     </tr>
                     </thead>
-                    <tbody ng-if="!questions.showMessageNoEntity">
-                    <tr ng-repeat="question in questions.list">
-                        <td data-th="Номер">{{$index + 1 }}</td>
-                        <td data-th="Завдання">{{::question.question_text}}qwertyu123456</td>
-                        <td data-th="Завдання">{{::question.question_text}}qwertyu123456</td>
-                        <td data-th="Рівень">{{::question.level}}</td>
-                        <td data-th="Тип">{{::question.type}}</td>
+                    <tbody ng-if="!answers.showMessageNoEntity">
+                    <tr ng-repeat="answer in answers.list">
+                        <td data-th="Зображення"><img ng-src="{{answers.attachment}}" height="100" width="100" alt="Зображення"></td>
+                        <td data-th="Текст відповіді">{{:: answer.answer_text}}</td>
+                        <td data-th="Результат">{{::answer.true_answer}}</td>
                         <td>
-                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                            <button type="button" ng-click="answers.deleteAnswers(answer.answer_id)" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити">
                                 <i class="glyphicon glyphicon-trash"></i>
                             </button>
                             <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
                             ><i class="glyphicon glyphicon-pencil"></i>
-                            </button>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Відповіді"
-                            ><i class="glyphicon glyphicon-list"></i>
                             </button>
                         </td>
                     </tr>

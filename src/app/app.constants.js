@@ -4,8 +4,6 @@
     angular.module('app')
 
         .constant('appConstants', {
-
-            currentID: '',
             logInURL: baseUrl + 'login/index',
             logOutURL: baseUrl + 'login/logout',
             isLoggedURL: baseUrl + 'login/isLogged',
@@ -43,7 +41,8 @@
             editQuestion: baseUrl + 'question/update/',
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
-            getAnswersByQuestionID: baseUrl + 'answer/getAnswersByQuestion/',  // get answer id
+            getAnswersByQuestionID: baseUrl + 'answer/getRecords/',  // get answer id
+                 deleteAnswers: baseUrl + 'answer/del/', // + id of answer
 
             getSpecialities: baseUrl + 'speciality/getRecords',
             getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',
@@ -74,6 +73,10 @@
             delAdmins: '/AdminUser/del/',
             addAdmins:'/AdminUser/insertData',
 
+
+
+            getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
+
             getStudents: baseUrl + 'student/getRecords',
             countStudents: baseUrl + 'student/countRecords',
             editStudent: baseUrl + 'student/update/',
@@ -91,7 +94,7 @@
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',
-            countTestPassesByStudent: baseUrl + 'countTestPassesByStudent/' // + id`s of student and test
-
+            countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
+            startTestInfoInLog: baseUrl + 'log/startTest/' // + <user_id>/<test_id>
         });
 }());
