@@ -14,6 +14,7 @@
         self.currenSubjectName = '';
         self.showMessageNoEntity = false;
         self.group_id = $stateParams.groupId;
+
         self.listOfEvents  = [];
         self.listOfTests = [];
         self.currentTests = {};
@@ -40,12 +41,11 @@
                                             test.subject_name = response;
                                             test.date = event.event_date;
                                             self.listOfTests.push(test);
-                                        });
-                                });
+                                    });
                             });
-                    });
+                        });
+                });
             });
-            console.log(self.listOfTests);
         }
 
         function getOneSubject(id) {

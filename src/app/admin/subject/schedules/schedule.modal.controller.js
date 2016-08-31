@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('ScheduleModalController', scheduleModalController);
-    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'ngDialog'];
+    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'uibDateParser'];
 
-        function scheduleModalController(scheduleService, groupService, $stateParams, subjectService,  $uibModalInstance,  currentSchedule, currentGroupId,  ngDialog) {
+        function scheduleModalController(scheduleService, groupService, $stateParams, subjectService,  $uibModalInstance,  currentSchedule, currentGroupId, uibDateParser) {
             var self = this;
 
             //variables

@@ -10,7 +10,7 @@
         var self = this;
         self.currentTest = {};
         self.pastAttemps = undefined;
-        return{
+        return {
             checkAttemptsOfUser: checkAttemptsOfUser
         };
 
