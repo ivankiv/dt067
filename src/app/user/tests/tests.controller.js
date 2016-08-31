@@ -22,6 +22,7 @@
         //methods
         self.getTestBySubjectId = getTestBySubjectId;
         self.getOneSubject = getOneSubject;
+        self.testPlayerPreparation = testPlayerPreparation;
 
         activate();
 
@@ -65,6 +66,10 @@
             return testService.getTestBySubjectId(subjectId).then(function(response) {
                     self.currentTests = response.data;
             })
+        }
+
+        function testPlayerPreparation(testObj) {
+            localStorage.setItem("currentTest", JSON.stringify(testObj));
         }
     }
 }());

@@ -8,27 +8,16 @@
     function testPlayerService($http ,appConstants ,testService ,testDetailsService) {
 
         var self = this;
-        self.currentTest = {};
         self.pastAttemps = undefined;
         return {
             checkAttemptsOfUser: checkAttemptsOfUser
         };
 
-        function checkAttemptsOfUser(user_id,test_id) {
-            return getCurrentTest(test_id)
-                .then(function () {
-                    return getPastAttempts(user_id, test_id)
+        function checkAttemptsOfUser(user_id,currentTest) {
+                    return getPastAttempts(user_id, currentTest.test_id)
                         .then(function () {
-                            return self.pastAttemps >= self.currentTest.attempts;
-                        });
+                            return self.pastAttemps >= currentTest.attempts;
                     });
-        }
-
-        function getCurrentTest(test_id) {
-            return testService.getOneTest(test_id)
-                .then(function (response) {
-                    self.currentTest = response.data[0];
-                });
         }
 
         function getPastAttempts(user_id, test_id) {

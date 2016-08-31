@@ -18,6 +18,7 @@
         self.test_id = $stateParams.currentTestId;
         self.listOfQuestions = [];
         self.checked;
+        self.currentTest = JSON.parse(localStorage.currentTest);
 
         //methods
 
@@ -25,6 +26,7 @@
         activate();
 
         function activate() {
+            console.log(self.currentTest);
             isLogged()
                 .then(checkAttempts)
                 .then(getTestDetailsByTest);
@@ -37,7 +39,7 @@
         }
 
         function checkAttempts(){
-            testPlayerService.checkAttemptsOfUser(self.user_id,self.test_id)
+            testPlayerService.checkAttemptsOfUser(self.user_id,self.currentTest)
                 .then(function(response) {
                     self.checked = response;
                 });
