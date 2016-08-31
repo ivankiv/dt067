@@ -1,9 +1,11 @@
-<ol class="breadcrumb">
-    <li ng-repeat="crumb in breadcrumbs"
-        ng-class="{ active: $last }">
-            <a ui-sref="{{crumb.route}}"
-               ng-if="!$last">{{ crumb.displayName }}&nbsp;
-            </a>
-        <span ng-show="$last">{{ crumb.displayName }}</span>
+<ul class="breadcrumbs">
+    <li ng-repeat="state in $navigationState.currentState.path">
+        <span ng-if="!$navigationState.isCurrent(state)">
+            <a href="#{{ state.url.format(params) }}">{{$navigationState.getDisplayName(state)}}</a>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </span>
+        <span ng-if="$navigationState.isCurrent(state)">
+            {{$navigationState.getDisplayName(state)}}
+        </span>
     </li>
-</ol>
+</ul>

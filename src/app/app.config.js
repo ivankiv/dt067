@@ -1,9 +1,11 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'/*,'breadcrumbsDirective'*/ ];
 
-function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, */ngDialogProvider) {
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'];
+
+function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
+
 
     ngDialogProvider.setDefaults({
         plain: true,
@@ -52,7 +54,6 @@ function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, *
             controller: 'adminStatController as stat',
             data: {
                 displayName: 'Головна'
-
             }
         })
 
