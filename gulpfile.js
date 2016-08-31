@@ -40,10 +40,12 @@ gulp.task('concatCSS', function() {
     log('Compiling sass --> css and concating to styles.ccs');
     return gulp
         .src(config.sass)
+        .pipe($.sourcemaps.init())
         .pipe($.sass())
         .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
         .pipe($.plumber())
         .pipe($.concat(config.css))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest(config.temp + 'css'));
 });
 

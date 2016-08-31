@@ -1,21 +1,23 @@
+
 (function(){
     'use strict';
 
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal'];
+    TestPlayerController.$inject = ['loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal'];
 
-    function TestPlayerController ($stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal) {
+    function TestPlayerController (loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal) {
 
         var self = this;
 
         //variables
-        self.user_id = 2;
+        self.user_id = 0;
+        self.questionId = $stateParams.currentQuestionId;
+        self.groupId = $stateParams.groupId;
         self.test_id = $stateParams.currentTestId;
-        self.levelOfQuestion = 1;
-        self.numberOfQuestions = 5;
         self.listOfQuestions = [];
+        self.checked;
 
         //methods
 
@@ -23,28 +25,50 @@
         activate();
 
         function activate() {
-            getQuestionsByLevelRand();
-            checkAttempts(self.user_id,self.test_id);
+            isLogged()
+                .then(checkAttempts)
+                .then(getTestDetailsByTest);
         }
 
-        function checkAttempts(user_id,test_id){
-            var checked = testPlayerService.checkAttemptsOfUser(user_id,test_id);
-            console.log(checked);
-                if(checked){
+        function isLogged() {
+            return loginService.isLogged().then(function(response) {
+                self.user_id = response.data.id;
+            });
+        }
+
+        function checkAttempts(){
+            testPlayerService.checkAttemptsOfUser(self.user_id,self.test_id)
+                .then(function(response) {
+                    self.checked = response;
+                });
+                if(self.checked){
                     ngDialog.open({
-                                template:'<div class="ngdialog-message">Перевищена кількість спроб здати тест!</div>',
+                                template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
                                 plain:true
                     })
                 }
         }
 
-        function getQuestionsByLevelRand() {
-            questionsService.getQuestionsByLevelRand(self.test_id, self.levelOfQuestion, self.numberOfQuestions)
-                .then(function(response) {
-                    console.log('from questionsController', response.data);
-                    self.listOfQuestions = response.data;
+        function getTestDetailsByTest() {
+            testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetailsByTestComplete)
+        }
+        function getTestDetailsByTestComplete(response) {
+                angular.forEach(response.data, function(testDetail) {
+                    getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
                 });
-            console.log('from questionsController', self.listOfQuestions);
+        }
+
+        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
+            questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
+                .then(function(response) {
+                    angular.forEach(response.data, function(question) {
+                        self.listOfQuestions.push(question);
+                    });
+
+                    angular.forEach(self.listOfQuestions, function(question, index) {
+                        question.index = index + 1;
+                    });
+                });
         }
 
     }

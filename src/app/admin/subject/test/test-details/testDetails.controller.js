@@ -35,6 +35,32 @@
                 testDetailsService.getTestDetailsByTest($stateParams.currentTestId).then(getTestDetailsByTestComplete)
             }
 
+            function getTestDetailsByTestComplete(response) {
+                self.list = response.data;
+                calculateAvailableTask();
+
+                function calculateAvailableTask() {
+                    self.amountOfRate = 0;
+                    self.amountOfTasks = 0;
+
+                    if(response.data.response === "no records") {
+                        self.showMessageNoEntity = true;
+                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
+                    } else {
+
+                        angular.forEach(self.list, function(item) {
+                            //calculate amount of rate per current test
+                            self.amountOfRate += item.rate * item.tasks;
+
+                            //calculate amount of tasks per current test
+                            self.amountOfTasks += parseInt(item.tasks);
+                        });
+
+                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
+                    }
+                }
+            }
+
             function deleteTestDetails(id) {
                 ngDialog.openConfirm({
                     template: 'app/partials/confirm-delete-dialog.html',
@@ -87,32 +113,6 @@
                     });
                     activate();
                 })
-            }
-
-            function getTestDetailsByTestComplete(response) {
-                self.list = response.data;
-                calculateAvailableTask();
-
-                function calculateAvailableTask() {
-                    self.amountOfRate = 0;
-                    self.amountOfTasks = 0;
-
-                    if(response.data.response === "no records") {
-                        self.showMessageNoEntity = true;
-                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
-                    } else {
-
-                        angular.forEach(self.list, function(item) {
-                            //calculate amount of rate per current test
-                            self.amountOfRate += item.rate * item.tasks;
-
-                            //calculate amount of tasks per current test
-                            self.amountOfTasks += parseInt(item.tasks);
-                        });
-
-                        self.availableAmountOfTaskForCurrentTest = self.currentTest.tasks - self.amountOfTasks;
-                    }
-                }
             }
         }
 }());

@@ -73,6 +73,10 @@
             delAdmins: '/AdminUser/del/',
             addAdmins:'/AdminUser/insertData',
 
+
+
+            getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
+
             getStudents: baseUrl + 'student/getRecords',
             countStudents: baseUrl + 'student/countRecords',
             editStudent: baseUrl + 'student/update/',
@@ -91,6 +95,7 @@
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/' // + id`s of student and test
+
 
         });
 }());
