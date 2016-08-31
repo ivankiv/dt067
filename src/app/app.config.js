@@ -55,17 +55,7 @@ function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, *
 
             }
         })
-//////////////
-        .state('admin-home.test_player', {
-            url: '/test_player',
-            views: {
-                'content': {
-                    templateUrl: 'app/user/tests/test-player/test-player.html',
-                    controller: 'TestPlayerController as testPlayer'
-                }
-            }
-        })
-///////////////
+
         .state('admin-home.subject', {
             url: '/subject',
             views: {
