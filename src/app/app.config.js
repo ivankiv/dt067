@@ -35,6 +35,17 @@ function configApp($stateProvider, $urlRouterProvider, /*breadcrumbsDirective, *
             controller: 'TestPlayerController as player'
         })
 
+        .state('test.question', {
+            url: '/:currentQuestionId',
+            views: {
+                'question': {
+                    templateUrl: 'app/user/tests/test-player/question.html',
+                    controller: 'TestPlayerController as player'
+                }
+
+            }
+        })
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',

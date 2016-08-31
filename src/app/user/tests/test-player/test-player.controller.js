@@ -12,6 +12,7 @@
 
         //variables
         self.user_id = 0;
+        self.questionId = $stateParams.currentQuestionId;
         self.groupId = $stateParams.groupId;
         self.test_id = $stateParams.currentTestId;
         self.listOfQuestions = [];
@@ -59,7 +60,7 @@
         function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
             questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
                 .then(function(response) {
-                    angular.forEach(response.data, function(question, index) {
+                    angular.forEach(response.data, function(question) {
                         self.listOfQuestions.push(question);
                     });
 

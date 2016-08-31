@@ -11,9 +11,15 @@
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Завершити тест</i>
                     </button>
                 </div>
-                <aside class="wrapForQuestions">
-                    <div class="allOfQuestions" ng-repeat="question in player.listOfQuestions">
-                        <span>{{::question.index}}</span>
+                <aside class="wrapForQuestions col-md-5">
+                    <button class="allOfQuestions " ui-sref="test.question({currentQuestionId: question.question_id})"
+                            ng-repeat="question in player.listOfQuestions">{{::question.index}}
+                    </button>
+                    <div class="col-md-7">
+                        <h1>Запитання:</h1>
+                        <div ui-view="question">
+
+                        </div>
                     </div>
                 </aside>
             </div>
