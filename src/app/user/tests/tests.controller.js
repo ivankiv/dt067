@@ -26,11 +26,16 @@
         activate();
 
         function activate() {
-            getScheduleForGroup();
+            getScheduleForGroup().then(function(){
+                // if(self.listOfTests.length===0) {
+                //     self.showMessageNoEntity = true;
+                // }
+                console.log(self.listOfTests);
+            }) ;
         }
 
         function getScheduleForGroup() {
-            scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
+            return scheduleService.getScheduleForGroup(self.group_id).then(function (response) {
                 self.listOfEvents  = response.data;
 
                 angular.forEach(self.listOfEvents, function (event) {
@@ -38,9 +43,11 @@
                             getTestBySubjectId(event.subject_id).then(function () {
 
                                     angular.forEach(self.currentTests, function (test) {
-                                            test.subject_name = response;
-                                            test.date = event.event_date;
-                                            self.listOfTests.push(test);
+                                            if(test != 'no records') {
+                                                test.subject_name = response;
+                                                test.date = event.event_date;
+                                                self.listOfTests.push(test);
+                                            }
                                     });
                             });
                         });
@@ -56,11 +63,7 @@
         //this method return an array of tests for subject if they exist
         function getTestBySubjectId(subjectId) {
             return testService.getTestBySubjectId(subjectId).then(function(response) {
-                if(response.data.response === 'no records') {
-                    self.showMessageNoEntity = true;
-                } else {
                     self.currentTests = response.data;
-                }
             })
         }
     }

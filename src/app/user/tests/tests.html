@@ -22,7 +22,7 @@
                     </tr>
                     </thead>
                     <tbody ng-if="!tests.showMessageNoEntity">
-                    <tr ng-repeat="test in tests.listOfTests">
+                    <tr ng-repeat="test in tests.listOfTests track by $index">
                         <td data-th="Предмет">{{::test.subject_name}}</td>
                         <td data-th="Тест">{{::test.test_name}}</td>
                         <td data-th="Дата">{{::test.date}}</td>
