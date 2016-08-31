@@ -38,6 +38,11 @@
                 });
         }
 
+        function startTestInfoInLog(user_id,test_id) {
+            return $http.post(appConstants.startTestInfoInLog + user_id + "/" + test_id)
+                .then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }

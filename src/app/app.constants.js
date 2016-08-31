@@ -94,8 +94,7 @@
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',
-            countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/' // + id`s of student and test
-
-
+            countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
+            startTestInfoInLog: baseUrl + 'log/startTest/' // + <user_id>/<test_id>
         });
 }());
