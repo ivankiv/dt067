@@ -42,7 +42,7 @@
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
             getAnswersByQuestionID: baseUrl + 'answer/getRecords/',  // get answer id
-                 deleteQuestions: baseUrl + 'answer/del/', // + id of answer
+                 deleteAnswers: baseUrl + 'answer/del/', // + id of answer
 
             getSpecialities: baseUrl + 'speciality/getRecords',
             getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',

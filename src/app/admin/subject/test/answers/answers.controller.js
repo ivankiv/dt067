@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('AnswersController', answersController);
-    answersController.$inject = ['answersService', '$stateParams', 'testService'];
+    answersController.$inject = ['answersService', '$stateParams', 'testService', 'ngDialog', '$uibModal'];
 
-    function answersController (answersService, $stateParams, testService) {
+    function answersController (answersService, $stateParams, testService, ngDialog, $uibModal) {
         var self = this;
 
         //variables
@@ -16,6 +16,8 @@
 
         //methods
         self.getQuestionsRangeByTest = getQuestionsRangeByTest;
+        self.deleteAnswers = deleteAnswers;
+        self.showAddAnswerForm = showAddAnswerForm;
 
         activate();
 
@@ -46,7 +48,7 @@
                 plain: false
             }).then(deleteAnswers);
 
-            function deleteAnswers(answer_id) {
+            function deleteAnswers() {
                 answersService.deleteAnswers(answer_id).then(function(response) {
                     if(response.data.response === 'ok') {
                         activate();
@@ -59,6 +61,24 @@
                     }
                 });
             }
+        }
+
+        function showAddQuestionForm() {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/subject/test/answers/add-answer.html',
+                controller: 'AnswersModalController as answers',
+                backdrop: false,
+                resolve: {
+                    currentAnswer: {}
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Відповідь успішно додано!</div>'
+                });
+                self.showMessageNoEntity = false;
+                activate();
+            })
         }
 
     }

@@ -7,7 +7,8 @@
 
     function answersService ($http, appConstants) {
         return {
-            getAnswersByQuestion: getAnswersByQuestion
+            getAnswersByQuestion: getAnswersByQuestion,
+            deleteAnswers: deleteAnswers
         };
 
         function getAnswersByQuestion(question_id) {

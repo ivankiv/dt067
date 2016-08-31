@@ -10,7 +10,7 @@
                             ui-sref="admin-home.questions({currentSubjectId: answers.currentSubjectId, currentTestId: answers.currentTestId})">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
-                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту">
+                    <button type="button" class="btn btn-success add-btn" ng-click="answers.showAddAnswerForm()" title="Додати дату тесту">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
@@ -23,10 +23,10 @@
                     </tr>
                     </thead>
                     <tbody ng-if="!answers.showMessageNoEntity">
-                    <tr ng-repeat="answers in answers.list">
+                    <tr ng-repeat="answer in answers.list">
                         <td data-th="Зображення"><img ng-src="{{answers.attachment}}" height="100" width="100" alt="Зображення"></td>
-                        <td data-th="Текст відповіді">{{:: answers.answer_text}}</td>
-                        <td data-th="Результат">{{::answers.true_answer}}</td>
+                        <td data-th="Текст відповіді">{{:: answer.answer_text}}</td>
+                        <td data-th="Результат">{{::answer.true_answer}}</td>
                         <td>
                             <button type="button" ng-click="answers.deleteAnswers(answer.answer_id)" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити">
