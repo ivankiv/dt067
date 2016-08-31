@@ -22,7 +22,7 @@
                     </tr>
                     </thead>
                     <tbody ng-if="!tests.showMessageNoEntity">
-                    <tr ng-repeat="test in tests.listOfTests">
+                    <tr ng-repeat="test in tests.listOfTests track by $index">
                         <td data-th="Предмет">{{::test.subject_name}}</td>
                         <td data-th="Тест">{{::test.test_name}}</td>
                         <td data-th="Дата">{{::test.date}}</td>
@@ -31,7 +31,7 @@
                         <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
                         <td>
                             <button type="button" class="btn btn-primary pull-right table-help-btns" title="Пройти тест"
-                                    ui-sref="test({currentTestId: test.test_id, groupId: test.group_id})">
+                                    ui-sref="test({currentTestId: test.test_id, groupId: tests.group_id})">
                                 <i class="glyphicon glyphicon-list-alt"></i>
                             </button>
                         </td>
