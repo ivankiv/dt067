@@ -30,7 +30,7 @@
 
         function activate() {
             isLogged()
-                .then(getTestDetailsByTest);
+                /*.then(getTestDetailsByTest)*/;
             getTimerValue();
         }
 
@@ -46,27 +46,27 @@
             });
         }
 
-        function getTestDetailsByTest() {
-            testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetailsByTestComplete)
-        }
-        function getTestDetailsByTestComplete(response) {
-                angular.forEach(response.data, function(testDetail) {
-                    getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
-                });
-        }
-
-        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-            questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
-                .then(function(response) {
-                    angular.forEach(response.data, function(question) {
-                        self.listOfQuestions.push(question);
-                    });
-
-                    angular.forEach(self.listOfQuestions, function(question, index) {
-                        question.index = index + 1;
-                    });
-                });
-        }
+        // function getTestDetailsByTest() {
+        //     testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetailsByTestComplete)
+        // }
+        // function getTestDetailsByTestComplete(response) {
+        //         angular.forEach(response.data, function(testDetail) {
+        //             getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
+        //         });
+        // }
+        //
+        // function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
+        //     questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
+        //         .then(function(response) {
+        //             angular.forEach(response.data, function(question) {
+        //                 self.listOfQuestions.push(question);
+        //             });
+        //
+        //             angular.forEach(self.listOfQuestions, function(question, index) {
+        //                 question.index = index + 1;
+        //             });
+        //         });
+        // }
 
     }
 }());
