@@ -12,7 +12,7 @@
             self.answer = {};
             self.currentAnswer = currentAnswer;
             self.answer.attachment = "";
-            self.answer.question_id = $stateParams.currentTestId;
+            self.answer.question_id = $stateParams.questionId;
             self.duplicateEntityMessage = false;
             self.wasNotEditEntityMessage = false;
 
@@ -23,6 +23,7 @@
 
 
             function addAnswer() {
+                console.log(self.answer.question_id, 'qwerty122');
                 answersService.addAnswer(self.answer).then(addAnswerComplete)
             }
 
@@ -35,6 +36,7 @@
             }
 
             function addAnswerComplete(response) {
+                console.log(response, 'gggg');
                 if(response.data.response === "ok") {
                     self.answer = {};
                     $uibModalInstance.close();

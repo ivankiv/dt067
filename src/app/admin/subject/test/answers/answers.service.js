@@ -9,7 +9,8 @@
         return {
             getAnswersByQuestion: getAnswersByQuestion,
             deleteAnswers: deleteAnswers,
-            getQuestionByQuestionID: getQuestionByQuestionID
+            getQuestionByQuestionID: getQuestionByQuestionID,
+            addAnswer: addAnswer
         };
 
         function getAnswersByQuestion(question_id) {
@@ -25,6 +26,12 @@
         }
         function rejected(response) {
             return response;
+        }
+
+        function addAnswer(data) {
+            console.log(data, 'service data');
+            return $http.post(appConstants.addAnswer, data)
+                .then(fulfilled, rejected);
         }
 
         function deleteAnswers(answer_id) {

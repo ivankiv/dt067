@@ -51,7 +51,6 @@
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
-                console.log(response,'response');
                 self.question_text = response.data[0].question_text;
             }
         }

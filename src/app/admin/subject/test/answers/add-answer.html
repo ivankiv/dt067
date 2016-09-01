@@ -8,18 +8,18 @@
             <div class="col-sm-9">
                 <input class="form-control add-photo-inp"
                        id="image"
-                       file-load = "questions.question.attachment"
-                       ng-model="questions.question.attachment"
+                       file-load = "answers.answer.attachment"
+                       ng-model="answers.answer.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
-                <img ng-src="{{questions.question.attachment}}" height="100" width="100" alt="Зображення">
+                <img ng-src="{{answers.answer.attachment}}" height="100" width="100" alt="Зображення">
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-3" for="question_text">Відповідь: </label>
+            <label class="control-label col-sm-3" for="answer_text">Відповідь: </label>
             <div class="col-sm-9">
-                <textarea class="form-control" id="question_text"  name="question_text"
-                          ng-model="questions.question.question_text"
+                <textarea class="form-control" id="answer_text"  name="answer_text"
+                          ng-model="answers.answer.answer_text"
                           placeholder="Напишіть текс відповіді"
                           required>
                 </textarea>
@@ -31,7 +31,7 @@
             <label class="control-label col-sm-3" for="type">Правильність: </label>
             <div class="col-sm-9">
                 <select class="form-control input-form" id="type" name="type"
-                        ng-model="questions.question.type"
+                        ng-model="answers.answer.true_answer"
                         required>
                     <option disabled selected value="">Оберіть тип відповіді</option>
                     <option value="1">Вірно</option>
@@ -42,7 +42,7 @@
     </form>
 </div>
 <div class="modal-footer custom-modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="answers.addQuestion()"
+    <button class="btn btn-primary" type="button" ng-click="answers.addAnswer()"
             ng-disabled="newAddAnswersForm.$invalid"> Додати тест
     </button>
     <button class="btn btn-warning" type="button" ng-click="answers.cancelForm()">Відмінити</button>
