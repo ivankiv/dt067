@@ -13,6 +13,7 @@
         self.currentTestId = $stateParams.currentTestId;
         self.list = {};
         self.showMessageNoEntity = false;
+        self.question_id = $stateParams.questionId;
 
         //methods
         self.getQuestionsRangeByTest = getQuestionsRangeByTest;
@@ -23,6 +24,7 @@
 
         function activate() {
             getQuestionsRangeByTest();
+            getQuestionByQuestionID();
         }
 
 
@@ -33,12 +35,24 @@
 
 
         function getAnswersByQuestionComplete(response) {
-            console.log(response,'response');
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
                 self.list = response.data;
-                console.log(self.list,'self-list');
+            }
+        }
+
+        function getQuestionByQuestionID() {
+            answersService.getQuestionByQuestionID(self.question_id)
+                .then(getQuestionByQuestionIDComplete)
+        }
+
+        function getQuestionByQuestionIDComplete(response) {
+            if(response.data.response === 'no records') {
+                self.showMessageNoEntity = true;
+            } else {
+                console.log(response,'response');
+                self.question_text = response.data[0].question_text;
             }
         }
 

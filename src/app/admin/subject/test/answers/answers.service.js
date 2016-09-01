@@ -8,11 +8,16 @@
     function answersService ($http, appConstants) {
         return {
             getAnswersByQuestion: getAnswersByQuestion,
-            deleteAnswers: deleteAnswers
+            deleteAnswers: deleteAnswers,
+            getQuestionByQuestionID: getQuestionByQuestionID
         };
 
         function getAnswersByQuestion(question_id) {
             return $http.get(appConstants.getAnswersByQuestionID + question_id)
+                .then(fulfilled, rejected);
+        }
+        function getQuestionByQuestionID(question_id) {
+            return $http.get(appConstants.getQuestionByQuestionID + question_id)
                 .then(fulfilled, rejected);
         }
         function fulfilled(response) {
