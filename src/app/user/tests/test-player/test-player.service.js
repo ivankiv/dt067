@@ -10,7 +10,8 @@
         var self = this;
         self.pastAttemps = undefined;
         return {
-            checkAttemptsOfUser: checkAttemptsOfUser
+            checkAttemptsOfUser: checkAttemptsOfUser,
+            checkAnswersList:checkAnswersList
         };
 
         function checkAttemptsOfUser(user_id,currentTest) {

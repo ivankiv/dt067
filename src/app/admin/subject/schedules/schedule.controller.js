@@ -16,7 +16,7 @@
             self.associativeGroup = {};
             self.group_id = $stateParams.group_id;
             self.currentGroup = {};
-
+self.subject_name = 'name';
             //methods
             self.getOneSubject = getOneSubject;
             self.getSubjects = getSubjects;
