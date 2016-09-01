@@ -18,9 +18,9 @@
         self.listOfQuestions = [];
         self.checked;
         self.currentTest = JSON.parse(localStorage.currentTest);
+        self.endTime =JSON.parse(localStorage.endTime);
         self.test_id = self.currentTest.test_id;
-        self.timerValue;
-        self.testDuration = self.currentTest.time_for_test * 60000;
+        self.timerValue= 0;
         self.getTimerValue;
 
         //methods
@@ -32,11 +32,12 @@
             isLogged()
                 .then(getTestDetailsByTest);
             getTimerValue();
+            console.log(self.endTime);
         }
 
          function getTimerValue () {
              $interval(function () {
-                 return self.timerValue = self.testDuration -= 1000;
+                 self.timerValue = self.endTime -new Date().valueOf();
              }, 1000);
          }
 

@@ -13,7 +13,7 @@
         self.listOfEvents = {};
         self.status = ["Недоступно", "Доступно"];
         self.currenSubjectName = '';
-        self.showMessageNoEntity = false;
+        self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
         self.currentQuestionsId = [];
         self.currentTestId = 0;
@@ -32,13 +32,7 @@
         activate();
 
         function activate() {
-            getScheduleForGroup().then(function(){
-                // if(self.listOfTests.length===0) {
-                //     self.showMessageNoEntity = true;
-                // }
-                console.log(self.listOfTests);
-
-            }) ;
+            getScheduleForGroup();
             isLogged();
         }
 
@@ -55,6 +49,7 @@
                                                 test.subject_name = response;
                                                 test.date = event.event_date;
                                                 self.listOfTests.push(test);
+                                                self.showMessageNoEntity = false;
                                             }
                                     });
                             });
@@ -98,6 +93,8 @@
                         getTestDetailsByTest().then(function(response) {
                             console.log(response);
                             localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                            var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                            localStorage.setItem("endTime", JSON.stringify(endTime));
                             $state.go("test", {groupId: self.group_id});
                         })
 
