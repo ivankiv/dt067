@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams','ngDialog'];
+        'loginService', '$state','$stateParams','ngDialog','$timeout'];
 
-    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
+    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
         var self = this;
 
         //variables
@@ -85,7 +85,7 @@
                     self.checked = response;
                     if(self.checked){
                         ngDialog.open({
-                            template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
+                            template:'<div class="ngdialog-message">У Вас не залишилось спроб!</div>',
                             plain:true
                         })
                     }
@@ -93,12 +93,13 @@
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
                         getTestDetailsByTest().then(function(response) {
-                            console.log('response.length', response[1][0]);
-                            if(response[1][0] !== false) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
-                                var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
-                                localStorage.setItem("endTime", JSON.stringify(endTime));
-                                $state.go("test", {groupId: self.group_id});
+                            if(self.enoughQuestions[0] !== false) {
+                                $timeout(function () {
+                                    localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                    var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                                    localStorage.setItem("endTime", JSON.stringify(endTime));
+                                    $state.go("test", {questionIndex:0});
+                                },1000);
                             }
                         })
                     }
@@ -113,7 +114,7 @@
                 angular.forEach(response.data, function(testDetail) {
                        getQuestionsByLevelRand(testDetail.level, testDetail.tasks)
                 });
-                return [self.currentQuestionsId, self.enoughQuestions ];
+                return self.currentQuestionsId;
             }
         }
 
@@ -134,7 +135,7 @@
                             self.currentQuestionsId.push({'question_id':question.question_id});
                         });
                     }
-                   return [self.currentQuestionsId, self.enoughQuestions ];
+                   return self.currentQuestionsId;
                 });
         }
     }
