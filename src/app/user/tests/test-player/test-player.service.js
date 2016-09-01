@@ -32,6 +32,10 @@
                 .then(fulfilled,rejected);
         }
 
+        function checkAnswersList(answers) {
+            $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }
