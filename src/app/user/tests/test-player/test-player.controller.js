@@ -15,12 +15,12 @@
         self.user_id = 0;
         self.questionId = $stateParams.currentQuestionId;
         self.groupId = $stateParams.groupId;
-        self.test_id = $stateParams.currentTestId;
         self.listOfQuestions = [];
         self.checked;
         self.currentTest = JSON.parse(localStorage.currentTest);
+        self.test_id = self.currentTest.test_id;
         self.timerValue;
-        self.testDuration = 1800000;          // TODO should be someservisemethod
+        self.testDuration = self.currentTest.time_for_test * 60000;
         self.getTimerValue;
 
         //methods
