@@ -3,10 +3,10 @@
 
     angular.module('app')
         .controller('TestsController', TestsController);
-    TestsController.$inject = ['testService', 'subjectService', 'scheduleService', 'testPlayerService',
+    TestsController.$inject = ['testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
         'loginService', '$state','$stateParams','ngDialog'];
 
-    function TestsController (testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
+    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
         var self = this;
 
         //variables
@@ -15,6 +15,8 @@
         self.currenSubjectName = '';
         self.showMessageNoEntity = false;
         self.group_id = $stateParams.groupId;
+        self.currentQuestionsId = [];
+        self.currentTestId = 0;
 
         self.listOfEvents  = [];
         self.listOfTests = [];
@@ -80,6 +82,7 @@
         }
 
         function testPlayerPreparation(currentTest){
+            self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
                     self.checked = response;
@@ -91,8 +94,34 @@
                     }
                     else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
-                        $state.go("test", {groupId: self.group_id});
+
+                        getTestDetailsByTest().then(function(response) {
+                            console.log(response);
+                            localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                            $state.go("test", {groupId: self.group_id});
+                        })
+
                     }
+                });
+        }
+
+        function getTestDetailsByTest() {
+            return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
+        }
+        function getTestDetailsByTestComplete(response) {
+            angular.forEach(response.data, function(testDetail) {
+                getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
+            });
+            return self.currentQuestionsId;
+        }
+
+        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
+           return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
+                .then(function(response) {
+                    console.log('response from getQuestionsByLevelRand', response);
+                    angular.forEach(response.data, function(question) {
+                        self.currentQuestionsId.push(question.question_id);
+                    });
                 });
         }
 

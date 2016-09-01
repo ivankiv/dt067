@@ -29,8 +29,6 @@
         activate();
 
         function activate() {
-            console.log(self.currentTest);
-            console.log(self.listOfQuestions);
             isLogged()
                 .then(getTestDetailsByTest);
             getTimerValue();
