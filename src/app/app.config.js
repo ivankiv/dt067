@@ -49,7 +49,6 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                     templateUrl: 'app/user/tests/test-player/question.html',
                     controller: 'TestPlayerController as player'
                 }
-
             }
         })
 

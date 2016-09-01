@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
+    TestPlayerController.$inject = ['$state', 'loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
 
-    function TestPlayerController (loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
+    function TestPlayerController ($state, loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
 
         var self = this;
 
@@ -21,11 +21,14 @@
         self.currentTest = JSON.parse(localStorage.currentTest);
         self.endTime =JSON.parse(localStorage.endTime);
         self.test_id = self.currentTest.test_id;
+
+        self.currentQuestion_index = 0;
+
         self.timerValue= 0;
-        self.getTimerValue;
 
         //methods
-
+        self.getTimerValue;
+        self.chooseQuestion = chooseQuestion;
 
         activate();
 
@@ -34,7 +37,12 @@
                 /*.then(getTestDetailsByTest)*/;
             getTimerValue();
         }
-
+        
+        function chooseQuestion(question_id, question_index) {
+            self.currentQuestion_index = question_index;
+            $state.go('test.question', {currentQuestionId: question_id});
+        }
+        
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();
@@ -49,28 +57,6 @@
                 self.user_id = response.data.id;
             });
         }
-
-        // function getTestDetailsByTest() {
-        //     testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetailsByTestComplete)
-        // }
-        // function getTestDetailsByTestComplete(response) {
-        //         angular.forEach(response.data, function(testDetail) {
-        //             getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
-        //         });
-        // }
-        //
-        // function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-        //     questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
-        //         .then(function(response) {
-        //             angular.forEach(response.data, function(question) {
-        //                 self.listOfQuestions.push(question);
-        //             });
-        //
-        //             angular.forEach(self.listOfQuestions, function(question, index) {
-        //                 question.index = index + 1;
-        //             });
-        //         });
-        // }
 
         function finishTest() {
            console.log("finish test");
