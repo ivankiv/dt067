@@ -25,7 +25,8 @@
     "angular-messages": "^1.5.8",
     "angular-toArrayFilter": "^1.0.1",
     "font-awesome": "fontawesome#^4.6.3",
-    "angular-i18n": "^1.5.8"
+    "angular-i18n": "^1.5.8",
+    "angular-breadcrumb": "~0.4.1"
   },
   "overrides": {
     "bootstrap": {

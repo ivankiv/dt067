@@ -46,6 +46,21 @@
                         </select>
                     </div>
 
+                    <button ng-if="groups.speciality_id"
+                            type="button"
+                            class="btn btn-danger pull-right button-student-back selct-search-group"
+                            ui-sref="admin-home.speciality"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
+                    </button>
+                    <button ng-if="groups.faculty_id"
+                            type="button"
+                            class="btn btn-danger pull-right button-student-back selct-search-group"
+                            ui-sref="admin-home.faculty"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
+                    </button>
+
                     <button type="button" class="btn btn-success add-btn selct-search-group" title="Додати групу"
                             ng-click="groups.showAddGroupForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
