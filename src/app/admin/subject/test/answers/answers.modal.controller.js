@@ -19,16 +19,15 @@
             //methods
             self.addAnswer = addAnswer;
             self.cancelForm = cancelForm;
-            // self.updateAnswer = updateAnswer;
+            self.updateAnswer = updateAnswer;
 
 
             function addAnswer() {
-                console.log(self.answer.question_id, 'qwerty122');
                 answersService.addAnswer(self.answer).then(addAnswerComplete)
             }
 
-            function updateQuestion() {
-                answersService.editQuestion(self.currentAnswer.question_id, self.currentAnswer ).then(updateAnswerComplete)
+            function updateAnswer() {
+                answersService.editAnswer(self.currentAnswer.answer_id, self.currentAnswer ).then(updateAnswerComplete)
             }
 
             function cancelForm () {
@@ -36,14 +35,13 @@
             }
 
             function addAnswerComplete(response) {
-                console.log(response, 'gggg');
                 if(response.data.response === "ok") {
                     self.answer = {};
                     $uibModalInstance.close();
                 }
             }
 
-            function updateQuestionComplete(response) {
+            function updateAnswerComplete(response) {
                 if(response.data.response === "ok") {
                     self.currentAnswer = {};
                     $uibModalInstance.close();

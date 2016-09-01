@@ -19,6 +19,7 @@
         self.getQuestionsRangeByTest = getQuestionsRangeByTest;
         self.deleteAnswers = deleteAnswers;
         self.showAddAnswerForm = showAddAnswerForm;
+        self.showEditAnswerForm = showEditAnswerForm;
 
         activate();
 
@@ -88,6 +89,24 @@
             modalInstance.result.then(function() {
                 ngDialog.open({template: '<div class="ngdialog-message"> \
 						  Відповідь успішно додано!</div>'
+                });
+                self.showMessageNoEntity = false;
+                activate();
+            })
+        }
+
+        function showEditAnswerForm(currentAnswer) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/admin/subject/test/answers/edit-answer.html',
+                controller: 'AnswersModalController as answers',
+                backdrop: false,
+                resolve: {
+                    currentAnswer: currentAnswer
+                }
+            });
+            modalInstance.result.then(function() {
+                ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>'
                 });
                 self.showMessageNoEntity = false;
                 activate();
