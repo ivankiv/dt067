@@ -10,7 +10,8 @@
             getAnswersByQuestion: getAnswersByQuestion,
             deleteAnswers: deleteAnswers,
             getQuestionByQuestionID: getQuestionByQuestionID,
-            addAnswer: addAnswer
+            addAnswer: addAnswer,
+            editAnswer: editAnswer
         };
 
         function getAnswersByQuestion(question_id) {
@@ -29,8 +30,14 @@
         }
 
         function addAnswer(data) {
-            console.log(data, 'service data');
+            console.log(data, 'addAnswer');
             return $http.post(appConstants.addAnswer, data)
+                .then(fulfilled, rejected);
+        }
+
+        function editAnswer(answer_id, data) {
+            console.log(data, 'editAnswer');
+            return $http.post(appConstants.editAnswer + answer_id, data)
                 .then(fulfilled, rejected);
         }
 

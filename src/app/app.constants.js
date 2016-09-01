@@ -45,6 +45,7 @@
                  deleteAnswers: baseUrl + 'answer/del/', // + id of answer
                  getQuestionByQuestionID: baseUrl + 'question/getRecords/', // + question id
                 addAnswer: baseUrl + 'answer/insertData',
+                editAnswer: baseUrl + 'answer/update/',
 
             getSpecialities: baseUrl + 'speciality/getRecords',
             getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',
