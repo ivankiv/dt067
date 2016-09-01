@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state', 'loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
+    TestPlayerController.$inject = ['$state', 'loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService','testPlayerService', '$interval','$timeout'];
 
-    function TestPlayerController ($state, loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
+    function TestPlayerController ($state, loginService, testDetailsService, $stateParams, questionsService, testService, testPlayerService,$interval, $timeout) {
 
         var self = this;
 
@@ -33,8 +33,8 @@
         activate();
 
         function activate() {
-            isLogged()
-                /*.then(getTestDetailsByTest)*/;
+            isLogged();
+            $timeout(function () {console.log(self.listOfQuestionsId)},1000);
             getTimerValue();
         }
         

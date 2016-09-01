@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams','ngDialog'];
+        'loginService', '$state','$stateParams','ngDialog','$timeout'];
 
-    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
+    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
         var self = this;
 
         //variables
@@ -84,7 +84,7 @@
                     self.checked = response;
                     if(self.checked){
                         ngDialog.open({
-                            template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
+                            template:'<div class="ngdialog-message">У Вас не залишилось спроб!</div>',
                             plain:true
                         })
                     }
@@ -94,11 +94,13 @@
                         getTestDetailsByTest().then(function(response) {
 
                             if(self.getQuestionsSucceess) {
-                                console.log(response);
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
-                                var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
-                                localStorage.setItem("endTime", JSON.stringify(endTime));
-                                $state.go("test", {groupId: self.group_id});
+                                $timeout(function () {
+                                    localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                    var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                                    localStorage.setItem("endTime", JSON.stringify(endTime));
+                                    $state.go("test", {groupId: self.group_id});
+                                },2000);
+
                             }
 
                         })
