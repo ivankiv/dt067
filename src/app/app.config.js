@@ -37,19 +37,9 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
         })
 
         .state('test', {
-            url: '/:groupId/tests/test/:currentTestId',
+            url: '/tests/test/:questionIndex',
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player'
-        })
-
-        .state('test.question', {
-            url: '/:currentQuestionId',
-            views: {
-                'question': {
-                    templateUrl: 'app/user/tests/test-player/question.html',
-                    controller: 'TestPlayerController as player'
-                }
-            }
         })
 
         .state('admin-home', {

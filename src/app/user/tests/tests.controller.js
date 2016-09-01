@@ -98,8 +98,8 @@
                                     localStorage.setItem("currentQuestionsId", JSON.stringify(response));
                                     var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                     localStorage.setItem("endTime", JSON.stringify(endTime));
-                                    $state.go("test", {groupId: self.group_id});
-                                },2000);
+                                    $state.go("test", {questionIndex:0});
+                                },1000);
 
                             }
 
