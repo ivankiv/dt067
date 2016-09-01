@@ -16,6 +16,7 @@
         self.questionId = $stateParams.currentQuestionId;
         self.groupId = $stateParams.groupId;
         self.listOfQuestions = [];
+        self.listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
         self.checked;
         self.currentTest = JSON.parse(localStorage.currentTest);
         self.endTime =JSON.parse(localStorage.endTime);
@@ -32,12 +33,14 @@
             isLogged()
                 .then(getTestDetailsByTest);
             getTimerValue();
-            console.log(self.endTime);
         }
 
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();
+                 if(self.timerValue<=0) {
+                     finishTest();
+                 }
              }, 1000);
          }
 
@@ -69,5 +72,9 @@
                 });
         }
 
+        function finishTest() {
+           console.log("finish test");
+            testPlayerService.checkAnswersList(self.listOfQuestionsId);
+        }
     }
 }());
