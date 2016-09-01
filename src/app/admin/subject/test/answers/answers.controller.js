@@ -63,7 +63,7 @@
             }
         }
 
-        function showAddQuestionForm() {
+        function showAddAnswerForm() {
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/admin/subject/test/answers/add-answer.html',
                 controller: 'AnswersModalController as answers',
