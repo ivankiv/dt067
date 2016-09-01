@@ -34,6 +34,7 @@
             editTestDetails: baseUrl + 'testDetail/update/', // + id of testDetails
             deleteTestDetails: baseUrl + 'testDetail/del/', // + id of testDetails
 
+            getQuestionById:baseUrl +  'question/getRecords/', // + id of question,
             getQuestionsRangeByTest: baseUrl +  'question/getRecordsRangeByTest/', // + id of test
             countQuestionsByTest: baseUrl + 'question/countRecordsByTest/', // + id of test
             delQuestions: baseUrl + 'question/del/', // + id of question

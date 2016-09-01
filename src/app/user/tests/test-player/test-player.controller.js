@@ -5,26 +5,24 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state', 'loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService','testPlayerService', '$interval','$timeout'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$q','$timeout'];
 
-    function TestPlayerController ($state, loginService, testDetailsService, $stateParams, questionsService, testService, testPlayerService,$interval, $timeout) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $q, $timeout) {
 
         var self = this;
 
         //variables
         self.user_id = 0;
-        self.questionId = $stateParams.currentQuestionId;
-        self.groupId = $stateParams.groupId;
-        self.listOfQuestions = [];
-        self.listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+        self.currentQuestion = {};
+
         self.checked;
-        self.currentTest = JSON.parse(localStorage.currentTest);
         self.endTime =JSON.parse(localStorage.endTime);
-        self.test_id = self.currentTest.test_id;
-
-        self.currentQuestion_index = 0;
-
+        self.currentQuestion_index = $stateParams.questionIndex;
         self.timerValue= 0;
+        self.listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+        self.currentTest = JSON.parse(localStorage.currentTest);
+        self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
+        self.test_id = self.currentTest.test_id;
 
         //methods
         self.getTimerValue;
@@ -33,16 +31,33 @@
         activate();
 
         function activate() {
+            getCurrentQuestion().then(function () {
+                    console.log('questio= ',self.currentQuestion);
+                    console.log('questionId= ',self.questionId);
+                    console.log("arr =",self.listOfQuestionsId );
+            });
             isLogged();
-            $timeout(function () {console.log(self.listOfQuestionsId)},1000);
             getTimerValue();
+
         }
-        
-        function chooseQuestion(question_id, question_index) {
-            self.currentQuestion_index = question_index;
-            $state.go('test.question', {currentQuestionId: question_id});
+
+        // function init() {
+        //     var defer = $q.defer();
+        //     $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
+        //     return defer.promise;
+        // }
+        function chooseQuestion(question_index) {
+            $state.go('test', {questionIndex:question_index});
         }
-        
+
+        function getCurrentQuestion() {
+            return questionsService.getQuestionById(self.questionId)
+                .then(
+                    function (response) {
+                        self.currentQuestion = response.data[0];
+                    }
+                );
+        }
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();

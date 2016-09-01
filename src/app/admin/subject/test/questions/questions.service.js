@@ -12,11 +12,17 @@
                 countQuestionsByTest: countQuestionsByTest,
                 deleteQuestions: deleteQuestions,
                 addQuestion: addQuestion,
-                editQuestion: editQuestion
+                editQuestion: editQuestion,
+                getQuestionById:getQuestionById
             };
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
                 return $http.get(appConstants.getQuestionsRangeByTest + test_id + "/" + limit + "/" + offset)
+                    .then(fulfilled, rejected);
+            }
+
+            function getQuestionById(question_id) {
+                return $http.get(appConstants.getQuestionById + question_id)
                     .then(fulfilled, rejected);
             }
 
