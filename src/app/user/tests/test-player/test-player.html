@@ -63,8 +63,8 @@
 
                             <div class="col-sm-3 col-xs-12 wrapForQuestions">
                                 <div ng-click="player.chooseQuestion(question.question_id, question.index)"
-                                     class="allOfQuestions bg-info" ng-repeat="question in player.listOfQuestions">
-                                    {{$index}}
+                                     class="allOfQuestions bg-info" ng-repeat="question in player.listOfQuestionsId">
+                                    <button>{{$index+1}}</button>
                                 </div>
                             </div>
 
