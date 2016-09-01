@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
+    TestPlayerController.$inject = ['$state', 'loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
 
-    function TestPlayerController (loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
+    function TestPlayerController ($state, loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
 
         var self = this;
 
@@ -21,21 +21,25 @@
         self.test_id = self.currentTest.test_id;
         self.timerValue;
         self.testDuration = self.currentTest.time_for_test * 60000;
-        self.getTimerValue;
+        self.currentQuestion_index = 0;
 
         //methods
-
+        self.getTimerValue;
+        self.chooseQuestion = chooseQuestion;
 
         activate();
 
         function activate() {
-            console.log(self.currentTest);
-            console.log(self.listOfQuestions);
             isLogged()
                 .then(getTestDetailsByTest);
             getTimerValue();
         }
-
+        
+        function chooseQuestion(question_id, question_index) {
+            self.currentQuestion_index = question_index;
+            $state.go('test.question', {currentQuestionId: question_id});
+        }
+        
          function getTimerValue () {
              $interval(function () {
                  return self.timerValue = self.testDuration -= 1000;
@@ -63,6 +67,7 @@
                     angular.forEach(response.data, function(question) {
                         self.listOfQuestions.push(question);
                     });
+                    console.log(self.listOfQuestions);
 
                     angular.forEach(self.listOfQuestions, function(question, index) {
                         question.index = index + 1;

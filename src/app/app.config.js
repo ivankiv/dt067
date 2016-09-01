@@ -44,7 +44,6 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     templateUrl: 'app/user/tests/test-player/question.html',
                     controller: 'TestPlayerController as player'
                 }
-
             }
         })
 

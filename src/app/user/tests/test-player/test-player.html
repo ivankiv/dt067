@@ -61,13 +61,14 @@
 
                         <div class="col-sm-12 col-xs-12 player-wrap">
 
-                            <div class="col-sm-3 col-xs-12 wrapForQuestions bg-info">
-                                <div class="allOfQuestions" ng-repeat="question in player.listOfQuestions">
-                                    <span>{{::question.index}}</span>
+                            <div class="col-sm-3 col-xs-12 wrapForQuestions">
+                                <div ng-click="player.chooseQuestion(question.question_id, question.index)"
+                                     class="allOfQuestions bg-info" ng-repeat="question in player.listOfQuestions">
+                                    {{::question.index}}
                                 </div>
                             </div>
 
-                            <div class="col-sm-8 col-xs-12 questions-box bg-info"></div>
+                            <div ui-view="question" class="col-sm-8 col-xs-12 questions-box bg-info"></div>
 
                         </div>
 
