@@ -3,18 +3,20 @@
 
     angular.module('app')
         .controller('TestsController', TestsController);
-    TestsController.$inject = ['testService', 'subjectService', 'scheduleService', 'testPlayerService',
+    TestsController.$inject = ['testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
         'loginService', '$state','$stateParams','ngDialog'];
 
-    function TestsController (testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
+    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
         var self = this;
 
         //variables
         self.listOfEvents = {};
         self.status = ["Недоступно", "Доступно"];
         self.currenSubjectName = '';
-        self.showMessageNoEntity = false;
+        self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
+        self.currentQuestionsId = [];
+        self.currentTestId = 0;
 
         self.listOfEvents  = [];
         self.listOfTests = [];
@@ -30,13 +32,7 @@
         activate();
 
         function activate() {
-            getScheduleForGroup().then(function(){
-                // if(self.listOfTests.length===0) {
-                //     self.showMessageNoEntity = true;
-                // }
-                console.log(self.listOfTests);
-
-            }) ;
+            getScheduleForGroup();
             isLogged();
         }
 
@@ -53,6 +49,7 @@
                                                 test.subject_name = response;
                                                 test.date = event.event_date;
                                                 self.listOfTests.push(test);
+                                                self.showMessageNoEntity = false;
                                             }
                                     });
                             });
@@ -80,6 +77,8 @@
         }
 
         function testPlayerPreparation(currentTest){
+            self.getQuestionsSucceess = true;
+            self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
                     self.checked = response;
@@ -91,10 +90,55 @@
                     }
                     else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
-                        $state.go("test", {groupId: self.group_id});
+
+                        getTestDetailsByTest().then(function(response) {
+
+                            if(self.getQuestionsSucceess) {
+                                console.log(response);
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                                localStorage.setItem("endTime", JSON.stringify(endTime));
+                                $state.go("test", {groupId: self.group_id});
+                            }
+
+                        })
                     }
                 });
         }
 
+        function getTestDetailsByTest() {
+            return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
+        }
+        function getTestDetailsByTestComplete(response) {
+            if(response.statusText === 'OK') {
+                angular.forEach(response.data, function(testDetail) {
+                        getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
+                });
+                return self.currentQuestionsId;
+            } else {
+                return response;
+            }
+        }
+
+        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
+           return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
+                .then(function(response) {
+                    if(response.data.response === "Not enough number of questions for quiz") {
+
+                        if(self.getQuestionsSucceess){
+                            ngDialog.open({
+                                template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
+                                plain:true
+                            });
+                            self.getQuestionsSucceess = false;
+                        }
+
+                    } else {
+                        angular.forEach(response.data, function(question) {
+                            self.currentQuestionsId.push({'question_id':question.question_id});
+                        });
+                    }
+                });
+        }
     }
 }());

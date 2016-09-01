@@ -16,12 +16,15 @@
         self.questionId = $stateParams.currentQuestionId;
         self.groupId = $stateParams.groupId;
         self.listOfQuestions = [];
+        self.listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
         self.checked;
         self.currentTest = JSON.parse(localStorage.currentTest);
+        self.endTime =JSON.parse(localStorage.endTime);
         self.test_id = self.currentTest.test_id;
-        self.timerValue;
-        self.testDuration = self.currentTest.time_for_test * 60000;
+
         self.currentQuestion_index = 0;
+
+        self.timerValue= 0;
 
         //methods
         self.getTimerValue;
@@ -31,7 +34,7 @@
 
         function activate() {
             isLogged()
-                .then(getTestDetailsByTest);
+                /*.then(getTestDetailsByTest)*/;
             getTimerValue();
         }
         
@@ -42,7 +45,10 @@
         
          function getTimerValue () {
              $interval(function () {
-                 return self.timerValue = self.testDuration -= 1000;
+                 self.timerValue = self.endTime -new Date().valueOf();
+                 if(self.timerValue<=0) {
+                     finishTest();
+                 }
              }, 1000);
          }
 
@@ -52,28 +58,9 @@
             });
         }
 
-        function getTestDetailsByTest() {
-            testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetailsByTestComplete)
+        function finishTest() {
+           console.log("finish test");
+            testPlayerService.checkAnswersList(self.listOfQuestionsId);
         }
-        function getTestDetailsByTestComplete(response) {
-                angular.forEach(response.data, function(testDetail) {
-                    getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
-                });
-        }
-
-        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-            questionsService.getQuestionsByLevelRand(self.test_id, levelOfQuestion, numberOfQuestions)
-                .then(function(response) {
-                    angular.forEach(response.data, function(question) {
-                        self.listOfQuestions.push(question);
-                    });
-                    console.log(self.listOfQuestions);
-
-                    angular.forEach(self.listOfQuestions, function(question, index) {
-                        question.index = index + 1;
-                    });
-                });
-        }
-
     }
 }());

@@ -32,15 +32,16 @@
                         <td>
                             <button type="button" class="btn btn-primary pull-right table-help-btns"
                                     title="Пройти тест"
+                                     ng-if="test.enabled==1"
                                     ng-click = "tests.testPlayerPreparation(test)">
-                                <i class="glyphicon glyphicon-list-alt"></i>
+                                <i class="glyphicon glyphicon-play"></i>
                             </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <div ng-if="tests.showMessageNoEntity" class="text-center">
-                    <h1>Немає тестів для даного предмету!</h1>
+                    <h1>Немає тестів для даної групи!</h1>
                 </div>
             </div>
         </div>

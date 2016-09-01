@@ -27,7 +27,7 @@
             }
 
             function updateQuestion() {
-                questionsService.editQuestion(self.currentQuestion.question_id, self.currentQuestion ).then(updateQuestionComplete)
+                questionsService.editQuestion(self.currentQuestion.question_id, self.currentQuestion).then(updateQuestionComplete)
             }
 
             function cancelForm () {

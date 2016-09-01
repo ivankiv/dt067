@@ -14,6 +14,7 @@
                     </h4>
                 </div>
                 <div class=' col-xs-12 views-header views-header-students-view-wrpr views-header-wrapper-add-btn-and-search'>
+
                     <select class="pull-right header-views-select-pages-search"
                             ng-show="students.showSearch"
                             ng-model="students.studentsPerPage"
@@ -23,6 +24,13 @@
                     <button type="button" class="btn btn-success add-btn" title="Додати студента"
                             ng-click="students.showCreateForm()"
                     ><i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <button ng-if="students.group_id"
+                            type="button"
+                            class="btn btn-danger pull-right back-btn-user"
+                            ui-sref="admin-home.groups"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
                     </button>
                     <input class="views-header-search-inpts students-input" type="text"
                            placeholder="Пошук на сторінці"

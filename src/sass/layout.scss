@@ -356,7 +356,7 @@ div.row.schedule-form {
   margin-left: 0;
 }
 .selct-search-group {
-  margin: 5px;
+  margin-bottom: 10px;
 }
 .students-input {
   margin-bottom: 15px;
@@ -471,4 +471,15 @@ aside.wrapForQuestions {
     color: green;
     border: 1px solid gray;
   }
+}
+.button-student-back {
+  margin: 5px;
+}
+.button-student-back{
+    @media (max-width: 992px) {
+     margin-right: 20px;
+  }
+}
+.back-btn-user {
+  margin-right: 7px;
 }
