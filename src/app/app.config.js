@@ -2,9 +2,9 @@ angular.module('app')
     .config(configApp);
 
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider'];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider', '$breadcrumbProvider'];
 
-function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
+function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadcrumbProvider) {
 
 
     ngDialogProvider.setDefaults({
@@ -13,6 +13,11 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
         closeByDocument: false,
         closeByEscape: true,
         closeByNavigation: true
+    });
+
+    $breadcrumbProvider.setOptions({
+        prefixStateName: 'admin-home',
+        template: 'bootstrap3'
     });
 
     $urlRouterProvider.otherwise('/');
@@ -52,8 +57,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
             controller: 'adminStatController as stat',
-            data: {
-                displayName: 'Головна'
+            ncyBreadcrumb: {
+                label: 'Головна'
             }
         })
 
@@ -65,8 +70,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'SubjectController as subjects'
                 }
             },
-            data: {
-                displayName: 'Предмети'
+            ncyBreadcrumb: {
+                label: 'Предмети'
             }
         })
 
@@ -78,8 +83,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'ScheduleController as schedules'
                 }
             },
-            data: {
-                displayName: 'Розклад'
+            ncyBreadcrumb: {
+                label: 'Розклад'
             }
         })
 
@@ -91,8 +96,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'ScheduleController as schedules'
                 }
             },
-            data: {
-                displayName: 'Розклад'
+            ncyBreadcrumb: {
+                label: 'Розклад'
             }
         })
 
@@ -104,8 +109,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'GroupController as groups'
                 }
             },
-            data: {
-                displayName: 'Групи'
+            ncyBreadcrumb: {
+                label: 'Групи'
             }
         })
 
@@ -117,8 +122,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller:'GroupController as groups'
                 }
             },
-            data: {
-                displayName: 'Групи'
+            ncyBreadcrumb: {
+                label: 'Групи'
             }
         })
 
@@ -130,8 +135,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller:'GroupController as groups'
                 }
             },
-            data: {
-                displayName: 'Групи'
+            ncyBreadcrumb: {
+                label: 'Групи'
             }
         })
 
@@ -143,8 +148,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'TestController as tests'
                 }
             },
-            data: {
-                displayName: 'Тести'
+            ncyBreadcrumb: {
+                label: 'Тести'
             }
         })
 
@@ -156,8 +161,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'QuestionsController as questions'
                 }
             },
-            data: {
-                displayName: 'Питання'
+            ncyBreadcrumb: {
+                label: 'Питання'
             }
         })
 
@@ -169,8 +174,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'AnswersController as answers'
                 }
             },
-            data: {
-                displayName: 'Відповіді'
+            ncyBreadcrumb: {
+                label: 'Відповіді'
             }
         })
 
@@ -192,8 +197,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'SpecialityController as specialities'
                 }
             },
-            data: {
-                displayName: 'Спеціальності'
+            ncyBreadcrumb: {
+                label: 'Спеціальності'
             }
         })
 
@@ -205,8 +210,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'facultyController as faculties'
                 }
             },
-            data: {
-                displayName: 'Факультет'
+            ncyBreadcrumb: {
+                label: 'Факультет'
             }
         })
 
@@ -228,8 +233,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'AdminEditController as admins'
                 }
             },
-            data: {
-                displayName: 'Адміни'
+            ncyBreadcrumb: {
+                label: 'Адміни'
             }
         })
 
@@ -241,8 +246,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'StudentEditController as students'
                 }
             },
-            data: {
-                displayName: 'Студенти'
+            ncyBreadcrumb: {
+                label: 'Студенти'
             }
         })
 
@@ -254,8 +259,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                     controller: 'StudentEditController as students'
                 }
             },
-            data: {
-                displayName: 'Студенти'
+            ncyBreadcrumb: {
+                label: 'Студенти'
             }
         })
 
@@ -267,8 +272,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider) {
                         controller: 'TestsController as tests'
                     }
                 },
-                data: {
-                    displayName: 'Тести'
+                ncyBreadcrumb: {
+                    label: 'Тести'
                 }
             });
 }

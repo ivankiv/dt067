@@ -13,7 +13,7 @@
 
                     var defaultResolver = function (state) {
 
-                        var displayName = state.data.displayName || state.name;
+                        var displayName = state.ncyBreadcrumb.label || state.name;
 
                         return displayName;
                     };
@@ -52,7 +52,7 @@
 
                     setNavigationState();
                 }],
-                link: function (scope, element, attrs) {
+                link: function (scope, element, attrs, controller) {
                     scope.hasCustomResolver = angular.isDefined(attrs['itemDisplayNameResolver']);
                 }
             };
