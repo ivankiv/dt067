@@ -25,6 +25,7 @@
         self.currentQuestion_index = 0;
 
         self.timerValue= 0;
+        /*self.timerBackground = '';*/
 
         //methods
         self.getTimerValue;
@@ -46,7 +47,7 @@
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();
-                 if(self.timerValue<=0) {
+                 if (self.timerValue <= 0) {
                      finishTest();
                  }
              }, 1000);
