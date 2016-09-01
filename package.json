@@ -10,7 +10,6 @@
   "author": "IF-067 group",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
   },
   "devDependencies": {
     "del": "^2.2.1",

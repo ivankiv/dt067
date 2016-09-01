@@ -1,4 +1,5 @@
 /*
+
 (function(){
     'use strict';
 
@@ -10,29 +11,36 @@
         var self = this;
 
         //variables
-         self.startTime;
-         self.finalTime;
          self.timerValue;
+         self.currentTime;
+         self.serverTime;
+         self.testDuration = 1800000;   // TODO
 
          activate();
 
          function activate() {
-            getStartTime();
-            getFinalTime();
+         getCurrentTime();
+         getServerTime();
          }
 
-         function getStartTime () {
-            self.startTime = timerService.getStartTime();
-         }
 
-         function getFinalTime () {
-            self.finalTime = timerService.getFinalTime();
-         }
-
-         $interval(function () {
-            self.timerValue = timerService.getTimerValue();
+         self.timerValue = $interval(function () {
+         return self.testDuration -= 1000;
          }, 1000);
+
+         function getCurrentTime () {
+         self.currentTime = timerService.getCurrentTime();
+         console.log(self.currentTime);
+         }
+
+         function getServerTime () {
+         self.serverTime = timerService.getServerTime();
+         console.log(self.serverTime);
+         }
 
     }
 }());
+
 */
+
+

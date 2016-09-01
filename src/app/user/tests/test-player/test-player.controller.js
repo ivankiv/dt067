@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal'];
+    TestPlayerController.$inject = ['loginService', 'testDetailsService', '$stateParams', 'questionsService', 'testService', 'scheduleService', 'testPlayerService', 'adminService', '$uibModal', '$interval'];
 
-    function TestPlayerController (loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal) {
+    function TestPlayerController (loginService, testDetailsService, $stateParams, questionsService, testService, scheduleService, testPlayerService, adminService, $uibModal, $interval) {
 
         var self = this;
 
@@ -19,6 +19,9 @@
         self.listOfQuestions = [];
         self.checked;
         self.currentTest = JSON.parse(localStorage.currentTest);
+        self.timerValue;
+        self.testDuration = 1800000;          // TODO should be someservisemethod
+        self.getTimerValue;
 
         //methods
 
@@ -27,10 +30,18 @@
 
         function activate() {
             console.log(self.currentTest);
+            console.log(self.listOfQuestions);
             isLogged()
                 .then(checkAttempts)
                 .then(getTestDetailsByTest);
+            getTimerValue();
         }
+
+         function getTimerValue () {
+             $interval(function () {
+                 return self.timerValue = self.testDuration -= 1000;
+             }, 1000);
+         }
 
         function isLogged() {
             return loginService.isLogged().then(function(response) {

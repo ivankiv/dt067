@@ -1,29 +1,64 @@
-.test-player-box{
-  width: 100%;
-  border: 1px solid black;
-  padding: 0;
-  .timer-box{
-    border: 1px solid black;
-    .timer{
-      width: 25%;
-      min-width: 80px;
-      margin: 0 auto;
-      text-align: center;
-      border: 1px solid black;
-    }
-  }
-  /*.questions-list-box{
-    .questions-button{
-      border: 1px solid black;
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-    }
-  }*/
+.test-player-container{
+  background-color: #867DB0;
   .main-test-box{
-    border: 1px solid black;
-  }
-  .end-test-btn{
-    margin: 0 auto;
+    clear: both;
+    vertical-align: bottom;
+    text-align: center;
+    padding: 10px 20px;
+    @media (max-width: 400px) {
+      padding: 10px 5px;
+    }
+    .timer-and-questionNum-box{
+      padding: 5px 0;
+      .questionNum-box{
+        margin: 5px 0;
+        padding: 5px;
+        text-align: left;
+        display: inline-block;
+        .questionNum-sign{
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+      .timer-box{
+        margin: 5px 0;
+        padding: 0 5px;
+        text-align: right;
+        display: inline-block;
+        .timeleft-sign{
+          font-weight: bold;
+          color: #fff;
+        }
+        .timer{
+          display: inline-block;
+          padding: 5px 5px;
+          font-weight: bold;
+          color: #000;
+        }
+      }
+    }
+    .player-wrap{
+      padding: 15px 0;
+      .wrapForQuestions{
+        min-height: 10px;
+        vertical-align: top;
+        text-align: left;
+        padding: 5px;
+        margin-bottom: 10px;
+        .allOfQuestions{
+          padding: 0;
+          height: 15px;
+          width: 15px;
+          margin-right: 3px;
+        }
+      }
+      .questions-box{
+        min-height: 300px;
+        float: right;
+      }
+    }
+    .end-test-btn{
+      margin: 10px auto;
+    }
   }
 }
