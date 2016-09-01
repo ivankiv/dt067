@@ -29,24 +29,24 @@
             $uibModalInstance.dismiss();
         }
         function addSpecialityComplete(response) {
-            if(response.status == 400){
+            if(response.status === 400){
                 self.duplicateSpecialitiesMessage = true;
                 return;
             }
-            if(response.data.response == "ok"){
+            if(response.data.response === "ok"){
                 self.speciality = {};
                 $uibModalInstance.close(response);
             }
         }
         function updateComplete(response) {
-            if(response.status == 400){
+            if(response.status === 400){
                 self.duplicateSpecialitiesMessage = true;
                 return;
             }
-            if(response.status == 200 && response.data.response == 'error'){
+            if(response.status === 200 && response.data.response === 'error'){
                 self.wasNotEditSpecialityMessage = true;
             }
-            if(response.data.response == 'ok'){
+            if(response.data.response === 'ok'){
                 self.currentSpeciality = {};
                 $uibModalInstance.close();
                 ngDialog.open({
