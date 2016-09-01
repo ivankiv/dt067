@@ -2,27 +2,27 @@
     'use strict';
 
     angular.module('app')
-        .controller('QuestionsModalController', questionsModalController);
-        questionsModalController.$inject = ['answersService', '$stateParams',  '$uibModalInstance', 'currentAnswer'];
+        .controller('AnswersModalController', answersModalController);
+        answersModalController.$inject = ['answersService', '$stateParams',  '$uibModalInstance', 'currentAnswer'];
 
-        function questionsModalController(questionsService, $stateParams,  $uibModalInstance, currentAnswer) {
+        function answersModalController(answersService, $stateParams,  $uibModalInstance, currentAnswer) {
             var self = this;
 
             //variables
             self.answer = {};
             self.currentAnswer = currentAnswer;
-            self.question.attachment = "";
-            self.question.test_id = $stateParams.currentTestId;
+            self.answer.attachment = "";
+            self.answer.question_id = $stateParams.currentTestId;
             self.duplicateEntityMessage = false;
             self.wasNotEditEntityMessage = false;
 
             //methods
-            self.addQuestion = addAnswer;
+            self.addAnswer = addAnswer;
             self.cancelForm = cancelForm;
-            self.updateQuestion = updateAnswer;
+            // self.updateAnswer = updateAnswer;
 
 
-            function addQuestion() {
+            function addAnswer() {
                 answersService.addAnswer(self.answer).then(addAnswerComplete)
             }
 
@@ -34,9 +34,9 @@
                 $uibModalInstance.dismiss();
             }
 
-            function addQuestionComplete(response) {
+            function addAnswerComplete(response) {
                 if(response.data.response === "ok") {
-                    self.question = {};
+                    self.answer = {};
                     $uibModalInstance.close();
                 }
             }
