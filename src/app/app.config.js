@@ -84,7 +84,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Розклад'
+                label: 'Розклад',
+                parent: 'admin-home.subject'
             }
         })
 
@@ -97,7 +98,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Розклад'
+                label: 'Розклад',
+                parent: 'admin-home.groups'
             }
         })
 
@@ -123,7 +125,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Групи'
+                label: 'Групи',
+                parent: 'admin-home.speciality'
             }
         })
 
@@ -136,7 +139,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Групи'
+                label: 'Групи',
+                parent: 'admin-home.faculty'
             }
         })
 
@@ -149,7 +153,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Тести'
+                label: 'Тести',
+                parent: 'admin-home.subject'
             }
         })
 
@@ -162,7 +167,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Питання'
+                label: 'Питання',
+                parent: 'admin-home.test'
             }
         })
 
@@ -186,6 +192,10 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                     templateUrl: 'app/admin/subject/test/test-details/test-details.html',
                     controller: 'TestDetailsController as testDetails'
                 }
+            },
+            ncyBreadcrumb: {
+                label: 'Деталі тесту',
+                parent: 'admin-home.test'
             }
         })
 
@@ -260,7 +270,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Студенти'
+                label: 'Студенти',
+                parent: 'admin-home.groups'
             }
         })
 

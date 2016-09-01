@@ -472,3 +472,14 @@ aside.wrapForQuestions {
     border: 1px solid gray;
   }
 }
+.button-student-back {
+  margin: 5px;
+}
+.button-student-back{
+    @media (max-width: 992px) {
+     margin-right: 20px;
+  }
+}
+.back-btn-user {
+  margin-right: 7px;
+}
