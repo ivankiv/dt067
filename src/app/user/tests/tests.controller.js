@@ -1,11 +1,12 @@
-(function(){
+﻿(function(){
     'use strict';
 
     angular.module('app')
         .controller('TestsController', TestsController);
-    TestsController.$inject = ['testService', 'subjectService', 'scheduleService', '$stateParams'];
+    TestsController.$inject = ['testService', 'subjectService', 'scheduleService', 'testPlayerService',
+        'loginService', '$state','$stateParams','ngDialog'];
 
-    function TestsController (testService, subjectService, scheduleService, $stateParams) {
+    function TestsController (testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog) {
         var self = this;
 
         //variables
@@ -18,6 +19,8 @@
         self.listOfEvents  = [];
         self.listOfTests = [];
         self.currentTests = {};
+        self.checked;
+        self.user_id = 0;
 
         //methods
         self.getTestBySubjectId = getTestBySubjectId;
@@ -32,7 +35,9 @@
                 //     self.showMessageNoEntity = true;
                 // }
                 console.log(self.listOfTests);
+
             }) ;
+            isLogged();
         }
 
         function getScheduleForGroup() {
@@ -68,8 +73,28 @@
             })
         }
 
-        function testPlayerPreparation(testObj) {
-            localStorage.setItem("currentTest", JSON.stringify(testObj));
+        function isLogged() {
+            return loginService.isLogged().then(function(response) {
+                self.user_id = response.data.id;
+            });
         }
+
+        function testPlayerPreparation(currentTest){
+            testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
+                .then(function(response) {
+                    self.checked = response;
+                    if(self.checked){
+                        ngDialog.open({
+                            template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
+                            plain:true
+                        })
+                    }
+                    else {
+                        localStorage.setItem("currentTest", JSON.stringify(currentTest));
+                        $state.go("test", {currentTestId: currentTest.test_id, groupId: self.group_id});
+                    }
+                });
+        }
+
     }
 }());

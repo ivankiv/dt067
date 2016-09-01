@@ -32,7 +32,6 @@
             console.log(self.currentTest);
             console.log(self.listOfQuestions);
             isLogged()
-                .then(checkAttempts)
                 .then(getTestDetailsByTest);
             getTimerValue();
         }
@@ -47,19 +46,6 @@
             return loginService.isLogged().then(function(response) {
                 self.user_id = response.data.id;
             });
-        }
-
-        function checkAttempts(){
-            testPlayerService.checkAttemptsOfUser(self.user_id,self.currentTest)
-                .then(function(response) {
-                    self.checked = response;
-                });
-                if(self.checked){
-                    ngDialog.open({
-                                template:'<div class="ngdialog-message">РџРµСЂРµРІРёС‰РµРЅР° РєС–Р»СЊРєС–СЃС‚СЊ СЃРїСЂРѕР± Р·РґР°С‚Рё С‚РµСЃС‚!</div>',
-                                plain:true
-                    })
-                }
         }
 
         function getTestDetailsByTest() {
@@ -86,4 +72,3 @@
 
     }
 }());
-
