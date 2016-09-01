@@ -91,7 +91,7 @@
                     }
                     else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
-                        $state.go("test", {currentTestId: currentTest.test_id, groupId: self.group_id});
+                        $state.go("test", {groupId: self.group_id});
                     }
                 });
         }
