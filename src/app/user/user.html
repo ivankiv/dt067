@@ -28,8 +28,8 @@
     </div>
     </aside>
     <section ui-view="content" class="col-xs-12">
-        <div class="col-xs-12 col-md-10 col-md-offset-1">
-            <div class='col-xs-12 col-md-10 views-header'>
+        <div class="col-xs-12 col-md-12">
+            <div class='col-xs-12 col-md-12 views-header'>
                 <h4>{{user.user.student_surname}}&nbsp;{{user.user.student_name}}&nbsp;{{user.user.student_fname}}
                     <br>Ласкаво просимо!</h4>
             </div>
@@ -37,16 +37,16 @@
                 <img ng-src="{{user.user.photo}}" id="studentImage" height="250" width="250"
                 alt="Зображення">
             </div>
-            <div class="col-xs-12 col-md-3">
+            <div class="col-xs-12 col-md-2">
                 <p>Група:&nbsp;{{user.group_name}}</p>
                 <p>№ залікової книжки:&nbsp;{{user.user.gradebook_id}}</p>
-                <div  class="dateEvent col-xs-12  pull-right" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
-                    <h5>Деталі тесту:</h5>
-                    <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
-                    <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
-                </div>
             </div>
-            <div class="col-xs-12 col-md-4" ng-if="user.calendarLoad">
+            <div  class="dateEvent col-xs-12 col-md-3" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
+                <h5>Деталі тесту:</h5>
+                <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
+                <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
+            </div>
+            <div class="col-xs-12 col-md-4 pull-right" ng-if="user.calendarLoad">
                 <div class="user-date-picker">
                     <div uib-datepicker
                          ng-model="user.dateEvent"
