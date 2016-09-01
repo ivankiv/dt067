@@ -77,6 +77,7 @@
         }
 
         function testPlayerPreparation(currentTest){
+            self.getQuestionsSucceess = true;
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
@@ -91,13 +92,16 @@
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
                         getTestDetailsByTest().then(function(response) {
-                            console.log(response);
-                            localStorage.setItem("currentQuestionsId", JSON.stringify(response));
-                            var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
-                            localStorage.setItem("endTime", JSON.stringify(endTime));
-                            $state.go("test", {groupId: self.group_id});
-                        })
 
+                            if(self.getQuestionsSucceess) {
+                                console.log(response);
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                                localStorage.setItem("endTime", JSON.stringify(endTime));
+                                $state.go("test", {groupId: self.group_id});
+                            }
+
+                        })
                     }
                 });
         }
@@ -106,21 +110,35 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            angular.forEach(response.data, function(testDetail) {
-                getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
-            });
-            return self.currentQuestionsId;
+            if(response.statusText === 'OK') {
+                angular.forEach(response.data, function(testDetail) {
+                        getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
+                });
+                return self.currentQuestionsId;
+            } else {
+                return response;
+            }
         }
 
         function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
            return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
                 .then(function(response) {
-                    console.log('response from getQuestionsByLevelRand', response);
-                    angular.forEach(response.data, function(question) {
-                        self.currentQuestionsId.push(question.question_id);
-                    });
+                    if(response.data.response === "Not enough number of questions for quiz") {
+
+                        if(self.getQuestionsSucceess){
+                            ngDialog.open({
+                                template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
+                                plain:true
+                            });
+                            self.getQuestionsSucceess = false;
+                        }
+
+                    } else {
+                        angular.forEach(response.data, function(question) {
+                            self.currentQuestionsId.push({'question_id':question.question_id});
+                        });
+                    }
                 });
         }
-
     }
 }());
