@@ -28,8 +28,12 @@
         activate();
 
         function activate() {
-            countSpecialities();
-            getSpecialities();
+            isLogged();
+            getSpecialities().then(pageChanged);
+        }
+
+        function isLogged() {
+            loginService.isLogged();
         }
 
         function getSpecialities() {
@@ -45,8 +49,8 @@
         }
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.specialitiesPerPage);
-            self.showSearch = (self.currentPage == 1) ? true : false;
-            self.textSearch = (self.currentPage == 1) ? self.textSearch : "";
+            self.showSearch = (self.currentPage === 1);
+            self.textSearch = (self.currentPage === 1) ? self.textSearch : "";
         }
         function deleteSpeciality(speciality_id) {
             ngDialog.openConfirm({
@@ -57,19 +61,17 @@
             });
         }
         function deleteSpecialityComplete(response) {
-            if (response.status == 400) {
+            if (response.status === 400) {
                 ngDialog.open({
                     template: '<div class="ngdialog-message">Спеціальність містить групи,неможливе видалення!</div>',
                     plain: true
                 })
-            } else if (response.data.response == 'ok') {
+            } else if (response.data.response === 'ok') {
                 ngDialog.open({
                     template: '<div class="ngdialog-message">Спеціальність успішно видалена!</div>',
                     plain: true
                 });
-                getSpecialities()
-                    .then(countSpecialities)
-                    .then(pageChanged);
+                activate();
             }
         }
         function showAddSpecialityForm() {
@@ -85,9 +87,7 @@
                ngDialog.open({
                    template:'<div class="ngdialog-message">Спеціальність успішно додана!</div>'
                });
-                getSpecialities()
-                    .then(countSpecialities)
-                    .then(pageChanged);
+                activate();
             });
         }
         function showEditSpecialityForm(speciality) {
@@ -102,9 +102,7 @@
                 }
             });
             modalInstance.result.then(function () {
-               getSpecialities()
-                   .then(countSpecialities)
-                   .then(pageChanged);
+               activate();
             });
         }
     }
