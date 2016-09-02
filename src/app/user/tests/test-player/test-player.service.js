@@ -38,7 +38,7 @@
         }
 
         function mixAnswers(answers) {
-            var currentIndex = answers.lenght,temporaryValue,randomIndex;
+            var currentIndex = answers.length,temporaryValue,randomIndex;
 
             while (0 !== currentIndex){
                 randomIndex = Math.floor(Math.random() * currentIndex);
