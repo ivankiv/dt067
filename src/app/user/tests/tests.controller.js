@@ -93,15 +93,16 @@
 
                         getTestDetailsByTest().then(function(response) {
 
-                            console.log("response 1111: ", response);
-                            if(response.length == currentTest.tasks) {
+                            var notEnoughQuestions = response.filter(function(question) {
+                                return question.response === "Not enough number of questions for quiz";
+                            });
+
+                            if(notEnoughQuestions.length === 0) {
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(response));
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
                                 $state.go("test", {questionIndex:0});
                             } else {
-                                console.log("response: ", response);
-                                console.log("self.currentQuestionsIdelse: ", self.currentQuestionsId);
                                 ngDialog.open({
                                     template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
                                     plain:true
@@ -117,22 +118,22 @@
         }
         function getTestDetailsByTestComplete(response) {
             var deferred = $q.defer();
-            var promises = [];
-            angular.forEach(response.data, function(testDetail) {
-                promises.push(questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks));
+
+            var promises = response.data.map(function(testDetail) {
+                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
             });
 
-        $q.all(promises).then(function(response) {
-            var questionsList = [];
-                angular.forEach(response, function (reponse) {
-                    questionsList = questionsList.concat(reponse.data);
+            $q.all(promises).then(function(response) {
+                var questionsList = [];
+                    angular.forEach(response, function (reponse) {
+                        questionsList = questionsList.concat(reponse.data);
+                    });
+                    deferred.resolve(questionsList);
+                }, function (response) {
+                    deferred.reject(response);
                 });
-                deferred.resolve(questionsList);
-            }, function (response) {
-                deferred.reject(response);
-            });
 
-        return deferred.promise;
-        }
+            return deferred.promise;
+            }
     }
 }());
