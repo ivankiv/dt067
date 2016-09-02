@@ -8,16 +8,23 @@
     function facultyService ($http, appConstants) {
         return {
             getFaculties: getFaculties,
+            getOneFaculty: getOneFaculty,
             countFaculties: countFaculties,
             getRecordsRange: getRecordsRange,
             addFaculty: addFaculty,
-            deleteFaculty: deleteFaculty
+            deleteFaculty: deleteFaculty,
+            editFaculty: editFaculty
         };
 
         function getFaculties() {
             return $http.get(appConstants.getFaculties)
                 .then(fulfilled, rejected);
         }
+
+        function getOneFaculty(currentId) {
+            return $http.get(appConstants.getOneFaculty + currentId)
+                .then(fulfilled, rejected);
+            }
 
         function countFaculties() {
             return $http.get(appConstants.countFaculties)
@@ -39,6 +46,11 @@
                 .then(fulfilled, rejected);
         }
 
+        function editFaculty(faculty_id, data) {
+            return $http.post(appConstants.editFaculty + faculty_id, data)
+                .then(fulfilled, rejected);
+        }
+
         function fulfilled(response) {
             return response;
         }
@@ -47,4 +59,4 @@
             return response;
         }
     }
-})();
+}());

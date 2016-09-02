@@ -3,16 +3,18 @@
 
     angular.module('app')
         .controller('SubjectModalController', subjectModalController);
-        subjectModalController.$inject = ['subjectService', 'appConstants', '$uibModalInstance', 'currentSubject'];
+        subjectModalController.$inject = ['subjectService', '$uibModalInstance', 'currentSubject', 'ngDialog'];
 
-        function subjectModalController(subjectService, appConstants, $uibModalInstance, currentSubject) {
+        function subjectModalController(subjectService, $uibModalInstance,  currentSubject, ngDialog) {
             var self = this;
 
         //Variables
             self.subject = {subject_name: "", subject_description: ""};
             self.currentSubject = currentSubject;
+            self.duplicateSubjectsMessage = false;
+            self.wasNotEditSubjectMessage = false;
 
-         //Methods
+            //Methods
             self.addSubject = addSubject;
             self.updateSubject = updateSubject;
             self.cancelForm = cancelForm;
@@ -23,25 +25,42 @@
             }
 
             function updateSubject() {
-                subjectService.editSubject(appConstants.currentID, self.currentSubject)
+                subjectService.editSubject(currentSubject.subject_id, self.currentSubject)
                     .then(updateComplete, rejected);
             }
 
             function cancelForm () {
-                $uibModalInstance.dismiss('cancel');
+                $uibModalInstance.dismiss();
             }
 
             function addSubjectComplete(response) {
-                if(response.data.response = "ok") {
+                if(response.status == 400) {
+                    self.duplicateSubjectsMessage = true;
+                    return;
+                }
+
+                if(response.data.response == "ok") {
                     self.subject = {};
                     $uibModalInstance.close();
                 }
             }
 
             function updateComplete(response) {
+                if(response.status == 400 && response.data.response !== 'Error when update') {
+                    self.duplicateSubjectsMessage = true;
+                    return;
+                }
+
+                if(response.status == 400 && response.data.response == 'Error when update') {
+                    self.wasNotEditSubjectMessage = true;
+                }
                 if(response.data.response == 'ok') {
                     self.currentSubject = {};
                     $uibModalInstance.close();
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Зміни збережено!</div>',
+                        plain: 'true'
+                    });
                 }
             }
 
@@ -51,4 +70,4 @@
             }
 
         }
-})();
+}());

@@ -1,0 +1,44 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-xs-12 views-header text-center'>
+                    <h4>
+                    {{students.currentObj.student_surname}}&nbsp;{{students.currentObj.student_name}}&nbsp;{{students.currentObj.student_fname}}
+                    </h4>
+                </div>
+                    <table class="rwd-table create-student-table table-striped">
+                        <tbody>
+                        <tr>
+                            <td colspan="2" class = "text-center">
+                                <span>Фото</span>
+                                <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250"
+                                     alt="Зображення">
+                            </td>
+                            <td colspan="4">
+                                <p>Група:&nbsp;{{students.associativeGroup[students.currentObj.group_id]}}</p>
+                                <p>Логін:&nbsp;{{students.currentObj.username}}</p>
+                                <p>Пароль:&nbsp;{{students.currentObj.plain_password}}</p>
+                                <p>№ залікової книжки:&nbsp;{{students.currentObj.gradebook_id}}</p>
+                                <p>Email:&nbsp;{{students.currentObj.email}}</p>
+                            </td>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-center create-student-submit-btns-wrpr" colspan="2" >
+                                <button type="button" class="btn btn-info pull-left " title="Повернутися"
+                                        ng-click="students.hide('info')">
+                                    <i class="glyphicon glyphicon-backward"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning pull-right" title="Редагувати"
+                                        ng-click="students.showEditForm()" >
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </section>
+</section>

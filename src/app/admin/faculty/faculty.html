@@ -1,40 +1,65 @@
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
-            <div class="col-xs-12">
-                <table>
-                    <thead>
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-2 col-xs-12 views-header'><h4>Факультети</h4></div>
+                <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <select class="pull-right header-views-select-pages-search" ng-show="faculties.showSearch"
+                            ng-model="faculties.facultiesPerPage"
+                            ng-options="facultyPerPage for facultyPerPage in faculties.numberToDisplayFacultiesOnPage"
+                            ng-change="faculties.pageChanged()"
+                            name="facultiesPerPage"
+                            title="Кількість записів на сторінці"></select>
+                    <button type="button" class="btn btn-success add-btn"
+                            title="Додати факультет"
+                            ng-click="faculties.showAddFacultyForm()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <input class="views-header-search-inpts"
+                           ng-show="faculties.showSearch" type="text"
+                           placeholder="Пошук"
+                           ng-model="faculties.textSearch"
+                           name="search">
+                    </div>
+                <table class="rwd-table faculty-table table-striped ">
                     <tr>
-                        <th colspan="5">Факультети</th>
-                        <th class="addGroup" data-target="#addGroup" data-toggle="modal">
-                            <a ui-sref="admin-home.newFaculty">Додати новий Факультет</a>
-                        </th>
+                        <th>Факультет</th>
+                        <th colspan="2">Опис факультету</th>
                     </tr>
-                    <tr>
-                        <th>№</th>
-                        <th>Назва Факультету</th>
-                        <th>Опис факультету</th>
+                    <tr ng-repeat="faculty in faculties.list
+                        | toArray | filter:faculties.textSearch
+                        | limitTo: faculties.facultiesPerPage : faculties.begin ">
+                        <td data-th="Факультет">{{::faculty.faculty_name}}</td>
+                        <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити"
+                                    ng-click="faculties.deleteFaculty(faculty.faculty_id)">
+                                    <i class="glyphicon glyphicon-trash"></i></button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns"
+                                    title="Редагувати"
+                                    ng-click="faculties.showEditFacultyForm(faculty)">
+                                    <i class="glyphicon glyphicon-pencil"></i></button>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns"
+                                    title="Перейти до груп факультету"
+                                    ui-sref="admin-home.groupsByFaculty({faculty_id: faculty.faculty_id})">
+                                    <i class="fa fa-users"></i>
+                            </button>
+                        </td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="faculty in faculty.list">
-                        <td>{{$index + (faculty.currentPage - 1)*10 + 1}}</td>
-                        <td>{{::faculty.faculty_name}}</td>
-                        <td>{{::faculty.faculty_description}}</td>
-                    </tr>
-                    </tbody>
                 </table>
 
-                <div class="">
+                <div class="subject-pagination pull-right">
                     <uib-pagination
-                            total-items="faculties.total.Faculties.numberOfRecords"
+                            ng-show="faculties.totalFaculties > faculties.facultiesPerPage"
+                            total-items="faculties.totalFaculties"
+                            items-per-page="faculties.facultiesPerPage"
                             ng-model="faculties.currentPage"
-                            ng-change="faculty.pageChanged()"
+                            ng-change="faculties.pageChanged()"
                             previous-text="&lsaquo;"
                             next-text="&rsaquo;">
                     </uib-pagination>
                 </div>
-
             </div>
 
         </div>

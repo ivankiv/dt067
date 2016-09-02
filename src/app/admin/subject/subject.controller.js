@@ -3,30 +3,26 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['subjectService', 'appConstants', '$uibModal'];
+        subjectController.$inject = ['loginService', 'subjectService', '$uibModal', 'ngDialog'];
 
-        function subjectController(subjectService, appConstants, $uibModal) {
+        function subjectController(loginService, subjectService, $uibModal, ngDialog) {
             var self = this;
 
-        //variables
+            //variables
             self.list = {};
-            self.listAllSubjects = {};
 
-         //variables and methods for Pagination's panel
+             //variables and methods for search and Pagination's panel
             self.totalSubjects = 0;
+            self.showSearch = true;
+            self.textSearch = "";
+            self.begin = 0;
             self.currentPage = 1;
-            self.subjectsPerPage = 10;
-            var firstSubjectInList = 0;
+            self.subjectsPerPage = 5;
+            self.numberToDisplaySubjectsOnPage = [5,10,15,20];
             self.pageChanged = pageChanged;
 
-         //variables to show error message
-            self.showErrorMessage = false;
-            self.message = "Loading...";
-
-         //Methods
-            self.getAllSubjects = getAllSubjects;
-            self.getRecordsRange = getRecordsRange;
-            self.countSubjects = countSubjects;
+            //methods
+            self.getSubjects = getSubjects;
             self.deleteSubject = deleteSubject;
             self.showAddSubjectForm = showAddSubjectForm;
             self.showEditSubjectForm = showEditSubjectForm;
@@ -34,56 +30,47 @@
             activate();
 
             function activate() {
-                countSubjects();
-                getRecordsRange()
+                isLogged();
+                getSubjects().then(pageChanged);
             }
 
-            function getAllSubjects() {
-                subjectService.getSubjects()
-                    .then(getSubjectsComplete, rejected);
+            function isLogged() {
+                loginService.isLogged();
             }
 
-            function getRecordsRange() {
-                subjectService.getRecordsRange(self.subjectsPerPage, firstSubjectInList)
-                    .then(getRecordsRangeComplete, getRecordsRangeFailed);
-            }
-
-            function countSubjects() {
-                subjectService.countSubjects()
-                    .then(countSubjectComplete, rejected);
+            function getSubjects() {
+                return subjectService.getSubjects().then(function(response) {
+                    self.list = response.data;
+                    self.totalSubjects = response.data.length;
+                });
             }
 
             function deleteSubject(subject_id) {
-                subjectService.deleteSubject(subject_id)
-                    .then(deleteSubjectComplete, rejected);
+                ngDialog.openConfirm({
+                    template: 'app/partials/confirm-delete-dialog.html',
+                    plain: false
+                }).then(function() {
+                    subjectService.deleteSubject(subject_id).then(deleteSubjectComplete);
+                });
             }
 
             function pageChanged() {
-                var begin = ((self.currentPage - 1) * self.subjectsPerPage);
-                subjectService.getRecordsRange(self.subjectsPerPage, begin).then(getRecordsRangeComplete);
-            }
-
-            function getRecordsRangeComplete(response) {
-                self.list = response.data;
-            }
-
-            function getRecordsRangeFailed(response) {
-                self.showErrorMessage = true;
-                self.message = "Error:" + " " + response.status + " " + response.statusText;
-            }
-
-            function getSubjectsComplete(response) {
-                self.listAllSubjects = response.data;
-            }
-
-            function countSubjectComplete(response) {
-                self.totalSubjects = response.data;
+                self.begin = ((self.currentPage - 1) * self.subjectsPerPage);
+                self.showSearch = (self.currentPage == 1) ? true : false;
+                self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
             }
 
             function deleteSubjectComplete(response) {
                 if(response.data.response == "ok") {
-                   countSubjects();
-                   pageChanged();
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Предмет успішно видалено!</div>'
+                    });
+                    activate();
+                }
+                if(response.status === 400) {
+                    ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Неможливо видалити предмет який містить тести або записи в розкладі тестувань!</div>'
+                    });
                 }
             }
 
@@ -91,37 +78,34 @@
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/add-subject.html',
                     controller: 'SubjectModalController as subjects',
+                    backdrop: false,
                     resolve: {
                         currentSubject: {}
                     }
                 });
                 modalInstance.result.then(function() {
-                    countSubjects();
-                    pageChanged();
+                        ngDialog.open({template: '<div class="ngdialog-message"> \
+						  Предмет успішно додано!</div>'
+                        });
+                        activate();
                 })
             }
 
             function showEditSubjectForm(subject) {
-                //we need this to get data of current subject and to pass it to SubjectModalController
-                // to edit current subject
-                appConstants.currentID = subject.subject_id;
-
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/edit-subject.html',
                     controller: 'SubjectModalController as subjects',
+                    backdrop: false,
                     resolve: {
+                    //the variable is needed to store data of current subject
+                    // to fill up the form of editing subject
                         currentSubject: subject
 
                     }
                 });
                 modalInstance.result.then(function() {
-                    pageChanged();
+                    activate();
                 })
             }
-
-            function rejected(response) {
-                console.log(response.data.response);
-                console.log(response.status + " " + response.statusText);
-            }
         }
-})();
+}());

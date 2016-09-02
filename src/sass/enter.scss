@@ -1,3 +1,4 @@
+@import 'https://fonts.googleapis.com/css?family=Bad+Script|Cormorant+Infant|Marck+Script';
 //colors
 $color_shark_approx: #29272b;
 $color_straw_approx: #d6bf8c;
@@ -46,7 +47,6 @@ body {
 		display: block;
 		width: 150px;
 		margin-top: 20px;
-		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 20px;
 		height: 35px;
 		color: $color_shark_approx;
@@ -54,6 +54,14 @@ body {
 		font-weight: bold;
 		border: none;
 	}
+}
+.welcome-to-d-tester{
+	font-family: 'Marck Script', cursive;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+	color: red;
+	margin-bottom: 50px;
 }
 .pagination {
   cursor: pointer;
@@ -67,4 +75,10 @@ table.subject-list {
   	.subject-list-centered{
 	  text-align: center;
 	}
+}
+.val.ng-invalid {
+	border-color: rgba(255, 0, 0, 0.4);
+}
+.val.ng-valid {
+	border-color: rgba(0, 204, 0, 0.6);
 }

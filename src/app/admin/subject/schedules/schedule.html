@@ -1,0 +1,61 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Розклад тестування
+                        <span ng-if="schedules.group_id"> для групи: &nbsp;{{schedules.associativeGroup[schedules.group_id]}}</span>
+                        <span ng-if="!schedules.group_id"> для предмету: &nbsp;{{schedules.currentSubjectName}}</span>
+                    </h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button"
+                            class="btn btn-danger pull-right"
+                            ui-sref="admin-home.subject"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                    <button type="button"
+                            class="btn btn-danger pull-right"
+                            ui-sref="admin-home.groups"
+                            ng-if="schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту"
+                            ng-click="schedules.showAddScheduleForm()"><i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th ng-if="schedules.group_id">Предмет</th>
+                        <th ng-if="!schedules.group_id">Група</th>
+                        <th>Дата проведення тесту</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!schedules.showMessageNoEntity">
+                    <tr ng-repeat="schedule in schedules.list">
+                        <td data-th="Група" ng-if="schedules.group_id">{{::schedules.associativeSubject[schedule.subject_id]}}</td>
+                        <td data-th="Група" ng-if="!schedules.group_id">{{::schedules.associativeGroup[schedule.group_id]}}</td>
+                        <td data-th="Дата проведення">{{::schedule.event_date | date: "dd MMMM yyyy"}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
+                                    ng-click="schedules.deleteSchedule(schedule.timetable_id)"><i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                    ng-click="schedules.showEditScheduleForm(schedule)"><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="schedules.showMessageNoEntity" class="text-center">
+                    <h1>В розкладі немає тестів
+                        <span ng-if="schedules.group_id"> для групи: &nbsp;{{schedules.associativeGroup[schedules.group_id]}}</span>
+                        <span ng-if="!schedules.group_id"> для предмету: &nbsp;{{schedules.currentSubjectName}}</span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

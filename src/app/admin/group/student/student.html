@@ -1,0 +1,106 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showEdit" ng-include = "'app/admin/group/student/student-edit-form.html'"></div>
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showCreate" ng-include = "'app/admin/group/student/student-create-form.html'"></div>
+            <div class= "col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "students.showInfo" ng-include = "'app/admin/group/student/student-info.html'"></div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1"
+                 ng-if = "!students.showEdit && !students.showCreate && !students.showInfo">
+                <div class=' col-xs-12 views-header'><h4>Студенти
+                        <span ng-if="students.group_id">{{students.associativeGroup[students.group_id]}}</span>
+                    </h4>
+                </div>
+                <div class=' col-xs-12 views-header views-header-students-view-wrpr views-header-wrapper-add-btn-and-search'>
+
+                    <select class="pull-right header-views-select-pages-search"
+                            ng-show="students.showSearch"
+                            ng-model="students.studentsPerPage"
+                            ng-options="studentsPerPage for studentsPerPage in students.numberToDisplayStudentsOnPage"
+                            ng-change="students.pageChanged()"
+                            name="subjectsPerPage" title="Кількість записів на сторінці"></select>
+                    <button type="button" class="btn btn-success add-btn" title="Додати студента"
+                            ng-click="students.showCreateForm()"
+                    ><i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <button ng-if="students.group_id"
+                            type="button"
+                            class="btn btn-danger pull-right back-btn-user"
+                            ui-sref="admin-home.groups"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
+                    </button>
+                    <input class="views-header-search-inpts students-input" type="text"
+                           placeholder="Пошук на сторінці"
+                           check-pagination
+                           items-per-page="students.studentsPerPage"
+                           total-items="students.totalStudents"
+                           text-search="students.textSearch"
+                           ng-model="students.textSearch">
+                    <select class="header-views-select-pages-search student-view-group-select"
+                            ng-if="!students.group_id"
+                            ng-options="group.group_name as group.group_name for group  in students.groupList"
+                            ng-model="students.textSearch"
+                            id="group" placeholder="Виберіть групу">
+                        <option value="" disabled>&nbsp;Виберіть групу&nbsp;</option>
+                    </select>
+                </div>
+                <table class="rwd-table faculty-table table-striped ">
+                    <thead>
+                        <tr>
+                            <th>Реєстр №</th>
+                            <th>Група</th>
+                            <th colspan="2">ПІБ</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-if="!students.showMessageNoEntity"></tbody>
+                        <tr ng-repeat="student in students.list | toArray | filter: students.textSearch |limitTo: students.studentsPerPage : students.begin">
+                            <td data-th="Реєстр №">{{::student.user_id}}</td>
+                            <td data-th="Група">{{::student.group_name}}</td>
+                            <td data-th="ПIБ">
+                                {{::student.student_surname}}&nbsp;{{::student.student_name}}&nbsp;{{::student.student_fname}}</td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns"
+                                        title="Видалити"
+                                        ng-click="students.remove(student.user_id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning   pull-right table-help-btns"
+                                        title="Редагувати"
+                                        ng-click="students.showEditForm(student)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button type="button" class="btn btn-info pull-right table-help-btns"
+                                        title="Профіль"
+                                        ng-click="students.showInfoPage(student)">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                </button>
+                                <button type="button" class="btn btn-info pull-right table-help-btns"
+                                        title="Результати"
+                                        ng-click="students.showInfoPage(student)">
+                                    <i class="glyphicon glyphicon-registration-mark"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="students.showMessageNoEntity" class="text-center">
+                    <h1>Не зареєстровано жодного студента для даної групи!</h1>
+                </div>
+                <div class="subject-pagination pull-right">
+                    <uib-pagination
+                            ng-show="students.totalStudents > students.studentsPerPage"
+                            total-items="students.totalStudents"
+                            items-per-page="students.studentsPerPage"
+                            ng-model="students.currentPage"
+                            ng-change="students.pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

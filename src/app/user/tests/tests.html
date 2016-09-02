@@ -1,0 +1,50 @@
+﻿<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Список тестів</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right" ui-sref="user">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+
+                        <th>Назва предмету</th>
+                        <th>Назва тесту</th>
+                        <th>Дата проведення</th>
+                        <th>К-сть завдань</th>
+                        <th>Тривалість тесту</th>
+                        <th>Статус</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!tests.showMessageNoEntity">
+                    <tr ng-repeat="test in tests.listOfTests track by $index">
+                        <td data-th="Предмет">{{::test.subject_name}}</td>
+                        <td data-th="Тест">{{::test.test_name}}</td>
+                        <td data-th="Дата">{{::test.date}}</td>
+                        <td data-th="К-сть завдань">{{::test.tasks}}</td>
+                        <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
+                        <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns"
+                                    title="Пройти тест"
+                                     ng-if="test.enabled==1"
+                                    ng-click = "tests.testPlayerPreparation(test)">
+                                <i class="glyphicon glyphicon-play"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="tests.showMessageNoEntity" class="text-center">
+                    <h1>Немає тестів для даної групи!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

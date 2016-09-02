@@ -1,87 +1,73 @@
 <!-- container section start -->
   <section id="container" class="">
-     
-      
-      <header class="header dark-bg">
-            <div class="toggle-nav">
-                <div class="icon-reorder" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-            </div>
+      <header>
+          <nav class="navbar navbar-default" role="navigation">
+              <!-- Brand and toggle get grouped for better mobile display -->
 
-            <!--logo start-->
-            <a href="index.html" class="logo">Menu<span class="lite">Admin</span></a>
-            <!--logo end-->
+              <div class="navbar-header">
+
+                  <button type="button" add-class-in class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <span class="navbar-brand"><img src="img/dt-brand.png"></span>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'">
+
+                  <ul class="nav navbar-nav">
+                      <li ng-click="navCollapsed = true" ><a ui-sref="admin-home">Статистика</a></li>
+                      <li ng-click="navCollapsed = true"><a ui-sref="admin-home.faculty">Факультети</a></li>
+                      <li ng-click="navCollapsed = true"><a ui-sref="admin-home.speciality">Спеціальності</a></li>
+                      <li ng-click="navCollapsed = true"><a ui-sref="admin-home.groups">Групи</a></li>
+                      <li ng-click="navCollapsed = true"><a ui-sref="admin-home.subject">Предмети</a></li>
+                      <li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>
+                      <li ng-if="!stat.tooManyStudents" ng-click="navCollapsed = true" ><a ui-sref="admin-home.student">Студенти</a></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                  </ul>
+              </div>
+          </nav>
+
+          <div ncy-breadcrumb></div>
 
       </header>      
-      <!--header end-->
 
-      <!--sidebar start-->
-      <aside class="admin-aside col-md-2">
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu">                
-                  <li >
-                      <a ui-sref="StatisticSystem" class="" >
-                          <span>Statistics system</span>
-                      </a>
-                  </li>
-				  <li class="sub-menu">
-                      <a ui-sref="GroupsAndStudents" class="">
-                          <span>Groups and students</span>
-                         <!--  <span class="menu-arrow arrow_carrot-right"></span> -->
-                      </a>
-                  </li>       
-                  <li>
-                      <a ui-sref="admin-home.subject" class="">
-                          <span>Subjects</span>
-                      </a>
-                  </li>
-                  <li>
-                      <a class="" ui-sref="TestsOfSubject">
-                          <span>Subject tests</span>
-                      </a>
-                  </li>
-                             
-
-                 <li class="sub-menu">
-                      <a ui-sref="RegistrationTestTask" class="">
-                          <span>New test task</span>
-                      </a>
-                  </li>
-
-                   <li class="sub-menu">
-                      <a ui-sref="admin-home.admin" class="">
-                          <span>Admins</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a ui-sref="admin-home.speciality" class="">
-                          <span>Specialities</span>
-                      </a>
-                  </li>
-
-                  <li class="sub-menu">
-                      <a ui-sref="admin-home.faculty" class="">
-                          <span>Faculties</span>
-                      </a>
-                  </li>
-
-                  <li>                     
-                      <a ui-sref="login" class="">
-                          <span>Log out</span>
-                          
-                      </a>
-                                         
-                  </li>
-                  
-              </ul>
-              <!-- sidebar menu end-->
           </div>
       </aside>
       
-      <section ui-view="content" class="col-xs-12 col-md-12"></section>
-
-
-
-
+      <section ui-view="content" class="col-xs-12">
+          <div class="col-xs-12 col-md-10 col-md-offset-1">
+          <div class='col-xs-12 views-header'><h4>Статистика системи</h4></div>
+          <table class="rwd-table statistic-table table-striped">
+              <tr>
+                  <td>Зареєстровано факультетів</td>
+                  <td>{{stat.facultiesQuantity}}</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано спеціальностей</td>
+                  <td>{{stat.specialitiesQuantity}}</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано груп</td>
+                  <td>{{stat.groupsQuantity}}</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано студентів</td>
+                  <td>{{stat.studentsQuantity}}</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано предметів</td>
+                  <td>{{stat.subjectsQuantity}}</td>
+              </tr>
+              <tr>
+                  <td>Зареєстровано тестів</td>
+                  <td>{{stat.testsQuantity}}</td>
+              </tr>
+          </table>
+          </div>
+      </section>
   </section>

@@ -1,0 +1,74 @@
+<div class="modal-header custom-modal-header">
+    <h3 class="modal-title">Створити нового адміністратора</h3>
+</div>
+<div class="modal-body custom-modal-body">
+    <form class="form-horizontal" name="adminCreationForm" role="form">
+        <input type="text" ng-hide = "true">
+        <input type="password" ng-hide = "true">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Логін: </label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id ="name" name="name"
+                       ng-model="admins.currentObject.username"
+                       placeholder="Введіть логін"
+                       ng-minlength="3"
+                       ng-maxlength="50"
+                       required >
+                <novalidate-messages field="adminCreationForm.name"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="email">Email: </label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id = "email" name="email"
+                       ng-model="admins.currentObject.email"
+                       placeholder="Ведіть адресу почтової скриньки"
+                       required>
+                <novalidate-messages field="adminCreationForm.email"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pass">Пароль: </label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="pass" name="pass"
+                       ng-model="admins.password"
+                       placeholder="Пароль"
+                       required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="pass2">Повторіть пароль: </label>
+            <div class="col-sm-10">
+                    <input type="password" class="form-control" id="pass2" name="pass2"
+                           ng-model="admins.password1"
+                           placeholder="Пароль"
+                           required>
+            </div>
+        </div>
+    </form>
+    <div class="clearfix" ng-if="admins.duplicateAdminsMessage">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Адміністратор з таким логіном вже існує!</span>
+        </div>
+    </div>
+    <div class="clearfix" ng-if="admins.passwordConfirmation">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Паролі не співпадають!</span>
+        </div>
+    </div>
+    <div class="clearfix" ng-if="admins.wrongData">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Некоректні дані!</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-success" type="button" ng-click="admins.create()"
+            ng-disabled="adminCreationForm.$invalid">
+        <i class="glyphicon glyphicon-ok"></i>
+    </button>
+    <button class="btn btn-danger" type="button" ng-click="admins.cancelForm()">
+        <i class="glyphicon glyphicon-remove"></i>
+    </button>
+</div>

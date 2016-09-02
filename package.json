@@ -4,16 +4,39 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "gulp index && gulp admin && gulp sass && node app.js"
+    "prestart": "npm install && bower install",
+    "start": "gulp"
   },
-  "author": "",
+  "author": "IF-067 group",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.4"
   },
   "devDependencies": {
+    "del": "^2.2.1",
     "gulp": "^3.9.1",
-    "gulp-inject": "^4.0.0",
-    "gulp-sass": "^2.3.2"
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-batch": "^1.0.5",
+    "gulp-concat": "^2.6.0",
+    "gulp-copy": "0.0.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-if": "^2.0.1",
+    "gulp-imagemin": "^3.0.3",
+    "gulp-inject": "^4.1.0",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-print": "^2.0.1",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.9",
+    "jshint": "^2.9.2",
+    "jshint-stylish": "^2.2.0",
+    "run-sequence": "^1.2.2",
+    "wiredep": "^4.0.0",
+    "yargs": "^4.8.1"
   }
 }

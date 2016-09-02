@@ -1,0 +1,48 @@
+    <div class="modal-header custom-modal-header">
+        <h3 class="modal-title">Додати новий факультет</h3>
+    </div>
+    <div class="modal-body custom-modal-body">
+        <form class="form-horizontal" name="newFacultyForm" role="form">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="name">Назва факультету: </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name"
+                           required
+                           placeholder="Назва факультету"
+                           ng-pattern="/^[a-zа-яіїє\+\-'\s]+$/i"
+                           ng-model="faculties.faculty.faculty_name"
+                           ng-minlength="3"
+                           ng-maxlength="75">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Опис факультету</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"
+                           id="description"
+                           name="description"
+                           required
+                           placeholder="Додайте опис факультету"
+                           ng-model="faculties.faculty.faculty_description">
+                </div>
+            </div>
+        </form>
+        <div class="clearfix" ng-if="faculties.duplicateFacultysMessage">
+            <div class="col-sm-10 col-sm-offset-2" >
+                <span class="text-danger">Факультет із такою назвою вже зареєстрований в системі!</span>
+            </div>
+        </div>
+        <div  class="clearfix">
+            <div class="col-sm-10 col-sm-offset-2">
+                <div my-messages="newFacultyForm.name"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer custom-modal-footer">
+        <button class="btn btn-primary" type="button"
+                ng-click="faculties.addFaculty()"
+                ng-disabled="newFacultyForm.$invalid"> Додати факультет
+        </button>
+        <button class="btn btn-warning" type="button"
+                ng-click="faculties.cancelForm()">Відмінити</button>
+    </div>

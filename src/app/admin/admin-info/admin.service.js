@@ -1,6 +1,5 @@
 (function(){
     'use strict';
-
     angular
         .module('app')
         .factory('adminService',adminService);
@@ -12,39 +11,52 @@
             getAdmins:getAdmins,
             deleteAdmin:deleteAdmin,
             editAdmin:editAdmin,
-            createAdmin:createAdmin
+            createAdmin:createAdmin,
+            duplicateLogin:duplicateLogin
         };
 
-        function getAdmins() {
-            return $http.get(appConstants.getAdmins)
-                .then(complete)
-                .catch(failed);
+        function getAdmins(id) {
+            var addId =(id) ? "/"+ id: "";
+            return $http.get(appConstants.getAdmins + addId)
+                .then(complete, failed);
         }
 
         function editAdmin(obj) {
             return $http.post(appConstants.editAdmins + obj.id, obj)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function deleteAdmin(id) {
             return $http.delete(appConstants.delAdmins + id)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function createAdmin(admin) {
             return $http.post(appConstants.addAdmins, admin)
-                .then(complete)
-                .catch(failed);
+                .then(complete, failed);
         }
 
         function complete(response) {
-            return response.data;
+            return response;
         }
 
         function failed(error) {
             alert('XHR Failed. Error: ' + error.data);
         }
+
+        function duplicateLogin(username) {
+            var alreadyExist = false;
+            getAdmins().then(
+                function (response) {
+                var list = response.data;
+                list.forEach(
+                    function(x){
+                        if(x.username===username){
+                            alreadyExist = true;
+                        }
+                    });
+            });
+            return alreadyExist;
+        }
     }
-})();
+}());

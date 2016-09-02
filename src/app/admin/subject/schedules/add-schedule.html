@@ -1,0 +1,58 @@
+<div class="modal-header">
+    <h3 class="modal-title">Додати новий запис до розкладу тестів</h3>
+</div>
+<div class="modal-body">
+    <div class="row schedule-form">
+        <form class="form-horizontal" name="newScheduleForm" role="form">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <select class="form-control" name="group" id="group"
+                            ng-if="!schedules.group_id"
+                            ng-model="schedules.schedule.group_id"
+                            ng-options="groupList.group_id as groupList.group_name for groupList in schedules.groupList"
+                            ng-required="true">
+                        <option disabled selected value="">Виберіть групу</option>
+                    </select>
+                    <select class="form-control" name="subject" id="subject"
+                            ng-if="schedules.group_id"
+                            ng-model="schedules.schedule.subject_id"
+                            ng-options="subjectList.subject_id as subjectList.subject_name for subjectList in schedules.subjectList"
+                            ng-required="true">
+                        <option disabled selected value="">Виберіть пердмет</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <p class="input-group">
+                    <input type="text" class="form-control" id="event_date"
+                           date-picker-local-date
+                           placeholder="Дата у форматі: ХХХХ/ХХ/ХХ "
+                           uib-datepicker-popup="yyyy/MM/dd"
+                           ng-model="schedules.schedule.event_date"
+                           is-open="schedules.DatePickerOpened"
+                           datepicker-options="schedules.dateOptions"
+                           ng-required="true"
+                           close-text="Закрити"
+                           current-text="Cьогодні"
+                           clear-text="Очистити"/>
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="schedules.openDatePicker()"
+                        title="Дата проведення тестування"><i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+                </p>
+            </div>
+        </form>
+    </div>
+    <div class="clearfix" ng-if="schedules.alreadyExistInSchedule">
+        <div class="col-sm-8 col-sm-offset-4">
+            <span class="text-danger" role="alert">Для даної групи вже призначено дату проведення тесту по даному предмету</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="schedules.addSchedule()"
+            ng-disabled="newScheduleForm.$invalid"> Додати
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="schedules.cancelForm()">Відмінити</button>
+</div>

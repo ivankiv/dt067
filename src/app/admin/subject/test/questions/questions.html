@@ -1,0 +1,65 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Завдання для тесту: &nbsp;{{::questions.currentTest.test_name}}</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="admin-home.test({currentSubjectId: questions.currentSubjectId})">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-success add-btn" title="Додати дату тесту"
+                            ng-click="questions.showAddQuestionForm()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Номер</th>
+                        <th>Завдання</th>
+                        <th>Рівень</th>
+                        <th>Тип</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!questions.showMessageNoEntity">
+                    <tr ng-repeat="question in questions.list">
+                        <td data-th="Номер">{{$index + (questions.currentPage - 1)* questions.questionsPerPage + 1 }}</td>
+                        <td data-th="Завдання">{{::question.question_text}}</td>
+                        <td data-th="Рівень">{{::question.level}}</td>
+                        <td data-th="Тип">{{questions.nameOfType[question.type]}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити" ng-click="questions.deleteQuestions(question.question_id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" title="Редагувати"
+                                    ng-click="questions.showEditQuestionForm(question)"><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Відповіді"
+                                    ui-sref="admin-home.answers({questionId: question.question_id, currentTestId: questions.currentTestId, currentSubjectId: questions.currentSubjectId})"><i class="glyphicon glyphicon-list"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div class="subject-pagination pull-right">
+                    <uib-pagination
+                            ng-show="questions.totalQuestions > questions.questionsPerPage"
+                            total-items="questions.totalQuestions"
+                            items-per-page="questions.questionsPerPage"
+                            ng-model="questions.currentPage"
+                            ng-change="questions.pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
+                <div ng-if="questions.showMessageNoEntity" class="text-center">
+                    <h1>Немає завдань до даного тесту!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

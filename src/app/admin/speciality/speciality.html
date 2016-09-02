@@ -1,38 +1,77 @@
-       <section id="main-content">
-          <section class="wrapper">
-              <div class="row">
-                  <div class="col-xs-12">
-                          <table>
-            <thead>
-              <tr>
-                <th colspan="2">Спеціальність</th>
-                <th class="addGroup" data-target="#addGroup" data-toggle="modal">Додати нову спеціальність</th>
-              </tr>
-              <tr>
-                <th>№ п/п</th>
-                <th>Назва спеціалізаці</th>
-                <th >Код</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="speciality in speciality.list">
-                <td>{{$index + 1}}</td>
-                <td>{{::speciality.speciality_name}}</td>
-                <td>{{::speciality.speciality_code}}</td>
-              </tr>
-            </tbody>
-          </table>
-                      <uib-pagination
-                              total-items="speciality.totalSpecialities.numberOfRecords"
-                              ng-model="speciality.currentPage"
-                              ng-change="speciality.pageChanged()"
-                              previous-text="&lsaquo;"
-                              next-text="&rsaquo;">
-                      </uib-pagination>
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-2 col-xs-12 views-header'><h4>Спеціальності</h4></div>
+                <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <select class="pull-right header-views-select-pages-search"
+                            ng-show="specialities.showSearch"
+                            ng-model="specialities.specialitiesPerPage"
+                            ng-options="specialitiesPerPage for specialitiesPerPage in specialities.numberToDisplaySpecialitiesOnPage"
+                            ng-change="specialities.pageChanged()"
+                            name="specialitiesPerPage"
+                            title="Кількість записів на сторінці">
+                    </select>
+                    <button type="button" class="btn btn-success add-btn"
+                            title="Додати спеціальність"
+                            ng-click="specialities.showAddSpecialityForm()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <input class="views-header-search-inpts"
+                           ng-show="specialities.showSearch"
+                           type="text"
+                           placeholder="Пошук на сторінці"
+                           ng-model="specialities.textSearch"
+                           name="search">
+                </div>
+                <table class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Спеціальність</th>
+                        <th>Код</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="speciality in specialities.list| toArray | filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
+                        <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
+                        <td data-th="Код">{{::speciality.speciality_code}}</td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити"
+                                    ng-click="specialities.deleteSpeciality(speciality.speciality_id)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button"
+                                    class="btn btn-warning pull-right table-help-btns"
+                                    title="Редагувати"
+                                    ng-click="specialities.showEditSpecialityForm(speciality);">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                            <button type="button"
+                                    class="btn btn-primary pull-right table-help-btns"
+                                    title="Перехід на групи по спеціальності"
+                                    ui-sref="admin-home.groupsBySpeciality({currentSpecialityId: speciality.speciality_id})">
+                                <i class="fa fa-users"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-                  </div>
-
-              </div>
-
-          </section>
-      </section>
+                <div class="subject-pagination pull-right">
+                    <uib-pagination
+                            ng-show="specialities.totalSpecialities > specialities.specialitiesPerPage"
+                            ng-hide="specialities.textSearch!=''"
+                            total-items="specialities.totalSpecialities"
+                            items-per-page="specialities.specialitiesPerPage"
+                            ng-model="specialities.currentPage"
+                            ng-change="specialities.pageChanged()"
+                            previous-text="&lsaquo;"
+                            next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

@@ -1,74 +1,50 @@
 <section id="main-content" class="wrapper">
-
-    <div class="col-xs-12 edit-admin-wrapper" ng-if = "admins.show">
-        <form>
-            <table>
-                <thead>
-                <tr>
-                    <th colspan="6" >Edit admin</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td colspan="3">Ім'я</td>
-                    <td colspan="3">
-                        <input type="text" class="registr-new-test-nameof-inp" name="name-of-test" ng-model="admins.currentObj.username"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">email</td>
-                    <td colspan="3">
-                        <input type="text" class="registr-new-test-nameof-inp" name="name-of-test" ng-model="admins.currentObj.email"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">Пароль</td>
-                    <td colspan="3">
-                        <input type="password" class="registr-new-test-inpts" name="name-of-test" ng-model="admins.password"></td>
-                </tr>
-                <tr>
-                    <td colspan="3">Підтвердження пароля</td>
-                    <td colspan="3">
-                        <input type="password" class="registr-new-test-inpts" name="name-of-test" ng-model="admins.password1"></td>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-center"><button class="btn btn-info" ng-click="admins.hide()">Скасувати</button></td>
-                    <td colspan="3" class="text-center">
-                        <button class="btn btn-info" ng-click="admins.update()">Підтвердити</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <table class="text-center">
+    <section class="wrapper">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 edit-admin-wrapper"
+             ng-if = "admins.showEdit"
+             ng-include = "'app/admin/admin-info/admin-edit-form.html'">
+        </div>
+        <div class="col-xs-12 col-md-10 col-md-offset-1 create-admin-wrapper"
+             ng-if = "admins.showCreate"
+             ng-include = "'app/admin/admin-info/admin-create-form.html'">
+        </div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1" ng-if = "!admins.showEdit && !admins.showCreate">
+                <div class='col-sm-2 col-xs-12 views-header'><h4>Адміністратори</h4></div>
+                <div class='col-sm-10 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-success add-btn" title="Додати адміністратора"
+                            ng-click="admins.showCreateForm()">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                    </button>
+                    <input class="views-header-search-inpts" type="text" placeholder="Пошук на сторінці">
+                </div>
+                <table class="text-center rwd-table faculty-table table-striped">
                     <thead class="text-center">
-                    <tr>
-                        <th colspan="4">Адміністратори</th>
-                        <th><a ui-sref="admin-create">Додати нового адміністратора</a></th>
-                    </tr>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th colspan="2" class="text-center">Управління</th>
-                    </tr>
+                        <tr>
+                            <th data-th="ID">ID</th>
+                            <th data-th="Логін">Логін</th>
+                            <th data-th="Поштова скринька">Поштова скринька</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="admin in admins.list">
-                        <td>{{::admin.id}}</td>
-                        <td>{{::admin.username}}</td>
-                        <td>{{::admin.email}}</td>
-                        <td class="text-center"><button class="btn btn-info" ng-click = "admins.edit(admin)" >Редагувати</button></td>
-                        <td class="text-center"><button class="btn btn-info" ng-click = "admins.remove(admin.id)">Видалити</button></td>
-                    </tr>
+                        <tr ng-repeat="admin in admins.list">
+                            <td  data-th="ID">{{::admin.id}}</td>
+                            <td data-th="Логін">{{::admin.username}}</td>
+                            <td  data-th="Поштова скринька">{{::admin.email}}</td>
+                            <td>
+                                <button type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити"
+                                        ng-click="admins.remove(admin.id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button" class="btn btn-warning pull-right table-help-btns"
+                                        title="Редагувати"
+                                        ng-click="admins.showEditForm(admin)">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-        </div>
-    </div>
-
+    </section>
 </section>
+
