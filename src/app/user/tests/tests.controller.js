@@ -101,8 +101,10 @@
                                 return {question_id: question.question_id};
                             });
 
+                            console.log('response.length', response.length);
+                            console.log('currentTest.tasks', currentTest.tasks);
 
-                            if(notEnoughQuestions.length === 0) {
+                            if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
