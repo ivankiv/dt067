@@ -41,11 +41,11 @@
 
         }
 
-        // function init() {
-        //     var defer = $q.defer();
-        //     $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
-        //     return defer.promise;
-        // }
+        function init() {
+            var defer = $q.defer();
+            $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
+            return defer.promise;
+        }
         function chooseQuestion(question_index) {
             $state.go('test', {questionIndex:question_index});
         }
