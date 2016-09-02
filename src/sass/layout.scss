@@ -471,7 +471,7 @@ aside.wrapForQuestions {
     color: green;
     border: 1px solid gray;
   }
-}
+}s
 .button-student-back{
     @media (max-width: 992px) {
      margin-right: 20px;
@@ -479,4 +479,7 @@ aside.wrapForQuestions {
 }
 .back-btn-user {
   margin-right: 7px;
+}
+.btn-conf {
+  margin-right: 5px;
 }

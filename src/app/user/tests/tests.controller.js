@@ -3,10 +3,10 @@
 
     angular.module('app')
         .controller('TestsController', TestsController);
-    TestsController.$inject = ['testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
+    TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
         'loginService', '$state','$stateParams','ngDialog','$timeout'];
 
-    function TestsController (testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
+    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
         var self = this;
 
         //variables
@@ -77,7 +77,7 @@
         }
 
         function testPlayerPreparation(currentTest){
-            self.getQuestionsSucceess = true;
+            self.showMessageNotEnoughQuestion = true;
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
@@ -93,16 +93,28 @@
 
                         getTestDetailsByTest().then(function(response) {
 
-                            if(self.getQuestionsSucceess) {
-                                $timeout(function () {
-                                    localStorage.setItem("currentQuestionsId", JSON.stringify(response));
-                                    var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
-                                    localStorage.setItem("endTime", JSON.stringify(endTime));
-                                    $state.go("test", {questionIndex:0});
-                                },1000);
+                            var notEnoughQuestions = response.filter(function(question) {
+                                return question.response === "Not enough number of questions for quiz";
+                            });
 
+                            var questionsId = response.map(function(question){
+                                return {question_id: question.question_id};
+                            });
+
+                            console.log('response.length', response.length);
+                            console.log('currentTest.tasks', currentTest.tasks);
+
+                            if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+                                var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+                                localStorage.setItem("endTime", JSON.stringify(endTime));
+                                $state.go("test", {questionIndex:0});
+                            } else {
+                                ngDialog.open({
+                                    template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
+                                    plain:true
+                                });
                             }
-
                         })
                     }
                 });
@@ -112,35 +124,23 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            if(response.statusText === 'OK') {
-                angular.forEach(response.data, function(testDetail) {
-                        getQuestionsByLevelRand(testDetail.level, testDetail.tasks);
+            var deferred = $q.defer();
+
+            var promises = response.data.map(function(testDetail) {
+                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
+            });
+
+            $q.all(promises).then(function(response) {
+                var questionsList = [];
+                    angular.forEach(response, function (reponse) {
+                        questionsList = questionsList.concat(reponse.data);
+                    });
+                    deferred.resolve(questionsList);
+                }, function (response) {
+                    deferred.reject(response);
                 });
-                return self.currentQuestionsId;
-            } else {
-                return response;
+
+            return deferred.promise;
             }
-        }
-
-        function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-           return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
-                .then(function(response) {
-                    if(response.data.response === "Not enough number of questions for quiz") {
-
-                        if(self.getQuestionsSucceess){
-                            ngDialog.open({
-                                template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-                                plain:true
-                            });
-                            self.getQuestionsSucceess = false;
-                        }
-
-                    } else {
-                        angular.forEach(response.data, function(question) {
-                            self.currentQuestionsId.push({'question_id':question.question_id});
-                        });
-                    }
-                });
-        }
     }
 }());
