@@ -97,8 +97,13 @@
                                 return question.response === "Not enough number of questions for quiz";
                             });
 
+                            var questionsId = response.map(function(question){
+                                return {question_id: question.question_id};
+                            });
+
+
                             if(notEnoughQuestions.length === 0) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
                                 $state.go("test", {questionIndex:0});
