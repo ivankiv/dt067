@@ -93,12 +93,9 @@
 
                         getTestDetailsByTest().then(function(response) {
 
-
-                            console.log("self.currentQuestionsId: ", self.currentQuestionsId);
-                            console.log("self.currentQuestionsId.length: ", self.currentQuestionsId.length);
-                            console.log("currentTest.tasks", currentTest.tasks);
+                            console.log("response 1111: ", response);
                             if(response.length == currentTest.tasks) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(self.currentQuestionsId));
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
                                 $state.go("test", {questionIndex:0});
@@ -115,63 +112,27 @@
                 });
         }
 
-        // function init() {
-        //     var defer = $q.defer();
-        //
-        //     defer.resolve(getTestDetailsByTest);
-        //
-        //     return defer.promise;
-        // }
-
         function getTestDetailsByTest() {
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            var defer_parent = $q.defer();
-            var questionsId = [];
+            var deferred = $q.defer();
+            var promises = [];
+            angular.forEach(response.data, function(testDetail) {
+                promises.push(questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks));
+            });
 
-            if(response.statusText === 'OK') {
+        $q.all(promises).then(function(response) {
+            var questionsList = [];
+                angular.forEach(response, function (reponse) {
+                    questionsList = questionsList.concat(reponse.data);
+                });
+                deferred.resolve(questionsList);
+            }, function (response) {
+                deferred.reject(response);
+            });
 
-                angular.forEach(response.data, function(testDetail) {
-                    var currentQuestionsId = [];
-                        return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks)
-                            .then(function(response) {
-                                var defer = $q.defer();
-                                    angular.forEach(response.data, function(question) {
-                                        currentQuestionsId.push({'question_id':question.question_id});
-                                    });
-                                defer.resolve(currentQuestionsId);
-                                return defer.promise;
-                            }).then(function(response) {
-                                console.log(response);
-                                questionsId.concat(response);
-                            })
-                })
-            }
-            defer_parent.resolve(questionsId);
-            return defer_parent.promise;
+        return deferred.promise;
         }
-
-        // function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-        //    return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
-        //         .then(function(response) {
-        //
-        //             if(response.data.response === "Not enough number of questions for quiz") {
-        //                 if(self.showMessageNotEnoughQuestion){
-        //                     ngDialog.open({
-        //                         template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-        //                         plain:true
-        //                     });
-        //                     self.showMessageNotEnoughQuestion = false;
-        //                 }
-        //             } else {
-        //                 var defer = $q.defer();
-        //                 defer.resolve(angular.forEach(response.data, function(question) {
-        //                     self.currentQuestionsId.push({'question_id':question.question_id});
-        //                 }))
-        //                 return defer.promise;
-        //             }
-        //         });
-        // }
     }
 }());
