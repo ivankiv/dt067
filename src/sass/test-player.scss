@@ -35,7 +35,13 @@
           font-weight: bold;
           color: #000;
           border: 2px solid #34495E;
-          border-radius: 2px;
+          border-radius: 3px;
+        }
+        .danger-color{
+           background-color: #d9534f;
+         }
+        .norm-color{
+          background-color: #d9edf7;
         }
       }
     }
@@ -57,12 +63,25 @@
         min-height: 300px;           //TODO
         float: right;
         border: 2px solid #34495E;
-        border-radius: 2px;
+        border-radius: 3px;
         .question-view{
           border: 1px solid black;
+          padding: 10px;
+          .test-sign{
+            color: #000;
+            font-weight: bold;
+          }
         }
         .answer-view{
           border: 1px solid black;
+          padding: 10px;
+          .test-sign{
+            color: #000;
+            font-weight: bold;
+          }
+        }
+        .submit-answer{
+          margin: 5px auto;
         }
       }
     }

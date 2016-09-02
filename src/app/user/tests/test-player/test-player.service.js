@@ -9,9 +9,11 @@
 
         var self = this;
         self.pastAttemps = undefined;
+
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
-            checkAnswersList:checkAnswersList
+            checkAnswersList:checkAnswersList,
+            getAnswersListByQuestionId: getAnswersListByQuestionId
         };
 
         function checkAttemptsOfUser(user_id,currentTest) {
@@ -32,6 +34,13 @@
             return $http.post(appConstants.startTestInfoInLog + user_id + "/" + test_id)
                 .then(fulfilled,rejected);
         }
+
+        /////////////
+        function getAnswersListByQuestionId (questionId) {
+            return $http.get(appConstants.getAnswersListByQuestionId, + questionId)
+                .then(fulfilled, rejected);
+        }
+        /////////////
 
         function checkAnswersList(answers) {
             $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);

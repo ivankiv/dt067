@@ -3,14 +3,16 @@
         <div class="row">
 
             <div class="question-view">
-                Питання:
+                <span class="test-sign">Питання:</span>
                 <div class="question-image">{{player.currentQuestion.attachment}}</div>
                 <div class="question-text">{{player.currentQuestion.question_text}}</div>
             </div>
             <div class="answer-view">
-                Ваша відповідь:
-                {{}}
+                <span class="test-sign">Ваша відповідь:</span>
+                <div ng-if="" class="multi-answer"></div>
+                <div ng-if="" class="single-answer"></div>
             </div>
+            <button class="submit-answer btn btn-info">Наступне питання</button>
         </div>
     </section>
 </section>

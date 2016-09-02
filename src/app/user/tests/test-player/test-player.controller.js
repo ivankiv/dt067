@@ -23,10 +23,14 @@
         self.currentTest = JSON.parse(localStorage.currentTest);
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
         self.test_id = self.currentTest.test_id;
+        self.timerBackground = '';
+
+        self.currentAnswer = {};
 
         //methods
         self.getTimerValue;
         self.chooseQuestion = chooseQuestion;
+        self.getCurrentAnswersList = getCurrentAnswersList;
 
         activate();
 
@@ -38,7 +42,7 @@
             });
             isLogged();
             getTimerValue();
-
+            getCurrentAnswersList();
         }
 
         // function init() {
@@ -46,6 +50,18 @@
         //     $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
         //     return defer.promise;
         // }
+
+        //////////////////////
+        function getCurrentAnswersList() {
+            return testPlayerService.getAnswersListByQuestionId(self.questionId)
+                .then(function (response) {
+                    self.currentAnswer = response.data;
+                    console.log(self.currentAnswer);
+                    }
+                );
+        }
+        //////////////////////
+
         function chooseQuestion(question_index) {
             $state.go('test', {questionIndex:question_index});
         }
@@ -55,13 +71,18 @@
                 .then(
                     function (response) {
                         self.currentQuestion = response.data[0];
+                        console.log(self.currentQuestion);
                     }
                 );
         }
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();
-                 if (self.timerValue <= 0) {
+                 if (self.timerValue > 60000){
+                     self.timerBackground = 'norm-color';
+                 } else if (self.timerValue <= 60000){
+                     self.timerBackground = 'danger-color';
+                 } else if (self.timerValue <= 0) {
                      finishTest();
                  }
              }, 1000);
