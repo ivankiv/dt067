@@ -3,9 +3,9 @@
     angular.module('app')
         .factory('loginService', loginService);
 
-    loginService.$inject = ['$http', 'appConstants','$uibModal', 'ngDialog', '$state'];
+    loginService.$inject = ['$http', 'appConstants','$uibModal', '$state'];
 
-    function loginService($http, appConstants, $uibModal, ngDialog, $state) {
+    function loginService($http, appConstants, $uibModal, $state) {
         return {
             enterLogin: enterLogin,
             isLogged: isLogged
@@ -19,7 +19,7 @@
                     $state.go('login');
                     $uibModal.open({
                         templateUrl: 'app/auth/islogged-dialog.html',
-                        controller: 'loginModalController as login',
+                        controller: 'modalController as modal',
                         backdrop: true
                     })
                 }
@@ -37,7 +37,7 @@
         function enterLoginFailed(response) {
             $uibModal.open({
                 templateUrl: 'app/auth/login-failed-dialog.html',
-                controller: 'loginModalController as login',
+                controller: 'modalController as modal',
                 backdrop: true
             });
             return response;

@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('groupModalController', groupModalController);
 
-    groupModalController.$ingect = ['grouopService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'currentGroup', 'ngDialog'];
+    groupModalController.$ingect = ['grouopService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'currentGroup', '$uibModal'];
 
-    function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance,  currentGroup, ngDialog) {
+    function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance,  currentGroup, $uibModal) {
         var self = this;
         self.currentGroup = currentGroup;
         self.duplicateGroupsMessage = false;
@@ -60,7 +60,7 @@
 
         }
         function addError(response) {
-            alert("Something went wrong");
+            alert("Ви не можете додати групу");
             console.log(response)
         }
 
@@ -80,9 +80,10 @@
             if(response.data.response == 'ok') {
                 self.currentGroup = {};
                 $uibModalInstance.close();
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>',
-                    plain: 'true'
+                $uibModal.open({
+                    templateUrl: 'app/modal/partials/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
             }
         }
