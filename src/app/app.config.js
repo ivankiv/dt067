@@ -170,7 +170,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 }
             },
             ncyBreadcrumb: {
-                label: 'Відповіді'
+                label: 'Відповіді',
+                parent: 'admin-home.questions'
             }
         })
 
