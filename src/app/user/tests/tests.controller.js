@@ -92,10 +92,14 @@
                     else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
-                        getTestDetailsByTest().then(function(response) {
-                            if(self.enoughQuestions[0] !== false) {
+                        getTestDetailsByTest().then(function(questionsId) {
+
+                            console.log("questionsId.length: ", questionsId.length);
+                            console.log("questionsId: ", questionsId);
+                            console.log("currenttest", currentTest.tasks);
+                            if(questionsId.length === currentTest.tasks) {
                                 $timeout(function () {
-                                    localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                    localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
                                     var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                     localStorage.setItem("endTime", JSON.stringify(endTime));
                                     $state.go("test", {questionIndex:0});
