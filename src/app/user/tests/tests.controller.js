@@ -132,14 +132,12 @@
                                 plain:true
                             });
                             self.showMessageNoEnoughQuestion = false;
-                            self.enoughQuestions.push(self.showMessageNoEnoughQuestion);
                         }
                     } else {
                         angular.forEach(response.data, function(question) {
                             self.currentQuestionsId.push({'question_id':question.question_id});
                         });
                     }
-                   return self.currentQuestionsId;
                 });
         }
     }
