@@ -119,7 +119,7 @@
             });
             modalInstance.result.then(function(response) {
                 $uibModal.open({
-                    templateUrl: 'app/modal/partials/confirm-dialog.html',
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
                     controller: 'modalController as modal',
                     backdrop: true
                 });
@@ -130,7 +130,7 @@
 
         function deleteGroup(group_id) {
             var modalInstance = $uibModal.open({
-                templateUrl: 'app/modal/partials/confirm-delete-dialog.html',
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
                 controller: 'modalController as modal',
                 backdrop: true
             });
@@ -146,7 +146,7 @@
         function deleteGroupComplete(response) {
             if(response.status === 400) {
                 $uibModal.open({
-                    templateUrl: 'app/modal/partials/forbidden-confirm-dialog.html',
+                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
                     controller: 'modalController as modal',
                     backdrop: true
                 });
@@ -154,7 +154,7 @@
 
             if(response.data.response == "ok") {
                 $uibModal.open({
-                    templateUrl: 'app/modal/partials/confirm-dialog.html',
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
                     controller: 'modalController as modal',
                     backdrop: true
                 });

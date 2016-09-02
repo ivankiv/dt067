@@ -81,7 +81,7 @@
                 self.currentGroup = {};
                 $uibModalInstance.close();
                 $uibModal.open({
-                    templateUrl: 'app/modal/partials/confirm-dialog.html',
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
                     controller: 'modalController as modal',
                     backdrop: true
                 });

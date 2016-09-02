@@ -18,7 +18,7 @@
                 } else if (response.data.response == "non logged") {
                     $state.go('login');
                     $uibModal.open({
-                        templateUrl: 'app/auth/islogged-dialog.html',
+                        templateUrl: 'app/modal/templates/islogged-dialog.html',
                         controller: 'modalController as modal',
                         backdrop: true
                     })
@@ -36,7 +36,7 @@
         }
         function enterLoginFailed(response) {
             $uibModal.open({
-                templateUrl: 'app/auth/login-failed-dialog.html',
+                templateUrl: 'app/modal/templates/login-failed-dialog.html',
                 controller: 'modalController as modal',
                 backdrop: true
             });

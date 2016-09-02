@@ -12,7 +12,7 @@
         self.confirmForm = confirmForm;
        
         function closeForm() {
-            $uibModalInstance.close();
+            $uibModalInstance.dismiss('cancel');
         }
 
         function confirmForm() {
