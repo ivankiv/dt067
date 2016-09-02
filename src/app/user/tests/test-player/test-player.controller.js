@@ -14,7 +14,6 @@
         //variables
         self.user_id = 0;
         self.currentQuestion = {};
-
         self.checked;
         self.endTime =JSON.parse(localStorage.endTime);
         self.currentQuestion_index = $stateParams.questionIndex;
@@ -32,20 +31,11 @@
 
         function activate() {
             getCurrentQuestion().then(function () {
-                    console.log('questio= ',self.currentQuestion);
-                    console.log('questionId= ',self.questionId);
-                    console.log("arr =",self.listOfQuestionsId );
             });
             isLogged();
             getTimerValue();
-
         }
 
-        function init() {
-            var defer = $q.defer();
-            $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
-            return defer.promise;
-        }
         function chooseQuestion(question_index) {
             $state.go('test', {questionIndex:question_index});
         }

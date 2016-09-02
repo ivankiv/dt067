@@ -15,7 +15,6 @@
         self.currenSubjectName = '';
         self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
-        self.currentQuestionsId = [];
         self.currentTestId = 0;
 
         self.listOfEvents  = [];
@@ -90,18 +89,16 @@
                     }
                     else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
-
                         getTestDetailsByTest().then(function(response) {
-
-                            console.log("response 1111: ", response);
                             if(response.length == currentTest.tasks) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(response));
+                                var listOfQuestionsId = response.map(function (obj) {
+                                    return {question_id:obj.question_id};
+                                })
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(listOfQuestionsId));
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
                                 $state.go("test", {questionIndex:0});
                             } else {
-                                console.log("response: ", response);
-                                console.log("self.currentQuestionsIdelse: ", self.currentQuestionsId);
                                 ngDialog.open({
                                     template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
                                     plain:true
@@ -131,7 +128,6 @@
             }, function (response) {
                 deferred.reject(response);
             });
-
         return deferred.promise;
         }
     }
