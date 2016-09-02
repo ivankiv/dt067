@@ -4,9 +4,9 @@
 
     angular.module('app')
         .controller('GroupController', groupController);
-    groupController.$inject = ['groupService', 'loginService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', 'ngDialog', '$stateParams'];
+    groupController.$inject = ['groupService', 'loginService', 'facultyService', 'specialityService', 'appConstants', '$uibModal', '$stateParams'];
 
-    function groupController(groupService, loginService, facultyService, specialityService, appConstants, $uibModal, ngDialog , $stateParams) {
+    function groupController(groupService, loginService, facultyService, specialityService, appConstants, $uibModal, $stateParams) {
         var self = this;
 
         //variables
@@ -118,8 +118,10 @@
                 }
             });
             modalInstance.result.then(function(response) {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Групу успішно додано!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
                 pageChanged();
@@ -127,24 +129,34 @@
         }
 
         function deleteGroup(group_id) {
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            }).then(function() {
-                groupService.deleteGroup(group_id).then(deleteGroupComplete);
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result.then(function(response) {
+                if (response) {
+                    groupService.deleteGroup(group_id).then(deleteGroupComplete);
+                } else {
+                    return response;
+                }
             });
         }
 
         function deleteGroupComplete(response) {
             if(response.status === 400) {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Ви не можете видалити групу яка містить записи про студентів!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
             }
 
             if(response.data.response == "ok") {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Групу видалено!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
                 pageChanged();
