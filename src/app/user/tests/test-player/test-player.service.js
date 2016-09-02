@@ -37,6 +37,20 @@
             $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
         }
 
+        function mixAnswers(answers) {
+            var currentIndex = answers.length,temporaryValue,randomIndex;
+
+            while (0 !== currentIndex){
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+                temporaryValue = answers[currentIndex];
+                answers[currentIndex] = answers[randomIndex];
+                answers[randomIndex] = temporaryValue;
+            }
+
+            return answers;
+        }
+
         function fulfilled(response) {
             return response;
         }

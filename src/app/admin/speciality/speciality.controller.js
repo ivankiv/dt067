@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('SpecialityController',specialityController);
 
-    specialityController.$inject = ['specialityService','appConstants','$uibModal','ngDialog'];
+    specialityController.$inject = ['specialityService', 'loginService', 'appConstants','$uibModal','ngDialog'];
 
-    function specialityController(specialityService,appConstants,$uibModal,ngDialog) {
+    function specialityController(specialityService, loginService, appConstants,$uibModal,ngDialog) {
         var self = this;
 
         self.list = {};
