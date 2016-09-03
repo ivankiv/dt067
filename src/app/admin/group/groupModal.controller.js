@@ -3,7 +3,7 @@
     angular.module('app')
         .controller('groupModalController', groupModalController);
 
-    groupModalController.$ingect = ['grouopService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'currentGroup', '$uibModal'];
+    groupModalController.$ingect = ['groupService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'currentGroup', '$uibModal'];
 
     function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance,  currentGroup, $uibModal) {
         var self = this;
