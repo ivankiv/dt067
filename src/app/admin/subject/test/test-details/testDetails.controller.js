@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestDetailsController', testDetailsController);
-        testDetailsController.$inject = ['loginService', '$stateParams', 'testDetailsService', 'testService', '$uibModal', 'ngDialog'];
+        testDetailsController.$inject = ['loginService', '$stateParams', 'testDetailsService', 'testService', '$uibModal'];
 
-        function testDetailsController(loginService, $stateParams, testDetailsService, testService, $uibModal, ngDialog) {
+        function testDetailsController(loginService, $stateParams, testDetailsService, testService, $uibModal) {
             var self = this;
 
             //variables
@@ -62,14 +62,23 @@
             }
 
             function deleteTestDetails(id) {
-                ngDialog.openConfirm({
-                    template: 'app/partials/confirm-delete-dialog.html',
-                    plain: false
-                }).then(function() {
-                    testDetailsService.deleteTestDetails(id).then(function() {
-                        activate();
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
+                });
+                modalInstance.result.then(function() {
+                    testDetailsService.deleteTestDetails(id).then(function(response) {
+                        if(response.data.response == "ok") {
+                            $uibModal.open({
+                                templateUrl: 'app/modal/templates/confirm-dialog.html',
+                                controller: 'modalController as modal',
+                                backdrop: true
+                            });
+                            activate();
+                        }
                     })
-                })
+                });
             }
 
              function getOneTest() {
@@ -89,8 +98,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Деталі тесту успішно додано!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     activate();
@@ -108,8 +119,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     activate();
                 })
