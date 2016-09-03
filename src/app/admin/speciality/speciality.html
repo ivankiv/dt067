@@ -18,21 +18,26 @@
                         <i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                     <input class="views-header-search-inpts"
-                           ng-show="specialities.showSearch"
                            type="text"
-                           placeholder="Пошук на сторінці"
+                           placeholder="Пошук"
                            ng-model="specialities.textSearch"
-                           name="search">
+                           name="search"
+                           check-pagination
+                           items-per-page="specialities.specialitiesPerPage"
+                           total-items="specialities.totalSpecialities"
+                           text-search="specialities.textSearch"/>
                 </div>
                 <table class="rwd-table subject-table table-striped">
                     <thead>
                     <tr>
+                        <th>Номер</th>
                         <th>Спеціальність</th>
                         <th>Код</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="speciality in specialities.list| toArray | filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
+                        <td data-th="Номер">{{$index + (specialities.currentPage - 1) * specialities.specialitiesPerPage + 1}}</td>
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
                         <td>
@@ -62,7 +67,6 @@
                 <div class="subject-pagination pull-right">
                     <uib-pagination
                             ng-show="specialities.totalSpecialities > specialities.specialitiesPerPage"
-                            ng-hide="specialities.textSearch!=''"
                             total-items="specialities.totalSpecialities"
                             items-per-page="specialities.specialitiesPerPage"
                             ng-model="specialities.currentPage"

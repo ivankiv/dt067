@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('SpecialityController',specialityController);
 
-    specialityController.$inject = ['specialityService', 'loginService', 'appConstants','$uibModal','ngDialog'];
+    specialityController.$inject = ['specialityService', 'loginService','$uibModal','ngDialog'];
 
-    function specialityController(specialityService, loginService, appConstants,$uibModal,ngDialog) {
+    function specialityController(specialityService, loginService ,$uibModal,ngDialog) {
         var self = this;
 
         self.list = {};
@@ -20,7 +20,6 @@
         self.pageChanged = pageChanged;
 
         self.getSpecialities = getSpecialities;
-        self.countSpecialities = countSpecialities;
         self.deleteSpeciality = deleteSpeciality;
         self.showAddSpecialityForm = showAddSpecialityForm;
         self.showEditSpecialityForm = showEditSpecialityForm;
@@ -39,14 +38,10 @@
         function getSpecialities() {
             return specialityService.getSpecialities().then(function(response) {
                 self.list = response.data;
+                self.totalSpecialities = response.data.length;
             });
         }
 
-        function countSpecialities() {
-            specialityService.countSpecialities().then(function (response) {
-               self.totalSpecialities = response.data.numberOfRecords;
-            });
-        }
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.specialitiesPerPage);
             self.showSearch = (self.currentPage === 1);
