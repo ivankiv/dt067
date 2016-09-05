@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService","ngDialog","$stateParams"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","$stateParams","$uibModal"];
 
-    function StudentEditController(studentService, groupService, adminService, ngDialog, $stateParams) {
+    function StudentEditController(studentService, groupService, adminService, $stateParams, $uibModal) {
         var self = this;
 
         //Methods
@@ -93,7 +93,7 @@
 
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.studentsPerPage);
-            self.showSearch = (self.currentPage === 1) ? true : false;
+            self.showSearch = (self.currentPage === 1);
             self.textSearch = (self.currentPage === 1) ? self.textSearch  : "";
         }
 
@@ -106,10 +106,12 @@
         }
 
         function remove(id) {
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            })
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result
                 .then(function(){
                     studentService.deleteStudent(id)
                         .then(activate);

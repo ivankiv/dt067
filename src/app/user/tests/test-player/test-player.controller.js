@@ -47,6 +47,8 @@
             return defer.promise;
         }
         function chooseQuestion(question_index) {
+            localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+            if(question_index === 19)
             $state.go('test', {questionIndex:question_index});
         }
 
