@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('TestController', testController);
-        testController.$inject = ['loginService', 'testService', 'subjectService', '$uibModal', '$stateParams', 'ngDialog'];
+        testController.$inject = ['loginService', 'testService', 'subjectService', '$uibModal', '$stateParams'];
 
-        function testController (loginService, testService, subjectService, $uibModal, $stateParams, ngDialog) {
+        function testController (loginService, testService, subjectService, $uibModal, $stateParams) {
             var self = this;
 
             //variables
@@ -49,21 +49,31 @@
             }
 
             function deleteTest(testId) {
-                ngDialog.openConfirm({
-                    template: 'app/partials/confirm-delete-dialog.html',
-                    plain: false
-                }).then(function() {
-                    testService.deleteTest(testId).then(function(response) {
-                        if(response.data.response === 'ok') {
-                            getTestBySubjectId();
-                        }
-                        if(response.status === 400) {
-                            ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Неможливо видалити тест в якому є завдання!</div>'
-                            });
-                        }
-                    })
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
+                modalInstance.result.then(function() {
+                    testService.deleteTest(testId).then(deleteTestComplete);
+                });
+            }
+            function deleteTestComplete(response) {
+                if(response.data.response === 'ok') {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                    getTestBySubjectId();
+                }
+                if(response.status === 400) {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                }
             }
 
             function showAddTestForm() {
@@ -76,8 +86,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Тест успішно додано!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     getTestBySubjectId();
@@ -94,8 +106,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     getTestBySubjectId();

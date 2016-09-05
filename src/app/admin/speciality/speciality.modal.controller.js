@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('SpecialityModalController',specialityModalController);
 
-    specialityModalController.$inject = ['specialityService','appConstants','$uibModalInstance','currentSpeciality','ngDialog'];
+    specialityModalController.$inject = ['specialityService','appConstants','$uibModalInstance','currentSpeciality','$uibModal'];
 
-    function specialityModalController(specialityService,appConstants,$uibModalInstance,currentSpeciality,ngDialog) {
+    function specialityModalController(specialityService,appConstants,$uibModalInstance,currentSpeciality,$uibModal) {
         var self = this;
 
         self.speciality = {speciality_name: "",speciality_code: ""};
@@ -39,19 +39,17 @@
             }
         }
         function updateComplete(response) {
-            if(response.status === 400){
+            if(response.status === 400 || (response.status === 200 && response.data.response === 'error')){
                 self.duplicateSpecialitiesMessage = true;
                 return;
-            }
-            if(response.status === 200 && response.data.response === 'error'){
-                self.wasNotEditSpecialityMessage = true;
             }
             if(response.data.response === 'ok'){
                 self.currentSpeciality = {};
                 $uibModalInstance.close();
-                ngDialog.open({
-                   template:'<div class="ngdialog-message">Зміни збережено!</div>',
-                    plain:true
+                $uibModal.open({
+                   templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
             }
         }

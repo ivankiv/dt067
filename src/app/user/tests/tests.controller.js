@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams','ngDialog','$timeout'];
+        'loginService', '$state','$stateParams', '$timeout', '$uibModal'];
 
-    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
+    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams, $timeout, $uibModal) {
         var self = this;
 
         //variables
@@ -83,31 +83,36 @@
                 .then(function(response) {
                     self.checked = response;
                     if(self.checked){
-                        ngDialog.open({
-                            template:'<div class="ngdialog-message">У Вас не залишилось спроб!</div>',
-                            plain:true
-                        })
-                    }
-                    else {
+                        $uibModal.open({
+                            templateUrl: 'app/modal/templates/no-more-attempts.html',
+                            controller: 'modalController as modal',
+                            backdrop: true
+                        });
+                    } else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
                         getTestDetailsByTest().then(function(response) {
 
+                            var notEnoughQuestions = response.filter(function(question) {
+                                return question.response === "Not enough number of questions for quiz";
+                            });
 
-                            console.log("self.currentQuestionsId: ", self.currentQuestionsId);
-                            console.log("self.currentQuestionsId.length: ", self.currentQuestionsId.length);
-                            console.log("currentTest.tasks", currentTest.tasks);
-                            if(response.length == currentTest.tasks) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(self.currentQuestionsId));
+                            var questionsId = response.map(function(question){
+                                return {question_id: question.question_id};
+                            });
+
+                            if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
+
                                 $state.go("test", {questionIndex:0});
                             } else {
-                                console.log("response: ", response);
-                                console.log("self.currentQuestionsIdelse: ", self.currentQuestionsId);
-                                ngDialog.open({
-                                    template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-                                    plain:true
+                                $uibModal.open({
+                                    templateUrl: 'app/modal/templates/attention-noquestions-dialog.html',
+                                    controller: 'modalController as modal',
+                                    backdrop: true
                                 });
                             }
                         })
@@ -115,63 +120,24 @@
                 });
         }
 
-        // function init() {
-        //     var defer = $q.defer();
-        //
-        //     defer.resolve(getTestDetailsByTest);
-        //
-        //     return defer.promise;
-        // }
-
         function getTestDetailsByTest() {
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            var defer_parent = $q.defer();
-            var questionsId = [];
 
-            if(response.statusText === 'OK') {
+            var promises = response.data.map(function(testDetail) {
+                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
+            });
 
-                angular.forEach(response.data, function(testDetail) {
-                    var currentQuestionsId = [];
-                        return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks)
-                            .then(function(response) {
-                                var defer = $q.defer();
-                                    angular.forEach(response.data, function(question) {
-                                        currentQuestionsId.push({'question_id':question.question_id});
-                                    });
-                                defer.resolve(currentQuestionsId);
-                                return defer.promise;
-                            }).then(function(response) {
-                                console.log(response);
-                                questionsId.concat(response);
-                            })
-                })
+           return $q.all(promises).then(function(response) {
+                var questionsList = [];
+                    angular.forEach(response, function (reponse) {
+                        questionsList = questionsList.concat(reponse.data);
+                    });
+                return questionsList;
+                }, function (response) {
+                    return response
+                });
             }
-            defer_parent.resolve(questionsId);
-            return defer_parent.promise;
-        }
-
-        // function getQuestionsByLevelRand(levelOfQuestion, numberOfQuestions) {
-        //    return questionsService.getQuestionsByLevelRand(self.currentTestId, levelOfQuestion, numberOfQuestions)
-        //         .then(function(response) {
-        //
-        //             if(response.data.response === "Not enough number of questions for quiz") {
-        //                 if(self.showMessageNotEnoughQuestion){
-        //                     ngDialog.open({
-        //                         template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-        //                         plain:true
-        //                     });
-        //                     self.showMessageNotEnoughQuestion = false;
-        //                 }
-        //             } else {
-        //                 var defer = $q.defer();
-        //                 defer.resolve(angular.forEach(response.data, function(question) {
-        //                     self.currentQuestionsId.push({'question_id':question.question_id});
-        //                 }))
-        //                 return defer.promise;
-        //             }
-        //         });
-        // }
     }
 }());
