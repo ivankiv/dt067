@@ -41,32 +41,32 @@
                 self.listOfEvents  = response.data;
 
                 angular.forEach(self.listOfEvents, function (event) {
-                        getOneSubject(event.subject_id).then(function (response) {
-                            getTestBySubjectId(event.subject_id).then(function () {
+                    getOneSubject(event.subject_id).then(function (response) {
+                        getTestBySubjectId(event.subject_id).then(function () {
 
-                                    angular.forEach(self.currentTests, function (test) {
-                                            if(test != 'no records') {
-                                                test.subject_name = response;
-                                                test.date = event.event_date;
-                                                self.listOfTests.push(test);
-                                                self.showMessageNoEntity = false;
-                                            }
-                                    });
+                            angular.forEach(self.currentTests, function (test) {
+                                if(test != 'no records') {
+                                    test.subject_name = response;
+                                    test.date = event.event_date;
+                                    self.listOfTests.push(test);
+                                    self.showMessageNoEntity = false;
+                                }
                             });
                         });
+                    });
                 });
             });
         }
 
         function getOneSubject(id) {
-           return  subjectService.getOneSubject(id).then(function(response) {
+            return  subjectService.getOneSubject(id).then(function(response) {
                 return response.data[0].subject_name;
             })
         }
         //this method return an array of tests for subject if they exist
         function getTestBySubjectId(subjectId) {
             return testService.getTestBySubjectId(subjectId).then(function(response) {
-                    self.currentTests = response.data;
+                self.currentTests = response.data;
             })
         }
 
@@ -138,18 +138,18 @@
             });
 
             var promises = response.data.map(function(testDetail) {
-                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
+                return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
             });
 
-           return $q.all(promises).then(function(response) {
+            return $q.all(promises).then(function(response) {
                 var questionsList = [];
-                    angular.forEach(response, function (reponse) {
-                        questionsList = questionsList.concat(reponse.data);
-                    });
-                return questionsList;
-                }, function (response) {
-                    return response
+                angular.forEach(response, function (reponse) {
+                    questionsList = questionsList.concat(reponse.data);
                 });
-            }
+                return questionsList;
+            }, function (response) {
+                return response
+            });
+        }
     }
 }());

@@ -39,9 +39,9 @@
 
         function activate() {
             getCurrentQuestion().then(function () {
-                    console.log('questio= ',self.currentQuestion);
-                    console.log('questionId= ',self.questionId);
-                    console.log("arr =",self.listOfQuestionsId );
+                console.log('questio= ',self.currentQuestion);
+                console.log('questionId= ',self.questionId);
+                console.log("arr =",self.listOfQuestionsId );
             });
             isLogged();
             getTimerValue();
@@ -52,10 +52,10 @@
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
-                    self.currentAnswerArray = response.data;
-                    self.answerId =
-                    console.log(self.currentAnswerArray);
-                    console.log("questionID-", self.questionId);
+                        self.currentAnswerArray = response.data;
+                        self.answerId =
+                            console.log(self.currentAnswerArray);
+                        console.log("questionID-", self.questionId);
                     }
                 );
         }
@@ -67,12 +67,14 @@
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
             console.log("y",typeof(question_index));
             console.log("x",self.listOfQuestionsId.length-1);
-            if(question_index == (self.listOfQuestionsId.length -1)){
+            if(question_index == (self.listOfQuestionsId.length)){
                 console.log("!!!!!!!!!!!!!");
                 var newIndex = 0;
                 $state.go('test', {questionIndex:newIndex});
             }
-            $state.go('test', {questionIndex:question_index});
+            else {
+                $state.go('test', {questionIndex:question_index});
+            }
         }
 
         function getCurrentQuestion() {
@@ -85,18 +87,18 @@
                     }
                 );
         }
-         function getTimerValue () {
-             $interval(function () {
-                 self.timerValue = self.endTime -new Date().valueOf();
-                 if (self.timerValue > 60000){
-                     self.timerBackground = 'norm-color';
-                 } else if (self.timerValue <= 60000){
-                     self.timerBackground = 'danger-color';
-                 } else if (self.timerValue <= 0) {
-                     finishTest();
-                 }
-             }, 100);
-         }
+        function getTimerValue () {
+            $interval(function () {
+                self.timerValue = self.endTime -new Date().valueOf();
+                if (self.timerValue > 60000){
+                    self.timerBackground = 'norm-color';
+                } else if (self.timerValue <= 60000){
+                    self.timerBackground = 'danger-color';
+                } else if (self.timerValue <= 0) {
+                    finishTest();
+                }
+            }, 100);
+        }
 
         function isLogged() {
             return loginService.isLogged().then(function(response) {
@@ -119,7 +121,7 @@
         }
 
         function finishTest() {
-           console.log("finish test");
+            console.log("finish test");
             testPlayerService.checkAnswersList(self.listOfQuestionsId);
         }
 
