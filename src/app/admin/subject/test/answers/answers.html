@@ -26,7 +26,7 @@
                     <tr ng-repeat="answer in answers.list">
                         <td data-th="Зображення"><img ng-src="{{answer.attachment}}" height="100" width="100" alt="Зображення"></td>
                         <td data-th="Текст відповіді">{{:: answer.answer_text}}</td>
-                        <td data-th="Результат">{{::answer.true_answer}}</td>
+                        <td data-th="Результат">{{answers.true_answers[answer.true_answer]}}</td>
                         <td>
                             <button type="button" ng-click="answers.deleteAnswers(answer.answer_id)" class="btn btn-danger views-remove-btn pull-right table-help-btns"
                                     title="Видалити">
