@@ -22,13 +22,11 @@
         self.timerValue= 0;
         self.listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
         self.currentTest = JSON.parse(localStorage.currentTest);
-        self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
         self.test_id = self.currentTest.test_id;
         self.timerBackground = '';
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
-        self.checkedAnswer ="";
-
+        self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
 
         //methods
         self.getTimerValue;
@@ -61,10 +59,16 @@
         }
 
         function chooseQuestion(question_index) {
-            self.listOfQuestionsId[self.currentQuestion_index].answer_ids = [];
+
+            console.log("y",question_index);
+            self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
-            if(question_index === self.listOfQuestionsId.length -1){
-                $state.go('test', {questionIndex:0});
+            console.log("y",typeof(question_index));
+            console.log("x",self.listOfQuestionsId.length-1);
+            if(question_index == (self.listOfQuestionsId.length -1)){
+                console.log("!!!!!!!!!!!!!");
+                var newIndex = 0;
+                $state.go('test', {questionIndex:newIndex});
             }
             $state.go('test', {questionIndex:question_index});
         }
