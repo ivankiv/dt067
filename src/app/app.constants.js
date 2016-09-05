@@ -42,7 +42,7 @@
             editQuestion: baseUrl + 'question/update/',
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
-            getAnswersByQuestionID: baseUrl + 'answer/getRecords/',  // get answer id
+            getAnswersByQuestionID: baseUrl + '/answer/getAnswersByQuestion/',  // get question id
                  deleteAnswers: baseUrl + 'answer/del/', // + id of answer
                  getQuestionByQuestionID: baseUrl + 'question/getRecords/', // + question id
                 addAnswer: baseUrl + 'answer/insertData',
