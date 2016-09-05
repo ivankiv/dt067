@@ -50,11 +50,11 @@
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 timer-and-questionNum-box">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 questionNum-box">
-                                <span class="questionNum-sign">Завдання {{::question.index}} із {{player.currentTest.tasks}}</span>
+                                <span class="questionNum-sign">Завдання {{$index+1}} із {{player.currentTest.tasks}}</span>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 timer-box">
                                 <span class="timeleft-sign">Залишилось часу:</span>
-                                <div class="timer bg-info">{{player.timerValue | date: 'HH:mm:ss' : '+0000'}}</div>
+                                <div class="timer {{player.timerBackground}}">{{player.timerValue | date: 'HH:mm:ss' : '+0000'}}</div>
                             </div>
                         </div>
 
@@ -62,10 +62,10 @@
                         <div class="col-sm-12 col-xs-12 player-wrap">
 
                             <div class="col-sm-3 col-xs-12 wrapForQuestions">
-                                <div ng-click="player.chooseQuestion($index)"
-                                     class="allOfQuestions bg-info" ng-repeat="question in player.listOfQuestionsId">
-                                    <button>{{$index+1}}</button>
-                                </div>
+                                <button ng-click="player.chooseQuestion($index)"
+                                     class="allOfQuestions btn btn-info" ng-repeat="question in player.listOfQuestionsId">
+                                    {{$index+1}}
+                                </button>
                             </div>
 
                             <div class="col-sm-8 col-xs-12 questions-box bg-info"

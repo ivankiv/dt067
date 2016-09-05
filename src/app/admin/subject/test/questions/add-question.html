@@ -20,7 +20,7 @@
             <div class="col-sm-9">
                 <textarea class="form-control" id="question_text"  name="question_text"
                           ng-model="questions.question.question_text"
-                          placeholder="Напишіть текс завдання"
+                          placeholder="Напишіть текст завдання"
                           required>
                 </textarea>
                 <novalidate-messages field="newAddQuestionsForm.question_text"></novalidate-messages>
@@ -57,7 +57,7 @@
 </div>
 <div class="modal-footer custom-modal-footer">
     <button class="btn btn-primary" type="button" ng-click="questions.addQuestion()"
-            ng-disabled="newAddQuestionsForm.$invalid"> Додати тест
+            ng-disabled="newAddQuestionsForm.$invalid"> Додати завдання
     </button>
     <button class="btn btn-warning" type="button" ng-click="questions.cancelForm()">Відмінити</button>
 </div>

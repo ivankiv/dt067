@@ -14,6 +14,7 @@
         //variables
         self.user_id = 0;
         self.currentQuestion = {};
+        self.currentAnswerArray = {};
 
         self.checked;
         self.endTime =JSON.parse(localStorage.endTime);
@@ -23,10 +24,17 @@
         self.currentTest = JSON.parse(localStorage.currentTest);
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
         self.test_id = self.currentTest.test_id;
+        self.timerBackground = '';
+        self.typeOfQuestion;
+        self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
+        self.checkedAnswer ="";
+
 
         //methods
         self.getTimerValue;
         self.chooseQuestion = chooseQuestion;
+        self.getCurrentAnswersList = getCurrentAnswersList;
+        self.toggleSelection = toggleSelection;
 
         activate();
 
@@ -38,17 +46,26 @@
             });
             isLogged();
             getTimerValue();
-
+            getCurrentAnswersList();
         }
 
-        function init() {
-            var defer = $q.defer();
-            $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
-            return defer.promise;
+        function getCurrentAnswersList() {
+            return testPlayerService.getAnswersListByQuestionId(self.questionId)
+                .then(function (response) {
+                    self.currentAnswerArray = response.data;
+                    self.answerId =
+                    console.log(self.currentAnswerArray);
+                    console.log("questionID-", self.questionId);
+                    }
+                );
         }
+
         function chooseQuestion(question_index) {
-            localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
-            if(question_index === 19)
+            self.listOfQuestionsId[self.currentQuestion_index].answer_ids = [];
+            localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
+            if(question_index === self.listOfQuestionsId.length -1){
+                $state.go('test', {questionIndex:0});
+            }
             $state.go('test', {questionIndex:question_index});
         }
 
@@ -57,16 +74,22 @@
                 .then(
                     function (response) {
                         self.currentQuestion = response.data[0];
+                        self.typeOfQuestion = self.currentQuestion.type;
+                        console.log(self.typeOfQuestion);
                     }
                 );
         }
          function getTimerValue () {
              $interval(function () {
                  self.timerValue = self.endTime -new Date().valueOf();
-                 if(self.timerValue<=0) {
+                 if (self.timerValue > 60000){
+                     self.timerBackground = 'norm-color';
+                 } else if (self.timerValue <= 60000){
+                     self.timerBackground = 'danger-color';
+                 } else if (self.timerValue <= 0) {
                      finishTest();
                  }
-             }, 1000);
+             }, 100);
          }
 
         function isLogged() {
@@ -74,6 +97,20 @@
                 self.user_id = response.data.id;
             });
         }
+
+        function toggleSelection(answer_id) {
+            var idx = self.checkedAnswers.indexOf(answer_id);
+
+            // is currently selected
+            if (idx > -1) {
+                self.checkedAnswers.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                self.checkedAnswers.push(answer_id);
+            }
+        };
 
         function finishTest() {
            console.log("finish test");
