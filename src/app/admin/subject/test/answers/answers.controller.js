@@ -30,7 +30,7 @@
 
 
         function getQuestionsRangeByTest() {
-            answersService.getAnswersByQuestion($stateParams.currentQuestionId)
+            answersService.getAnswersByQuestion(self.question_id)
                 .then(getAnswersByQuestionComplete)
         }
 
@@ -40,6 +40,7 @@
                 self.showMessageNoEntity = true;
             } else {
                 self.list = response.data;
+                console.log(self.list, 'self list');
             }
         }
 
