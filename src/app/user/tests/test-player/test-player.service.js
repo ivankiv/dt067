@@ -12,7 +12,7 @@
 
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
-            checkAnswersList:checkAnswersList,
+            checkAnswersList: checkAnswersList,
             getAnswersListByQuestionId: getAnswersListByQuestionId
         };
 
@@ -35,12 +35,10 @@
                 .then(fulfilled,rejected);
         }
 
-        /////////////
         function getAnswersListByQuestionId (questionId) {
             return $http.get(appConstants.getAnswersListByQuestionId + questionId)
                 .then(fulfilled, rejected);
         }
-        /////////////
 
         function checkAnswersList(answers) {
             $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);

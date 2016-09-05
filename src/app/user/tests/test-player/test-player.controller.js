@@ -46,13 +46,6 @@
             getCurrentAnswersList();
         }
 
-        // function init() {
-        //     var defer = $q.defer();
-        //     $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
-        //     return defer.promise;
-        // }
-
-        //////////////////////
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
@@ -63,7 +56,6 @@
                     }
                 );
         }
-        //////////////////////
 
         function init() {
             var defer = $q.defer();
@@ -100,7 +92,7 @@
                  } else if (self.timerValue <= 0) {
                      finishTest();
                  }
-             }, 1000);
+             }, 100);
          }
 
         function isLogged() {
