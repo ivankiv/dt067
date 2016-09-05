@@ -65,12 +65,14 @@
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
             console.log("y",typeof(question_index));
             console.log("x",self.listOfQuestionsId.length-1);
-            if(question_index == (self.listOfQuestionsId.length -1)){
+            if(question_index == (self.listOfQuestionsId.length)){
                 console.log("!!!!!!!!!!!!!");
                 var newIndex = 0;
                 $state.go('test', {questionIndex:newIndex});
             }
-            $state.go('test', {questionIndex:question_index});
+            else {
+                $state.go('test', {questionIndex:question_index});
+            }
         }
 
         function getCurrentQuestion() {
