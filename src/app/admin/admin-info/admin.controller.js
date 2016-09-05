@@ -5,9 +5,9 @@
         .module('app')
         .controller('AdminEditController', AdminEditController);
 
-    AdminEditController.$inject = ['adminService','$uibModal', 'ngDialog'];
+    AdminEditController.$inject = ['adminService','$uibModal'];
 
-    function AdminEditController(adminService,$uibModal, ngDialog) {
+    function AdminEditController(adminService,$uibModal) {
         var self = this;
 
         //Methods
@@ -32,13 +32,15 @@
                 alert("Цього адміна не дозволено видаляти");
                 return;
             }
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            }).
-            then(function(){
+
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result.then(function(){
                 adminService.deleteAdmin(id).then(activate)
-            })
+            });
         }
 
         function showCreateForm() {
@@ -51,8 +53,10 @@
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template:
-                    '<div class="ngdialog-message">Адміністратора створено!</div>'
+                $uibModal.open({
+                    templateUrl:'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
             })
@@ -68,8 +72,10 @@
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template:
-                    '<div class="ngdialog-message">Збережено!</div>'
+                $uibModal.open({
+                    templateUrl:'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
             })

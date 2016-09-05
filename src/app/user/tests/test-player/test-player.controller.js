@@ -72,6 +72,11 @@
         }
 
         function chooseQuestion(question_index) {
+            questionsId[self.currentQuestion_index].answer_ids = [];
+            localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+            if(question_index === self.listOfQuestionsId.length -1){
+                $state.go('test', {questionIndex:0});
+            }
             $state.go('test', {questionIndex:question_index});
         }
 

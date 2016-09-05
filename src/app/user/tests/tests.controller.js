@@ -98,7 +98,7 @@
                             });
 
                             var questionsId = response.map(function(question){
-                                return {question_id: question.question_id};
+                                return {"question_id": question.question_id, "answers_ids":[]};
                             });
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
