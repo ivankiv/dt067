@@ -4,9 +4,9 @@
     angular.module('app')
         .directive('spinner',spinner);
 
-    spinner.$inject = ['$rootScope'];
+    spinner.$inject = [];
 
-    function spinner($rootScope) {
+    function spinner() {
         return {
             link:function ($scope,element) {
                 $scope.$on("spinner_show",function () {

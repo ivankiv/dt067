@@ -132,7 +132,7 @@
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
                 controller: 'modalController as modal',
-                backdrop: true
+                backdrop: false
             });
             modalInstance.result.then(function(response) {
                 if (response) {
