@@ -4,8 +4,6 @@
     angular.module('app')
         .directive('spinner',spinner);
 
-    spinner.$inject = [];
-
     function spinner() {
         return {
             link:function ($scope,element) {
