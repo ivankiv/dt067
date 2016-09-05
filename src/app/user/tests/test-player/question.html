@@ -11,14 +11,18 @@
                 <span class="test-sign">Ваша відповідь:</span>
 
                 <div ng-repeat="answer in player.currentAnswerArray" class="multi-answer">
-                    <input ng-if="player.typeOfQuestion == 2" type="checkbox">
+                    <input ng-if="player.typeOfQuestion == 2"
+                           type="checkbox"
+                           name="$index"
+                    ng-checked="player.checkedAnswer.indexOf(answer.answer_id) > -1"
+                    ng-click="player.toggleSelection(answer.answer_id)">
                     <input ng-if="player.typeOfQuestion == 1" type="radio" name="checked-answer" value="{{answer.answer_id}}">
                     <p>{{answer.answer_text}}</p>
 
                 </div>
 
             </div>
-            <button class="submit-answer btn btn-info">Наступне питання</button>
+            <button class="submit-answer btn btn-info" ng-click="player.">Наступне питання</button>
         </div>
     </section>
 </section>

@@ -37,7 +37,7 @@
 
         /////////////
         function getAnswersListByQuestionId (questionId) {
-            return $http.get(appConstants.getAnswersListByQuestionId + questionId)
+            return $http.get(appConstants.getAnswersByQuestionID + questionId)
                 .then(fulfilled, rejected);
         }
         /////////////

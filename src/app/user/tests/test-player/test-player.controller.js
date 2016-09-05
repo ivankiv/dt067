@@ -26,12 +26,15 @@
         self.test_id = self.currentTest.test_id;
         self.timerBackground = '';
         self.typeOfQuestion;
+        self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
+        self.checkedAnswer ="";
 
 
         //methods
         self.getTimerValue;
         self.chooseQuestion = chooseQuestion;
         self.getCurrentAnswersList = getCurrentAnswersList;
+        self.toggleSelection = toggleSelection;
 
         activate();
 
@@ -94,6 +97,20 @@
                 self.user_id = response.data.id;
             });
         }
+
+        function toggleSelection(answer_id) {
+            var idx = self.checkedAnswers.indexOf(answer_id);
+
+            // is currently selected
+            if (idx > -1) {
+                self.checkedAnswers.splice(idx, 1);
+            }
+
+            // is newly selected
+            else {
+                self.checkedAnswers.push(answer_id);
+            }
+        };
 
         function finishTest() {
            console.log("finish test");
