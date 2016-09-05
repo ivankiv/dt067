@@ -2,10 +2,11 @@ angular.module('app')
     .config(configApp);
 
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider', '$breadcrumbProvider'];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider', '$breadcrumbProvider','$httpProvider'];
 
-function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadcrumbProvider) {
+function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadcrumbProvider , $httpProvider) {
 
+    $httpProvider.interceptors.push('spinnerService');
 
     ngDialogProvider.setDefaults({
         plain: true,

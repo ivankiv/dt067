@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams','ngDialog','$timeout'];
+        'loginService', '$state','$stateParams', '$timeout', '$uibModal'];
 
-    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
+    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams, $timeout, $uibModal) {
         var self = this;
 
         //variables
@@ -83,12 +83,12 @@
                 .then(function(response) {
                     self.checked = response;
                     if(self.checked){
-                        ngDialog.open({
-                            template:'<div class="ngdialog-message">У Вас не залишилось спроб!</div>',
-                            plain:true
-                        })
-                    }
-                    else {
+                        $uibModal.open({
+                            templateUrl: 'app/modal/templates/no-more-attempts.html',
+                            controller: 'modalController as modal',
+                            backdrop: true
+                        });
+                    } else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
                         getTestDetailsByTest().then(function(response) {
@@ -101,18 +101,18 @@
                                 return {question_id: question.question_id};
                             });
 
-                            console.log('response.length', response.length);
-                            console.log('currentTest.tasks', currentTest.tasks);
-
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
+
                                 $state.go("test", {questionIndex:0});
                             } else {
-                                ngDialog.open({
-                                    template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-                                    plain:true
+                                $uibModal.open({
+                                    templateUrl: 'app/modal/templates/attention-noquestions-dialog.html',
+                                    controller: 'modalController as modal',
+                                    backdrop: true
                                 });
                             }
                         })
@@ -124,23 +124,20 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            var deferred = $q.defer();
 
             var promises = response.data.map(function(testDetail) {
                  return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
             });
 
-            $q.all(promises).then(function(response) {
+           return $q.all(promises).then(function(response) {
                 var questionsList = [];
                     angular.forEach(response, function (reponse) {
                         questionsList = questionsList.concat(reponse.data);
                     });
-                    deferred.resolve(questionsList);
+                return questionsList;
                 }, function (response) {
-                    deferred.reject(response);
+                    return response
                 });
-
-            return deferred.promise;
             }
     }
 }());

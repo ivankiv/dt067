@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('facultyController', facultyController);
-        facultyController.$inject = ['loginService','facultyService', 'appConstants', '$uibModal', 'ngDialog'];
+        facultyController.$inject = ['loginService','facultyService', 'appConstants', '$uibModal'];
 
-    function facultyController(loginService, facultyService, appConstants, $uibModal, ngDialog) {
+    function facultyController(loginService, facultyService, appConstants, $uibModal) {
         var self = this;
 
         //variables
@@ -57,10 +57,12 @@
         }
 
         function deleteFaculty(faculty_id) {
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            }).then(function () {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result.then(function () {
                 facultyService.deleteFaculty(faculty_id).then(deleteFacultyComplete);
             });
         }
@@ -73,15 +75,18 @@
 
         function deleteFacultyComplete(response) {
             if (response.data.response == "ok") {
-                ngDialog.open({
-                    template: '<div class="ngdialog-message"> \
-                    Факультет видалено успішно!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
             }
             if(response.status === 400) {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Неможливо видалити факультет, для якого зареестровані групи!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
             }
         }
@@ -96,8 +101,10 @@
                 }
             });
             modalInstance.result.then(function(response) {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Факультет додано успішно!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
             })
