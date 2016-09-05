@@ -10,7 +10,8 @@
                 },
                 replace: true,
                 templateUrl: 'app/directives/templates/validate-input-directive.html',
-                link: function(scope,attrs) {
+
+                link: function(scope,element,attrs) {
                     scope.min = attrs.min || 1;
                     scope.max = attrs.max || 100;
                     scope.minlength = attrs.minlength || 3;
