@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['loginService', 'subjectService', '$uibModal', 'ngDialog'];
+        subjectController.$inject = ['loginService', 'subjectService', '$uibModal'];
 
-        function subjectController(loginService, subjectService, $uibModal, ngDialog) {
+        function subjectController(loginService, subjectService, $uibModal) {
             var self = this;
 
             //variables
@@ -46,32 +46,37 @@
             }
 
             function deleteSubject(subject_id) {
-                ngDialog.openConfirm({
-                    template: 'app/partials/confirm-delete-dialog.html',
-                    plain: false
-                }).then(function() {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
+                });
+                modalInstance.result.then(function() {
                     subjectService.deleteSubject(subject_id).then(deleteSubjectComplete);
                 });
+            }
+            function deleteSubjectComplete(response) {
+                if(response.data.response == "ok") {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                    activate();
+                }
+                if(response.status === 400) {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                }
             }
 
             function pageChanged() {
                 self.begin = ((self.currentPage - 1) * self.subjectsPerPage);
                 self.showSearch = (self.currentPage == 1) ? true : false;
                 self.textSearch = (self.currentPage == 1) ? self.textSearch  : "";
-            }
-
-            function deleteSubjectComplete(response) {
-                if(response.data.response == "ok") {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Предмет успішно видалено!</div>'
-                    });
-                    activate();
-                }
-                if(response.status === 400) {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Неможливо видалити предмет який містить тести або записи в розкладі тестувань!</div>'
-                    });
-                }
             }
 
             function showAddSubjectForm() {
@@ -84,10 +89,12 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                        ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Предмет успішно додано!</div>'
-                        });
-                        activate();
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                    activate();
                 })
             }
 
@@ -104,6 +111,11 @@
                     }
                 });
                 modalInstance.result.then(function() {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
                     activate();
                 })
             }

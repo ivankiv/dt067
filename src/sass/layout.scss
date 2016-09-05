@@ -36,6 +36,7 @@ $colom-title:yellow;
     }
   }
 }
+
 .collapse.in{
   @media (max-width: 768px) {
     clear: both!important;
@@ -483,3 +484,23 @@ aside.wrapForQuestions {
 .btn-conf {
   margin-right: 5px;
 }
+/*  FOR SPINNER  */
+#loaderSpin {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1100;
+  background-color: white;
+  opacity: .6;
+}
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -32px; /* -1 * image width / 2 */
+  margin-top: -32px; /* -1 * image height / 2 */
+  display: block;
+}
+.hidden{display:none !important}

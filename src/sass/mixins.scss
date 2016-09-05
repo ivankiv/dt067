@@ -1,0 +1,32 @@
+@mixin table-mixin {
+  -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  background: $table-bg;
+  color: white;
+  overflow: hidden;
+  font-weight: bold;
+  td:last-child{
+    width: 340px;
+    &:before {
+      content: attr(data-th)" ";
+      font-weight: bold;
+
+      @media (min-width: $breakpoint-alpha) {
+      -webkit-display: none;
+    }
+  }
+    @media (max-width: $breakpoint-alpha) {
+    margin-bottom: 15px;
+    float: left;
+  }
+}
+  td{
+    .table-help-btns{
+      margin-right: 8px!important;
+      @media (max-width: $breakpoint-alpha) {
+      margin-left: 8px!important;
+      float: left !important;
+    }
+  }
+}
+}

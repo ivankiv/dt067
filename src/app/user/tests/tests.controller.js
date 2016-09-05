@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams','ngDialog','$timeout'];
+        'loginService', '$state','$stateParams', '$timeout', '$uibModal'];
 
-    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams,ngDialog,$timeout) {
+    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams, $timeout, $uibModal) {
         var self = this;
 
         //variables
@@ -15,6 +15,7 @@
         self.currenSubjectName = '';
         self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
+        self.currentQuestionsId = [];
         self.currentTestId = 0;
 
         self.listOfEvents  = [];
@@ -40,32 +41,32 @@
                 self.listOfEvents  = response.data;
 
                 angular.forEach(self.listOfEvents, function (event) {
-                        getOneSubject(event.subject_id).then(function (response) {
-                            getTestBySubjectId(event.subject_id).then(function () {
+                    getOneSubject(event.subject_id).then(function (response) {
+                        getTestBySubjectId(event.subject_id).then(function () {
 
-                                    angular.forEach(self.currentTests, function (test) {
-                                            if(test != 'no records') {
-                                                test.subject_name = response;
-                                                test.date = event.event_date;
-                                                self.listOfTests.push(test);
-                                                self.showMessageNoEntity = false;
-                                            }
-                                    });
+                            angular.forEach(self.currentTests, function (test) {
+                                if(test != 'no records') {
+                                    test.subject_name = response;
+                                    test.date = event.event_date;
+                                    self.listOfTests.push(test);
+                                    self.showMessageNoEntity = false;
+                                }
                             });
                         });
+                    });
                 });
             });
         }
 
         function getOneSubject(id) {
-           return  subjectService.getOneSubject(id).then(function(response) {
+            return  subjectService.getOneSubject(id).then(function(response) {
                 return response.data[0].subject_name;
             })
         }
         //this method return an array of tests for subject if they exist
         function getTestBySubjectId(subjectId) {
             return testService.getTestBySubjectId(subjectId).then(function(response) {
-                    self.currentTests = response.data;
+                self.currentTests = response.data;
             })
         }
 
@@ -82,26 +83,36 @@
                 .then(function(response) {
                     self.checked = response;
                     if(self.checked){
-                        ngDialog.open({
-                            template:'<div class="ngdialog-message">У Вас не залишилось спроб!</div>',
-                            plain:true
-                        })
-                    }
-                    else {
+                        $uibModal.open({
+                            templateUrl: 'app/modal/templates/no-more-attempts.html',
+                            controller: 'modalController as modal',
+                            backdrop: true
+                        });
+                    } else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
+
                         getTestDetailsByTest().then(function(response) {
-                            if(response.length == currentTest.tasks) {
-                                var listOfQuestionsId = response.map(function (obj) {
-                                    return {question_id:obj.question_id};
-                                })
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(listOfQuestionsId));
+
+                            var notEnoughQuestions = response.filter(function(question) {
+                                return question.response === "Not enough number of questions for quiz";
+                            });
+
+                            var questionsId = response.map(function(question){
+                                return {question_id: question.question_id, "answer_ids":[]};
+                            });
+
+                            if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
+
                                 $state.go("test", {questionIndex:0});
                             } else {
-                                ngDialog.open({
-                                    template:'<div class="ngdialog-message">Для даного тесту не вистачає питань!</div>',
-                                    plain:true
+                                $uibModal.open({
+                                    templateUrl: 'app/modal/templates/attention-noquestions-dialog.html',
+                                    controller: 'modalController as modal',
+                                    backdrop: true
                                 });
                             }
                         })
@@ -113,22 +124,20 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            var deferred = $q.defer();
-            var promises = [];
-            angular.forEach(response.data, function(testDetail) {
-                promises.push(questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks));
+
+            var promises = response.data.map(function(testDetail) {
+                return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
             });
 
-        $q.all(promises).then(function(response) {
-            var questionsList = [];
+            return $q.all(promises).then(function(response) {
+                var questionsList = [];
                 angular.forEach(response, function (reponse) {
                     questionsList = questionsList.concat(reponse.data);
                 });
-                deferred.resolve(questionsList);
+                return questionsList;
             }, function (response) {
-                deferred.reject(response);
+                return response
             });
-        return deferred.promise;
         }
     }
 }());
