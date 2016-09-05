@@ -57,15 +57,9 @@
                 );
         }
 
-        function init() {
-            var defer = $q.defer();
-            $timeout(defer.resolve([JSON.parse(localStorage.currentQuestionsId), JSON.parse(localStorage.currentTest)]),500);
-            return defer.promise;
-        }
-
         function chooseQuestion(question_index) {
-            questionsId[self.currentQuestion_index].answer_ids = [];
-            localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+            self.listOfQuestionsId[self.currentQuestion_index].answer_ids = [];
+            localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
             if(question_index === self.listOfQuestionsId.length -1){
                 $state.go('test', {questionIndex:0});
             }
