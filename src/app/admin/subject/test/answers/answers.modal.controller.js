@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('AnswersModalController', answersModalController);
-        answersModalController.$inject = ['answersService', '$stateParams',  '$uibModalInstance', 'currentAnswer'];
+        answersModalController.$inject = ['answersService', '$stateParams',  '$uibModalInstance', 'currentAnswer', 'answerSrc'];
 
-        function answersModalController(answersService, $stateParams,  $uibModalInstance, currentAnswer) {
+        function answersModalController(answersService, $stateParams,  $uibModalInstance, currentAnswer, answerSrc) {
             var self = this;
 
             //variables
@@ -15,6 +15,8 @@
             self.answer.question_id = $stateParams.questionId;
             self.duplicateEntityMessage = false;
             self.wasNotEditEntityMessage = false;
+            self.answerSrc = answerSrc;
+
 
             //methods
             self.addAnswer = addAnswer;

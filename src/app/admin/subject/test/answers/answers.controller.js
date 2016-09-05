@@ -3,7 +3,7 @@
 
     angular.module('app')
         .controller('AnswersController', answersController);
-    answersController.$inject = ['answersService', '$stateParams', 'testService', 'ngDialog', '$uibModal'];
+    answersController.$inject = ['answersService', '$stateParams', 'testService',  'ngDialog', '$uibModal'];
 
     function answersController (answersService, $stateParams, testService, ngDialog, $uibModal) {
         var self = this;
@@ -20,6 +20,7 @@
         self.getQuestionsRangeByTest = getQuestionsRangeByTest;
         self.deleteAnswers = deleteAnswers;
         self.showAddAnswerForm = showAddAnswerForm;
+        self.ShowLargeAnswerPhotoForQuestion = ShowLargeAnswerPhotoForQuestion;
         self.showEditAnswerForm = showEditAnswerForm;
 
         activate();
@@ -93,7 +94,8 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: {}
+                    currentAnswer: {},
+                    answerSrc: {}
                 }
             });
             modalInstance.result.then(function() {
@@ -107,6 +109,20 @@
             })
 
         }
+        function ShowLargeAnswerPhotoForQuestion(answer) {
+            if(answer.attachment !== '') {
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/answers/show-large-answer-photo-for-question.html',
+                    controller: 'AnswersModalController as answers',
+                    backdrop: true,
+                    resolve: {
+                        currentAnswer: {},
+                        answerSrc: answer
+                    }
+                });
+            }
+        }
 
         function showEditAnswerForm(currentAnswer) {
             var modalInstance = $uibModal.open({
@@ -114,7 +130,8 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: currentAnswer
+                    currentAnswer: currentAnswer,
+                    answerSrc: {}
                 }
             });
             modalInstance.result.then(function() {
