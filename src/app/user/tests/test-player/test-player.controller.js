@@ -55,7 +55,7 @@
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
-                    self.currentAnswer = response.data;
+                    self.currentAnswer = response;
                     console.log(self.currentAnswer);
                     }
                 );
@@ -77,7 +77,6 @@
                 .then(
                     function (response) {
                         self.currentQuestion = response.data[0];
-                        console.log(self.currentQuestion);
                     }
                 );
         }

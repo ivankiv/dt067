@@ -93,7 +93,7 @@
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
 
-            getAnswersListByQuestionId: baseUrl + '/SAnswer/getAnswersByQuestion/',
+            getAnswersListByQuestionId: baseUrl + 'SAnswer/getAnswersByQuestion/',
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',
