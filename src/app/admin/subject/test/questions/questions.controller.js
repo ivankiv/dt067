@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal', 'ngDialog'];
+        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal'];
 
-        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, ngDialog) {
+        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal) {
             var self = this;
 
             //variables
@@ -74,24 +74,32 @@
             }
 
             function deleteQuestions(question_id) {
-                    ngDialog.openConfirm({
-                        template: 'app/partials/confirm-delete-dialog.html',
-                        plain: false
-                    }).then(deleteQuestion);
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
+                });
+                modalInstance.result.then(function() {
+                    questionsService.deleteQuestions(question_id).then(deleteQuestionsComplete);
+                });
+            }
+            function deleteQuestionsComplete(response) {
+                if(response.data.response === 'ok') {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                    activate();
+                }
 
-                    function deleteQuestion() {
-                        questionsService.deleteQuestions(question_id).then(function(response) {
-                            if(response.data.response === 'ok') {
-                                activate();
-                            }
-
-                            if(response.status === 400) {
-                                ngDialog.open({template: '<div class="ngdialog-message"> \
-                                        Неможливо видалити завдання яке містить відповіді!</div>'
-                                });
-                            }
-                        });
-                    }
+                if(response.status === 400) {
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
+                    });
+                }
             }
 
             function showAddQuestionForm() {
@@ -104,8 +112,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Запитання успішно додано!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     activate();
@@ -122,8 +132,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     activate();

@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('facultyModalController', facultyModalController);
         facultyModalController.$inject = ['facultyService',
-            'appConstants', '$uibModalInstance', 'currentFaculty', 'ngDialog'];
+            'appConstants', '$uibModalInstance', 'currentFaculty', '$uibModal'];
 
-        function facultyModalController(facultyService, appConstants, $uibModalInstance,  currentFaculty, ngDialog) {
+        function facultyModalController(facultyService, appConstants, $uibModalInstance,  currentFaculty, $uibModal) {
             var self = this;
 
         //Variables
@@ -59,9 +59,10 @@
                 if(response.data.response == 'ok') {
                     self.currentFaculty = {};
                     $uibModalInstance.close();
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>',
-                        plain: 'true'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                 }
             }

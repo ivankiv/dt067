@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectModalController', subjectModalController);
-        subjectModalController.$inject = ['subjectService', '$uibModalInstance', 'currentSubject', 'ngDialog'];
+        subjectModalController.$inject = ['subjectService', '$uibModalInstance', 'currentSubject'];
 
-        function subjectModalController(subjectService, $uibModalInstance,  currentSubject, ngDialog) {
+        function subjectModalController(subjectService, $uibModalInstance,  currentSubject) {
             var self = this;
 
         //Variables
@@ -57,10 +57,6 @@
                 if(response.data.response == 'ok') {
                     self.currentSubject = {};
                     $uibModalInstance.close();
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>',
-                        plain: 'true'
-                    });
                 }
             }
 

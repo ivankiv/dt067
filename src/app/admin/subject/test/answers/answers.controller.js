@@ -53,6 +53,12 @@
                 self.showMessageNoEntity = true;
             } else {
                 self.question_text = response.data[0].question_text;
+                console.log(response.data[0].type, 'response type');
+                if (response.data[0].type === '1'){
+                    self.questiontype = 'Простий вибір';
+                }else{
+                    self.questiontype = 'Мульти вибір';
+                }
             }
         }
 

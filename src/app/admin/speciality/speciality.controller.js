@@ -3,9 +3,9 @@
     angular.module('app')
         .controller('SpecialityController',specialityController);
 
-    specialityController.$inject = ['specialityService', 'loginService', 'appConstants','$uibModal','ngDialog'];
+    specialityController.$inject = ['specialityService', 'loginService','$uibModal','appConstants'];
 
-    function specialityController(specialityService, loginService, appConstants,$uibModal,ngDialog) {
+    function specialityController(specialityService, loginService ,$uibModal, appConstants) {
         var self = this;
 
         self.list = {};
@@ -20,7 +20,6 @@
         self.pageChanged = pageChanged;
 
         self.getSpecialities = getSpecialities;
-        self.countSpecialities = countSpecialities;
         self.deleteSpeciality = deleteSpeciality;
         self.showAddSpecialityForm = showAddSpecialityForm;
         self.showEditSpecialityForm = showEditSpecialityForm;
@@ -39,37 +38,43 @@
         function getSpecialities() {
             return specialityService.getSpecialities().then(function(response) {
                 self.list = response.data;
+                self.totalSpecialities = response.data.length;
             });
         }
 
-        function countSpecialities() {
-            specialityService.countSpecialities().then(function (response) {
-               self.totalSpecialities = response.data.numberOfRecords;
-            });
-        }
         function pageChanged() {
             self.begin = ((self.currentPage - 1) * self.specialitiesPerPage);
             self.showSearch = (self.currentPage === 1);
             self.textSearch = (self.currentPage === 1) ? self.textSearch : "";
         }
         function deleteSpeciality(speciality_id) {
-            ngDialog.openConfirm({
-                templateUrl: 'app/partials/confirm-delete-dialog.html',
-                plain:false
-            }).then(function () {
-               specialityService.deleteSpeciality(speciality_id).then(deleteSpecialityComplete);
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result.then(function (response) {
+                if (response){
+                    specialityService.deleteSpeciality(speciality_id)
+                        .then(deleteSpecialityComplete);
+                } else {
+                    return response;
+                }
             });
         }
         function deleteSpecialityComplete(response) {
             if (response.status === 400) {
-                ngDialog.open({
-                    template: '<div class="ngdialog-message">Спеціальність містить групи,неможливе видалення!</div>',
-                    plain: true
-                })
-            } else if (response.data.response === 'ok') {
-                ngDialog.open({
-                    template: '<div class="ngdialog-message">Спеціальність успішно видалена!</div>',
-                    plain: true
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
+                });
+            }
+            if (response.data.response === 'ok') {
+                $uibModal.open({
+                   templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 activate();
             }
@@ -84,8 +89,10 @@
                 }
             });
             modalInstance.result.then(function (response) {
-               ngDialog.open({
-                   template:'<div class="ngdialog-message">Спеціальність успішно додана!</div>'
+               $uibModal.open({
+                  templateUrl:'app/modal/templates/confirm-dialog.html',
+                   controller: 'modalController as modal',
+                   backdrop: true
                });
                 activate();
             });
