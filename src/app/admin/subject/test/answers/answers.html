@@ -24,7 +24,7 @@
                     </thead>
                     <tbody ng-if="!answers.showMessageNoEntity">
                     <tr ng-repeat="answer in answers.list">
-                        <td data-th="Зображення"><img ng-src="{{answer.attachment}}" height="100" width="100" alt="Зображення"></td>
+                        <td data-th="Зображення" ng-click="answers.ShowLargeAnswerPhotoForQuestion(answer)"><img ng-src="{{answer.attachment}}" height="100" width="100" alt="Зображення"></td>
                         <td data-th="Текст відповіді">{{:: answer.answer_text}}</td>
                         <td data-th="Результат">{{answers.true_answers[answer.true_answer]}}</td>
                         <td>
