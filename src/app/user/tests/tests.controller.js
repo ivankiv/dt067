@@ -77,6 +77,8 @@
         }
 
         function testPlayerPreparation(currentTest){
+            self.rateByLevels = [];
+            var rateByQuestionsId = [];
             self.showMessageNotEnoughQuestion = true;
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
@@ -93,6 +95,11 @@
 
                         getTestDetailsByTest().then(function(response) {
 
+                            // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
+                            response.forEach(function(question) {
+                                rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
+                            });
+
                             var notEnoughQuestions = response.filter(function(question) {
                                 return question.response === "Not enough number of questions for quiz";
                             });
@@ -103,6 +110,8 @@
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+
+                                localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
 
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
@@ -124,6 +133,9 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
+            response.data.forEach(function(testDetail) {
+                self.rateByLevels[testDetail.level] = testDetail.rate
+            });
 
             var promises = response.data.map(function(testDetail) {
                  return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);

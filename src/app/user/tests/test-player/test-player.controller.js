@@ -33,6 +33,7 @@
         self.chooseQuestion = chooseQuestion;
         self.getCurrentAnswersList = getCurrentAnswersList;
         self.toggleSelection = toggleSelection;
+        self.calculateResultOfTest = calculateResultOfTest;
 
         activate();
 
@@ -45,6 +46,7 @@
             isLogged();
             getTimerValue();
             getCurrentAnswersList();
+            //calculateResultOfTest();
         }
 
         function getCurrentAnswersList() {
@@ -114,11 +116,27 @@
             else {
                 self.checkedAnswers.push(answer_id);
             }
-        };
+        }
 
         function finishTest() {
            console.log("finish test");
             testPlayerService.checkAnswersList(self.listOfQuestionsId);
+        }
+
+        function calculateResultOfTest(response) {
+            var result = 0;
+            var rates = JSON.parse(localStorage.rateByQuestionsId);
+            var score = [];
+            rates.forEach(function(item, index) {
+                if(item !== null) score[index] = item;
+            });
+
+            //var res = [{"question_id":1,"true":0},{"question_id":7,"true":1},{"question_id":8,"true":0},
+            //            {"question_id":9,"true":1},{"question_id":10,"true":1}];
+
+            angular.forEach(response.data, function(item) {
+                result += score[item.question_id] * item.true;
+            });
         }
     }
 }());
