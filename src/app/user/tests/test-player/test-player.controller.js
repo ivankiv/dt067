@@ -14,6 +14,7 @@
         //variables
         self.user_id = 0;
         self.currentQuestion = {};
+        self.currentAnswerArray = {};
 
         self.checked;
         self.endTime =JSON.parse(localStorage.endTime);
@@ -24,8 +25,8 @@
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
         self.test_id = self.currentTest.test_id;
         self.timerBackground = '';
+        self.typeOfQuestion;
 
-        self.currentAnswer = {};
 
         //methods
         self.getTimerValue;
@@ -55,8 +56,10 @@
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
-                    self.currentAnswer = response;
-                    console.log(self.currentAnswer);
+                    self.currentAnswerArray = response.data;
+                    self.answerId =
+                    console.log(self.currentAnswerArray);
+                    console.log("questionID-", self.questionId);
                     }
                 );
         }
@@ -77,6 +80,8 @@
                 .then(
                     function (response) {
                         self.currentQuestion = response.data[0];
+                        self.typeOfQuestion = self.currentQuestion.type;
+                        console.log(self.typeOfQuestion);
                     }
                 );
         }

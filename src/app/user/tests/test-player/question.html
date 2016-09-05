@@ -9,8 +9,14 @@
             </div>
             <div class="answer-view">
                 <span class="test-sign">Ваша відповідь:</span>
-                <div ng-if="" class="multi-answer"></div>
-                <div ng-if="" class="single-answer"></div>
+
+                <div ng-repeat="answer in player.currentAnswerArray" class="multi-answer">
+                    <input ng-if="player.typeOfQuestion == 2" type="checkbox">
+                    <input ng-if="player.typeOfQuestion == 1" type="radio" name="checked-answer" value="{{answer.answer_id}}">
+                    <p>{{answer.answer_text}}</p>
+
+                </div>
+
             </div>
             <button class="submit-answer btn btn-info">Наступне питання</button>
         </div>

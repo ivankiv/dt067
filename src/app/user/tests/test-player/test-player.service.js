@@ -17,10 +17,10 @@
         };
 
         function checkAttemptsOfUser(user_id,currentTest) {
-                    return getPastAttempts(user_id, currentTest.test_id)
-                        .then(function () {
-                            return self.pastAttemps >= currentTest.attempts;
-                    });
+              return getPastAttempts(user_id, currentTest.test_id)
+                   .then(function () {
+                        return self.pastAttemps >= currentTest.attempts;
+              });
         }
 
         function getPastAttempts(user_id, test_id) {
@@ -37,7 +37,7 @@
 
         /////////////
         function getAnswersListByQuestionId (questionId) {
-            return $http.get(appConstants.getAnswersListByQuestionId, + questionId)
+            return $http.get(appConstants.getAnswersListByQuestionId + questionId)
                 .then(fulfilled, rejected);
         }
         /////////////
