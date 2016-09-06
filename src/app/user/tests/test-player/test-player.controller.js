@@ -115,7 +115,9 @@
                 controller: 'modalController as modal',
                 backdrop: true
             });
-            testPlayerService.checkAnswersList(self.listOfQuestionsId).then(function(response) {
+            var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+            console.log('listOfQuestionsId', listOfQuestionsId);
+            testPlayerService.checkAnswersList(listOfQuestionsId).then(function(response) {
                 console.log('calculateResultOfTest(response.data)', calculateResultOfTest(response.data));
             });
             $state.go('user.results');
