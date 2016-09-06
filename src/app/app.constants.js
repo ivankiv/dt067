@@ -92,6 +92,7 @@
             getTimeStamp: baseUrl + 'TestPlayer/getTimeStamp/',
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
+            saveResult: baseUrl + 'TestPlayer/result/insertData/',
 
             getAnswersListByQuestionId: baseUrl + 'SAnswer/getAnswersByQuestion/',
 

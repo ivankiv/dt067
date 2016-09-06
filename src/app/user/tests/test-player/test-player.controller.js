@@ -124,8 +124,9 @@
                 .then(function(response) {
                     return calculateResultOfTest(response.data);
                 })
-                .then(function(response) {
-                    localStorage.setItem('resultOfTest', JSON.stringify(response));
+                .then(function(resultOfTest) {
+                    saveResult(resultOfTest);
+                    localStorage.setItem('resultOfTest', JSON.stringify(resultOfTest));
                     $state.go('user.results');
                 })
         }
@@ -143,6 +144,25 @@
             });
 
             return result;
+        }
+
+        function saveResult(resultOfTest) {
+            var result = {
+                student_id:   self.user_id,
+                test_id:      self.test_id,
+                session_date: new Date(response.startTimeTest*1000).toISOString().split('T')[0],
+                start_time:   new Date(response.startTimeTest*1000).toISOString().substr(11,8),
+                end_time:     new Date().toString().substr(16,8),
+                result:       resultOfTest,
+                questions:    questions,
+                true_answers: trueAnswers,
+                answers:      answers
+            };
+
+            testPlayerService.checkAnswersList(result).then(function(response) {
+                console.log(response);
+            })
+
         }
     }
 }());

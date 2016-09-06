@@ -14,14 +14,13 @@
             checkAttemptsOfUser: checkAttemptsOfUser,
             checkAnswersList:checkAnswersList,
             getAnswersListByQuestionId: getAnswersListByQuestionId,
-            startTestInfoInLog:startTestInfoInLog
+            startTestInfoInLog:startTestInfoInLog,
+            saveResult: saveResult
         };
 
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
                    .then(function () {
-                       console.log('self.pastAttemps',self.pastAttemps);
-                       console.log('currentTest.attempts',currentTest.attempts)
                         return self.pastAttemps >= currentTest.attempts;
               });
         }
@@ -47,6 +46,11 @@
 
         function checkAnswersList(answers) {
            return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
+        }
+
+        function saveResult(result) {
+            return $http.post(appConstants.saveResult, result)
+                .then(fulfilled, rejected);
         }
 
         function mixAnswers(answers) {
