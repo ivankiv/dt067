@@ -48,9 +48,6 @@
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
                         self.currentAnswerArray = response.data;
-                        self.answerId =
-                            console.log(self.currentAnswerArray);
-                        console.log("questionID-", self.questionId);
                     }
                 );
         }
@@ -79,14 +76,14 @@
                 );
         }
         function getTimerValue () {
-            var time = $interval(function () {
+            var timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
                 if (self.timerValue > 60000){
                     self.timerBackground = 'norm-color';
                 } else if (self.timerValue <= 60000 && self.timerValue > 0){
                     self.timerBackground = 'danger-color';
                 } else if (self.timerValue <= 0) {
-                    $interval.cancel(time);
+                    $interval.cancel(timer);
                     finishTest();
                 }
             }, 100);
