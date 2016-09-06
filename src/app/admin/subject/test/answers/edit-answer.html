@@ -34,7 +34,7 @@
                         ng-model="answers.currentAnswer.true_answer"
                         required>
                     <option disabled selected value="">Оберіть тип відповіді</option>
-                    <option value="1">Вірно</option>
+                    <option ng-disabled="answers.isAnswerTrue.isAnswerTrue"  value="1">Вірно</option>
                     <option value="0">Невірно</option>
                 </select>
             </div>
