@@ -10,17 +10,19 @@
             <div class="answer-view">
                 <h5 class="test-sign">Ваша відповідь:</h5>
 
-                <div ng-repeat="answer in player.currentAnswerArray" class="answers">
-                    <div class="form-box">
-                        <form class="check-radio-inputs">
-                            <input ng-if="player.typeOfQuestion == 2"
-                                type="checkbox"
-                                name="$index"
-                            ng-checked="player.checkedAnswers.indexOf(answer.answer_id) > -1"
-                            ng-click="player.toggleSelection(answer.answer_id)" class="check-radio-inputs">
-                            <input ng-if="player.typeOfQuestion == 1" type="radio" name="checked-answer" value="{{answer.answer_id}}" class="chex-radio-inputs">
-                        </form>
-                    </div>
+                <div ng-repeat="answer in player.currentAnswerArray" class="multi-answer">
+                    <form class="check-radio-inputs">
+                    <input ng-if="player.typeOfQuestion == 2"
+                           type="checkbox"
+                           name="$index"
+                    ng-checked="player.checkedAnswers.indexOf(answer.answer_id) > -1"
+                    ng-click="player.toggleSelection(answer.answer_id)">
+                    <input ng-if="player.typeOfQuestion == 1"
+                           type="radio" name="checked-answer"
+                           value="{{answer.answer_id}}"
+                            ng-model="player.checkedAnswers[player.currentQuestion_index].answer_ids[0]">
+                    <p>{{answer.answer_text}}</p>
+                    </form>
                     <div class="answers-text-box" ng-if="answer.answer_text">
                         <p class="answers-text">{{answer.answer_text}}</p>
                     </div>

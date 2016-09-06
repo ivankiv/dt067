@@ -43,6 +43,32 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
             controller: 'TestPlayerController as player'
         })
 
+        .state('user.tests', {
+            url: '/:groupId/tests',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/tests/tests.html',
+                    controller: 'TestsController as tests'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Тести'
+            }
+        })
+
+        .state('user.results', {
+            url: '/result',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/tests/tests.html',
+                    controller: 'TestPlayerController as player'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Результати'
+            }
+        })
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
@@ -265,17 +291,4 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 parent: 'admin-home.groups'
             }
         })
-
-        .state('user.tests', {
-                url: '/:groupId/tests',
-                views: {
-                    'content': {
-                        templateUrl: 'app/user/tests/tests.html',
-                        controller: 'TestsController as tests'
-                    }
-                },
-                ncyBreadcrumb: {
-                    label: 'Тести'
-                }
-            });
 }

@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['testService', '$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$q','$timeout'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal'];
 
-    function TestPlayerController (testService, $state, loginService, $stateParams, questionsService, testPlayerService,$interval, $q, $timeout) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal) {
 
         var self = this;
 
@@ -37,44 +37,32 @@
         self.getCurrentAnswersList = getCurrentAnswersList;
         self.toggleSelection = toggleSelection;
         self.calculateResultOfTest = calculateResultOfTest;
+        self.finishTest = finishTest;
         self.getTestDuration = getTestDuration;
 
         activate();
 
         function activate() {
-            getCurrentQuestion().then(function () {
-                console.log('questio= ',self.currentQuestion);
-                console.log('questionId= ',self.questionId);
-                console.log("arr =",self.listOfQuestionsId );
-            });
             isLogged();
+            getCurrentQuestion();
             getTimerValue();
             getCurrentAnswersList();
-            //calculateResultOfTest();
-            getStartBackendTime();
-            getTestDuration();
         }
 
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
                         self.currentAnswerArray = response.data;
-                        self.answerId =
-                            console.log(self.currentAnswerArray);
-                        console.log("questionID-", self.questionId);
                     }
                 );
         }
 
         function chooseQuestion(question_index) {
 
-            console.log("y",question_index);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
-            console.log("y",typeof(question_index));
-            console.log("x",self.listOfQuestionsId.length-1);
+
             if(question_index == (self.listOfQuestionsId.length)){
-                console.log("!!!!!!!!!!!!!");
                 var newIndex = 0;
                 $state.go('test', {questionIndex:newIndex});
             }
@@ -89,18 +77,18 @@
                     function (response) {
                         self.currentQuestion = response.data[0];
                         self.typeOfQuestion = self.currentQuestion.type;
-                        console.log(self.typeOfQuestion);
                     }
                 );
         }
-
-        // counting timer time
         function getTimerValue () {
-            $interval(function () {
+            var timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
-                if (self.timerValue <= 60000){
+                if (self.timerValue > 60000){
+                    self.timerBackground = 'norm-color';
+                } else if (self.timerValue <= 60000 && self.timerValue > 0){
                     self.timerBackground = 'danger-color';
                 } else if (self.timerValue <= 0) {
+                    $interval.cancel(timer);
                     finishTest();
                 }
             }, 100);
@@ -133,6 +121,7 @@
             }
         }
 
+
         function isLogged() {
             return loginService.isLogged().then(function(response) {
                 self.user_id = response.data.id;
@@ -154,8 +143,17 @@
         }
 
         function finishTest() {
-            console.log("finish test");
-            testPlayerService.checkAnswersList(self.listOfQuestionsId);
+            $uibModal.open({
+                templateUrl: 'app/modal/templates/end-test-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+            console.log('listOfQuestionsId', listOfQuestionsId);
+            testPlayerService.checkAnswersList(listOfQuestionsId).then(function(response) {
+                console.log('calculateResultOfTest(response.data)', calculateResultOfTest(response.data));
+            });
+            $state.go('user.results');
         }
 
         function calculateResultOfTest(response) {
@@ -166,12 +164,11 @@
                 if(item !== null) score[index] = item;
             });
 
-            //var res = [{"question_id":1,"true":0},{"question_id":7,"true":1},{"question_id":8,"true":0},
-            //            {"question_id":9,"true":1},{"question_id":10,"true":1}];
-
-            angular.forEach(response.data, function(item) {
+            angular.forEach(response, function(item) {
                 result += score[item.question_id] * item.true;
             });
+
+            return result;
         }
     }
 }());
