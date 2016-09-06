@@ -9,16 +9,18 @@
 
         var self = this;
         self.pastAttemps = undefined;
+
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
-            checkAnswersList:checkAnswersList
+            checkAnswersList:checkAnswersList,
+            getAnswersListByQuestionId: getAnswersListByQuestionId
         };
 
         function checkAttemptsOfUser(user_id,currentTest) {
-                    return getPastAttempts(user_id, currentTest.test_id)
-                        .then(function () {
-                            return self.pastAttemps >= currentTest.attempts;
-                    });
+              return getPastAttempts(user_id, currentTest.test_id)
+                   .then(function () {
+                        return self.pastAttemps >= currentTest.attempts;
+              });
         }
 
         function getPastAttempts(user_id, test_id) {
@@ -33,8 +35,15 @@
                 .then(fulfilled,rejected);
         }
 
+        /////////////
+        function getAnswersListByQuestionId (questionId) {
+            return $http.get(appConstants.getAnswersListByQuestionId + questionId)
+                .then(fulfilled, rejected);
+        }
+        /////////////
+
         function checkAnswersList(answers) {
-            $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
+           return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
         }
 
         function mixAnswers(answers) {

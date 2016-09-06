@@ -43,7 +43,7 @@
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
             getAnswersByQuestionID: baseUrl + '/answer/getAnswersByQuestion/',  // get question id
-                 deleteAnswers: baseUrl + 'answer/del/', // + id of answer
+                deleteAnswers: baseUrl + 'answer/del/', // + id of answer
                  getQuestionByQuestionID: baseUrl + 'question/getRecords/', // + question id
                 addAnswer: baseUrl + 'answer/insertData',
                 editAnswer: baseUrl + 'answer/update/',
@@ -77,8 +77,6 @@
             delAdmins: '/AdminUser/del/',
             addAdmins:'/AdminUser/insertData',
 
-
-
             getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
 
             getStudents: baseUrl + 'student/getRecords',
@@ -95,6 +93,7 @@
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
 
+            getAnswersListByQuestionId: baseUrl + 'SAnswer/getAnswersByQuestion/',
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'result/insertData/',

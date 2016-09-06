@@ -36,9 +36,9 @@
                 <input class="form-control" type="number"  string-to-number name="time" id="time" ng-model="tests.currentTest.time_for_test"
                        placeholder="Час, хв"
                        required
-                       min="30"
+                       min="0.1"
                        max="180">
-                <novalidate-messages field="editTestForm.time" min="30" max="180"></novalidate-messages>
+                <novalidate-messages field="editTestForm.time" min="1" max="180"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">

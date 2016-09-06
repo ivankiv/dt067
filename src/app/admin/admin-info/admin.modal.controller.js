@@ -4,9 +4,9 @@
     angular
         .module('app')
         .controller('AdminModalController', adminModalController);
-    adminModalController.$inject = ['adminService', '$uibModalInstance', 'currentObject', 'ngDialog'];
+    adminModalController.$inject = ['adminService', '$uibModalInstance', 'currentObject'];
 
-    function adminModalController(adminService, $uibModalInstance, currentObject, ngDialog) {
+    function adminModalController(adminService, $uibModalInstance, currentObject) {
         var self = this;
 
         //Variables

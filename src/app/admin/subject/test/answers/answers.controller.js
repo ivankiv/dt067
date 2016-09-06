@@ -3,7 +3,7 @@
 
     angular.module('app')
         .controller('AnswersController', answersController);
-    answersController.$inject = ['answersService', '$stateParams', 'testService', 'ngDialog', '$uibModal'];
+    answersController.$inject = ['answersService', '$stateParams', 'testService',  'ngDialog', '$uibModal'];
 
     function answersController (answersService, $stateParams, testService, ngDialog, $uibModal) {
         var self = this;
@@ -14,11 +14,13 @@
         self.list = {};
         self.showMessageNoEntity = false;
         self.question_id = $stateParams.questionId;
+        self.true_answers = ['Не вірно', 'Вірно'];
 
         //methods
         self.getQuestionsRangeByTest = getQuestionsRangeByTest;
         self.deleteAnswers = deleteAnswers;
         self.showAddAnswerForm = showAddAnswerForm;
+        self.ShowLargeAnswerPhotoForQuestion = ShowLargeAnswerPhotoForQuestion;
         self.showEditAnswerForm = showEditAnswerForm;
 
         activate();
@@ -39,8 +41,9 @@
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
+                console.log(response.data, 'response dataaaaaaaaaaaaaaaaa');
+                console.log(response.data[0].true_answer, 'self listttttt');
                 self.list = response.data;
-                console.log(self.list, 'self list');
             }
         }
 
@@ -54,6 +57,7 @@
                 self.showMessageNoEntity = true;
             } else {
                 self.question_text = response.data[0].question_text;
+                console.log(response,'responsewwwwwwww');
                 console.log(response.data[0].type, 'response type');
                 if (response.data[0].type === '1'){
                     self.questiontype = 'Простий вибір';
@@ -90,16 +94,34 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: {}
+                    currentAnswer: {},
+                    answerSrc: {}
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Відповідь успішно додано!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 self.showMessageNoEntity = false;
                 activate();
             })
+
+        }
+        function ShowLargeAnswerPhotoForQuestion(answer) {
+            if(answer.attachment !== '') {
+
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/answers/show-large-answer-photo-for-question.html',
+                    controller: 'AnswersModalController as answers',
+                    backdrop: true,
+                    resolve: {
+                        currentAnswer: {},
+                        answerSrc: answer
+                    }
+                });
+            }
         }
 
         function showEditAnswerForm(currentAnswer) {
@@ -108,12 +130,15 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: currentAnswer
+                    currentAnswer: currentAnswer,
+                    answerSrc: {}
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 self.showMessageNoEntity = false;
                 activate();

@@ -8,7 +8,7 @@
             <div class="col-sm-9">
                 <input class="form-control add-photo-inp"
                        id="image"
-                       file-load = "answers.answer.attachment"
+                       file-load = "answers.currentAnswer.attachment"
                        ng-model="answers.currentAnswer.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
@@ -35,7 +35,7 @@
                         required>
                     <option disabled selected value="">Оберіть тип відповіді</option>
                     <option value="1">Вірно</option>
-                    <option value="2">Невірно</option>
+                    <option value="0">Невірно</option>
                 </select>
             </div>
         </div>

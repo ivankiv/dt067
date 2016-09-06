@@ -10,14 +10,12 @@
         var self = this;
 
         //variables
-        self.listOfEvents = {};
         self.status = ["Недоступно", "Доступно"];
         self.currenSubjectName = '';
         self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
         self.currentQuestionsId = [];
         self.currentTestId = 0;
-
         self.listOfEvents  = [];
         self.listOfTests = [];
         self.currentTests = {};
@@ -41,32 +39,32 @@
                 self.listOfEvents  = response.data;
 
                 angular.forEach(self.listOfEvents, function (event) {
-                        getOneSubject(event.subject_id).then(function (response) {
-                            getTestBySubjectId(event.subject_id).then(function () {
+                    getOneSubject(event.subject_id).then(function (response) {
+                        getTestBySubjectId(event.subject_id).then(function () {
 
-                                    angular.forEach(self.currentTests, function (test) {
-                                            if(test != 'no records') {
-                                                test.subject_name = response;
-                                                test.date = event.event_date;
-                                                self.listOfTests.push(test);
-                                                self.showMessageNoEntity = false;
-                                            }
-                                    });
+                            angular.forEach(self.currentTests, function (test) {
+                                if(test != 'no records') {
+                                    test.subject_name = response;
+                                    test.date = event.event_date;
+                                    self.listOfTests.push(test);
+                                    self.showMessageNoEntity = false;
+                                }
                             });
                         });
+                    });
                 });
             });
         }
 
         function getOneSubject(id) {
-           return  subjectService.getOneSubject(id).then(function(response) {
+            return  subjectService.getOneSubject(id).then(function(response) {
                 return response.data[0].subject_name;
             })
         }
         //this method return an array of tests for subject if they exist
         function getTestBySubjectId(subjectId) {
             return testService.getTestBySubjectId(subjectId).then(function(response) {
-                    self.currentTests = response.data;
+                self.currentTests = response.data;
             })
         }
 
@@ -77,6 +75,8 @@
         }
 
         function testPlayerPreparation(currentTest){
+            self.rateByLevels = [];
+            var rateByQuestionsId = [];
             self.showMessageNotEnoughQuestion = true;
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
@@ -93,16 +93,23 @@
 
                         getTestDetailsByTest().then(function(response) {
 
+                            // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
+                            response.forEach(function(question) {
+                                rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
+                            });
+
                             var notEnoughQuestions = response.filter(function(question) {
                                 return question.response === "Not enough number of questions for quiz";
                             });
 
                             var questionsId = response.map(function(question){
-                                return {question_id: question.question_id};
+                                return {question_id: question.question_id, "answer_ids":[]};
                             });
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+
+                                localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
 
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
@@ -124,20 +131,23 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-
-            var promises = response.data.map(function(testDetail) {
-                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
+            response.data.forEach(function(testDetail) {
+                self.rateByLevels[testDetail.level] = testDetail.rate
             });
 
-           return $q.all(promises).then(function(response) {
+            var promises = response.data.map(function(testDetail) {
+                return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
+            });
+
+            return $q.all(promises).then(function(response) {
                 var questionsList = [];
-                    angular.forEach(response, function (reponse) {
-                        questionsList = questionsList.concat(reponse.data);
-                    });
-                return questionsList;
-                }, function (response) {
-                    return response
+                angular.forEach(response, function (reponse) {
+                    questionsList = questionsList.concat(reponse.data);
                 });
-            }
+                return questionsList;
+            }, function (response) {
+                return response
+            });
+        }
     }
 }());
