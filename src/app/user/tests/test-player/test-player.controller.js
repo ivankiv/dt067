@@ -27,7 +27,6 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
-        self.startBackendTime;
         self.currentBackendTime;
         self.questionsIdForResult = [];
         self.answersIdForResult = [];
@@ -99,7 +98,7 @@
             }, 100);
         }
 
-        // getting start test time in backend
+        // getting end test time in backend
         function getEndBackendTime () {
            return testPlayerService.getServerEndTime()
                 .then(function (response) {
@@ -202,9 +201,9 @@
         }
 
         function saveResult(resultOfTest) {
-            var questionsIdForResult = self.questionsIdForResult.join("/");
-            var true_answers = self.true_answers.join("/");
-            var answersIdForResult = self.answersIdForResult.join("/");
+            var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
+            var true_answers = JSON.stringify(self.true_answers);
+            var answersIdForResult = JSON.stringify(self.answersIdForResult);
             var startTime = localStorage.startTime;
 
             var result = {
