@@ -43,7 +43,7 @@
         /////////////
 
         function checkAnswersList(answers) {
-            $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
+           return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
         }
 
         function mixAnswers(answers) {
