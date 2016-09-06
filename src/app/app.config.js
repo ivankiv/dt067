@@ -290,5 +290,5 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 label: 'Студенти',
                 parent: 'admin-home.groups'
             }
-        })
+        });
 }
