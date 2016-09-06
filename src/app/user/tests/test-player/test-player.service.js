@@ -14,15 +14,29 @@
             checkAttemptsOfUser: checkAttemptsOfUser,
             checkAnswersList: checkAnswersList,
             getAnswersListByQuestionId: getAnswersListByQuestionId,
-            getServerTime: getServerTime
+            getServerTime: getServerTime,
+            setServerEndTime: setServerEndTime,
+            getServerEndTime: getServerEndTime
         };
 
-        function setServerStartTime() {
+        function setServerEndTime(testDuration) {
+            $http.post(appConstants.resetSessionData)
+                .then(getServerTime().then(function (response) {
+                    var testEndTime = response.data.curtime * 1000 + testDuration;
+                    testEndTime = testEndTime.toString();
+                    $http.post(appConstants.saveEndTime, testEndTime)
+                        .then(fulfilled, rejected);
+                }));
 
         }
 
         function getServerTime () {
             return $http.get(appConstants.getServerTime)
+                .then(fulfilled, rejected);
+        }
+
+        function getServerEndTime () {
+            return $http.get(appConstants.getEndTime)
                 .then(fulfilled, rejected);
         }
 

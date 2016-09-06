@@ -114,7 +114,7 @@
 
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
-                                testPlayerService.SetServerStartTime(currentTest.time_for_test * 60000);
+                                testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
                                 $state.go("test", {questionIndex:0});
                             } else {
                                 $uibModal.open({

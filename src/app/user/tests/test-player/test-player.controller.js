@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q) {
 
         var self = this;
 
@@ -29,7 +29,6 @@
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
         self.startBackendTime;
         self.currentBackendTime;
-        self.testDuration;
 
         //methods
         self.getTimerValue;
@@ -38,7 +37,6 @@
         self.toggleSelection = toggleSelection;
         self.calculateResultOfTest = calculateResultOfTest;
         self.finishTest = finishTest;
-        self.getTestDuration = getTestDuration;
 
         activate();
 
@@ -58,6 +56,7 @@
         }
 
         function chooseQuestion(question_index) {
+            checkServerTime ();
 
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
@@ -80,6 +79,7 @@
                     }
                 );
         }
+
         function getTimerValue () {
             var timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
@@ -95,30 +95,37 @@
         }
 
         // getting start test time in backend
-        function getStartBackendTime () {
-            return testPlayerService.getServerTime()
+        function getEndBackendTime () {
+           return testPlayerService.getServerEndTime()
                 .then(function (response) {
-                    self.startBackendTime = response.data.curtime * 1000;
+                    self.endBackendTime = response.data;
+                    self.endBackendTime = parseInt(self.endBackendTime);
+                    console.log('self.endBackendTime', self.endBackendTime);
+                    console.log(typeof self.endBackendTime);
                 });
         }
 
-        // getting test duration
-        function getTestDuration() {
-            return testService.getOneTest(self.test_id)
+        function getServerTime () {
+            return testPlayerService.getServerTime()
                 .then(function (response) {
-                    self.testDuration = response.data[0].time_for_test;
+                    self.currentBackendTime = response.data.curtime * 1000;
+                    console.log('self.currentBackendTime', self.currentBackendTime);
+                    console.log(typeof self.currentBackendTime);
                 });
         }
 
         // checking if user doesn't hack test time
         function checkServerTime () {
-            testPlayerService.getServerTime()
-                .then(function (response) {
-                    self.currentBackendTime = response.data.curtime * 1000;
+            $q.all([getEndBackendTime(),getServerTime()])
+                .then(function (){
+                    console.log('self.endBackendTimeCS', self.endBackendTime);
+                    console.log('self.currentBackendTimeCS', self.currentBackendTime);
+                    var duration = self.endBackendTime - self.currentBackendTime;
+                    console.log(duration);
+                    if ( duration <= 0 ){
+                        finishTest();
+                    }
                 });
-            if (self.currentBackendTime - self.startBackendTime > self.testDuration) {
-                finishTest();
-            }
         }
 
 
