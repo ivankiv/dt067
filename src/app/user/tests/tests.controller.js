@@ -81,6 +81,7 @@
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
+                    console.log('checkAttemptsOfUser', response)
                     self.checked = response;
                     if(self.checked){
                         $uibModal.open({
@@ -115,6 +116,8 @@
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
                                 testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
+                                testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id);
+
                                 $state.go("test", {questionIndex:0});
                             } else {
                                 $uibModal.open({

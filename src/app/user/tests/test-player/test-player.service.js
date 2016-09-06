@@ -3,9 +3,9 @@
         angular.module('app')
             .factory('testPlayerService',testPlayerService);
 
-    testPlayerService.$inject = ['$http','appConstants','testService','testDetailsService'];
+    testPlayerService.$inject = ['$http','appConstants'];
 
-    function testPlayerService($http ,appConstants ,testService ,testDetailsService) {
+    function testPlayerService($http ,appConstants) {
 
         var self = this;
         self.pastAttemps = undefined;
@@ -16,7 +16,8 @@
             getAnswersListByQuestionId: getAnswersListByQuestionId,
             getServerTime: getServerTime,
             setServerEndTime: setServerEndTime,
-            getServerEndTime: getServerEndTime
+            getServerEndTime: getServerEndTime,
+            startTestInfoInLog:startTestInfoInLog
         };
 
         function setServerEndTime(testDuration) {
@@ -43,6 +44,8 @@
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
                    .then(function () {
+                       console.log('self.pastAttemps',self.pastAttemps);
+                       console.log('currentTest.attempts',currentTest.attempts)
                         return self.pastAttemps >= currentTest.attempts;
               });
         }
