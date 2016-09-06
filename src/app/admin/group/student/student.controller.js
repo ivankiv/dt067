@@ -28,6 +28,7 @@
         self.showEdit = false;
         self.showCreate = false;
         self.showInfo = false;
+        self.showResults = false;
         self.alreadyExist = false;
         self.currentObj = {};
         self.currentUser = {};
@@ -58,6 +59,9 @@
             }
             else if (param == "info") {
                 self.showInfo = false;
+            }
+            else if (param == "result") {
+                self.result = false;
             }
             else {
                 self.showCreate = false;
