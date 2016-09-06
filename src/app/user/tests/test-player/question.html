@@ -16,7 +16,10 @@
                            name="$index"
                     ng-checked="player.checkedAnswers.indexOf(answer.answer_id) > -1"
                     ng-click="player.toggleSelection(answer.answer_id)">
-                    <input ng-if="player.typeOfQuestion == 1" type="radio" name="checked-answer" value="{{answer.answer_id}}">
+                    <input ng-if="player.typeOfQuestion == 1"
+                           type="radio" name="checked-answer"
+                           value="{{answer.answer_id}}"
+                            ng-model="player.checkedAnswers[player.currentQuestion_index].answer_ids[0]">
                     <p>{{answer.answer_text}}</p>
 
                 </div>

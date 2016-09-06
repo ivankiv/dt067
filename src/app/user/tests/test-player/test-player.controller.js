@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$q','$timeout'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $q, $timeout) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval) {
 
         var self = this;
 
@@ -38,11 +38,7 @@
         activate();
 
         function activate() {
-            getCurrentQuestion().then(function () {
-                console.log('questio= ',self.currentQuestion);
-                console.log('questionId= ',self.questionId);
-                console.log("arr =",self.listOfQuestionsId );
-            });
+            getCurrentQuestion();
             isLogged();
             getTimerValue();
             getCurrentAnswersList();
@@ -53,22 +49,14 @@
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
                         self.currentAnswerArray = response.data;
-                        self.answerId =
-                            console.log(self.currentAnswerArray);
-                        console.log("questionID-", self.questionId);
                     }
                 );
         }
 
         function chooseQuestion(question_index) {
-
-            console.log("y",question_index);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
-            console.log("y",typeof(question_index));
-            console.log("x",self.listOfQuestionsId.length-1);
             if(question_index == (self.listOfQuestionsId.length)){
-                console.log("!!!!!!!!!!!!!");
                 var newIndex = 0;
                 $state.go('test', {questionIndex:newIndex});
             }
@@ -121,7 +109,6 @@
         }
 
         function finishTest() {
-            console.log("finish test");
             testPlayerService.checkAnswersList(self.listOfQuestionsId);
         }
 
