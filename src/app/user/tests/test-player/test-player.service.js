@@ -13,8 +13,18 @@
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
             checkAnswersList: checkAnswersList,
-            getAnswersListByQuestionId: getAnswersListByQuestionId
+            getAnswersListByQuestionId: getAnswersListByQuestionId,
+            getServerTime: getServerTime
         };
+
+        function setServerStartTime() {
+
+        }
+
+        function getServerTime () {
+            return $http.get(appConstants.getServerTime)
+                .then(fulfilled, rejected);
+        }
 
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)

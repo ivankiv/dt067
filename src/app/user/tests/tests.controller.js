@@ -93,6 +93,7 @@
                     } else {
                         localStorage.setItem("currentTest", JSON.stringify(currentTest));
 
+
                         getTestDetailsByTest().then(function(response) {
 
                             // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
@@ -115,7 +116,7 @@
 
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
-
+                                testPlayerService.SetServerStartTime(currentTest.time_for_test * 60000);
                                 $state.go("test", {questionIndex:0});
                             } else {
                                 $uibModal.open({

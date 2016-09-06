@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$q','$timeout'];
+    TestPlayerController.$inject = ['testService', '$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$q','$timeout'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $q, $timeout) {
+    function TestPlayerController (testService, $state, loginService, $stateParams, questionsService, testPlayerService,$interval, $q, $timeout) {
 
         var self = this;
 
@@ -27,6 +27,9 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
+        self.startBackendTime;
+        self.currentBackendTime;
+        self.testDuration;
 
         //methods
         self.getTimerValue;
@@ -34,6 +37,7 @@
         self.getCurrentAnswersList = getCurrentAnswersList;
         self.toggleSelection = toggleSelection;
         self.calculateResultOfTest = calculateResultOfTest;
+        self.getTestDuration = getTestDuration;
 
         activate();
 
@@ -47,6 +51,8 @@
             getTimerValue();
             getCurrentAnswersList();
             //calculateResultOfTest();
+            getStartBackendTime();
+            getTestDuration();
         }
 
         function getCurrentAnswersList() {
@@ -87,17 +93,44 @@
                     }
                 );
         }
+
+        // counting timer time
         function getTimerValue () {
             $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
-                if (self.timerValue > 60000){
-                    self.timerBackground = 'norm-color';
-                } else if (self.timerValue <= 60000){
+                if (self.timerValue <= 60000){
                     self.timerBackground = 'danger-color';
                 } else if (self.timerValue <= 0) {
                     finishTest();
                 }
             }, 100);
+        }
+
+        // getting start test time in backend
+        function getStartBackendTime () {
+            return testPlayerService.getServerTime()
+                .then(function (response) {
+                    self.startBackendTime = response.data.curtime * 1000;
+                });
+        }
+
+        // getting test duration
+        function getTestDuration() {
+            return testService.getOneTest(self.test_id)
+                .then(function (response) {
+                    self.testDuration = response.data[0].time_for_test;
+                });
+        }
+
+        // checking if user doesn't hack test time
+        function checkServerTime () {
+            testPlayerService.getServerTime()
+                .then(function (response) {
+                    self.currentBackendTime = response.data.curtime * 1000;
+                });
+            if (self.currentBackendTime - self.startBackendTime > self.testDuration) {
+                finishTest();
+            }
         }
 
         function isLogged() {
