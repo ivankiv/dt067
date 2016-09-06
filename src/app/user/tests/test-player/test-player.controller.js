@@ -203,7 +203,7 @@
         function saveResult(resultOfTest) {
             var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
             var true_answers = JSON.stringify(self.true_answers);
-            var answersIdForResult = JSON.stringify(self.answersIdForResult);
+            var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
             var startTime = localStorage.startTime;
 
             var result = {

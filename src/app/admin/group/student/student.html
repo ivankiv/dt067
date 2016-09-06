@@ -15,7 +15,7 @@
             <div class= "col-xs-12 col-md-10 col-md-offset-1"
                  ng-if = "students.showResult" ng-include = "'app/admin/group/student/student-result.html'"></div>
             <div class="col-xs-12 col-md-10 col-md-offset-1"
-                 ng-if = "!students.showEdit && !students.showCreate && !students.showInfo">
+                 ng-if = "!students.showEdit && !students.showCreate && !students.showInfo && !students.showResult">
                 <div class=' col-xs-12 views-header'><h4>Студенти
                         <span ng-if="students.group_id">{{students.associativeGroup[students.group_id]}}</span>
                     </h4>
@@ -86,7 +86,7 @@
                                 </button>
                                 <button type="button" class="btn btn-info pull-right table-help-btns"
                                         title="Результати"
-                                        ng-click="students.showInfoPage(student)">
+                                        ng-click="students.showResultPage(student)">
                                     <i class="glyphicon glyphicon-registration-mark"></i>
                                 </button>
                             </td>
