@@ -10,14 +10,12 @@
         var self = this;
 
         //variables
-        self.listOfEvents = {};
         self.status = ["Недоступно", "Доступно"];
         self.currenSubjectName = '';
         self.showMessageNoEntity = true;
         self.group_id = $stateParams.groupId;
         self.currentQuestionsId = [];
         self.currentTestId = 0;
-
         self.listOfEvents  = [];
         self.listOfTests = [];
         self.currentTests = {};

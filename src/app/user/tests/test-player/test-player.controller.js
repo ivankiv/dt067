@@ -34,6 +34,7 @@
         self.getCurrentAnswersList = getCurrentAnswersList;
         self.toggleSelection = toggleSelection;
         self.calculateResultOfTest = calculateResultOfTest;
+        self.finishTest = finishTest;
 
         activate();
 
