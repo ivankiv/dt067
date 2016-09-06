@@ -54,15 +54,17 @@
         }
 
         function chooseQuestion(question_index) {
-
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
+
             if(question_index == (self.listOfQuestionsId.length)){
                 var newIndex = 0;
+                $interval.cancel(self.timer);
                 $state.go('test', {questionIndex:newIndex});
             }
             else {
+                $interval.cancel(self.timer);
                 $state.go('test', {questionIndex:question_index});
             }
         }
@@ -77,14 +79,14 @@
                 );
         }
         function getTimerValue () {
-            var timer = $interval(function () {
+            self.timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
                 if (self.timerValue > 60000){
                     self.timerBackground = 'norm-color';
                 } else if (self.timerValue <= 60000 && self.timerValue > 0){
                     self.timerBackground = 'danger-color';
                 } else if (self.timerValue <= 0) {
-                    $interval.cancel(timer);
+                    $interval.cancel(self.timer);
                     finishTest();
                 }
             }, 100);
@@ -108,6 +110,7 @@
             else {
                 self.checkedAnswers.push(answer_id);
             }
+
         }
 
         function finishTest() {
@@ -117,11 +120,14 @@
                 backdrop: true
             });
             var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
-            console.log('listOfQuestionsId', listOfQuestionsId);
-            testPlayerService.checkAnswersList(listOfQuestionsId).then(function(response) {
-                console.log('calculateResultOfTest(response.data)', calculateResultOfTest(response.data));
-            });
-            $state.go('user.results');
+            testPlayerService.checkAnswersList(listOfQuestionsId)
+                .then(function(response) {
+                    return calculateResultOfTest(response.data);
+                })
+                .then(function(response) {
+                    localStorage.setItem('resultOfTest', JSON.stringify(response));
+                    $state.go('user.results');
+                })
         }
 
         function calculateResultOfTest(response) {
