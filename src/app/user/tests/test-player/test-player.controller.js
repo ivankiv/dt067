@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q) {
 
         var self = this;
 
@@ -27,6 +27,11 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
+        self.startBackendTime;
+        self.currentBackendTime;
+        self.questionsIdForResult = [];
+        self.answersIdForResult = [];
+        self.true_answers = [];
 
         //methods
         self.getTimerValue;
@@ -54,6 +59,7 @@
         }
 
         function chooseQuestion(question_index) {
+            checkServerTime ();
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
@@ -78,6 +84,7 @@
                     }
                 );
         }
+
         function getTimerValue () {
             self.timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
@@ -91,6 +98,41 @@
                 }
             }, 100);
         }
+
+        // getting start test time in backend
+        function getEndBackendTime () {
+           return testPlayerService.getServerEndTime()
+                .then(function (response) {
+                    self.endBackendTime = response.data;
+                    self.endBackendTime = parseInt(self.endBackendTime);
+                    console.log('self.endBackendTime', self.endBackendTime);
+                    console.log(typeof self.endBackendTime);
+                });
+        }
+
+        function getServerTime () {
+            return testPlayerService.getServerTime()
+                .then(function (response) {
+                    self.currentBackendTime = response.data.curtime * 1000;
+                    console.log('self.currentBackendTime', self.currentBackendTime);
+                    console.log(typeof self.currentBackendTime);
+                });
+        }
+
+        // checking if user doesn't hack test time
+        function checkServerTime () {
+            $q.all([getEndBackendTime(),getServerTime()])
+                .then(function (){
+                    console.log('self.endBackendTimeCS', self.endBackendTime);
+                    console.log('self.currentBackendTimeCS', self.currentBackendTime);
+                    var duration = self.endBackendTime - self.currentBackendTime;
+                    console.log(duration);
+                    if ( duration <= 0 ){
+                        finishTest();
+                    }
+                });
+        }
+
 
         function isLogged() {
             return loginService.isLogged().then(function(response) {
@@ -120,8 +162,21 @@
                 backdrop: true
             });
             var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+             self.questionsIdForResult = listOfQuestionsId.map(function(question) {
+                 return question.question_id;
+             });
+
+            self.answersIdForResult = listOfQuestionsId.map(function(question) {
+                return question.answer_ids;
+            });
+
             testPlayerService.checkAnswersList(listOfQuestionsId)
                 .then(function(response) {
+                    self.true_answers = response.data.filter(function(item) {
+                        return item.true == 1;
+                    }).map(function(item) {
+                        return item.question_id;
+                    });
                     return calculateResultOfTest(response.data);
                 })
                 .then(function(resultOfTest) {
@@ -147,19 +202,24 @@
         }
 
         function saveResult(resultOfTest) {
+            var questionsIdForResult = self.questionsIdForResult.join("/");
+            var true_answers = self.true_answers.join("/");
+            var answersIdForResult = self.answersIdForResult.join("/");
+            var startTime = localStorage.startTime;
+
             var result = {
                 student_id:   self.user_id,
                 test_id:      self.test_id,
-                session_date: new Date(response.startTimeTest*1000).toISOString().split('T')[0],
-                start_time:   new Date(response.startTimeTest*1000).toISOString().substr(11,8),
-                end_time:     new Date().toString().substr(16,8),
+                session_date: new Date(),
+                start_time:   startTime,
+                end_time:     new Date(),
                 result:       resultOfTest,
-                questions:    questions,
-                true_answers: trueAnswers,
-                answers:      answers
+                questions:    questionsIdForResult,
+                true_answers: true_answers,
+                answers:      answersIdForResult
             };
-
-            testPlayerService.checkAnswersList(result).then(function(response) {
+            console.log(result);
+            testPlayerService.saveResult(result).then(function(response) {
                 console.log(response);
             })
 

@@ -12,11 +12,35 @@
 
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
-            checkAnswersList:checkAnswersList,
+            checkAnswersList: checkAnswersList,
             getAnswersListByQuestionId: getAnswersListByQuestionId,
+            getServerTime: getServerTime,
+            setServerEndTime: setServerEndTime,
+            getServerEndTime: getServerEndTime,
             startTestInfoInLog:startTestInfoInLog,
             saveResult: saveResult
         };
+
+        function setServerEndTime(testDuration) {
+            $http.post(appConstants.resetSessionData)
+                .then(getServerTime().then(function (response) {
+                    var testEndTime = response.data.curtime * 1000 + testDuration;
+                    testEndTime = testEndTime.toString();
+                    $http.post(appConstants.saveEndTime, testEndTime)
+                        .then(fulfilled, rejected);
+                }));
+
+        }
+
+        function getServerTime () {
+            return $http.get(appConstants.getServerTime)
+                .then(fulfilled, rejected);
+        }
+
+        function getServerEndTime () {
+            return $http.get(appConstants.getEndTime)
+                .then(fulfilled, rejected);
+        }
 
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
@@ -37,12 +61,10 @@
                 .then(fulfilled,rejected);
         }
 
-        /////////////
         function getAnswersListByQuestionId (questionId) {
             return $http.get(appConstants.getAnswersListByQuestionId + questionId)
                 .then(fulfilled, rejected);
         }
-        /////////////
 
         function checkAnswersList(answers) {
            return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
