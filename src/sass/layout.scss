@@ -28,7 +28,16 @@ $colom-title:yellow;
   }
   td{
     .table-help-btns{
-      margin-right: 8px!important;
+      margin-right: 4px!important;
+      @media (max-width: $breakpoint-alpha) {
+        margin-left: 8px!important;
+        float: left !important;
+      }
+    }
+  }
+  td{
+    .group-help-btns{
+      margin: 4px 7px 0 0 !important;
       @media (max-width: $breakpoint-alpha) {
         margin-left: 8px!important;
         float: left !important;
