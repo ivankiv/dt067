@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q) {
 
         var self = this;
 
@@ -27,6 +27,8 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
+        self.startBackendTime;
+        self.currentBackendTime;
 
         //methods
         self.getTimerValue;
@@ -54,15 +56,18 @@
         }
 
         function chooseQuestion(question_index) {
-
+            checkServerTime ();
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
+
             if(question_index == (self.listOfQuestionsId.length)){
                 var newIndex = 0;
+                $interval.cancel(self.timer);
                 $state.go('test', {questionIndex:newIndex});
             }
             else {
+                $interval.cancel(self.timer);
                 $state.go('test', {questionIndex:question_index});
             }
         }
@@ -76,19 +81,55 @@
                     }
                 );
         }
+
         function getTimerValue () {
-            var timer = $interval(function () {
+            self.timer = $interval(function () {
                 self.timerValue = self.endTime -new Date().valueOf();
                 if (self.timerValue > 60000){
                     self.timerBackground = 'norm-color';
                 } else if (self.timerValue <= 60000 && self.timerValue > 0){
                     self.timerBackground = 'danger-color';
                 } else if (self.timerValue <= 0) {
-                    $interval.cancel(timer);
+                    $interval.cancel(self.timer);
                     finishTest();
                 }
             }, 100);
         }
+
+        // getting start test time in backend
+        function getEndBackendTime () {
+           return testPlayerService.getServerEndTime()
+                .then(function (response) {
+                    self.endBackendTime = response.data;
+                    self.endBackendTime = parseInt(self.endBackendTime);
+                    console.log('self.endBackendTime', self.endBackendTime);
+                    console.log(typeof self.endBackendTime);
+                });
+        }
+
+        function getServerTime () {
+            return testPlayerService.getServerTime()
+                .then(function (response) {
+                    self.currentBackendTime = response.data.curtime * 1000;
+                    console.log('self.currentBackendTime', self.currentBackendTime);
+                    console.log(typeof self.currentBackendTime);
+                });
+        }
+
+        // checking if user doesn't hack test time
+        function checkServerTime () {
+            $q.all([getEndBackendTime(),getServerTime()])
+                .then(function (){
+                    console.log('self.endBackendTimeCS', self.endBackendTime);
+                    console.log('self.currentBackendTimeCS', self.currentBackendTime);
+                    var duration = self.endBackendTime - self.currentBackendTime;
+                    console.log(duration);
+                    if ( duration <= 0 ){
+                        finishTest();
+                    }
+                });
+        }
+
 
         function isLogged() {
             return loginService.isLogged().then(function(response) {
@@ -108,6 +149,7 @@
             else {
                 self.checkedAnswers.push(answer_id);
             }
+
         }
 
         function finishTest() {
@@ -117,11 +159,14 @@
                 backdrop: true
             });
             var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
-            console.log('listOfQuestionsId', listOfQuestionsId);
-            testPlayerService.checkAnswersList(listOfQuestionsId).then(function(response) {
-                console.log('calculateResultOfTest(response.data)', calculateResultOfTest(response.data));
-            });
-            $state.go('user.results');
+            testPlayerService.checkAnswersList(listOfQuestionsId)
+                .then(function(response) {
+                    return calculateResultOfTest(response.data);
+                })
+                .then(function(response) {
+                    localStorage.setItem('resultOfTest', JSON.stringify(response));
+                    $state.go('user.results');
+                })
         }
 
         function calculateResultOfTest(response) {

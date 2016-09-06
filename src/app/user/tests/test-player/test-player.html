@@ -33,11 +33,11 @@
                             <div class="col-sm-3 col-xs-12 wrapForQuestions">
                                 <button ng-click="player.chooseQuestion($index)"
                                      class="allOfQuestions btn btn-info" ng-repeat="question in player.listOfQuestionsId">
-                                    {{$index+1}}
+                                    <span class="question-num">{{$index+1}}</span>
                                 </button>
                             </div>
 
-                            <div class="col-sm-8 col-xs-12 questions-box bg-info"
+                            <div class="col-sm-8 col-xs-12 questions-box"
                                  ng-include = "'app/user/tests/test-player/question.html'">
                             </div>
 

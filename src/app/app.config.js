@@ -60,8 +60,8 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
             url: '/result',
             views: {
                 'content': {
-                    templateUrl: 'app/user/tests/tests.html',
-                    controller: 'TestPlayerController as player'
+                    templateUrl: 'app/user/result.html',
+                    controller: 'UserController as user'
                 }
             },
             ncyBreadcrumb: {

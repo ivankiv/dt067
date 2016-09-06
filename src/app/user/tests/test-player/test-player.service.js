@@ -3,22 +3,49 @@
         angular.module('app')
             .factory('testPlayerService',testPlayerService);
 
-    testPlayerService.$inject = ['$http','appConstants','testService','testDetailsService'];
+    testPlayerService.$inject = ['$http','appConstants'];
 
-    function testPlayerService($http ,appConstants ,testService ,testDetailsService) {
+    function testPlayerService($http ,appConstants) {
 
         var self = this;
         self.pastAttemps = undefined;
 
         return {
             checkAttemptsOfUser: checkAttemptsOfUser,
-            checkAnswersList:checkAnswersList,
-            getAnswersListByQuestionId: getAnswersListByQuestionId
+            checkAnswersList: checkAnswersList,
+            getAnswersListByQuestionId: getAnswersListByQuestionId,
+            getServerTime: getServerTime,
+            setServerEndTime: setServerEndTime,
+            getServerEndTime: getServerEndTime,
+            startTestInfoInLog:startTestInfoInLog
         };
+
+        function setServerEndTime(testDuration) {
+            $http.post(appConstants.resetSessionData)
+                .then(getServerTime().then(function (response) {
+                    var testEndTime = response.data.curtime * 1000 + testDuration;
+                    testEndTime = testEndTime.toString();
+                    $http.post(appConstants.saveEndTime, testEndTime)
+                        .then(fulfilled, rejected);
+                }));
+
+        }
+
+        function getServerTime () {
+            return $http.get(appConstants.getServerTime)
+                .then(fulfilled, rejected);
+        }
+
+        function getServerEndTime () {
+            return $http.get(appConstants.getEndTime)
+                .then(fulfilled, rejected);
+        }
 
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
                    .then(function () {
+                       console.log('self.pastAttemps',self.pastAttemps);
+                       console.log('currentTest.attempts',currentTest.attempts)
                         return self.pastAttemps >= currentTest.attempts;
               });
         }
@@ -35,12 +62,10 @@
                 .then(fulfilled,rejected);
         }
 
-        /////////////
         function getAnswersListByQuestionId (questionId) {
             return $http.get(appConstants.getAnswersListByQuestionId + questionId)
                 .then(fulfilled, rejected);
         }
-        /////////////
 
         function checkAnswersList(answers) {
            return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);

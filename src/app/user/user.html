@@ -17,7 +17,7 @@
                 <ul class="nav navbar-nav">
                     <li ng-click="navCollapsed = true" ><a ui-sref="user">Профіль</a></li>
                     <li ng-click="navCollapsed = true"><a ui-sref="user.tests({groupId: user.user.group_id})">Тести</a></li>
-                    <li ng-click="navCollapsed = true"><a>Результати</a></li>
+                    <li ng-click="navCollapsed = true"><a ui-sref="user.results">Результати</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
