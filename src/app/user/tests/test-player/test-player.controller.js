@@ -171,11 +171,13 @@
 
             testPlayerService.checkAnswersList(listOfQuestionsId)
                 .then(function(response) {
+
                     self.true_answers = response.data.filter(function(item) {
                         return item.true == 1;
                     }).map(function(item) {
                         return item.question_id;
                     });
+
                     return calculateResultOfTest(response.data);
                 })
                 .then(function(resultOfTest) {
@@ -187,9 +189,10 @@
 
         function calculateResultOfTest(response) {
             var result = 0;
-            var rates = JSON.parse(localStorage.rateByQuestionsId);
             var score = [];
-            rates.forEach(function(item, index) {
+            var rates = JSON.parse(localStorage.rateByQuestionsId);
+
+            angular.forEach(rates, function(item, index) {
                 if(item !== null) score[index] = item;
             });
 
@@ -217,9 +220,9 @@
                 true_answers: true_answers,
                 answers:      answersIdForResult
             };
-            console.log(result);
+            console.log('result', result);
             testPlayerService.saveResult(result).then(function(response) {
-                console.log(response);
+                console.log('testPlayerService.saveResult', response);
             })
 
         }

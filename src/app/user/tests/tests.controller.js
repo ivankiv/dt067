@@ -96,7 +96,7 @@
                         getTestDetailsByTest().then(function(response) {
 
                             // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
-                            response.forEach(function(question) {
+                            angular.forEach(response, function(question) {
                                 rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
                             });
 
@@ -137,7 +137,8 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            response.data.forEach(function(testDetail) {
+
+            angular.forEach(response.data, function(testDetail) {
                 self.rateByLevels[testDetail.level] = testDetail.rate
             });
 
