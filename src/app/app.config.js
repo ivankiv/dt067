@@ -61,7 +61,7 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
             views: {
                 'content': {
                     templateUrl: 'app/user/result.html',
-                    controller: 'UserController as user'
+                    controller: 'ResultUserController as result'
                 }
             },
             ncyBreadcrumb: {
