@@ -168,6 +168,9 @@ body {
   @include table-mixin;
 }
 .subject-table{
+  .show-img{
+    visibility: hidden;
+  }
   @include table-mixin;
 }
 .header-views-select-pages-search{

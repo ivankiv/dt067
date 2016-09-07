@@ -117,7 +117,6 @@
         }
         function ShowLargeAnswerPhotoForQuestion(answer) {
             if(answer.attachment !== '') {
-
                 var modalInstance = $uibModal.open({
                     templateUrl: 'app/admin/subject/test/answers/show-large-answer-photo-for-question.html',
                     controller: 'AnswersModalController as answers',
