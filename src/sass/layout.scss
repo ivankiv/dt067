@@ -24,7 +24,7 @@
       content: attr(data-th)": ";
       font-weight: bold;
       margin-right: 25px;
-      width: 6.5em;
+      width: 8.5em;
       display: inline-block;
 
       @media (min-width: $breakpoint-alpha) {
@@ -460,3 +460,24 @@ aside.wrapForQuestions {
   display: block;
 }
 .hidden{display:none !important}
+
+
+.groups-table {
+  th {
+    &:first-child {
+      width: 10%;
+    }
+    &:nth-child(2) {
+      width: 15%;
+    }
+    &:nth-child(3) {
+      width: 22%;
+    }
+    &:last-child {
+      width: 22%;
+    }
+  }
+  td {
+    word-break: break-all;
+  }
+}
