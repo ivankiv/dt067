@@ -59,7 +59,6 @@
 
         function chooseQuestion(question_index) {
             checkServerTime ();
-            console.log(self.listOfQuestionsId);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
@@ -213,9 +212,8 @@
                 true_answers: true_answers,
                 answers:      answersIdForResult
             };
-            console.log('result', result);
             testPlayerService.saveResult(result).then(function(response) {
-                console.log('testPlayerService.saveResult', response);
+
             })
 
         }
