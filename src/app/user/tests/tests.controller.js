@@ -127,7 +127,7 @@
                                         else {
                                             testPlayerService.getServerTime()
                                                 .then(function (response) {
-                                                    localStorage.setItem("startTime", angular.toJson(response.data.curtime));
+                                                    localStorage.setItem("startTime", angular.toJson(response.data.unix_timestamp));
                                                 });
 
                                             $state.go("test", {questionIndex:0});

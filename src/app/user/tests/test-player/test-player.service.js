@@ -25,7 +25,7 @@
         function setServerEndTime(testDuration) {
             $http.post(appConstants.resetSessionData)
                 .then(getServerTime().then(function (response) {
-                    var testEndTime = response.data.curtime * 1000 + testDuration;
+                    var testEndTime = response.data.unix_timestamp * 1000 + testDuration;
                     testEndTime = testEndTime.toString();
                     $http.post(appConstants.saveEndTime, testEndTime)
                         .then(fulfilled, rejected);

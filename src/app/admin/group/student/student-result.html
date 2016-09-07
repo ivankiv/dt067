@@ -13,7 +13,7 @@
                         {{students.currentObj.student_fname}}</h4>
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-danger pull-right" usref">
+                    <button type="button" class="btn btn-danger pull-right" ng-click="students.hide('result')">
                         <i class="glyphicon glyphicon-share-alt"> Назад</i>
                     </button>
                 </div>
@@ -25,6 +25,8 @@
                         <th>К-сть завдань</th>
                         <th>К-сть правельних відповідей</th>
                         <th>Результат</th>
+                        <th>Час початку</th>
+                        <th>Час закінчення</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,15 +36,8 @@
                         <td data-th="К-сть завдань">{{::result.questions.length}}</td>
                         <td data-th="К-сть правельних відповідей">{{::result.true_answers.length}}</td>
                         <td data-th="Результат">{{::result.result}}</td>
-
-                        <td>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns"
-                                    title="Пройти тест"
-                                    ng-if="test.enabled==1"
-                                    ng-click = "tests.testPlayerPreparation(test)">
-                                <i class="glyphicon glyphicon-play"></i>
-                            </button>
-                        </td>
+                        <td data-th="Час початку">{{::result.start_time}}</td>
+                        <td data-th="Час закінчення">{{::result.end_time}}</td>
                     </tr>
                     </tbody>
                 </table>

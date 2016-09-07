@@ -109,7 +109,7 @@
         function getServerTime() {
             return testPlayerService.getServerTime()
                 .then(function (response) {
-                    self.currentBackendTime = response.data.curtime * 1000;
+                    self.currentBackendTime = response.data.unix_timestamp * 1000;
                 });
         }
 
@@ -214,7 +214,6 @@
                         true_answers: true_answers,
                         answers:      answersIdForResult
                     };
-                    console.log(result);
                     testPlayerService.saveResult(result).then(function(response) {
 
                     })

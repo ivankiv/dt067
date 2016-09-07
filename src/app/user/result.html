@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class='col-sm-12 col-xs-12 views-header'>
-                    <h4 class='text-center'><span class='pull-left'>Результати тестів</span></h4>
+                    <h4 class='text-center'>Результати тестів</h4>
                 </div>
                 <table ng-if="!result.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped">
                     <thead>
@@ -29,6 +29,7 @@
                         <th>К-сть завдань</th>
                         <th>К-сть правельних відповідей</th>
                         <th>Результат</th>
+                        <th>Час закінчення</th>
                     </tr>
                     </thead>
                     <tbody >
@@ -38,15 +39,7 @@
                         <td data-th="К-сть завдань">{{::result.questions.length}}</td>
                         <td data-th="К-сть правельних відповідей">{{::result.true_answers.length}}</td>
                         <td data-th="Результат">{{::result.result}}</td>
-                        <!--<td data-th="Час закінчення">{{::result.result}}</td>-->
-                        <td>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns"
-                                    title="Пройти тест"
-                                    ng-if="test.enabled==1"
-                                    ng-click = "tests.testPlayerPreparation(test)">
-                                <i class="glyphicon glyphicon-play"></i>
-                            </button>
-                        </td>
+                        <td data-th="Час закінчення">{{::result.end_time}}</td>
                     </tr>
                     </tbody>
                 </table>
