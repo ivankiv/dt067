@@ -13,6 +13,7 @@
         self.userId = 0;
         self.user = {};
         self.group_name = "";
+        self.resultOfTest = 0 || localStorage.resultOfTest;
          self.isEvent = isEvent;
 
         //->DatePicker options

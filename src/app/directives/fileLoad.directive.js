@@ -20,6 +20,7 @@
                         });
                     };
                     reader.readAsDataURL(changeEvent.target.files[0]);
+
                 });
             }
         };

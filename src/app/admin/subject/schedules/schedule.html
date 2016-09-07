@@ -1,4 +1,9 @@
 <section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -37,7 +42,7 @@
                     <tr ng-repeat="schedule in schedules.list">
                         <td data-th="Група" ng-if="schedules.group_id">{{::schedules.associativeSubject[schedule.subject_id]}}</td>
                         <td data-th="Група" ng-if="!schedules.group_id">{{::schedules.associativeGroup[schedule.group_id]}}</td>
-                        <td data-th="Дата проведення">{{::schedule.event_date | date: "dd MMMM yyyy"}}</td>
+                        <td data-th="Дата проведення">{{::schedule.event_date | date: "yyyy-MM-dd"}}</td>
                         <td>
                             <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"  title="Видалити"
                                     ng-click="schedules.deleteSchedule(schedule.timetable_id)"><i class="glyphicon glyphicon-trash"></i>

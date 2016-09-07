@@ -1,8 +1,4 @@
 @import 'https://fonts.googleapis.com/css?family=Bad+Script|Cormorant+Infant|Marck+Script';
-//colors
-$color_shark_approx: #29272b;
-$color_straw_approx: #d6bf8c;
-
 //urls
 $url_0: url(../img/enter-bg.jpg);
 
@@ -49,10 +45,13 @@ body {
 		margin-top: 20px;
 		border-radius: 20px;
 		height: 35px;
-		color: $color_shark_approx;
-		background-color: $color_straw_approx;
+		color: $white;
+		background: rgba(0,0,0,0.6);
 		font-weight: bold;
 		border: none;
+	}
+	.enter-submit:hover {
+		box-shadow: 0 0 10px 10px rgba(255,255, 255, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5);
 	}
 }
 .welcome-to-d-tester{
@@ -60,8 +59,9 @@ body {
 	text-align: center;
 	font-size: 40px;
 	font-weight: bold;
-	color: red;
+	color: $black;
 	margin-bottom: 50px;
+	text-shadow: 1px 1px 2px $white, 0 0 1em $white;
 }
 .pagination {
   cursor: pointer;

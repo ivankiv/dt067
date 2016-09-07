@@ -8,11 +8,11 @@
             <div class="col-sm-9">
                 <input class="form-control add-photo-inp"
                        id="image"
-                       file-load = "questions.question.attachment"
+                       file-load = "questions.currentQuestion.attachment"
                        ng-model="questions.currentQuestion.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
-                <img ng-src="{{questions.currentQuestion.attachment}}" height="100" width="100" alt="Зображення">
+                <img ng-if="questions.currentQuestion.attachment" ng-src="{{questions.currentQuestion.attachment}}" height="100" width="100" alt="Зображення">
             </div>
         </div>
         <div class="form-group">

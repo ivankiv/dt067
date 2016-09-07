@@ -1,7 +1,7 @@
-<div class="modal-header">
+<div class="modal-header custom-modal-header">
     <h3 class="modal-title">Додати новий запис до розкладу тестів</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body custom-modal-body">
     <div class="row schedule-form">
         <form class="form-horizontal" name="newScheduleForm" role="form">
             <div class="col-md-6">
@@ -26,8 +26,8 @@
                 <p class="input-group">
                     <input type="text" class="form-control" id="event_date"
                            date-picker-local-date
-                           placeholder="Дата у форматі: ХХХХ/ХХ/ХХ "
-                           uib-datepicker-popup="yyyy/MM/dd"
+                           placeholder="Дата у форматі: yyyy/MM/dd"
+                           uib-datepicker-popup="{{schedules.format}}"
                            ng-model="schedules.schedule.event_date"
                            is-open="schedules.DatePickerOpened"
                            datepicker-options="schedules.dateOptions"
@@ -50,7 +50,7 @@
         </div>
     </div>
 </div>
-<div class="modal-footer">
+<div class="modal-footer custom-modal-footer">
     <button class="btn btn-primary" type="button" ng-click="schedules.addSchedule()"
             ng-disabled="newScheduleForm.$invalid"> Додати
     </button>

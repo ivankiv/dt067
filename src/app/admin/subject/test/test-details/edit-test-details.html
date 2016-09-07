@@ -1,7 +1,7 @@
-<div class="modal-header">
+<div class="modal-header custom-modal-header">
     <h3 class="modal-title">Редагувати параметри для тесту: {{::testDetails.currentTestDetailsName}}</h3>
 </div>
-<div class="modal-body">
+<div class="modal-body custom-modal-body">
     <form class="form-horizontal" name="editTestDetailsForm" role="form">
         <div class="form-group">
             <label class="control-label col-sm-2" for="level">Рівень </label>
@@ -33,7 +33,7 @@
             <div class="col-sm-10">
                 <input class="form-control" type="number" id="rate"  name="rate" ng-model="testDetails.currentTestDetails.rate"
                        string-to-number
-                       placeholder="кількість балів за одне завдання"
+                       placeholder="Кількість балів за одне завдання"
                        required
                        min="1"
                        max="50">

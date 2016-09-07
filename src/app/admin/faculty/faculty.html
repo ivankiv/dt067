@@ -1,4 +1,9 @@
 <section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
@@ -23,12 +28,14 @@
                     </div>
                 <table class="rwd-table faculty-table table-striped ">
                     <tr>
+                        <th>Номер</th>
                         <th>Факультет</th>
                         <th colspan="2">Опис факультету</th>
                     </tr>
                     <tr ng-repeat="faculty in faculties.list
                         | toArray | filter:faculties.textSearch
                         | limitTo: faculties.facultiesPerPage : faculties.begin ">
+                        <td data-th="Номер">{{$index + (faculties.currentPage - 1) * faculties.facultiesPerPage + 1}}</td>
                         <td data-th="Факультет">{{::faculty.faculty_name}}</td>
                         <td data-th="Опис факультету">{{::faculty.faculty_description}}</td>
                         <td>

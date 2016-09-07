@@ -3,7 +3,7 @@
 
     angular.module('app')
         .controller('AnswersController', answersController);
-    answersController.$inject = ['answersService', '$stateParams', 'testService', 'ngDialog', '$uibModal'];
+    answersController.$inject = ['answersService', '$stateParams', 'testService',  'ngDialog', '$uibModal'];
 
     function answersController (answersService, $stateParams, testService, ngDialog, $uibModal) {
         var self = this;
@@ -14,23 +14,27 @@
         self.list = {};
         self.showMessageNoEntity = false;
         self.question_id = $stateParams.questionId;
+        self.true_answers = ['Не вірно', 'Вірно'];
+        self.isAnswerTrue = false;
 
         //methods
-        self.getQuestionsRangeByTest = getQuestionsRangeByTest;
+        self.getAnswersByQuestionID = getAnswersByQuestionID;
         self.deleteAnswers = deleteAnswers;
         self.showAddAnswerForm = showAddAnswerForm;
+        self.ShowLargeAnswerPhotoForQuestion = ShowLargeAnswerPhotoForQuestion;
         self.showEditAnswerForm = showEditAnswerForm;
 
         activate();
 
         function activate() {
-            getQuestionsRangeByTest();
+            getAnswersByQuestionID();
             getQuestionByQuestionID();
+
         }
 
 
-        function getQuestionsRangeByTest() {
-            answersService.getAnswersByQuestion($stateParams.currentQuestionId)
+        function getAnswersByQuestionID() {
+            answersService.getAnswersByQuestion(self.question_id)
                 .then(getAnswersByQuestionComplete)
         }
 
@@ -39,6 +43,16 @@
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
+                if(self.CurrentQuestionType === '1') {
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (response.data[i].true_answer == '1') {
+                            self.isAnswerTrue = true;
+                            break;
+                        } else if(response.data[i].true_answer == '0'){
+                            self.isAnswerTrue = false;
+                        }
+                    }
+                }
                 self.list = response.data;
             }
         }
@@ -46,20 +60,22 @@
         function getQuestionByQuestionID() {
             answersService.getQuestionByQuestionID(self.question_id)
                 .then(getQuestionByQuestionIDComplete)
+                .then(getAnswersByQuestionID)
         }
 
         function getQuestionByQuestionIDComplete(response) {
+            self.CurrentQuestionType = response.data[0].type;
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
                 self.question_text = response.data[0].question_text;
-                console.log(response.data[0].type, 'response type');
                 if (response.data[0].type === '1'){
                     self.questiontype = 'Простий вибір';
                 }else{
                     self.questiontype = 'Мульти вибір';
                 }
             }
+            return self.CurrentQuestionType;
         }
 
         function deleteAnswers(answer_id) {
@@ -73,12 +89,6 @@
                     if(response.data.response === 'ok') {
                         activate();
                     }
-
-                    if(response.status === 400) {
-                        ngDialog.open({template: '<div class="ngdialog-message"> \
-                                        Неможливо видалити завдання яке містить відповіді!</div>'
-                        });
-                    }
                 });
             }
         }
@@ -89,16 +99,35 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: {}
+                    currentAnswer: {},
+                    answerSrc: {},
+                    isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Відповідь успішно додано!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 self.showMessageNoEntity = false;
                 activate();
             })
+
+        }
+        function ShowLargeAnswerPhotoForQuestion(answer) {
+            if(answer.attachment !== '') {
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/admin/subject/test/answers/show-large-answer-photo-for-question.html',
+                    controller: 'AnswersModalController as answers',
+                    backdrop: true,
+                    resolve: {
+                        currentAnswer: {},
+                        answerSrc: answer,
+                        isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
+                    }
+                });
+            }
         }
 
         function showEditAnswerForm(currentAnswer) {
@@ -107,12 +136,16 @@
                 controller: 'AnswersModalController as answers',
                 backdrop: false,
                 resolve: {
-                    currentAnswer: currentAnswer
+                    currentAnswer: currentAnswer,
+                    answerSrc: {},
+                    isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
                 }
             });
             modalInstance.result.then(function() {
-                ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
                 });
                 self.showMessageNoEntity = false;
                 activate();

@@ -1,9 +1,14 @@
 <section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-4 col-xs-12 views-header'><h4>Тести предмету: &nbsp;{{tests.currentSubjectName}}</h4></div>
-                <div class='col-sm-8 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                <div class='col-sm-6 col-xs-12 views-header'><h4>Тести предмету: &nbsp;{{tests.currentSubjectName}}</h4></div>
+                <div class='col-sm-6 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
@@ -11,7 +16,7 @@
                             ng-click="tests.showAddTestForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
-                <table class="rwd-table subject-table table-striped">
+                <table class="rwd-table subject-table test-table table-striped">
                     <thead>
                     <tr>
                         <th>Номер</th>
@@ -29,18 +34,18 @@
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
                         <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
                         <td>
-                            <button  type="button" class="btn btn-danger pull-right table-help-btns" title="Видалити"
+                            <button  type="button" class="btn btn-danger pull-right table-help-btns group-help-btns" title="Видалити"
                                      ng-click="tests.deleteTest(test.test_id)"><i class="glyphicon glyphicon-trash"></i>
                             </button>
-                            <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns"
+                            <button  type="button" class="btn btn-warning subject-list-centered pull-right table-help-btns group-help-btns"
                                      title="Редагувати" ng-click='tests.showEditTestForm(test)'>
                                      <i class="glyphicon glyphicon-pencil"></i>
                             </button>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns" title="Завдання"
+                            <button type="button" class="btn btn-primary pull-right table-help-btns group-help-btns" title="Завдання"
                                     ui-sref="admin-home.questions({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
                                      <i class="glyphicon glyphicon-list-alt"></i>
                             </button>
-                            <button  type="button" class="btn btn-info pull-right table-help-btns" title="Деталі"
+                            <button  type="button" class="btn btn-info pull-right table-help-btns group-help-btns" title="Деталі"
                                      ui-sref="admin-home.testDetails({currentSubjectId: test.subject_id, currentTestId: test.test_id})">
                                      <i class="glyphicon glyphicon-info-sign"></i>
                             </button>

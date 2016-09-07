@@ -8,11 +8,11 @@
             <div class="col-sm-9">
                 <input class="form-control add-photo-inp"
                        id="image"
-                       file-load = "answers.answer.attachment"
+                       file-load = "answers.currentAnswer.attachment"
                        ng-model="answers.currentAnswer.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
-                <img ng-src="{{answers.currentAnswer.attachment}}" height="100" width="100" alt="Зображення">
+                <img ng-if="answers.currentAnswer.attachment" ng-src="{{answers.currentAnswer.attachment}}" height="100" width="100" alt="Зображення">
             </div>
         </div>
         <div class="form-group">
@@ -34,8 +34,8 @@
                         ng-model="answers.currentAnswer.true_answer"
                         required>
                     <option disabled selected value="">Оберіть тип відповіді</option>
-                    <option value="1">Вірно</option>
-                    <option value="2">Невірно</option>
+                    <option ng-disabled="answers.isAnswerTrue.isAnswerTrue"  value="1">Вірно</option>
+                    <option value="0">Невірно</option>
                 </select>
             </div>
         </div>

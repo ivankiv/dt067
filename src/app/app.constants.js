@@ -42,11 +42,11 @@
             editQuestion: baseUrl + 'question/update/',
             getQuestionsByLevelRand: baseUrl + 'question/getQuestionsByLevelRand/', // + id
 
-            getAnswersByQuestionID: baseUrl + 'answer/getRecords/',  // get answer id
-                 deleteAnswers: baseUrl + 'answer/del/', // + id of answer
-                 getQuestionByQuestionID: baseUrl + 'question/getRecords/', // + question id
-                addAnswer: baseUrl + 'answer/insertData',
-                editAnswer: baseUrl + 'answer/update/',
+            getAnswersByQuestionID: baseUrl + '/answer/getAnswersByQuestion/',  // get question id
+            deleteAnswers: baseUrl + 'answer/del/', // + id of answer
+            getQuestionByQuestionID: baseUrl + 'question/getRecords/', // + question id
+            addAnswer: baseUrl + 'answer/insertData',
+            editAnswer: baseUrl + 'answer/update/',
 
             getSpecialities: baseUrl + 'speciality/getRecords',
             getRangeOfSpecialities: baseUrl + 'speciality/getRecordsRange',
@@ -77,10 +77,6 @@
             delAdmins: '/AdminUser/del/',
             addAdmins:'/AdminUser/insertData',
 
-
-
-            getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
-
             getStudents: baseUrl + 'student/getRecords',
             countStudents: baseUrl + 'student/countRecords',
             editStudent: baseUrl + 'student/update/',
@@ -91,13 +87,16 @@
             saveTestPlayerData: baseUrl + 'TestPlayer/saveData/',
             getTestPlayerData: baseUrl + 'TestPlayer/getData/',
             resetSessionData: baseUrl + 'TestPlayer/resetSessionData/',
-            getTimeStamp: baseUrl + 'TestPlayer/getTimeStamp/',
+            getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
+            saveResult: baseUrl + 'result/insertData/',
 
+            getAnswersListByQuestionId: baseUrl + 'SAnswer/getAnswersByQuestion/',
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
-            addTestResult: baseUrl + 'result/insertData/',
+            addTestResult: baseUrl + 'Result/insertData/',
+            getTestResultByStudentId: baseUrl + 'Result/getRecordsbyStudent/', // + id of student
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
             startTestInfoInLog: baseUrl + 'log/startTest/' // + <user_id>/<test_id>
         });

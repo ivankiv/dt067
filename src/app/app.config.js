@@ -1,20 +1,11 @@
 angular.module('app')
     .config(configApp);
 
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider','$httpProvider'];
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider', '$breadcrumbProvider','$httpProvider'];
-
-function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadcrumbProvider , $httpProvider) {
+function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $httpProvider) {
 
     $httpProvider.interceptors.push('spinnerService');
-
-    ngDialogProvider.setDefaults({
-        plain: true,
-        showClose: true,
-        closeByDocument: false,
-        closeByEscape: true,
-        closeByNavigation: true
-    });
 
     $breadcrumbProvider.setOptions({
         prefixStateName: 'admin-home',
@@ -41,6 +32,32 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
             url: '/tests/test/:questionIndex',
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player'
+        })
+
+        .state('user.tests', {
+            url: '/:groupId/tests',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/tests/tests.html',
+                    controller: 'TestsController as tests'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Тести'
+            }
+        })
+
+        .state('user.results', {
+            url: '/result',
+            views: {
+                'content': {
+                    templateUrl: 'app/user/result.html',
+                    controller: 'ResultUserController as result'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Результати'
+            }
         })
 
         .state('admin-home', {
@@ -264,18 +281,5 @@ function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadc
                 label: 'Студенти',
                 parent: 'admin-home.groups'
             }
-        })
-
-        .state('user.tests', {
-                url: '/:groupId/tests',
-                views: {
-                    'content': {
-                        templateUrl: 'app/user/tests/tests.html',
-                        controller: 'TestsController as tests'
-                    }
-                },
-                ncyBreadcrumb: {
-                    label: 'Тести'
-                }
-            });
+        });
 }

@@ -20,7 +20,6 @@
 
         //variables for pagination panel and search
 
-        self.totalSubjects = 0;
         self.showSearch = true;
         self.textSearch = "";
         self.begin = 0;

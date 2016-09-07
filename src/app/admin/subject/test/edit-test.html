@@ -15,9 +15,9 @@
             <div class="col-sm-10">
                 <input class="form-control" type="text" name="name" id="name" ng-model="tests.currentTest.test_name"
                        required
-                       ng-minlength="3"
+                       ng-minlength="1"
                        ng-maxlength="100">
-                <novalidate-messages field="editTestForm.name" minlength="3" maxlength="100"></novalidate-messages>
+                <novalidate-messages field="editTestForm.name" minlength="1" maxlength="100"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">
@@ -25,9 +25,9 @@
             <div class="col-sm-10">
                 <input class="form-control" type="number" string-to-number name="amount" id="amount" ng-model="tests.currentTest.tasks"
                        required
-                       min="5"
+                       min="1"
                        max="100">
-                <novalidate-messages field="editTestForm.amount" min="5" max="100"></novalidate-messages>
+                <novalidate-messages field="editTestForm.amount"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">
@@ -36,9 +36,9 @@
                 <input class="form-control" type="number"  string-to-number name="time" id="time" ng-model="tests.currentTest.time_for_test"
                        placeholder="Час, хв"
                        required
-                       min="30"
+                       min="5"
                        max="180">
-                <novalidate-messages field="editTestForm.time" min="30" max="180"></novalidate-messages>
+                <novalidate-messages field="editTestForm.time" min="5" max="180"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">
@@ -51,13 +51,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="attemp">Кількість спроб: </label>
+            <label class="control-label col-sm-2" for="attempts">Кількість спроб: </label>
             <div class="col-sm-10">
-                <input class="form-control" type="number" string-to-number id="attemp"  name="attemp" ng-model="tests.currentTest.attempts"
+                <input class="form-control" type="number" string-to-number id="attempts"  name="attempts" ng-model="tests.currentTest.attempts"
                        required
                        min="1"
-                       max="10">
-                <novalidate-messages field="editTestForm.attemp" min="1" max="10"></novalidate-messages>
+                       max="20">
+                <novalidate-messages field="editTestForm.attempts" max="20"></novalidate-messages>
             </div>
         </div>
     </form>
