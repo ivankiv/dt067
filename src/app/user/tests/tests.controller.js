@@ -93,7 +93,6 @@
 
 
                         getTestDetailsByTest().then(function(response) {
-
                             // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
                             angular.forEach(response, function(question) {
                                 rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
@@ -110,10 +109,11 @@
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
 
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
-                                localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
-                                localStorage.setItem("endTime", JSON.stringify(endTime));
 
+
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+                                localStorage.setItem("endTime", JSON.stringify(endTime));
+                                testPlayerService.setRateOfQuestion(rateByQuestionsId);
                                 testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
                                 testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id);
                                 testPlayerService.getServerTime()

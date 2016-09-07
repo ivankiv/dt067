@@ -59,7 +59,6 @@
 
         function chooseQuestion(question_index) {
             checkServerTime ();
-            console.log(self.listOfQuestionsId);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
@@ -165,36 +164,41 @@
 
             testPlayerService.checkAnswersList(listOfQuestionsId)
                 .then(function(response) {
-
                     self.true_answers = response.data.filter(function(item) {
                         return item.true == 1;
                     }).map(function(item) {
                         return item.question_id;
                     });
 
+                    //get rate of questions for calculating result of test, which were stored on the server before.
                     return calculateResultOfTest(response.data);
                 })
                 .then(function(resultOfTest) {
                     saveResult(resultOfTest);
-                    localStorage.setItem('resultOfTest', JSON.stringify(resultOfTest));
                     $state.go('user.results');
                 })
         }
 
-        function calculateResultOfTest(response) {
-            var result = 0;
-            var score = [];
-            var rates = JSON.parse(localStorage.rateByQuestionsId);
+        function calculateResultOfTest(answers) {
+            var deferred = $q.defer();
 
-            angular.forEach(rates, function(item, index) {
-                if(item !== null) score[index] = item;
+            //get rate of questions for calculating result of test, which were stored on the server before.
+            testPlayerService.getRateOfQuestion().then(function(response) {
+                var result = 0;
+                var score = [];
+
+                angular.forEach(response.data, function(item, index) {
+                    if(item !== null) score[index] = item;
+                });
+
+                angular.forEach(answers, function(item) {
+                    result += score[item.question_id] * item.true;
+                });
+
+                deferred.resolve(result);
             });
 
-            angular.forEach(response, function(item) {
-                result += score[item.question_id] * item.true;
-            });
-
-            return result;
+            return deferred.promise;
         }
 
         function saveResult(resultOfTest) {
@@ -203,8 +207,6 @@
                 var true_answers = JSON.stringify(self.true_answers);
                 var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
                 var startTime = localStorage.startTime;
-                console.log('self.currentBackendTime for result=>', self.currentBackendTime);
-                console.log('startTime for result=>', startTime);
 
                 var result = {
                     student_id:   self.user_id,
@@ -217,7 +219,7 @@
                     true_answers: true_answers,
                     answers:      answersIdForResult
                 };
-                console.log('result', result);
+
                 testPlayerService.saveResult(result).then(function(response) {
                     console.log('testPlayerService.saveResult', response);
                 })
