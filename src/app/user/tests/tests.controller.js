@@ -4,9 +4,10 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams', '$timeout', '$uibModal'];
+        'loginService', '$state','$stateParams', '$timeout', '$uibModal', '$filter'];
 
-    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService, loginService, $state , $stateParams, $timeout, $uibModal) {
+    function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService,
+                              loginService, $state , $stateParams, $timeout, $uibModal, $filter) {
         var self = this;
 
         //variables
@@ -43,9 +44,11 @@
                         getTestBySubjectId(event.subject_id).then(function () {
 
                             angular.forEach(self.currentTests, function (test) {
+                                var current_date = $filter('date')(new Date(), 'yyyy-MM-dd');
                                 if(test != 'no records') {
                                     test.subject_name = response;
                                     test.date = event.event_date;
+                                    test.date_enabled = test.date == current_date;
                                     self.listOfTests.push(test);
                                     self.showMessageNoEntity = false;
                                 }
@@ -93,6 +96,7 @@
 
 
                         getTestDetailsByTest().then(function(response) {
+
                             // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
                             angular.forEach(response, function(question) {
                                 rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
@@ -108,8 +112,6 @@
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
-
-
 
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
