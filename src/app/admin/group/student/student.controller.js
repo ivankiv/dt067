@@ -14,20 +14,24 @@
         self.showEditForm = showEditForm;
         self.showCreateForm = showCreateForm;
         self.showInfoPage = showInfoPage;
+        self.showResultPage = showResultPage;
         self.hide = hide;
         self.update = update;
         self.remove = remove;
         self.create = create;
         self.pageChanged = pageChanged;
 
+
         //Variables
         self.list = [];
         self.userList = [];
         self.groupList = [];
+        self.resultList = [];
         self.group_id = $stateParams.group_id;
         self.showEdit = false;
         self.showCreate = false;
         self.showInfo = false;
+        self.showResults = false;
         self.alreadyExist = false;
         self.currentObj = {};
         self.currentUser = {};
@@ -41,13 +45,14 @@
         self.studentsPerPage = 5;
         self.numberToDisplayStudentsOnPage = [5,10,15,20];
         self.showMessageNoEntity = false;
+        self.showMessageNoTestsForStudent= false;
         activate();
 
         function activate() {
             studentService.getStudents(self.group_id).then(function (data) {
                 self.list = data;
                 self.totalStudents = data.length;
-                (data.response == "no records")? self.showMessageNoEntity = true:self.showMessageNoEntity = false;
+                self.showMessageNoEntity = (data.response === "no records");
                 getGroups();
             });
         }
@@ -58,6 +63,9 @@
             }
             else if (param == "info") {
                 self.showInfo = false;
+            }
+            else if (param == "result") {
+                self.showResult = false;
             }
             else {
                 self.showCreate = false;
@@ -89,6 +97,24 @@
                 self.currentUser = response.data[0];
                 self.currentObj = studentService.createStudentObj(self.currentUser,obj);
             });
+        }
+
+        function showResultPage(user) {
+            self.showResult = true;
+            self.currentObj = user;
+
+            studentService.getTestResultsByStudent(user.user_id)
+                .then(function (data) {
+                    self.showMessageNoTestsForStudent =(data.response === "no records");
+                    if(!self.showMessageNoTestsForStudent){
+                        self.resultList = data.map(function (result) {
+                            result.answers = JSON.parse(result.answers.replace(/&quot;/g, '"'));
+                            result.questions = JSON.parse(result.questions.replace(/&quot;/g, '"'));
+                            result.true_answers = JSON.parse(result.true_answers .replace(/&quot;/g, '"'));
+                            return  result;
+                        })
+                    }
+                })
         }
 
         function pageChanged() {

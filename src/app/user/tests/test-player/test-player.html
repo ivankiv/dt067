@@ -6,7 +6,9 @@
                     <h4>Тест:&nbsp{{::player.currentTest.test_name}}&nbspПредмет:&nbsp{{::player.currentTest.subject_name}}</h4>
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="player.finishTest()">
+                    <button type="button" class="btn btn-danger pull-right"
+                            ng-click="player.finishTest()">
+
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Завершити тест</i>
                     </button>
                 </div>
@@ -29,13 +31,16 @@
                         <div class="col-sm-12 col-xs-12 player-wrap">
 
                             <div class="col-sm-3 col-xs-12 wrapForQuestions">
-                                <button ng-click="player.chooseQuestion($index)"
-                                     class="allOfQuestions btn btn-info" ng-repeat="question in player.listOfQuestionsId">
-                                    {{$index+1}}
-                                </button>
+                                <form>
+                                    <button ng-click="player.chooseQuestion($index)"
+                                         class="allOfQuestions btn btn-default" ng-repeat="question in player.listOfQuestionsId"
+                                         ng-class="{'btn-info': player.listOfQuestionsId[$index].answer_ids.length > 0}">
+                                         {{$index+1}}
+                                    </button>
+                                </form>
                             </div>
 
-                            <div class="col-sm-8 col-xs-12 questions-box bg-info"
+                            <div class="col-sm-8 col-xs-12 questions-box"
                                  ng-include = "'app/user/tests/test-player/question.html'">
                             </div>
 

@@ -14,7 +14,8 @@
             editStudent:editStudent,
             createStudent:createStudent,
             createStudentObj:createStudentObj,
-            getStudentById:getStudentById
+            getStudentById:getStudentById,
+            getTestResultsByStudent:getTestResultsByStudent
         };
 
         function getStudents(group_id) {
@@ -46,6 +47,12 @@
         function createStudent(student) {
             return $http.post(appConstants.addStudents, student)
                 .then(complete, failed);
+        }
+
+        function getTestResultsByStudent(student_id) {
+            return $http.get(appConstants.getTestResultByStudentId + student_id)
+                .then(complete, failed);
+
         }
 
         function complete(response) {

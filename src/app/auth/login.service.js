@@ -21,7 +21,7 @@
                         templateUrl: 'app/modal/templates/islogged-dialog.html',
                         controller: 'modalController as modal',
                         backdrop: true
-                    })
+                    });
                 }
             });
         }

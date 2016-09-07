@@ -51,13 +51,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-sm-2" for="attemp">Кількість спроб: </label>
+            <label class="control-label col-sm-2" for="attempts">Кількість спроб: </label>
             <div class="col-sm-10">
-                <input class="form-control" type="number" string-to-number id="attemp"  name="attemp" ng-model="tests.currentTest.attempts"
+                <input class="form-control" type="number" string-to-number id="attempts"  name="attempts" ng-model="tests.currentTest.attempts"
                        required
                        min="1"
-                       max="10">
-                <novalidate-messages field="editTestForm.attemp" min="1" max="10"></novalidate-messages>
+                       max="50">
+                <novalidate-messages field="editTestForm.attempts" min="1" max="50"></novalidate-messages>
             </div>
         </div>
     </form>
