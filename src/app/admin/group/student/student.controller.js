@@ -105,6 +105,7 @@
 
             studentService.getTestResultsByStudent(user.user_id)
                 .then(function (data) {
+                    console.log(data);
                     self.showMessageNoTestsForStudent =(data.response === "no records");
                     if(!self.showMessageNoTestsForStudent){
                         self.resultList = data.map(function (result) {

@@ -108,16 +108,18 @@
                             });
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
-                                var startTime = new Date();
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
 
                                 localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
                                 localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
-                                localStorage.setItem("startTime", JSON.stringify(startTime));
 
                                 testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
                                 testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id);
+                                testPlayerService.getServerTime()
+                                    .then(function (response) {
+                                        localStorage.setItem("startTime", JSON.stringify(response.data.curtime));
+                                    });
 
                                 $state.go("test", {questionIndex:0});
                             } else {

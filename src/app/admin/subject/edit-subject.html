@@ -8,7 +8,7 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="name" name="name"
                        required
-                       placeholder="Напиши назву предмету"
+                       placeholder="Введіть назву предмету"
                        ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i"
                        ng-model="subjects.currentSubject.subject_name"
                        ng-minlength="3"
@@ -21,6 +21,7 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="description" name="description"
                        required
+                       placeholder="Додайте опис предмету"
                        ng-model="subjects.currentSubject.subject_description"
                        ng-minlength="3"
                        ng-maxlength="100">

@@ -52,7 +52,7 @@
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
-                        self.currentAnswerArray = response.data;
+                        self.currentAnswerArray = testPlayerService.mixAnswers(response.data);
                     }
                 );
         }
@@ -147,6 +147,7 @@
         }
 
         function finishTest() {
+            $interval.cancel(self.timer);
             $uibModal.open({
                 templateUrl: 'app/modal/templates/end-test-dialog.html',
                 controller: 'modalController as modal',
@@ -215,7 +216,6 @@
             testPlayerService.saveResult(result).then(function(response) {
 
             })
-
         }
     }
 }());
