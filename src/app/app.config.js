@@ -1,20 +1,11 @@
 angular.module('app')
     .config(configApp);
 
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider','$httpProvider'];
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', 'ngDialogProvider', '$breadcrumbProvider','$httpProvider'];
-
-function configApp($stateProvider, $urlRouterProvider, ngDialogProvider, $breadcrumbProvider , $httpProvider) {
+function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $httpProvider) {
 
     $httpProvider.interceptors.push('spinnerService');
-
-    ngDialogProvider.setDefaults({
-        plain: true,
-        showClose: true,
-        closeByDocument: false,
-        closeByEscape: true,
-        closeByNavigation: true
-    });
 
     $breadcrumbProvider.setOptions({
         prefixStateName: 'admin-home',
