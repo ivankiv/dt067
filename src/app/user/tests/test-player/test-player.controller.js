@@ -148,6 +148,7 @@
         }
 
         function finishTest() {
+            $interval.cancel(self.timer);
             $uibModal.open({
                 templateUrl: 'app/modal/templates/end-test-dialog.html',
                 controller: 'modalController as modal',
@@ -197,27 +198,30 @@
         }
 
         function saveResult(resultOfTest) {
-            var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
-            var true_answers = JSON.stringify(self.true_answers);
-            var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
-            var startTime = localStorage.startTime;
+            getServerTime ().then(function() {
+                var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
+                var true_answers = JSON.stringify(self.true_answers);
+                var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
+                var startTime = localStorage.startTime;
+                console.log('self.currentBackendTime for result=>', self.currentBackendTime);
+                console.log('startTime for result=>', startTime);
 
-            var result = {
-                student_id:   self.user_id,
-                test_id:      self.test_id,
-                session_date: new Date(),
-                start_time:   startTime,
-                end_time:     new Date(),
-                result:       resultOfTest,
-                questions:    questionsIdForResult,
-                true_answers: true_answers,
-                answers:      answersIdForResult
-            };
-            console.log('result', result);
-            testPlayerService.saveResult(result).then(function(response) {
-                console.log('testPlayerService.saveResult', response);
+                var result = {
+                    student_id:   self.user_id,
+                    test_id:      self.test_id,
+                    session_date: new Date(),
+                    start_time:   startTime,
+                    end_time:     self.currentBackendTime,
+                    result:       resultOfTest,
+                    questions:    questionsIdForResult,
+                    true_answers: true_answers,
+                    answers:      answersIdForResult
+                };
+                console.log('result', result);
+                testPlayerService.saveResult(result).then(function(response) {
+                    console.log('testPlayerService.saveResult', response);
+                })
             })
-
         }
     }
 }());
