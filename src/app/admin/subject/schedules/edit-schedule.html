@@ -27,7 +27,7 @@
                     <input type="text" class="form-control" id="event_date"
                            date-picker-local-date
                            placeholder="Дата у форматі: yyyy/MM/dd"
-                           uib-datepicker-popup="yyyy/MM/dd"
+                           uib-datepicker-popup="{{schedules.format}}"
                            ng-model="schedules.currentSchedule.event_date"
                            is-open="schedules.DatePickerOpened"
                            datepicker-options="schedules.dateOptions"
