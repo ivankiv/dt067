@@ -13,7 +13,7 @@
                         {{students.currentObj.student_fname}}</h4>
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-danger pull-right" ng-click="students.hide('result')">
+                    <button type="button" class="btn btn-danger pull-right" usref">
                         <i class="glyphicon glyphicon-share-alt"> Назад</i>
                     </button>
                 </div>
@@ -27,7 +27,7 @@
                         <th>Результат</th>
                     </tr>
                     </thead>
-                    <tbody ng-if="!tests.showMessageNoEntity">
+                    <tbody>
                     <tr ng-repeat="result in students.resultList track by $index">
                         <td data-th="Назва тесту">{{::result.test_name}}</td>
                         <td data-th="Дата проведення">{{::result.session_date}}</td>
