@@ -16,7 +16,7 @@
             self.associativeGroup = {};
             self.group_id = $stateParams.group_id;
             self.currentGroup = {};
-self.subject_name = 'name';
+            self.subject_name = 'name';
             //methods
             self.getOneSubject = getOneSubject;
             self.getSubjects = getSubjects;
@@ -88,15 +88,21 @@ self.subject_name = 'name';
             }
 
             function deleteSchedule(schedule_id) {
-                ngDialog.openConfirm({
-                    template: 'app/partials/confirm-delete-dialog.html',
-                    plain: false
-                }).then(function() {
-                    scheduleService.deleteSchedule(schedule_id).then(function(response) {
-                        if(response.data.response === 'ok') {
-                            activate();
-                        }
-                    });
+                var modalInstance = $uibModal.open({
+                    templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                    controller: 'modalController as modal',
+                    backdrop: false
+                });
+                modalInstance.result.then(function(response) {
+                    if (response) {
+                        scheduleService.deleteSchedule(schedule_id).then(function(response) {
+                            if(response.data.response === 'ok') {
+                                activate();
+                            }
+                        })
+                    } else {
+                        return response
+                    }
                 })
             }
 
@@ -112,8 +118,10 @@ self.subject_name = 'name';
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Додано новий запис!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     self.showMessageNoEntity = false;
                     activate();
