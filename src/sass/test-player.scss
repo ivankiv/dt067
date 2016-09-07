@@ -1,7 +1,8 @@
 .test-player-container{
-  background-color: #867DB0;
+  background-color: $table-bg;
   .main-test-box{
-    clear: both;
+    overflow: auto;
+    /*clear: both;*/
     vertical-align: bottom;
     text-align: center;
     padding: 10px 20px;
@@ -17,7 +18,7 @@
         display: inline-block;
         .questionNum-sign{
           font-weight: bold;
-          color: #fff;
+          color: $white;
         }
       }
       .timer-box{
@@ -27,19 +28,19 @@
         display: inline-block;
         .timeleft-sign{
           font-weight: bold;
-          color: #fff;
+          color: $white;
         }
         .timer{
           display: inline-block;
           padding: 5px 5px;
           font-weight: bold;
-          color: #000;
-          border: 2px solid #34495E;
+          color: $black;
+          border: 2px solid $player-border;
           border-radius: 3px;
-          background-color: #d9edf7;
+          background-color: $player-box-bg;
         }
         .danger-color{
-           background-color: #d9534f;
+           background-color: $error-message;
          }
       }
     }
@@ -62,36 +63,39 @@
       .questions-box{
         min-height: 300px;           //TODO
         float: right;
-        border: 2px solid #34495E;
+        border: 2px solid $player-border;
         border-radius: 3px;
-        background-color: #BCD4F7;
+        background-color: $player-bg;
         .question-view{
-          border-bottom: 1px solid #34495E;
+          border-bottom: 1px solid $player-border;
           border-radius: 3px;
           padding: 10px;
           .test-sign{
-            color: #000;
+            color: $black;
             font-weight: bold;
             margin-top: 0;
             text-align: center;
           }
-          .question-image{
+          .question-image-box{
             text-align: center;
             padding: 5px;
-            background-color: #d9edf7;
+            background-color: $player-box-bg;
+            .question-image{
+              display: inline-block;
+            }
           }
           .question-text{
-            color: #000;
+            color: $black;
             padding: 5px;
-            background-color: #d9edf7;
+            background-color: $player-box-bg;
           }
         }
         .answer-view{
-          border-top: 1px solid #34495E;
+          border-top: 1px solid $player-border;
           border-radius: 3px;
           padding: 10px;
           .test-sign{
-            color: #000;
+            color: $black;
             font-weight: bold;
             margin-top: 0;
             text-align: center;
@@ -101,7 +105,8 @@
             min-height: 35px;
             text-align: left;
             vertical-align: middle;
-            background-color: #d9edf7;
+            background-color: $player-box-bg;
+            border-bottom: 2px solid $player-bg;
             .form-box{
               display: inline-block;
               vertical-align: middle;
@@ -119,18 +124,22 @@
               vertical-align: middle;
               padding: 0;
               margin: 0 3px;
-              color: #000;
+              color: $black;
               .answers-text{
                 padding: 0;
                 margin: 0;
               }
             }
-            .answers-img-box{
+            .answers-image-box{
               display: inline-block;
               text-align: left;
               vertical-align: middle;
               padding: 0;
               margin: 0 3px;
+              height: 50px;
+              .answer-image{
+                display: inline-block;
+              }
             }
           }
         }
@@ -138,9 +147,6 @@
           margin: 5px auto;
         }
       }
-    }
-    .end-test-btn{
-      margin: 10px auto;
     }
   }
 }

@@ -170,29 +170,35 @@
                         return item.question_id;
                     });
 
+                    //get rate of questions for calculating result of test, which were stored on the server before.
                     return calculateResultOfTest(response.data);
                 })
                 .then(function(resultOfTest) {
                     saveResult(resultOfTest);
-                    localStorage.setItem('resultOfTest', JSON.stringify(resultOfTest));
                     $state.go('user.results');
                 })
         }
 
-        function calculateResultOfTest(response) {
-            var result = 0;
-            var score = [];
-            var rates = JSON.parse(localStorage.rateByQuestionsId);
+        function calculateResultOfTest(answers) {
+            var deferred = $q.defer();
 
-            angular.forEach(rates, function(item, index) {
-                if(item !== null) score[index] = item;
+            //get rate of questions for calculating result of test, which were stored on the server before.
+            testPlayerService.getRateOfQuestion().then(function(response) {
+                var result = 0;
+                var score = [];
+
+                angular.forEach(response.data, function(item, index) {
+                    if(item !== null) score[index] = item;
+                });
+
+                angular.forEach(answers, function(item) {
+                    result += score[item.question_id] * item.true;
+                });
+
+                deferred.resolve(result);
             });
 
-            angular.forEach(response, function(item) {
-                result += score[item.question_id] * item.true;
-            });
-
-            return result;
+            return deferred.promise;
         }
 
         function saveResult(resultOfTest) {
@@ -214,11 +220,8 @@
                         true_answers: true_answers,
                         answers:      answersIdForResult
                     };
-                    testPlayerService.saveResult(result).then(function(response) {
-
-                    })
-            });
-
+                    testPlayerService.saveResult(result);
+            })
         }
     }
 }());

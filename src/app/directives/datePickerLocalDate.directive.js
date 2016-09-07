@@ -10,7 +10,7 @@
                     ngModel.$parsers.push(function(value) {
                         // undo the timezone adjustment we did during the formatting
                         value.setMinutes(value.getMinutes() - value.getTimezoneOffset());
-                        return value;
+                        return value.toISOString();
                     });
                     ngModel.$formatters.push(function(modelValue) {
                         return new Date(modelValue);

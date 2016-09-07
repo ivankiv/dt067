@@ -19,7 +19,10 @@
             getServerEndTime: getServerEndTime,
             startTestInfoInLog:startTestInfoInLog,
             saveResult: saveResult,
-            mixAnswers:mixAnswers
+            mixAnswers:mixAnswers,
+            setRateOfQuestion: setRateOfQuestion,
+            getRateOfQuestion: getRateOfQuestion
+
         };
 
         function setServerEndTime(testDuration) {
@@ -31,6 +34,16 @@
                         .then(fulfilled, rejected);
                 }));
 
+        }
+
+        function setRateOfQuestion(listOfRates) {
+            return $http.post(appConstants.saveTestPlayerData, angular.toJson(listOfRates))
+                        .then(fulfilled, rejected);
+        }
+
+        function getRateOfQuestion() {
+            return $http.get(appConstants.getTestPlayerData)
+                .then(fulfilled, rejected);
         }
 
         function getServerTime () {
