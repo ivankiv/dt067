@@ -34,12 +34,13 @@
                         <td data-th="Дата">{{::test.date}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
-                        <td data-th="Статус">{{ tests.status[test.enabled]}}</td>
+                        <td data-th="Статус">{{tests.status[test.enabled]}}</td>
                         <td>
                             <button type="button" class="btn btn-primary pull-right table-help-btns"
                                     title="Пройти тест"
                                      ng-if="test.enabled==1"
-                                    ng-click = "tests.testPlayerPreparation(test)">
+                                    ng-click = "tests.testPlayerPreparation(test)"
+                                    ng-show="test.date_enabled">
                                 <i class="glyphicon glyphicon-play"></i>
                             </button>
                         </td>
