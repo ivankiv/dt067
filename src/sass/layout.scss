@@ -28,24 +28,20 @@ $colom-title:yellow;
   }
   td{
     .table-help-btns{
-      margin-right: 3px!important;
+      margin-right: 5px!important;
       @media (max-width: $breakpoint-alpha) {
-        margin-left: 8px!important;
+        margin-right: 8px!important;
         float: left !important;
       }
     }
   }
-  td{
-    .group-help-btns{
-      margin: 4px 7px 0 0 !important;
-      @media (max-width: $breakpoint-alpha) {
-        margin-left: 8px!important;
-        float: left !important;
-      }
-    }
+
+}
+th{
+  .group-head-number {
+    width: 10%;
   }
 }
-
 .collapse.in{
   @media (max-width: 768px) {
     clear: both!important;
@@ -72,7 +68,7 @@ $colom-title:yellow;
       content: attr(data-th)": ";
       font-weight: bold;
       margin-right: 25px;
-      width: 6.5em;
+      width: 8.5em;
       display: inline-block;
 
       @media (min-width: $breakpoint-alpha) {
@@ -513,3 +509,24 @@ aside.wrapForQuestions {
   display: block;
 }
 .hidden{display:none !important}
+
+
+.groups-table {
+  th {
+    &:first-child {
+      width: 10%;
+    }
+    &:nth-child(2) {
+      width: 15%;
+    }
+    &:nth-child(3) {
+      width: 22%;
+    }
+    &:last-child {
+      width: 22%;
+    }
+  }
+  td {
+    word-break: break-all;
+  }
+}
