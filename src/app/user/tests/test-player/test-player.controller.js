@@ -59,7 +59,6 @@
 
         function chooseQuestion(question_index) {
             checkServerTime ();
-            console.log(self.listOfQuestionsId);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
 
