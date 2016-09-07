@@ -40,14 +40,12 @@
 
 
         function getAnswersByQuestionComplete(response) {
-            console.log(self.CurrentQuestionType,'wwww');
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
                 if(self.CurrentQuestionType === '1') {
                     for (var i = 0; i < response.data.length; i++) {
                         if (response.data[i].true_answer == '1') {
-                            console.log(response.data[i].true_answer,'response.data[i].true_answer');
                             self.isAnswerTrue = true;
                             break;
                         } else if(response.data[i].true_answer == '0'){
@@ -71,8 +69,6 @@
                 self.showMessageNoEntity = true;
             } else {
                 self.question_text = response.data[0].question_text;
-                console.log(response,'responsewwwwwwww');
-                console.log(response.data[0].type, 'response type');
                 if (response.data[0].type === '1'){
                     self.questiontype = 'Простий вибір';
                 }else{

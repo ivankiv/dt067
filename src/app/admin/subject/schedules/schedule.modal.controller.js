@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('ScheduleModalController', scheduleModalController);
-    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentSchedule', 'currentGroupId', 'uibDateParser'];
+    scheduleModalController.$inject = ['scheduleService', 'groupService', '$stateParams', 'subjectService', '$uibModalInstance', 'currentSchedule', 'currentGroupId'];
 
-        function scheduleModalController(scheduleService, groupService, $stateParams, subjectService,  $uibModalInstance,  currentSchedule, currentGroupId, uibDateParser) {
+        function scheduleModalController(scheduleService, groupService, $stateParams, subjectService,  $uibModalInstance,  currentSchedule, currentGroupId) {
             var self = this;
 
             //variables
@@ -20,6 +20,7 @@
 
             //->DatePicker
             self.DatePickerOpened = false;
+            self.format = 'yyyy/MM/dd';
             self.dateOptions = {
                 dateDisabled: disabled,
                 formatYear: 'yy',
@@ -40,6 +41,7 @@
             activate();
 
             function activate() {
+                console.log(new Date(self.currentSchedule.event_date));
                 getGroups();
                 getSubjects();
             }
