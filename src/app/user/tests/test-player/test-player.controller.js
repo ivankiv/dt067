@@ -52,7 +52,7 @@
         function getCurrentAnswersList() {
             return testPlayerService.getAnswersListByQuestionId(self.questionId)
                 .then(function (response) {
-                        self.currentAnswerArray = response.data;
+                        self.currentAnswerArray = testPlayerService.mixAnswers(response.data);
                     }
                 );
         }

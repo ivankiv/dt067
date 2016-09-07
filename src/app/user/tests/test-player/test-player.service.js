@@ -18,7 +18,8 @@
             setServerEndTime: setServerEndTime,
             getServerEndTime: getServerEndTime,
             startTestInfoInLog:startTestInfoInLog,
-            saveResult: saveResult
+            saveResult: saveResult,
+            mixAnswers:mixAnswers
         };
 
         function setServerEndTime(testDuration) {
@@ -76,7 +77,9 @@
         }
 
         function mixAnswers(answers) {
-            var currentIndex = answers.length,temporaryValue,randomIndex;
+            var currentIndex = answers.length;
+            var temporaryValue;
+            var randomIndex;
 
             while (0 !== currentIndex){
                 randomIndex = Math.floor(Math.random() * currentIndex);
