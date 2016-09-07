@@ -70,7 +70,7 @@ body {
   width:100%;
   table-layout: fixed;
   background: #34495E;
-  color: #fff;
+  color: $white;
   overflow: hidden;
   th, td {
     text-align:left;
@@ -85,13 +85,13 @@ body {
 }
 .views-header{
   height: 70px;
-  background-color: #0D083B;
+  background-color: $views-header-bg;
   padding-top: 20px;
   color: $white;
   .add-btn{
     margin-right: 7px;
     float: right;
-    background-color: #4CAF50;
+    background-color: $add-btn-bg;
     border: none;
     color:$white;
   }
@@ -127,13 +127,13 @@ body {
       margin-top: 15px;
     }
   }
-  background-color: #0D083B;
+  background-color: $views-header-bg;
   color: $white;
   padding-bottom: 15px;
   .add-btn{
     margin-right: 7px;
     float: right;
-    background-color: #4CAF50;
+    background-color: $add-btn-bg;
     border: none;
     color:$white;
     @media (max-width: 992px) {
@@ -186,7 +186,7 @@ body {
     }
   }
   background: $table-bg;
-  color: white;
+  color: $white;
   overflow: hidden;
   font-weight: bold;
   .create-student-submit-btns-wrpr{
@@ -300,9 +300,9 @@ body {
   }
 }
 .admin-views-header{
-  background-color: #0f0f0f;
+  background-color: $black;
   h4{
-    color:#fff;
+    color:$white;
   }
 }
 
@@ -311,7 +311,7 @@ body {
   margin: auto!important;
 }
 .table-striped > tbody > tr:nth-of-type(odd) {
-  background-color: #5D5393;
+  background-color: $zebra-table-row-bg;
   color:$white!important;
 }
 div.row.schedule-form {
@@ -328,18 +328,18 @@ div.row.schedule-form {
 /*************************************************/
 .custom-modal-header {
   text-align: center;
-  background-color: #0D083B;
+  background-color: $views-header-bg;
   color: #ddd;
   border-radius: 5px 5px 0 0;
 }
 .custom-modal-body {
-  background-color: #867DB0;
+  background-color: $modal-body;
   color: #ddd;
 }
 .custom-modal-footer {
   text-align: center !important;
-  background-color: #0D083B;
-  color: #fff;
+  background-color: $views-header-bg;
+  color: $white;
   border-radius: 0 0 5px 5px;
 }
 /************************************************
@@ -350,7 +350,7 @@ div.row.schedule-form {
                   ngMessage styles
 /*************************************************/
 [ng-messages] {
-  color: red;
+  color: $error-message;
   font-size: 1em;
   display:none; }
 
@@ -394,23 +394,18 @@ div.row.schedule-form {
   font-size: 2em;
 }
 .login-dialog-border {
-  background-color: #f0f0f0;
+  background-color: $white;
   border-radius: 5px;
-  border: 5px solid #f0f0f0;
+  border: 5px solid $white;
 }
 
 .user-date-picker {
   display:inline-block;
   min-height:290px;
   .full button span {
-    background-color: limegreen;
+    background-color: $add-btn-bg;
     border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: yellow;
-    border-radius: 32px;
-    color: black;
+    color: $black;
   }
 }
 
@@ -430,7 +425,7 @@ aside.wrapForQuestions {
     width: 50px;
     height: 50px;
     background-color: lightgray;
-    color: green;
+    color: $add-btn-bg;
     border: 1px solid gray;
   }
 }
