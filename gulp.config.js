@@ -2,7 +2,7 @@ module.exports = function() {
 
     var client = './src/';
     var clientApp = client + 'app/';
-    var temp = './devBuild/';
+    var temp = './dev/';
 
     var config = {
 
