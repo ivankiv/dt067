@@ -481,3 +481,13 @@ aside.wrapForQuestions {
     word-break: break-all;
   }
 }
+.faculty-table {
+  th {
+    &:first-child {
+      width: 20%;
+    }
+    &:nth-child(2){
+      width: 20%;
+    }
+  }
+}
