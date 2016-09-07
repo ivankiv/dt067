@@ -7,8 +7,8 @@
     <section class="wrapper">
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
-                <div class='col-sm-4 col-xs-12 views-header'><h4>Тести предмету: &nbsp;{{tests.currentSubjectName}}</h4></div>
-                <div class='col-sm-8 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                <div class='col-sm-6 col-xs-12 views-header'><h4>Тести предмету: &nbsp;{{tests.currentSubjectName}}</h4></div>
+                <div class='col-sm-6 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.subject">
                         <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
                     </button>
@@ -16,7 +16,7 @@
                             ng-click="tests.showAddTestForm()"><i class="fa fa-plus" aria-hidden="true"></i>
                     </button>
                 </div>
-                <table class="rwd-table subject-table table-striped">
+                <table class="rwd-table subject-table test-table table-striped">
                     <thead>
                     <tr>
                         <th>Номер</th>

@@ -25,24 +25,19 @@
                         <th>К-сть завдань</th>
                         <th>К-сть правельних відповідей</th>
                         <th>Результат</th>
+                        <th>Час початку</th>
+                        <th>Час закінчення</th>
                     </tr>
                     </thead>
-                    <tbody ng-if="!tests.showMessageNoEntity">
+                    <tbody>
                     <tr ng-repeat="result in students.resultList track by $index">
                         <td data-th="Назва тесту">{{::result.test_name}}</td>
                         <td data-th="Дата проведення">{{::result.session_date}}</td>
                         <td data-th="К-сть завдань">{{::result.questions.length}}</td>
                         <td data-th="К-сть правельних відповідей">{{::result.true_answers.length}}</td>
                         <td data-th="Результат">{{::result.result}}</td>
-
-                        <td>
-                            <button type="button" class="btn btn-primary pull-right table-help-btns"
-                                    title="Пройти тест"
-                                    ng-if="test.enabled==1"
-                                    ng-click = "tests.testPlayerPreparation(test)">
-                                <i class="glyphicon glyphicon-play"></i>
-                            </button>
-                        </td>
+                        <td data-th="Час початку">{{::result.start_time}}</td>
+                        <td data-th="Час закінчення">{{::result.end_time}}</td>
                     </tr>
                     </tbody>
                 </table>

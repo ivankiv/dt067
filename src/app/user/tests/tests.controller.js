@@ -113,18 +113,31 @@
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
 
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
-                                localStorage.setItem("endTime", JSON.stringify(endTime));
+                                localStorage.setItem("currentQuestionsId", angular.toJson(questionsId));
+                                localStorage.setItem("endTime", angular.toJson(endTime));
+
                                 testPlayerService.setRateOfQuestion(rateByQuestionsId);
                                 testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
-                                testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id);
-                                testPlayerService.getServerTime()
+                                testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id)
                                     .then(function (response) {
-                                        localStorage.setItem("startTime", JSON.stringify(response.data.curtime));
-                                    });
+                                        if(response.data.response =="Error. User made test recently"){
+                                            $uibModal.open({
+                                                templateUrl: 'app/modal/templates/forbidden-time-reason.html',
+                                                controller: 'modalController as modal',
+                                                backdrop: true
+                                            })
+                                            }
+                                        else {
+                                            testPlayerService.getServerTime()
+                                                .then(function (response) {
+                                                    localStorage.setItem("startTime", angular.toJson(response.data.unix_timestamp));
+                                                });
 
-                                $state.go("test", {questionIndex:0});
-                            } else {
+                                            $state.go("test", {questionIndex:0});
+                                        }
+                                    });
+                            }
+                            else {
                                 $uibModal.open({
                                     templateUrl: 'app/modal/templates/attention-noquestions-dialog.html',
                                     controller: 'modalController as modal',

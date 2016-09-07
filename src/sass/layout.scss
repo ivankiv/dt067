@@ -477,7 +477,42 @@ aside.wrapForQuestions {
       width: 22%;
     }
   }
-  td {
-    word-break: break-all;
+}
+.subject-table{
+  th {
+    &:first-child {
+      width: 10%;
+    }
+  }
+}
+
+.test-table{
+  th{
+    &:first-child {
+      width: 10%;
+    }
+    &:nth-child(2) {
+      width: 18%;
+    }
+    &:nth-child(3) {
+      width: 15%;
+    }
+    &:nth-child(4) {
+      width: 14%;
+    }
+    &:last-child {
+      width: 12%;
+    }
+  }
+}
+
+.faculty-table {
+  th {
+    &:first-child {
+      width: 20%;
+    }
+    &:nth-child(2){
+      width: 20%;
+    }
   }
 }
