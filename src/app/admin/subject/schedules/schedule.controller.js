@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('ScheduleController', scheduleController);
-        scheduleController.$inject = ['loginService', 'subjectService', 'scheduleService', 'groupService', '$stateParams', '$uibModal', 'ngDialog'];
+        scheduleController.$inject = ['loginService', 'subjectService', 'scheduleService', 'groupService', '$stateParams', '$uibModal'];
 
-        function scheduleController(loginService, subjectService, scheduleService, groupService, $stateParams, $uibModal, ngDialog) {
+        function scheduleController(loginService, subjectService, scheduleService, groupService, $stateParams, $uibModal) {
             var self = this;
 
             //varibles
@@ -140,8 +140,10 @@
                     }
                 });
                 modalInstance.result.then(function() {
-                    ngDialog.open({template: '<div class="ngdialog-message"> \
-						  Зміни збережено!</div>'
+                    $uibModal.open({
+                        templateUrl: 'app/modal/templates/confirm-dialog.html',
+                        controller: 'modalController as modal',
+                        backdrop: true
                     });
                     activate();
                 })

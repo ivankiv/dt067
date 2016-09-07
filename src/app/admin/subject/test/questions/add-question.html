@@ -12,7 +12,7 @@
                        ng-model="questions.question.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
-                <img ng-src="{{questions.question.attachment}}" height="100" width="100" id="questionsImage" alt="Зображення">
+                <img ng-if="questions.question.attachment" ng-src="{{questions.question.attachment}}" height="100" width="100" id="questionsImage" alt="Зображення">
             </div>
         </div>
         <div class="form-group">

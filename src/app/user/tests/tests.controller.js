@@ -161,8 +161,8 @@
 
             return $q.all(promises).then(function(response) {
                 var questionsList = [];
-                angular.forEach(response, function (reponse) {
-                    questionsList = questionsList.concat(reponse.data);
+                angular.forEach(response, function (response) {
+                    questionsList = questionsList.concat(response.data);
                 });
                 return questionsList;
             }, function (response) {
