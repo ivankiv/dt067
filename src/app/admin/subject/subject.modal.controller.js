@@ -61,8 +61,6 @@
             }
 
             function rejected(response) {
-                console.log(response.data.response);
-                console.log(response.status + " " + response.statusText);
             }
 
         }

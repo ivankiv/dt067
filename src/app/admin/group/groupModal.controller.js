@@ -61,7 +61,6 @@
         }
         function addError(response) {
             alert("Ви не можете додати групу");
-            console.log(response)
         }
 
         function updateGroup() {

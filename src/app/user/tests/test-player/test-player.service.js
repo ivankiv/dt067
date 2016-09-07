@@ -18,7 +18,8 @@
             setServerEndTime: setServerEndTime,
             getServerEndTime: getServerEndTime,
             startTestInfoInLog:startTestInfoInLog,
-            saveResult: saveResult
+            saveResult: saveResult,
+            mixAnswers:mixAnswers
         };
 
         function setServerEndTime(testDuration) {
@@ -45,7 +46,9 @@
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
                    .then(function () {
-                        return self.pastAttemps >= currentTest.attempts;
+                       var attempts = parseInt(currentTest.attempts);
+                       var pastAttemps = parseInt(self.pastAttemps);
+                        return pastAttemps >= attempts;
               });
         }
 
@@ -76,7 +79,9 @@
         }
 
         function mixAnswers(answers) {
-            var currentIndex = answers.length,temporaryValue,randomIndex;
+            var currentIndex = answers.length;
+            var temporaryValue;
+            var randomIndex;
 
             while (0 !== currentIndex){
                 randomIndex = Math.floor(Math.random() * currentIndex);
