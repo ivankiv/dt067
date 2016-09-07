@@ -21,6 +21,7 @@
   }
 }
   td{
+    word-break: break-word;
     .table-help-btns{
       margin-right: 5px!important;
       @media (max-width: $breakpoint-alpha) {

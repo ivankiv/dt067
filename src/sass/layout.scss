@@ -477,8 +477,12 @@ aside.wrapForQuestions {
       width: 22%;
     }
   }
-  td {
-    word-break: break-all;
+}
+.subject-table{
+  th {
+    &:first-child {
+      width: 10%;
+    }
   }
 }
 .faculty-table {
