@@ -9,10 +9,8 @@ module.exports = function() {
         /*** file path ****/
         temp: temp,
         alljs: ['./src/**/*.js', './*.js'],
-        sass: client + 'sass/**/*.scss',
+        sass: client + 'sass/styles.scss',
         index: client + 'index.html',
-        //css: temp + 'styles.css',
-        cssTemplates: client + 'sass/admin-scss/*.css',
         html: clientApp + '**/*.html',
 
         /*** temp files ***/
