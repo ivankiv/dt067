@@ -485,6 +485,7 @@ aside.wrapForQuestions {
     }
   }
 }
+
 .test-table{
   th{
     &:first-child {
@@ -501,6 +502,17 @@ aside.wrapForQuestions {
     }
     &:last-child {
       width: 12%;
+    }
+  }
+}
+
+.faculty-table {
+  th {
+    &:first-child {
+      width: 20%;
+    }
+    &:nth-child(2){
+      width: 20%;
     }
   }
 }

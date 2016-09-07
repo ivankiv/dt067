@@ -106,10 +106,10 @@
                 });
         }
 
-        function getServerTime () {
+        function getServerTime() {
             return testPlayerService.getServerTime()
                 .then(function (response) {
-                    self.currentBackendTime = response.data.curtime * 1000;
+                    self.currentBackendTime = response.data.unix_timestamp * 1000;
                 });
         }
 
@@ -202,27 +202,25 @@
         }
 
         function saveResult(resultOfTest) {
-            getServerTime ().then(function() {
-                var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
-                var true_answers = JSON.stringify(self.true_answers);
-                var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
-                var startTime = localStorage.startTime;
-
-                var result = {
-                    student_id:   self.user_id,
-                    test_id:      self.test_id,
-                    session_date: new Date(),
-                    start_time:   startTime,
-                    end_time:     self.currentBackendTime,
-                    result:       resultOfTest,
-                    questions:    questionsIdForResult,
-                    true_answers: true_answers,
-                    answers:      answersIdForResult
-                };
-
-                testPlayerService.saveResult(result).then(function(response) {
-                    console.log('testPlayerService.saveResult', response);
-                })
+            var questionsIdForResult =angular.toJson(self.questionsIdForResult);
+            var true_answers = angular.toJson(self.true_answers);
+            var answersIdForResult = angular.toJson(self.listOfQuestionsId);
+            var startTime = new Date(localStorage.startTime*1000).toTimeString().split(" ")[0];
+            getServerTime()
+                .then(function () {
+                    var endTime = new Date(self.currentBackendTime).toTimeString().split(" ")[0];
+                    var result = {
+                        student_id:   self.user_id,
+                        test_id:      self.test_id,
+                        session_date: new Date(),
+                        start_time:   startTime,
+                        end_time:     endTime,
+                        result:       resultOfTest,
+                        questions:    questionsIdForResult,
+                        true_answers: true_answers,
+                        answers:      answersIdForResult
+                    };
+                    testPlayerService.saveResult(result);
             })
         }
     }
