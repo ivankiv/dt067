@@ -27,8 +27,10 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
-/*        self.startBackendTime; //todo*/
         self.currentBackendTime;
+        self.questionsIdForResult = [];
+        self.answersIdForResult = [];
+        self.true_answers = [];
 
         //methods
         self.getTimerValue;
@@ -96,7 +98,7 @@
             }, 100);
         }
 
-        // getting start test time in backend
+        // getting end test time in backend
         function getEndBackendTime () {
            return testPlayerService.getServerEndTime()
                 .then(function (response) {
@@ -152,21 +154,38 @@
                 backdrop: true
             });
             var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
+             self.questionsIdForResult = listOfQuestionsId.map(function(question) {
+                 return question.question_id;
+             });
+
+            self.answersIdForResult = listOfQuestionsId.map(function(question) {
+                return question.answer_ids;
+            });
+
             testPlayerService.checkAnswersList(listOfQuestionsId)
                 .then(function(response) {
+
+                    self.true_answers = response.data.filter(function(item) {
+                        return item.true == 1;
+                    }).map(function(item) {
+                        return item.question_id;
+                    });
+
                     return calculateResultOfTest(response.data);
                 })
-                .then(function(response) {
-                    localStorage.setItem('resultOfTest', JSON.stringify(response));
+                .then(function(resultOfTest) {
+                    saveResult(resultOfTest);
+                    localStorage.setItem('resultOfTest', JSON.stringify(resultOfTest));
                     $state.go('user.results');
                 })
         }
 
         function calculateResultOfTest(response) {
             var result = 0;
-            var rates = JSON.parse(localStorage.rateByQuestionsId);
             var score = [];
-            rates.forEach(function(item, index) {
+            var rates = JSON.parse(localStorage.rateByQuestionsId);
+
+            angular.forEach(rates, function(item, index) {
                 if(item !== null) score[index] = item;
             });
 
@@ -175,6 +194,30 @@
             });
 
             return result;
+        }
+
+        function saveResult(resultOfTest) {
+            var questionsIdForResult =JSON.stringify(self.questionsIdForResult);
+            var true_answers = JSON.stringify(self.true_answers);
+            var answersIdForResult = JSON.stringify(self.listOfQuestionsId);
+            var startTime = localStorage.startTime;
+
+            var result = {
+                student_id:   self.user_id,
+                test_id:      self.test_id,
+                session_date: new Date(),
+                start_time:   startTime,
+                end_time:     new Date(),
+                result:       resultOfTest,
+                questions:    questionsIdForResult,
+                true_answers: true_answers,
+                answers:      answersIdForResult
+            };
+            console.log('result', result);
+            testPlayerService.saveResult(result).then(function(response) {
+                console.log('testPlayerService.saveResult', response);
+            })
+
         }
     }
 }());

@@ -95,7 +95,7 @@
                         getTestDetailsByTest().then(function(response) {
 
                             // we'll use variable <rateByQuestionsId> for calculating summary score of the test after test has finished
-                            response.forEach(function(question) {
+                            angular.forEach(response, function(question) {
                                 rateByQuestionsId[question.question_id] =  self.rateByLevels[question.level]
                             });
 
@@ -108,12 +108,14 @@
                             });
 
                             if(notEnoughQuestions.length === 0 && response.length == currentTest.tasks) {
-                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
-
-                                localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
-
+                                var startTime = new Date();
                                 var endTime = new Date().valueOf()+ (currentTest.time_for_test * 60000);
+
+                                localStorage.setItem("currentQuestionsId", JSON.stringify(questionsId));
+                                localStorage.setItem("rateByQuestionsId", JSON.stringify(rateByQuestionsId));
                                 localStorage.setItem("endTime", JSON.stringify(endTime));
+                                localStorage.setItem("startTime", JSON.stringify(startTime));
+
                                 testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
                                 testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id);
 
@@ -134,7 +136,8 @@
             return testDetailsService.getTestDetailsByTest(self.currentTestId).then(getTestDetailsByTestComplete)
         }
         function getTestDetailsByTestComplete(response) {
-            response.data.forEach(function(testDetail) {
+
+            angular.forEach(response.data, function(testDetail) {
                 self.rateByLevels[testDetail.level] = testDetail.rate
             });
 

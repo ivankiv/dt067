@@ -15,9 +15,10 @@
         self.showMessageNoEntity = false;
         self.question_id = $stateParams.questionId;
         self.true_answers = ['Не вірно', 'Вірно'];
+        self.isAnswerTrue = false;
 
         //methods
-        self.getQuestionsRangeByTest = getQuestionsRangeByTest;
+        self.getAnswersByQuestionID = getAnswersByQuestionID;
         self.deleteAnswers = deleteAnswers;
         self.showAddAnswerForm = showAddAnswerForm;
         self.ShowLargeAnswerPhotoForQuestion = ShowLargeAnswerPhotoForQuestion;
@@ -26,23 +27,34 @@
         activate();
 
         function activate() {
-            getQuestionsRangeByTest();
+            getAnswersByQuestionID();
             getQuestionByQuestionID();
+
         }
 
 
-        function getQuestionsRangeByTest() {
+        function getAnswersByQuestionID() {
             answersService.getAnswersByQuestion(self.question_id)
                 .then(getAnswersByQuestionComplete)
         }
 
 
         function getAnswersByQuestionComplete(response) {
+            console.log(self.CurrentQuestionType,'wwww');
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
-                console.log(response.data, 'response dataaaaaaaaaaaaaaaaa');
-                console.log(response.data[0].true_answer, 'self listttttt');
+                if(self.CurrentQuestionType === '1') {
+                    for (var i = 0; i < response.data.length; i++) {
+                        if (response.data[i].true_answer == '1') {
+                            console.log(response.data[i].true_answer,'response.data[i].true_answer');
+                            self.isAnswerTrue = true;
+                            break;
+                        } else if(response.data[i].true_answer == '0'){
+                            self.isAnswerTrue = false;
+                        }
+                    }
+                }
                 self.list = response.data;
             }
         }
@@ -50,9 +62,11 @@
         function getQuestionByQuestionID() {
             answersService.getQuestionByQuestionID(self.question_id)
                 .then(getQuestionByQuestionIDComplete)
+                .then(getAnswersByQuestionID)
         }
 
         function getQuestionByQuestionIDComplete(response) {
+            self.CurrentQuestionType = response.data[0].type;
             if(response.data.response === 'no records') {
                 self.showMessageNoEntity = true;
             } else {
@@ -65,6 +79,7 @@
                     self.questiontype = 'Мульти вибір';
                 }
             }
+            return self.CurrentQuestionType;
         }
 
         function deleteAnswers(answer_id) {
@@ -78,12 +93,6 @@
                     if(response.data.response === 'ok') {
                         activate();
                     }
-
-                    if(response.status === 400) {
-                        ngDialog.open({template: '<div class="ngdialog-message"> \
-                                        Неможливо видалити завдання яке містить відповіді!</div>'
-                        });
-                    }
                 });
             }
         }
@@ -95,7 +104,8 @@
                 backdrop: false,
                 resolve: {
                     currentAnswer: {},
-                    answerSrc: {}
+                    answerSrc: {},
+                    isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
                 }
             });
             modalInstance.result.then(function() {
@@ -118,7 +128,8 @@
                     backdrop: true,
                     resolve: {
                         currentAnswer: {},
-                        answerSrc: answer
+                        answerSrc: answer,
+                        isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
                     }
                 });
             }
@@ -131,7 +142,8 @@
                 backdrop: false,
                 resolve: {
                     currentAnswer: currentAnswer,
-                    answerSrc: {}
+                    answerSrc: {},
+                    isAnswerTrue: {isAnswerTrue: self.isAnswerTrue}
                 }
             });
             modalInstance.result.then(function() {

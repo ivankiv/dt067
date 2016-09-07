@@ -90,11 +90,13 @@
             getServerTime: baseUrl + 'TestPlayer/getTimeStamp',
             getEndTime: baseUrl + 'TestPlayer/getEndTime/',
             saveEndTime: baseUrl + 'TestPlayer/saveEndTime/',
+            saveResult: baseUrl + 'result/insertData/',
 
             getAnswersListByQuestionId: baseUrl + 'SAnswer/getAnswersByQuestion/',
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
-            addTestResult: baseUrl + 'result/insertData/',
+            addTestResult: baseUrl + 'Result/insertData/',
+            getTestResultByStudentId: baseUrl + 'Result/getRecordsbyStudent/', // + id of student
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
             startTestInfoInLog: baseUrl + 'log/startTest/' // + <user_id>/<test_id>
         });

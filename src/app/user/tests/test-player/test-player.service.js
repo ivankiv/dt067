@@ -17,7 +17,8 @@
             getServerTime: getServerTime,
             setServerEndTime: setServerEndTime,
             getServerEndTime: getServerEndTime,
-            startTestInfoInLog:startTestInfoInLog
+            startTestInfoInLog:startTestInfoInLog,
+            saveResult: saveResult
         };
 
         function setServerEndTime(testDuration) {
@@ -67,6 +68,11 @@
 
         function checkAnswersList(answers) {
            return $http.post(appConstants.checkAnswers,answers).then(fulfilled,rejected);
+        }
+
+        function saveResult(result) {
+            return $http.post(appConstants.saveResult, result)
+                .then(fulfilled, rejected);
         }
 
         function mixAnswers(answers) {
