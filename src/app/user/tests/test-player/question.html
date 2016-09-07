@@ -4,7 +4,7 @@
 
             <div class="question-view">
                 <h5 class="test-sign">Питання:</h5>
-                <div class="question-image" ng-if="player.currentQuestion.attachment">{{player.currentQuestion.attachment}}</div>
+                <div class="question-image" ng-if="player.currentQuestion.attachment" ng-src="{{player.currentQuestion.attachment}}"></div>
                 <div class="question-text" ng-if="player.currentQuestion.question_text">{{player.currentQuestion.question_text}}</div>
             </div>
             <div class="answer-view">
@@ -24,7 +24,6 @@
                            ng-model="player.checkedAnswers[0]">
                         </form>
                     </div>
-                    <!--<p>{{answer.answer_text}}</p>-->
                     <div class="answers-text-box" ng-if="answer.answer_text">
                         <p class="answers-text">{{answer.answer_text}}</p>
                     </div>

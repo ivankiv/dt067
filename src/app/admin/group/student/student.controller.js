@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService","$stateParams","$uibModal"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","$stateParams","$uibModal","testService"];
 
-    function StudentEditController(studentService, groupService, adminService, $stateParams, $uibModal) {
+    function StudentEditController(studentService, groupService, adminService, $stateParams, $uibModal, testService) {
         var self = this;
 
         //Methods
@@ -109,6 +109,9 @@
                     self.showMessageNoTestsForStudent =(data.response === "no records");
                     if(!self.showMessageNoTestsForStudent){
                         self.resultList = data.map(function (result) {
+                            testService.getOneTest(result.test_id).then(function (response) {
+                                result.test_name = response.data[0].test_name;
+                            })
                             result.answers = JSON.parse(result.answers.replace(/&quot;/g, '"'));
                             result.questions = JSON.parse(result.questions.replace(/&quot;/g, '"'));
                             result.true_answers = JSON.parse(result.true_answers .replace(/&quot;/g, '"'));
