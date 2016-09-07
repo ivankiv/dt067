@@ -44,8 +44,6 @@
         function checkAttemptsOfUser(user_id,currentTest) {
               return getPastAttempts(user_id, currentTest.test_id)
                    .then(function () {
-                       console.log('self.pastAttemps',self.pastAttemps);
-                       console.log('currentTest.attempts',currentTest.attempts)
                         return self.pastAttemps >= currentTest.attempts;
               });
         }

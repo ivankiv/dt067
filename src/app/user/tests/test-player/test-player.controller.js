@@ -27,7 +27,7 @@
         self.typeOfQuestion;
         self.checkedAnswers = self.listOfQuestionsId[self.currentQuestion_index].answer_ids;
         self.questionId = self.listOfQuestionsId[self.currentQuestion_index].question_id;
-        self.startBackendTime;
+/*        self.startBackendTime; //todo*/
         self.currentBackendTime;
 
         //methods
@@ -57,9 +57,9 @@
 
         function chooseQuestion(question_index) {
             checkServerTime ();
+            console.log(self.listOfQuestionsId);
             self.listOfQuestionsId[self.currentQuestion_index].answer_ids = self.checkedAnswers;
             localStorage.setItem("currentQuestionsId", JSON.stringify(self.listOfQuestionsId));
-
 
             if(question_index == (self.listOfQuestionsId.length)){
                 var newIndex = 0;
@@ -102,8 +102,6 @@
                 .then(function (response) {
                     self.endBackendTime = response.data;
                     self.endBackendTime = parseInt(self.endBackendTime);
-                    console.log('self.endBackendTime', self.endBackendTime);
-                    console.log(typeof self.endBackendTime);
                 });
         }
 
@@ -111,8 +109,6 @@
             return testPlayerService.getServerTime()
                 .then(function (response) {
                     self.currentBackendTime = response.data.curtime * 1000;
-                    console.log('self.currentBackendTime', self.currentBackendTime);
-                    console.log(typeof self.currentBackendTime);
                 });
         }
 
@@ -120,10 +116,7 @@
         function checkServerTime () {
             $q.all([getEndBackendTime(),getServerTime()])
                 .then(function (){
-                    console.log('self.endBackendTimeCS', self.endBackendTime);
-                    console.log('self.currentBackendTimeCS', self.currentBackendTime);
                     var duration = self.endBackendTime - self.currentBackendTime;
-                    console.log(duration);
                     if ( duration <= 0 ){
                         finishTest();
                     }

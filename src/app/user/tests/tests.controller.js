@@ -81,7 +81,6 @@
             self.currentTestId = currentTest.test_id;
             testPlayerService.checkAttemptsOfUser(self.user_id, currentTest)
                 .then(function(response) {
-                    console.log('checkAttemptsOfUser', response)
                     self.checked = response;
                     if(self.checked){
                         $uibModal.open({

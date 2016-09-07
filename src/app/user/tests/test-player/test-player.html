@@ -31,10 +31,13 @@
                         <div class="col-sm-12 col-xs-12 player-wrap">
 
                             <div class="col-sm-3 col-xs-12 wrapForQuestions">
-                                <button ng-click="player.chooseQuestion($index)"
-                                     class="allOfQuestions btn btn-info" ng-repeat="question in player.listOfQuestionsId">
-                                    <span class="question-num">{{$index+1}}</span>
-                                </button>
+                                <form>
+                                    <button ng-click="player.chooseQuestion($index)"
+                                         class="allOfQuestions btn btn-default" ng-repeat="question in player.listOfQuestionsId"
+                                         ng-class="{'btn-info': player.listOfQuestionsId[$index].answer_ids.length > 0}">
+                                         {{$index+1}}
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="col-sm-8 col-xs-12 questions-box"
