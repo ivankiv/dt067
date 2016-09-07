@@ -76,10 +76,13 @@
             margin-top: 0;
             text-align: center;
           }
-          .question-image{
+          .question-image-box{
             text-align: center;
             padding: 5px;
             background-color: #d9edf7;
+            .question-image{
+              display: inline-block;
+            }
           }
           .question-text{
             color: #000;
@@ -103,6 +106,7 @@
             text-align: left;
             vertical-align: middle;
             background-color: #d9edf7;
+            border-bottom: 2px solid #BCD4F7;
             .form-box{
               display: inline-block;
               vertical-align: middle;
@@ -126,12 +130,16 @@
                 margin: 0;
               }
             }
-            .answers-img-box{
+            .answers-image-box{
               display: inline-block;
               text-align: left;
               vertical-align: middle;
               padding: 0;
               margin: 0 3px;
+              height: 50px;
+              .answer-image{
+                display: inline-block;
+              }
             }
           }
         }
