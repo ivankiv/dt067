@@ -41,7 +41,6 @@
             activate();
 
             function activate() {
-                console.log(new Date(self.currentSchedule.event_date));
                 getGroups();
                 getSubjects();
             }
