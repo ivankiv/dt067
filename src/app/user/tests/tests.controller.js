@@ -4,10 +4,10 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams', '$timeout', '$uibModal', '$filter'];
+        'loginService', '$state','$stateParams', '$uibModal', '$filter'];
 
     function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService,
-                              loginService, $state , $stateParams, $timeout, $uibModal, $filter) {
+                              loginService, $state , $stateParams, $uibModal, $filter) {
         var self = this;
 
         //variables
