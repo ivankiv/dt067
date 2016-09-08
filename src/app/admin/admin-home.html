@@ -24,7 +24,7 @@
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.groups">Групи</a></li>
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.subject">Предмети</a></li>
                       <li ng-click="navCollapsed = true"><a ui-sref="admin-home.admin">Адміністратори</a></li>
-                      <li ng-if="!stat.tooManyStudents" ng-click="navCollapsed = true" ><a ui-sref="admin-home.student">Студенти</a></li>
+                      <li ng-click="navCollapsed = true" ng-hide="stat.tooManyStudents"><a ui-sref="admin-home.student">Студенти</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
                       <li><a  ui-sref="login"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>

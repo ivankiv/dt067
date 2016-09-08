@@ -13,7 +13,6 @@
         self.userId = 0;
         self.showMessageNoTestsForStudent = false;
         self.resultList = [];
-        //<- the end of DatePicker options
 
         activate();
 
@@ -35,7 +34,7 @@
                         self.resultList = data.map(function (result) {
                             testService.getOneTest(result.test_id).then(function (response) {
                                 result.test_name = response.data[0].test_name;
-                            })
+                            });
                             result.answers = JSON.parse(result.answers.replace(/&quot;/g, '"'));
                             result.questions = JSON.parse(result.questions.replace(/&quot;/g, '"'));
                             result.true_answers = JSON.parse(result.true_answers .replace(/&quot;/g, '"'));
