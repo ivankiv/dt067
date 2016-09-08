@@ -83,7 +83,7 @@
                  for (var i = 0; i < self.userEvents.length; i++) {
                      var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
 
-                     if (dayToCheck === currentDay) {
+                     if (dayToCheck === currentDay && self.userEvents[i].subject_name) {
                          self.subject_name = self.userEvents[i].subject_name;
                          self.event = self.userEvents[i].date;
                          return true;
