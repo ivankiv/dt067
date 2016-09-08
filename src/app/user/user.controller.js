@@ -25,7 +25,9 @@
         activate();
 
         function activate() {
-            getUserInfo().then(getEventsForUser);
+            getUserInfo()
+                .then(getEventsForUser)
+                .then(isEvent);
         }
 
         function getUserInfo() {
@@ -63,7 +65,7 @@
         }
 
         function getOneSubject(schedule, index) {
-            subjectService.getOneSubject(schedule.subject_id).then(function(response) {
+            return subjectService.getOneSubject(schedule.subject_id).then(function(response) {
                 self.userEvents[index].subject_name = response.data[0].subject_name;
             });
         }
