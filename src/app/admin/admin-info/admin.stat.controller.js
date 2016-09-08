@@ -61,7 +61,7 @@
         }
 
         function getTestsQuantity (){
-            adminStatisticService.getSubjectsQuantity().then(function (data) {
+            adminStatisticService.getTestsQuantity().then(function (data) {
                 self.testsQuantity = data.data.numberOfRecords;
             });
         }
