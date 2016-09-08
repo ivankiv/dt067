@@ -15,7 +15,7 @@
                         <i class="glyphicon glyphicon-share-alt"> Назад</i>
                     </button>
                 </div>
-                <table class="rwd-table subject-table table-striped">
+                <table class="rwd-table subject-table list-of-tests table-striped">
                     <thead>
                     <tr>
 
@@ -31,7 +31,7 @@
                     <tr ng-repeat="test in tests.listOfTests track by $index">
                         <td data-th="Предмет">{{::test.subject_name}}</td>
                         <td data-th="Тест">{{::test.test_name}}</td>
-                        <td data-th="Дата" ng-class="{'date-on': test.date_enabled, 'date-off': !test.date_enabled}">{{::test.date}}</td>
+                        <td data-th="Дата"><div ng-class="{'date-on': test.date_enabled, 'date-off': !test.date_enabled}"></div>{{::test.date}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
                         <td data-th="Статус">{{tests.status[test.enabled]}}</td>

@@ -519,12 +519,35 @@ aside.wrapForQuestions {
     }
   }
 }
+.list-of-tests{
+  th {
+    &:nth-child(3){
+      width: 16%;
+      vertical-align: middle;
+      @media (max-width:$breakpoint-alpha){
+      width: 100%;
+    }
+    }
+  }
+}
 
 .date-on{
-  color: #0CAF05;
-  text-shadow: 1px 1px 1px #B4FF07;
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $open-test;
+  margin-right: 3px;
+  margin-bottom: 3px;
 }
 .date-off{
-  color: $error-message;
-  text-shadow: 1px 1px 1px #FF5205;
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $error-message;
+  margin-right: 3px;
+  margin-bottom: 3px;
 }
