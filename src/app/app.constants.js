@@ -98,6 +98,8 @@
             addTestResult: baseUrl + 'Result/insertData/',
             getTestResultByStudentId: baseUrl + 'Result/getRecordsbyStudent/', // + id of student
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
-            startTestInfoInLog: baseUrl + 'log/startTest/' // + <user_id>/<test_id>
+            startTestInfoInLog: baseUrl + 'log/startTest/', // + <user_id>/<test_id>
+
+            studentsQuantityForStudentState:200
         });
 }());
