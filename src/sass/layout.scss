@@ -170,8 +170,15 @@ body {
 .subject-table{
   .show-img{
     visibility: hidden;
+    -moz-visibility: hidden;
   }
   @include table-mixin;
+}
+.answers-table{
+  td{
+    height:120px;
+    -moz-height:120px;
+  }
 }
 .header-views-select-pages-search{
   height: 32px;
@@ -439,6 +446,7 @@ aside.wrapForQuestions {
 }
 .back-btn-user {
   margin-right: 7px;
+  margin-top:-1px;
 }
 .btn-conf {
   margin-right: 5px;
