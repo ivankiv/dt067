@@ -87,7 +87,12 @@
 
         function showCreateForm() {
             self.showCreate = true;
-            self.currentObj = studentService.createStudentObj({},{});
+            if(self.group_id) {
+                self.currentObj = studentService.createStudentObj({}, {group_id: self.group_id});
+            }
+            else{
+                self.currentObj = studentService.createStudentObj({}, {});
+            }
         }
 
         function showInfoPage(obj) {
