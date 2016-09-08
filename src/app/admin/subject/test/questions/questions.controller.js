@@ -35,8 +35,8 @@
             function activate() {
                 isLogged();
                 getOneTest();
-                countQuestionsByTest()
-                    .then(pageChanged());
+                countQuestionsByTest();
+                getQuestionsRangeByTest();
             }
 
             function isLogged() {
@@ -56,7 +56,9 @@
             }
 
             function getQuestionsRangeByTest() {
-                questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, self.begin)
+                var start = 0;
+                questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, start)
+
                     .then(getRecordsRangeComplete)
             }
             function getRecordsRangeComplete(response) {
@@ -90,7 +92,9 @@
                         controller: 'modalController as modal',
                         backdrop: true
                     });
-                    activate();
+
+                    countQuestionsByTest().then(getQuestionsRangeByTest)
+
                 }
 
                 if(response.status === 400) {
@@ -118,7 +122,7 @@
                         backdrop: true
                     });
                     self.showMessageNoEntity = false;
-                    activate();
+                    countQuestionsByTest().then(pageChanged);
                 })
             }
 
