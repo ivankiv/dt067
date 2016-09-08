@@ -82,6 +82,7 @@
             background-color: $player-box-bg;
             .question-image{
               display: inline-block;
+              width: 300px;
             }
           }
           .question-text{
@@ -139,6 +140,7 @@
               height: 50px;
               .answer-image{
                 display: inline-block;
+                width: 300px;
               }
             }
           }
