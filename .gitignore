@@ -2,8 +2,10 @@
 bower_components/
 node_modules/
 devBuild/
+dev/
 .idea/
 build/
+.gitignore
 .sass-cache
 styles.css.map
 *.log

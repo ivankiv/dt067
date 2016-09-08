@@ -234,7 +234,7 @@ body {
       text-align: left;
     }
     &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)" ";
       font-weight: bold;
       width: 1px;
 
@@ -518,4 +518,13 @@ aside.wrapForQuestions {
       width: 20%;
     }
   }
+}
+
+.date-on{
+  color: #0CAF05;
+  text-shadow: 1px 1px 1px #B4FF07;
+}
+.date-off{
+  color: $error-message;
+  text-shadow: 1px 1px 1px #FF5205;
 }

@@ -127,7 +127,8 @@
                                                 backdrop: true
                                             })
                                             }
-                                        else {
+                                        else
+                                            {
                                             testPlayerService.getServerTime()
                                                 .then(function (response) {
                                                     localStorage.setItem("startTime", angular.toJson(response.data.unix_timestamp));
