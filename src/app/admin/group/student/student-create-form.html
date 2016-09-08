@@ -76,8 +76,10 @@
                                 <label for="email" >Email</label>
                                 <input type="email" class="form-control" name="email" id="email"placeholder="Введіть email"
                                        ng-model="students.currentObj.email"
+                                       ng-pattern="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        required >
-                                <novalidate-messages field="studentCreationForm.email"></novalidate-messages>
+                                <novalidate-messages field="studentCreationForm.email" pattern="Некоректні дані!" >
+                                </novalidate-messages>
                             </td>
                         </tr>
                         <tr>
