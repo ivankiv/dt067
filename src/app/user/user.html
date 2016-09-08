@@ -48,8 +48,8 @@
             </div>
             <div  class="dateEvent col-xs-12 col-md-3" ng-class="{'dateEventVisible': user.isEvent(user.dateEvent)}">
                 <h5>Деталі тесту:</h5>
-                <p>Предмет: <span class="text-primary" ng-bind="user.subject_name"></span></p>
-                <p>Дата проведення: <span class="text-primary">{{user.event | date: "dd MMMM yyyy"}}</span></p>
+                <p>Предмет: <span ng-bind="user.subject_name"></span></p>
+                <p>Дата проведення: <span>{{user.event | date: "yyyy-MM-dd"}}</span></p>
             </div>
             <div class="col-xs-12 col-md-4 pull-right" ng-if="user.calendarLoad">
                 <div class="user-date-picker">
