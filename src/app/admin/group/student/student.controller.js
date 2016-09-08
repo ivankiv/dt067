@@ -148,7 +148,16 @@
             modalInstance.result
                 .then(function(){
                     studentService.deleteStudent(id)
-                        .then(activate);
+                        .then(function (response) {
+                            if(response.status === 400) {
+                                $uibModal.open({
+                                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                                    controller: 'modalController as modal',
+                                    backdrop: true
+                                });
+                            }
+                            activate();
+                        });
                 })
         }
 
