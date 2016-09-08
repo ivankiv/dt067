@@ -85,7 +85,7 @@
 
         function getTimerValue () {
             self.timer = $interval(function () {
-                self.timerValue = self.endTime -new Date().valueOf();
+                self.timerValue = self.endTime - new Date().valueOf();
                 if (self.timerValue > 60000){
                     self.timerBackground = 'norm-color';
                 } else if (self.timerValue <= 60000 && self.timerValue > 0){

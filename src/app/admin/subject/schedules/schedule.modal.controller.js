@@ -18,6 +18,7 @@
             self.group_id =  currentGroupId.group_id;
 
 
+
             //->DatePicker
             self.DatePickerOpened = false;
             self.format = 'yyyy/MM/dd';
