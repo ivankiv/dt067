@@ -82,7 +82,11 @@
             background-color: $player-box-bg;
             .question-image{
               display: inline-block;
-              width: 300px;
+              width: 250px;
+              @media (max-width: 400px) {
+                width: 180px;
+              }
+
             }
           }
           .question-text{
@@ -132,21 +136,22 @@
               }
             }
             .answers-image-box{
-              display: inline-block;
-              text-align: left;
-              vertical-align: middle;
-              padding: 0;
-              margin: 0 3px;
-              height: 50px;
-              .answer-image{
-                display: inline-block;
-                width: 300px;
-              }
-            }
+               display: block;
+               text-align: left;
+               vertical-align: middle;
+               padding: 0;
+               .answer-image{
+                 display: inline-block;
+                 width: 250px;
+                 @media (max-width: 400px) {
+                   width: 180px;
+                 }
+               }
+             }
           }
         }
         .submit-answer{
-          margin: 5px auto;
+          margin: 5px auto 15px;
         }
       }
     }

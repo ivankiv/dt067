@@ -3,15 +3,17 @@
     angular.module('app')
         .controller('groupModalController', groupModalController);
 
-    groupModalController.$ingect = ['groupService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'currentGroup', '$uibModal'];
+    groupModalController.$ingect = ['groupService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'groupByOtherEntity', 'currentGroup', '$uibModal'];
 
-    function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance,  currentGroup, $uibModal) {
+    function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance, groupByOtherEntity,  currentGroup, $uibModal) {
         var self = this;
         self.currentGroup = currentGroup;
         self.duplicateGroupsMessage = false;
         self.incorrectEnteredDataMessage = false;
         self.specialityList = {};
         self.facultyList = {};
+        self.speciality_id = groupByOtherEntity.speciality_id;
+        self.faculty_id = groupByOtherEntity.faculty_id;
 
         self.group = currentGroup;
         self.addGroup = addGroup;
@@ -40,7 +42,15 @@
         }
 
         function addGroup() {
-            groupService.addGroup(self.group).then(addFinish, addError)
+            if (self.speciality_id) {
+                self.group.speciality_id = self.speciality_id;
+                groupService.addGroup(self.group).then(addFinish, addError)
+            } else if (self.faculty_id) {
+                self.group.faculty_id = self.faculty_id;
+                groupService.addGroup(self.group).then(addFinish, addError)
+            } else {
+                groupService.addGroup(self.group).then(addFinish, addError)
+            }
         }
 
         function cancelForm() {

@@ -170,8 +170,15 @@ body {
 .subject-table{
   .show-img{
     visibility: hidden;
+    -moz-visibility: hidden;
   }
   @include table-mixin;
+}
+.answers-table{
+  td{
+    height:120px;
+    -moz-height:120px;
+  }
 }
 .header-views-select-pages-search{
   height: 32px;
@@ -234,7 +241,7 @@ body {
       text-align: left;
     }
     &:before {
-      content: attr(data-th)" "; // who knew you could do this? The internet, that's who.
+      content: attr(data-th)" ";
       font-weight: bold;
       width: 1px;
 
@@ -439,6 +446,7 @@ aside.wrapForQuestions {
 }
 .back-btn-user {
   margin-right: 7px;
+  margin-top:-1px;
 }
 .btn-conf {
   margin-right: 5px;
@@ -518,4 +526,36 @@ aside.wrapForQuestions {
       width: 20%;
     }
   }
+}
+.list-of-tests{
+  th {
+    &:nth-child(3){
+      width: 16%;
+      vertical-align: middle;
+      @media (max-width:$breakpoint-alpha){
+      width: 100%;
+    }
+    }
+  }
+}
+
+.date-on{
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $open-test;
+  margin-right: 3px;
+  margin-bottom: 3px;
+}
+.date-off{
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: $error-message;
+  margin-right: 3px;
+  margin-bottom: 3px;
 }

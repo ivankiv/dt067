@@ -10,12 +10,11 @@
                     <table class="rwd-table create-student-table table-striped">
                         <tbody>
                         <tr>
-                            <td colspan="2" class = "text-center">
-                                <span>Фото</span>
+                            <td colspan="3" class = "text-center">
                                 <img ng-src="{{students.currentObj.photo}}" id="studentImage" height="250" width="250"
                                      alt="Зображення">
                             </td>
-                            <td colspan="4">
+                            <td colspan="3">
                                 <p>Група:&nbsp;{{students.associativeGroup[students.currentObj.group_id]}}</p>
                                 <p>Логін:&nbsp;{{students.currentObj.username}}</p>
                                 <p>Пароль:&nbsp;{{students.currentObj.plain_password}}</p>

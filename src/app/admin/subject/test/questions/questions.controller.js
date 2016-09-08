@@ -58,6 +58,7 @@
             function getQuestionsRangeByTest() {
                 var start = 0;
                 questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, start)
+
                     .then(getRecordsRangeComplete)
             }
             function getRecordsRangeComplete(response) {
@@ -91,8 +92,9 @@
                         controller: 'modalController as modal',
                         backdrop: true
                     });
-                    countQuestionsByTest();
-                    getQuestionsRangeByTest();
+
+                    countQuestionsByTest().then(getQuestionsRangeByTest)
+
                 }
 
                 if(response.status === 400) {
@@ -120,7 +122,7 @@
                         backdrop: true
                     });
                     self.showMessageNoEntity = false;
-                    activate();
+                    countQuestionsByTest().then(pageChanged);
                 })
             }
 

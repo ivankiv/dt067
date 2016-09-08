@@ -25,7 +25,9 @@
         activate();
 
         function activate() {
-            getUserInfo().then(getEventsForUser);
+            getUserInfo()
+                .then(getEventsForUser)
+                .then(isEvent);
         }
 
         function getUserInfo() {
@@ -63,7 +65,7 @@
         }
 
         function getOneSubject(schedule, index) {
-            subjectService.getOneSubject(schedule.subject_id).then(function(response) {
+            return subjectService.getOneSubject(schedule.subject_id).then(function(response) {
                 self.userEvents[index].subject_name = response.data[0].subject_name;
             });
         }
@@ -81,7 +83,7 @@
                  for (var i = 0; i < self.userEvents.length; i++) {
                      var currentDay = new Date(self.userEvents[i].date).setHours(0,0,0,0);
 
-                     if (dayToCheck === currentDay) {
+                     if (dayToCheck === currentDay && self.userEvents[i].subject_name) {
                          self.subject_name = self.userEvents[i].subject_name;
                          self.event = self.userEvents[i].date;
                          return true;

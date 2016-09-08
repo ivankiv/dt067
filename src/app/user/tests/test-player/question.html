@@ -5,7 +5,7 @@
             <div class="question-view">
                 <h5 class="test-sign">Питання:</h5>
                 <div class="question-image-box" ng-if="player.currentQuestion.attachment">
-                    <img class="question-image" ng-src="{{player.currentQuestion.attachment}}">
+                    <img class="question-image" ng-src="{{player.currentQuestion.attachment}}" alt="question-image">
                 </div>
                 <div class="question-text" ng-if="player.currentQuestion.question_text">{{player.currentQuestion.question_text}}</div>
             </div>
@@ -29,8 +29,8 @@
                     <div class="answers-text-box" ng-if="answer.answer_text">
                         <p class="answers-text">{{answer.answer_text}}</p>
                     </div>
-                    <div class="answers-imgage-box" ng-if="answer.attachment">
-                        <img style="width:300px" class="answer-image" ng-src="{{answer.attachment}}">
+                    <div class="answers-image-box" ng-if="answer.attachment">
+                        <img class="answer-image" ng-src="{{answer.attachment}}" alt="answer-image">
                     </div>
                 </div>
 

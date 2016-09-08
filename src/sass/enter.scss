@@ -37,6 +37,9 @@ body {
 		height: 40px;
 		width: 250px;
 		padding-left: 10px;
+		&:focus{
+			box-shadow: 2px 2px 3px #fff, 1px 1px 2em #fff;
+		}
 	}
 	.enter-submit {
 		margin: auto;
@@ -62,6 +65,7 @@ body {
 	color: $black;
 	margin-bottom: 50px;
 	text-shadow: 1px 1px 2px $white, 0 0 1em $white;
+	-moz-text-shadow: 1px 1px 2px $white, 0 0 1em $white;
 }
 .pagination {
   cursor: pointer;

@@ -28,8 +28,12 @@
         }
 
         function remove(id) {
-            if (id == 1){
-                alert("Цього адміна не дозволено видаляти");
+            if (id === "1"){
+                $uibModal.open({
+                    templateUrl:'app/modal/templates/forbidden-admin-delete.html',
+                    controller: 'modalController as modal',
+                    backdrop: true
+                });
                 return;
             }
 
