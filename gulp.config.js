@@ -10,6 +10,7 @@ module.exports = function() {
         temp: temp,
         alljs: ['./src/**/*.js', './*.js'],
         sass: client + 'sass/styles.scss',
+        sassWatch: client + 'sass/**/*scss',
         index: client + 'index.html',
         html: clientApp + '**/*.html',
 
