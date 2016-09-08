@@ -17,6 +17,7 @@
         self.associativeSpeciality = {};
         self.associativeFaculty = {};
         self.showMessageNoEntity = false;
+        self.groupByOtherEntity = {};
 
         //variables for pagination panel and search
 
@@ -73,6 +74,9 @@
         }
 
         function getFaculty() {
+            if (self.faculty_id){
+
+            }
             facultyService.getFaculties().then( function(response) {
                 self.facultyList = response.data;
                 //we make substitute id and name
@@ -108,12 +112,15 @@
             })
         }
         function showAddGroupForm() {
+            self.groupByOtherEntity.speciality_id = self.speciality_id;
+            self.groupByOtherEntity.faculty_id = self.faculty_id;
             var modalInstance = $uibModal.open({
                 templateUrl: 'app/admin/group/add-group.html',
                 controller: 'groupModalController as groups',
                 backdrop: false,
                 resolve: {
-                    currentGroup: {}
+                    currentGroup: {},
+                    groupByOtherEntity: self.groupByOtherEntity
                 }
             });
             modalInstance.result.then(function(response) {
@@ -173,7 +180,8 @@
                 resolve: {
                     //the variable is needed to store data of current group
                     // to fill up the form of editing group
-                    currentGroup: group
+                    currentGroup: group,
+                    groupByOther: {}
 
                 }
             });
