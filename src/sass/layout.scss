@@ -559,3 +559,10 @@ aside.wrapForQuestions {
   margin-right: 3px;
   margin-bottom: 3px;
 }
+
+.question-image {
+  cursor: pointer;
+  &:hover {
+    border: 2px solid $white;
+  }
+}

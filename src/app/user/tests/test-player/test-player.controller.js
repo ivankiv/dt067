@@ -182,13 +182,11 @@
         }
 
         function calculateResultOfTest(answers) {
-            var deferred = $q.defer();
 
             //get rate of questions for calculating result of test, which were stored on the server before.
-            testPlayerService.getRateOfQuestion().then(function(response) {
+           return testPlayerService.getRateOfQuestion().then(function(response) {
                 var result = 0;
                 var score = [];
-
                 angular.forEach(response.data, function(item, index) {
                     if(item !== null) score[index] = item;
                 });
@@ -196,11 +194,8 @@
                 angular.forEach(answers, function(item) {
                     result += score[item.question_id] * item.true;
                 });
-
-                deferred.resolve(result);
+                return result
             });
-
-            return deferred.promise;
         }
 
         function saveResult(resultOfTest) {

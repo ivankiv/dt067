@@ -29,6 +29,7 @@
             self.deleteQuestions = deleteQuestions;
             self.showAddQuestionForm = showAddQuestionForm;
             self.showEditQuestionForm = showEditQuestionForm;
+            self.showLargeQuestionImage = showLargeQuestionImage;
 
             activate();
 
@@ -112,7 +113,8 @@
                     controller: 'QuestionsModalController as questions',
                     backdrop: false,
                     resolve: {
-                        currentQuestion: {}
+                        currentQuestion: {},
+                        question: {}
                     }
                 });
                 modalInstance.result.then(function() {
@@ -132,7 +134,8 @@
                     controller: 'QuestionsModalController as questions',
                     backdrop: false,
                     resolve: {
-                        currentQuestion: currentQuestion
+                        currentQuestion: currentQuestion,
+                        question: {}
                     }
                 });
                 modalInstance.result.then(function() {
@@ -144,6 +147,20 @@
                     self.showMessageNoEntity = false;
                     activate();
                 })
+            }
+
+            function showLargeQuestionImage(question) {
+                if(question.attachment) {
+                    var modalInstance = $uibModal.open({
+                        templateUrl: 'app/admin/subject/test/questions/show-large-question-image.html',
+                        controller: 'QuestionsModalController as questions',
+                        backdrop: true,
+                        resolve: {
+                            currentQuestion: {},
+                            question: question
+                        }
+                    });
+                }
             }
         }
 }());
