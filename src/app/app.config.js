@@ -81,6 +81,22 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
             }
         })
 
+        .state('admin-home.config', {
+            url: '/config',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/config/config.html',
+                    controller: 'ConfigController as config'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Налаштування'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
+            }
+        })
+
         .state('admin-home.subject', {
             url: '/subject',
             views: {
