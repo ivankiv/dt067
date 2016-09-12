@@ -22,6 +22,8 @@
         self.currentTests = {};
         self.checked;
         self.user_id = 0;
+        self.current_date;
+
 
         //methods
         self.getTestBySubjectId = getTestBySubjectId;
@@ -31,8 +33,8 @@
         activate();
 
         function activate() {
-            getScheduleForGroup();
             isLogged();
+            getServerTime().then(getScheduleForGroup);
         }
 
         function getScheduleForGroup() {
@@ -44,11 +46,11 @@
                         getTestBySubjectId(event.subject_id).then(function () {
 
                             angular.forEach(self.currentTests, function (test) {
-                                var current_date = $filter('date')(new Date(), 'yyyy-MM-dd');
+                                var current_date = $filter('date')(self.current_date, 'yyyy-MM-dd');
                                 if(test != 'no records') {
                                     test.subject_name = response;
                                     test.date = event.event_date;
-                                    test.date_enabled = test.date == current_date;
+                                    test.date_enabled = test.date === current_date;
                                     self.listOfTests.push(test);
                                     self.showMessageNoEntity = false;
                                 }
@@ -57,6 +59,13 @@
                     });
                 });
             });
+        }
+
+        function getServerTime() {
+            return testPlayerService.getServerTime()
+                .then(function (response) {
+                    self.current_date = response.data.curtime * 1000;
+                });
         }
 
         function getOneSubject(id) {
