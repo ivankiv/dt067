@@ -60,7 +60,8 @@
         }
 
         function failed(error) {
-            alert('XHR Failed. Error: ' + error.data);
+            console.log(error);
+            return error;
         }
 
         function createStudentObj(userObj,studentObj){

@@ -5,9 +5,9 @@
         .module("app")
         .controller("adminStatController", adminStatController);
 
-    adminStatController.$inject = ['adminStatisticService'];
+    adminStatController.$inject = ['adminStatisticService','appConstants'];
 
-    function adminStatController(adminStatisticService) {
+    function adminStatController(adminStatisticService, appConstants) {
 
         var self = this;
         self.facultiesQuantity = 0;
@@ -50,7 +50,7 @@
         function getStudentsQuantity (){
             adminStatisticService.getStudentsQuantity().then(function (data) {
                 self.studentsQuantity = data.data.numberOfRecords;
-                self.tooManyStudents = 200 < self.studentsQuantity;
+                self.tooManyStudents = appConstants.studentsQuantityForStudentState < self.studentsQuantity;
             });
         }
 

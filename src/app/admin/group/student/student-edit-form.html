@@ -81,11 +81,11 @@
                             </td>
                             <td colspan="3" class="text-center">
                                 <label for="email" >Email</label>
-                                <input type="email" class="form-control" name="email" id="email"
-                                       placeholder="Введіть email"
+                                <input type="email" class="form-control" name="email" id="email"placeholder="Введіть email"
                                        ng-model="students.currentObj.email"
+                                       ng-pattern="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        required >
-                                <novalidate-messages field="studentEditForm.email"></novalidate-messages>
+                                <novalidate-messages field="studentEditForm.email" pattern="Некоректні дані!" >
                             </td>
                         </tr>
                         <tr>
@@ -97,7 +97,7 @@
                                 </button>
                                 <button type="button" class="btn btn-success pull-left" title="Підтвердити"
                                         ng-click="students.update()"
-                                        ng-disabled="studentCreationForm.$invalid">
+                                        ng-disabled="studentEditForm.$invalid">
                                     <i class="glyphicon glyphicon-ok"></i>
                                 </button>
                             </td>

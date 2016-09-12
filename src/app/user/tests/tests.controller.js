@@ -4,10 +4,10 @@
     angular.module('app')
         .controller('TestsController', TestsController);
     TestsController.$inject = ['$q', 'testDetailsService', 'questionsService', 'testService', 'subjectService', 'scheduleService', 'testPlayerService',
-        'loginService', '$state','$stateParams', '$timeout', '$uibModal', '$filter'];
+        'loginService', '$state','$stateParams', '$uibModal', '$filter'];
 
     function TestsController ($q, testDetailsService, questionsService, testService, subjectService, scheduleService,testPlayerService,
-                              loginService, $state , $stateParams, $timeout, $uibModal, $filter) {
+                              loginService, $state , $stateParams, $uibModal, $filter) {
         var self = this;
 
         //variables
@@ -115,9 +115,10 @@
 
                                 localStorage.setItem("currentQuestionsId", angular.toJson(questionsId));
                                 localStorage.setItem("endTime", angular.toJson(endTime));
-
-                                testPlayerService.setRateOfQuestion(rateByQuestionsId);
-                                testPlayerService.setServerEndTime(currentTest.time_for_test * 60000);
+                                testPlayerService.setServerEndTime(currentTest.time_for_test * 60000)
+                                    .then(function () {
+                                        testPlayerService.setRateOfQuestion(rateByQuestionsId);
+                                    });
                                 testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id)
                                     .then(function (response) {
                                         if(response.data.response =="Error. User made test recently"){

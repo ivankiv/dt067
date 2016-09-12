@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('AnswersController', answersController);
-    answersController.$inject = ['answersService', '$stateParams', 'testService',  'ngDialog', '$uibModal'];
+    answersController.$inject = ['answersService', '$stateParams', '$uibModal'];
 
-    function answersController (answersService, $stateParams, testService, ngDialog, $uibModal) {
+    function answersController (answersService, $stateParams, $uibModal) {
         var self = this;
 
         //variables
@@ -79,10 +79,12 @@
         }
 
         function deleteAnswers(answer_id) {
-            ngDialog.openConfirm({
-                template: 'app/partials/confirm-delete-dialog.html',
-                plain: false
-            }).then(deleteAnswers);
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result.then(deleteAnswers);
 
             function deleteAnswers() {
                 answersService.deleteAnswers(answer_id).then(function(response) {
