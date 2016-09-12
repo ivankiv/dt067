@@ -303,7 +303,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 }
             },
             ncyBreadcrumb: {
-                label: 'Адміни'
+                label: 'Адміністратори'
             },
             data: {
                 authorizedRole: USER_ROLES.ADMIN
