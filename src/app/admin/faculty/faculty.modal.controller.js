@@ -48,8 +48,7 @@
 
             function updateComplete(response) {
                 if(response.status == 400 && response.data.response !== 'Error when update') {
-                    self.duplicateFacultiesMessage = true;
-                    return;
+                    self.duplicateFacultysMessage = true;
                 }
 
                 if(response.status == 400 && response.data.response == 'Error when update') {
