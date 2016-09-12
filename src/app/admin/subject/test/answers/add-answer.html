@@ -15,7 +15,7 @@
                 <div ng-if="answers.answer.attachment">
                 <img ng-src="{{answers.answer.attachment}}" height="100" width="100" alt="Зображення">
                 <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
-                            title="Видалити" ng-click="">
+                            title="Видалити" ng-click="answers.deleteAttachment()">
                     <i class="glyphicon glyphicon-trash"></i>
                 </button>
                 </div>
