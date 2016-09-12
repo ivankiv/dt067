@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider','$httpProvider'];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider', 'USER_ROLES' ,'$httpProvider'];
 
-function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $httpProvider) {
+function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USER_ROLES , $httpProvider) {
 
     $httpProvider.interceptors.push('spinnerService');
 
@@ -25,13 +25,19 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
         .state('user', {
             url: '/user',
             templateUrl: 'app/user/user.html',
-            controller: 'UserController as user'
+            controller: 'UserController as user',
+            data: {
+                authorizedRole: USER_ROLES.USER
+            }
         })
 
         .state('test', {
             url: '/tests/test/:questionIndex',
             templateUrl: 'app/user/tests/test-player/test-player.html',
-            controller: 'TestPlayerController as player'
+            controller: 'TestPlayerController as player',
+            data: {
+                authorizedRole: USER_ROLES.USER
+            }
         })
 
         .state('user.tests', {
@@ -44,6 +50,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Тести'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -57,6 +66,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Результати'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -66,6 +78,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             controller: 'adminStatController as stat',
             ncyBreadcrumb: {
                 label: 'Головна'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -79,6 +94,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Предмети'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -93,6 +111,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Розклад',
                 parent: 'admin-home.subject'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -107,6 +128,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Розклад',
                 parent: 'admin-home.groups'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -120,6 +144,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Групи'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -134,6 +161,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Групи',
                 parent: 'admin-home.speciality'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -148,6 +178,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Групи',
                 parent: 'admin-home.faculty'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -162,6 +195,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Тести',
                 parent: 'admin-home.subject'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -176,6 +212,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Питання',
                 parent: 'admin-home.test'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -190,6 +229,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Відповіді',
                 parent: 'admin-home.questions'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -204,6 +246,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Деталі тесту',
                 parent: 'admin-home.test'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -217,6 +262,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Спеціальності'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -230,6 +278,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Факультет'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -240,6 +291,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
                     templateUrl: 'app/admin/faculty/faculty-add.html',
                     controller: 'facultyController as faculties'
                 }
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -253,6 +307,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Адміни'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -266,6 +323,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             },
             ncyBreadcrumb: {
                 label: 'Студенти'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         })
 
@@ -280,6 +340,9 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , $ht
             ncyBreadcrumb: {
                 label: 'Студенти',
                 parent: 'admin-home.groups'
+            },
+            data: {
+                authorizedRole: USER_ROLES.ADMIN
             }
         });
 }

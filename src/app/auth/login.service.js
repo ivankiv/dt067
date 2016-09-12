@@ -3,12 +3,13 @@
     angular.module('app')
         .factory('loginService', loginService);
 
-    loginService.$inject = ['$http', 'appConstants','$uibModal', '$state'];
+    loginService.$inject = ['$http', 'appConstants','$uibModal', '$state', "USER_ROLES"];
 
-    function loginService($http, appConstants, $uibModal, $state) {
+    function loginService($http, appConstants, $uibModal, $state, USER_ROLES) {
         return {
             enterLogin: enterLogin,
-            isLogged: isLogged
+            isLogged: isLogged,
+            isAuthorized: isAuthorized
         };
         
         function isLogged() {
@@ -32,6 +33,7 @@
         }
 
         function enterLoginComplete(response) {
+            localStorage.userRole = response.data.roles[1];
             return response;
         }
         function enterLoginFailed(response) {
@@ -41,6 +43,19 @@
                 backdrop: true
             });
             return response;
+        }
+
+        function isAuthorized() {
+            return $http.get(appConstants.isLoggedURL)
+                .then(function(response) {
+                    if ((response.data.response === "logged") && ((response.data.roles[1] === USER_ROLES.ADMIN) || (response.data.roles[1] === USER_ROLES.USER))) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }, function (response) {
+                    return false;
+                });
         }
     }
 }());
