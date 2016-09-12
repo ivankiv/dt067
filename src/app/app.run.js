@@ -15,10 +15,10 @@ function runApp($rootScope, $state, USER_ROLES, loginService){
         else $rootScope.previousState = fromState.name;
 
         if (toState.data && toState.data.authorizedRole) {
-            loginService.isAuthorized().then(function(response) {
-                if (response && ((toState.name.indexOf("admin") !== -1) && (localStorage.userRole === USER_ROLES.ADMIN))) {
+            loginService.isAuthorized().then(function() {
+                if (toState.name.indexOf("admin") !== -1 && localStorage.userRole === USER_ROLES.ADMIN) {
                     $state.go(toState, toParams);
-                } else if ((toState.name.indexOf("user") !== -1) && (localStorage.userRole === USER_ROLES.USER)) {
+                } else if (toState.name.indexOf("user") !== -1 && localStorage.userRole === USER_ROLES.USER) {
                     $state.go(toState, toParams);
                 } else {
                     event.preventDefault();

@@ -48,11 +48,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                     controller: 'TestsController as tests'
                 }
             },
-            ncyBreadcrumb: {
-                label: 'Тести'
-            },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                authorizedRole: USER_ROLES.USER
             }
         })
 
@@ -68,7 +65,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Результати'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                authorizedRole: USER_ROLES.USER
             }
         })
 

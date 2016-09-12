@@ -9,7 +9,8 @@
         return {
             enterLogin: enterLogin,
             isLogged: isLogged,
-            isAuthorized: isAuthorized
+            isAuthorized: isAuthorized,
+            logOut: logOut
         };
         
         function isLogged() {
@@ -24,6 +25,12 @@
                         backdrop: true
                     });
                 }
+            });
+        }
+
+        function logOut() {
+            return $http.get(appConstants.logOutURL).then(function (response) {
+                return response
             });
         }
 
