@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q','$location'];
+    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q,$location) {
+    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q) {
 
         var self = this;
 
@@ -174,19 +174,19 @@
                     return calculateResultOfTest(response.data);
                 })
                 .then(function(resultOfTest) {
-                    saveResult(resultOfTest);
-                    $state.go('user.results');
+                    saveResult(resultOfTest)
+                        .then(function () {
+                            $state.go('user.results');
+                    })
                 })
         }
 
         function calculateResultOfTest(answers) {
-            var deferred = $q.defer();
 
             //get rate of questions for calculating result of test, which were stored on the server before.
-            testPlayerService.getRateOfQuestion().then(function(response) {
+           return testPlayerService.getRateOfQuestion().then(function(response) {
                 var result = 0;
                 var score = [];
-
                 angular.forEach(response.data, function(item, index) {
                     if(item !== null) score[index] = item;
                 });
@@ -194,11 +194,8 @@
                 angular.forEach(answers, function(item) {
                     result += score[item.question_id] * item.true;
                 });
-
-                deferred.resolve(result);
+                return result
             });
-
-            return deferred.promise;
         }
 
         function saveResult(resultOfTest) {
@@ -206,7 +203,7 @@
             var true_answers = angular.toJson(self.true_answers);
             var answersIdForResult = angular.toJson(self.listOfQuestionsId);
             var startTime = new Date(localStorage.startTime*1000).toTimeString().split(" ")[0];
-            getServerTime()
+            return getServerTime()
                 .then(function () {
                     var endTime = new Date(self.currentBackendTime).toTimeString().split(" ")[0];
                     var result = {
@@ -220,7 +217,7 @@
                         true_answers: true_answers,
                         answers:      answersIdForResult
                     };
-                    testPlayerService.saveResult(result);
+                   return testPlayerService.saveResult(result);
             })
         }
     }

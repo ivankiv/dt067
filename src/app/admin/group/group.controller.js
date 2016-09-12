@@ -181,7 +181,7 @@
                     //the variable is needed to store data of current group
                     // to fill up the form of editing group
                     currentGroup: group,
-                    groupByOther: {}
+                    groupByOtherEntity: {}
 
                 }
             });

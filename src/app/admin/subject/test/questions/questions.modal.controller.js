@@ -3,15 +3,16 @@
 
     angular.module('app')
         .controller('QuestionsModalController', questionsModalController);
-        questionsModalController.$inject = ['questionsService', '$stateParams',  '$uibModalInstance', 'currentQuestion'];
+        questionsModalController.$inject = ['questionsService', '$stateParams',  '$uibModalInstance', 'currentQuestion', 'question'];
 
-        function questionsModalController(questionsService, $stateParams,  $uibModalInstance, currentQuestion) {
+        function questionsModalController(questionsService, $stateParams,  $uibModalInstance, currentQuestion, question) {
             var self = this;
 
             //variables
             self.question = {};
             self.currentQuestion = currentQuestion;
             self.question.attachment = "";
+            self.questionsSrc = question;
             self.question.test_id = $stateParams.currentTestId;
             self.duplicateEntityMessage = false;
             self.wasNotEditEntityMessage = false;

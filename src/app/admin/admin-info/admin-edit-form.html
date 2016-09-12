@@ -23,8 +23,9 @@
                 <input type="email" class="form-control" id = "email" name="email"
                        ng-model="admins.currentObject.email"
                        placeholder="Ведіть адресу почтової скриньки"
+                       ng-pattern="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                        required>
-                <novalidate-messages field="adminEditForm.email"></novalidate-messages>
+                <novalidate-messages field="adminEditForm.email" pattern="Некоректні дані!"></novalidate-messages>
             </div>
         </div>
         <div class="form-group">

@@ -24,6 +24,7 @@
                     <thead>
                     <tr>
                         <th>Номер</th>
+                        <th>Зображення</th>
                         <th>Завдання</th>
                         <th>Рівень</th>
                         <th>Тип</th>
@@ -32,6 +33,10 @@
                     <tbody ng-if="!questions.showMessageNoEntity">
                     <tr ng-repeat="question in questions.list">
                         <td data-th="Номер">{{$index + (questions.currentPage - 1)* questions.questionsPerPage + 1 }}</td>
+                        <td data-th="Зображення"  ng-click="questions.showLargeQuestionImage(question)">
+                            <img  class="question-image" ng-class="{'show-img': question.attachment ? false: true}" ng-src="{{question.attachment}}"
+                                 height="100" width="100" title="Зображення {{$index + 1}}" alt="Зображення">
+                        </td>
                         <td data-th="Завдання">{{::question.question_text}}</td>
                         <td data-th="Рівень">{{::question.level}}</td>
                         <td data-th="Тип">{{questions.nameOfType[question.type]}}</td>

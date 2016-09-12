@@ -42,7 +42,6 @@
             activate();
 
             function activate() {
-                console.log(new Date(self.currentSchedule.event_date));
                 getGroups();
                 getSubjects();
             }
@@ -75,7 +74,7 @@
             function addScheduleComplete (response) {
                 if(response.data.response === 'ok') {
                     $uibModalInstance.close();
-                    self.schedule = {};
+                    self.schedule = {subject_id: null, event_date: new Date()};
                 }
                 if(response.status === 400) {
                     self.alreadyExistInSchedule = true;
@@ -85,7 +84,7 @@
             function updateScheduleComplete(response) {
                 if(response.data.response === 'ok') {
                     $uibModalInstance.close();
-                    self.currentSchedule = {};
+                    self.currentSchedule = {subject_id: null, event_date: new Date()};
                 }
             }
 
