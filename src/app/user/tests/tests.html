@@ -34,8 +34,11 @@
                         <td data-th="Дата"><div ng-class="{'date-on': test.date_enabled, 'date-off': !test.date_enabled}"></div>{{::test.date}}</td>
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
-                        <td data-th="Статус">{{tests.status[test.enabled]}}</td>
-                        <td>
+                        <td data-th="Статус">
+                            <span ng-if="test.date_enabled">{{::tests.status[test.enabled]}}</span>
+                            <span ng-if="!test.date_enabled">Недоступно</span>
+                        </td>
+                        <td id="play-button-cell">
                             <button type="button" class="btn btn-primary pull-right table-help-btns"
                                     title="Пройти тест"
                                      ng-if="test.enabled==1"

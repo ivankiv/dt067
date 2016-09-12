@@ -5,9 +5,9 @@
         .module("app")
         .controller("adminStatController", adminStatController);
 
-    adminStatController.$inject = ['adminStatisticService','appConstants'];
+    adminStatController.$inject = ['adminStatisticService','appConstants', '$state', 'loginService'];
 
-    function adminStatController(adminStatisticService, appConstants) {
+    function adminStatController(adminStatisticService, appConstants, $state, loginService) {
 
         var self = this;
         self.facultiesQuantity = 0;
@@ -17,6 +17,7 @@
         self.subjectsQuantity = 0;
         self.testsQuantity = 0;
         self.tooManyStudents = false;
+        self.logOut = logOut;
 
         activate();
 
@@ -27,6 +28,14 @@
             getStudentsQuantity();
             getSubjectsQuantity();
             getTestsQuantity();
+        }
+
+        function logOut() {
+            loginService.logOut().then(function (response) {
+                localStorage.clear();
+                $state.go('login');
+                return response;
+            })
         }
 
         function getFacultiesQuantity (){

@@ -28,10 +28,10 @@
 
         function showResultPage() {
             studentService.getTestResultsByStudent(self.userId)
-                .then(function (data) {
-                    self.showMessageNoTestsForStudent =(data.response === "no records");
+                .then(function (response) {
+                    self.showMessageNoTestsForStudent =(response.data.response === "no records");
                     if(!self.showMessageNoTestsForStudent){
-                        self.resultList = data.map(function (result) {
+                        self.resultList = response.data.map(function (result) {
                             testService.getOneTest(result.test_id).then(function (response) {
                                 result.test_name = response.data[0].test_name;
                             });

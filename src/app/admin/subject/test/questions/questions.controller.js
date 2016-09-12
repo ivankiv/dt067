@@ -59,7 +59,6 @@
             function getQuestionsRangeByTest() {
                 var start = 0;
                 questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, start)
-
                     .then(getRecordsRangeComplete)
             }
             function getRecordsRangeComplete(response) {

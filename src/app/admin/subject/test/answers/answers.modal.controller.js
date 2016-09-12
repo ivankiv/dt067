@@ -23,6 +23,7 @@
             self.addAnswer = addAnswer;
             self.cancelForm = cancelForm;
             self.updateAnswer = updateAnswer;
+            self.deleteAttachment = deleteAttachment;
 
 
             function addAnswer() {
@@ -42,6 +43,11 @@
                     self.answer = {};
                     $uibModalInstance.close();
                 }
+            }
+
+            function deleteAttachment () {
+                self.answer.attachment = false;
+                self.currentAnswer.attachment = false;
             }
 
             function updateAnswerComplete(response) {
