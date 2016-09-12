@@ -46,15 +46,17 @@
         self.numberToDisplayStudentsOnPage = [5,10,15,20];
         self.showMessageNoEntity = false;
         self.showMessageNoTestsForStudent= false;
+        self.wrongData = false;
         activate();
 
         function activate() {
-            studentService.getStudents(self.group_id).then(function (data) {
-                self.list = data;
-                self.totalStudents = data.length;
-                self.showMessageNoEntity = (data.response === "no records");
+            studentService.getStudents(self.group_id).then(function (response) {
+                self.list = response.data;
+                self.totalStudents = response.data.length;
+                self.showMessageNoEntity = (response.data.response === "no records");
                 getGroups();
             });
+            self.wrongData = false;
         }
 
         function hide(param) {
@@ -109,13 +111,13 @@
             self.currentObj = user;
 
             studentService.getTestResultsByStudent(user.user_id)
-                .then(function (data) {
-                    self.showMessageNoTestsForStudent =(data.response === "no records");
+                .then(function (response) {
+                    self.showMessageNoTestsForStudent =(response.data.response === "no records");
                     if(!self.showMessageNoTestsForStudent){
                         self.resultList = data.map(function (result) {
                             testService.getOneTest(result.test_id).then(function (response) {
                                 result.test_name = response.data[0].test_name;
-                            })
+                            });
                             result.answers = JSON.parse(result.answers.replace(/&quot;/g, '"'));
                             result.questions = JSON.parse(result.questions.replace(/&quot;/g, '"'));
                             result.true_answers = JSON.parse(result.true_answers .replace(/&quot;/g, '"'));
@@ -135,8 +137,7 @@
             self.currentObj.password = self.currentObj.plain_password;
             self.currentObj.password_confirm = self.currentObj.plain_password;
             studentService.editStudent(self.currentObj,self.currentUserId)
-                .then(activate);
-            hide("edit");
+                .then(completeEdit);
         }
 
         function remove(id) {
@@ -155,8 +156,8 @@
                                     controller: 'modalController as modal',
                                     backdrop: true
                                 });
+                                activate();
                             }
-                            activate();
                         });
                 })
         }
@@ -177,8 +178,7 @@
             self.currentObj.password = self.currentObj.plain_password;
             self.currentObj.password_confirm = self.currentObj.plain_password;
             studentService.createStudent(self.currentObj)
-                .then(activate);
-            hide();
+                .then(completeCreate);
         }
 
         function getGroups() {
@@ -197,5 +197,26 @@
                 }
             })
         }
+
+        function completeCreate(response) {
+            if(response.status == 200 && response.data.response == "Failed to validate array") {
+                self.wrongData = true;
+            }
+            else{
+                activate();
+                hide();
+            }
+        }
+
+        function completeEdit(response) {
+            if(response.status == 200 && response.data.response == "Failed to validate array") {
+                self.wrongData = true;
+            }
+            else {
+                hide("edit");
+                activate();
+            }
+        }
+
     }
 }());
