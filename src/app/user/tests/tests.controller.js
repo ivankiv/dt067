@@ -173,15 +173,18 @@
                 return questionsService.getQuestionsByLevelRand(self.currentTestId, testDetail.level, testDetail.tasks);
             });
 
-            return $q.all(promises).then(function(response) {
-                var questionsList = [];
-                angular.forEach(response, function (response) {
-                    questionsList = questionsList.concat(response.data);
-                });
-                return questionsList;
-            }, function (response) {
-                return response
-            });
+            return $q.all(promises).then(
+                function(response) {
+                    var questionsList = [];
+                    angular.forEach(response, function (response) {
+                        questionsList = questionsList.concat(response.data);
+                    });
+                    return questionsList;
+                },
+                function (response) {
+                    return response
+                }
+            );
         }
     }
 }());

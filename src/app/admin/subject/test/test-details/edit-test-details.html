@@ -7,12 +7,7 @@
             <label class="control-label col-sm-2" for="level">Рівень </label>
             <div class="col-sm-10">
                 <select class="form-control input-form" id="level" name="level" ng-model="testDetails.currentTestDetails.level" required>
-                    <option disabled selected value="">Оберіть рівень завдання</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
+                    <option ng-repeat="value in testDetails.levelsOfTasks" value="{{value}}">{{value}}</option>
                 </select>
             </div>
         </div>
@@ -52,7 +47,7 @@
 </div>
 <div class="modal-footer custom-modal-footer">
     <button class="btn btn-primary" type="button" ng-click="testDetails.updateTestDetails()"
-            ng-disabled="editTestDetailsForm.$invalid"> Додати тест
+            ng-disabled="editTestDetailsForm.$invalid"> Додати
     </button>
     <button class="btn btn-warning" type="button" ng-click="testDetails.cancelForm()">Відмінити</button>
 </div>
