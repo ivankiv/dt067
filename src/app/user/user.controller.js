@@ -5,16 +5,17 @@
         .module("app")
         .controller("UserController", UserController);
 
-    UserController.$inject = ["scheduleService", "subjectService", "studentService","groupService","loginService"];
+    UserController.$inject = ["scheduleService", "subjectService", "studentService","groupService", "loginService", "$state"];
 
-    function UserController(scheduleService, subjectService, studentService, groupService, loginService) {
+    function UserController(scheduleService, subjectService, studentService, groupService, loginService, $state) {
         var self = this;
 
         self.userId = 0;
         self.user = {};
         self.group_name = "";
         self.resultOfTest = 0 || localStorage.resultOfTest;
-         self.isEvent = isEvent;
+        self.isEvent = isEvent;
+        self.logOut = logOut;
 
         //->DatePicker options
         self.userEvents = [];
@@ -42,6 +43,14 @@
                             });
                         });
                 });
+        }
+
+        function logOut() {
+            loginService.logOut().then(function (response) {
+                localStorage.clear();
+                $state.go('login');
+                return response;
+            })
         }
 
         function getEventsForUser() {
