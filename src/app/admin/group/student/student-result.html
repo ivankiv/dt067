@@ -27,6 +27,7 @@
                         <th>Результат</th>
                         <th>Час початку</th>
                         <th>Час закінчення</th>
+                        <th>Видалити</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,6 +39,13 @@
                         <td data-th="Результат">{{::result.result}}</td>
                         <td data-th="Час початку">{{::result.start_time}}</td>
                         <td data-th="Час закінчення">{{::result.end_time}}</td>
+                        <td data-th="Видалити">
+                            <button type="button" class="btn btn-danger views-remove-btn  pull-right table-help-btns"
+                                    title="Видалити"
+                                    ng-click="students.removeTestResult(result.session_id)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

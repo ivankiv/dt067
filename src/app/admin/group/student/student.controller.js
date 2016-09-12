@@ -20,6 +20,7 @@
         self.remove = remove;
         self.create = create;
         self.pageChanged = pageChanged;
+        self.removeTestResult =removeTestResult;
 
 
         //Variables
@@ -114,7 +115,7 @@
                 .then(function (response) {
                     self.showMessageNoTestsForStudent =(response.data.response === "no records");
                     if(!self.showMessageNoTestsForStudent){
-                        self.resultList = data.map(function (result) {
+                        self.resultList = response.data.map(function (result) {
                             testService.getOneTest(result.test_id).then(function (response) {
                                 result.test_name = response.data[0].test_name;
                             });
@@ -156,9 +157,9 @@
                                     controller: 'modalController as modal',
                                     backdrop: true
                                 });
-                                activate();
                             }
-                        });
+                        })
+                        .then(activate)
                 })
         }
 
@@ -196,6 +197,30 @@
                         });
                 }
             })
+        }
+
+        function removeTestResult(session_id) {
+            var modalInstance = $uibModal.open({
+                templateUrl: 'app/modal/templates/confirm-delete-dialog.html',
+                controller: 'modalController as modal',
+                backdrop: true
+            });
+            modalInstance.result
+                .then(function(){
+                    studentService.delTestResult(session_id)
+                        .then(function (response) {
+                            if(response.status === 400) {
+                                $uibModal.open({
+                                    templateUrl: 'app/modal/templates/forbidden-confirm-dialog.html',
+                                    controller: 'modalController as modal',
+                                    backdrop: true
+                                });
+                            }
+                        })
+                        .then(function() {
+                            showResultPage(self.currentObj);
+                        })
+                    })
         }
 
         function completeCreate(response) {

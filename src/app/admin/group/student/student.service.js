@@ -15,7 +15,8 @@
             createStudent:createStudent,
             createStudentObj:createStudentObj,
             getStudentById:getStudentById,
-            getTestResultsByStudent:getTestResultsByStudent
+            getTestResultsByStudent:getTestResultsByStudent,
+            delTestResult:delTestResult
         };
 
         function getStudents(group_id) {
@@ -53,6 +54,11 @@
             return $http.get(appConstants.getTestResultByStudentId + student_id)
                 .then(complete, failed);
 
+        }
+
+        function delTestResult(session_id) {
+            return $http.get(appConstants.delTestResult + session_id)
+                .then(complete, failed);
         }
 
         function complete(response) {
