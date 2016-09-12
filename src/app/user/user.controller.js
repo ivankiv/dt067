@@ -35,8 +35,8 @@
                 .then(function (response) {
                     self.userId = response.data.id;
                     return studentService.getStudentById(self.userId)
-                        .then(function (data) {
-                            self.user = data[0];
+                        .then(function (response) {
+                            self.user = response.data[0];
                             return  groupService.getOneGroup(self.user.group_id).then(function (response) {
                                 self.group_name = response.data[0].group_name;
                             });
