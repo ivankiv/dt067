@@ -30,7 +30,7 @@
         self.showEditFacultyForm = showEditFacultyForm;
 
         self.showErrorMessage = false;
-        self.message = "Loading...";
+
 
         activate();
 

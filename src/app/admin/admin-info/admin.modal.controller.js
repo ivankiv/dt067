@@ -39,7 +39,7 @@
                 return;
             }
             adminService.createAdmin(self.currentObject)
-                .then(complete, rejected);
+                .then(complete);
         }
 
         function cancelForm () {
@@ -64,7 +64,7 @@
                 return;
             }
             adminService.editAdmin(self.currentObject)
-                .then(complete, rejected);
+                .then(complete);
         }
 
         function complete(response) {
@@ -76,8 +76,5 @@
                 $uibModalInstance.close();
             }
         }
-
-        function rejected(response) {
-                    }
     }
 }());
