@@ -25,7 +25,6 @@
                         <th>К-сть завдань</th>
                         <th>Тривалість тесту</th>
                         <th>Статус</th>
-                        <th>Старт тесту</th>
                     </tr>
                     </thead>
                     <tbody ng-if="!tests.showMessageNoEntity">
@@ -36,7 +35,7 @@
                         <td data-th="К-сть завдань">{{::test.tasks}}</td>
                         <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
                         <td data-th="Статус">
-                            <span ng-if="test.date_enabled">{{tests.status[test.enabled]}}</span>
+                            <span ng-if="test.date_enabled">{{::tests.status[test.enabled]}}</span>
                             <span ng-if="!test.date_enabled">Недоступно</span>
                         </td>
                         <td id="play-button-cell">

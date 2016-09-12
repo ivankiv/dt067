@@ -553,17 +553,12 @@ aside.wrapForQuestions {
       width: 15%;
       vertical-align: middle;
     }
-    &:last-child {
-      vertical-align: middle;
-
-    }
   }
   #play-button-cell{
-    width: 100%;
+    width: inherit;
     height: 100%;
-    margin: 0;
     float: none;
-    text-align: center;
+    text-align: left;
   }
 }
 
