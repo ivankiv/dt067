@@ -82,6 +82,11 @@
                                 </novalidate-messages>
                             </td>
                         </tr>
+                        <tr ng-if="students.wrongData">
+                            <td colspan="6"  class="text-center text-danger">
+                                Користувач з таким логіном існує або введені некоректні дані!
+                            </td>
+                        </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td class="text-center create-student-submit-btns-wrpr" colspan="2" >
@@ -101,6 +106,7 @@
                     </table>
                 </form>
             </div>
+
         </div>
     </section>
 </section>
