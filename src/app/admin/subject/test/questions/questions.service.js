@@ -13,14 +13,8 @@
                 deleteQuestions: deleteQuestions,
                 addQuestion: addQuestion,
                 editQuestion: editQuestion,
-                getAnswersByQuestion: getAnswersByQuestion,
                 getQuestionById:getQuestionById
             };
-
-            function getAnswersByQuestion(question_id) {
-                return $http.get(appConstants.getAnswersByQuestionID + question_id)
-                    .then(fulfilled, rejected);
-            }
 
             function getQuestionsRangeByTest(test_id, limit, offset) {
                 return $http.get(appConstants.getQuestionsRangeByTest + test_id + "/" + limit + "/" + offset)

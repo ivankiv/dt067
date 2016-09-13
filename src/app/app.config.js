@@ -78,6 +78,22 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
             }
         })
 
+        .state('admin-home.result', {
+            url: '/result/:group_id',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/result/result.html',
+                    controller: 'ResultController as result'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Результати групи'
+            },
+            data: {
+                role: defineUser.admin
+            }
+        })
+
         .state('admin-home.config', {
             url: '/config',
             views: {

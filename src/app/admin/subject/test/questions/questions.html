@@ -37,7 +37,7 @@
                             <img  class="question-image" ng-class="{'show-img': question.attachment ? false: true}" ng-src="{{question.attachment}}"
                                  height="100" width="100" title="Зображення {{$index + 1}}" alt="Зображення">
                         </td>
-                        <td data-th="Завдання"><is-answer></is-answer>{{::question.question_text}}</td>
+                        <td data-th="Завдання"><div class="CheckTrueAnswersFalse" ng-class="{'CheckTrueAnswers': questions.isAnswers(question.question_id)}"></div>{{::question.question_text}}</td>
                         <td data-th="Рівень">{{::question.level}}</td>
                         <td data-th="Тип">{{questions.nameOfType[question.type]}}</td>
                         <td>
