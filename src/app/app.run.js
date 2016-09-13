@@ -1,8 +1,8 @@
 angular.module('app')
     .run(runApp);
 
-runApp.$inject = ['$rootScope','$state', 'USER_ROLES', 'loginService' ];
-function runApp($rootScope, $state, USER_ROLES, loginService){
+runApp.$inject = ['$rootScope','$state', 'defineUser', 'loginService' ];
+function runApp($rootScope, $state, defineUser, loginService){
 
     $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams)
     {
@@ -14,14 +14,15 @@ function runApp($rootScope, $state, USER_ROLES, loginService){
         }
         else $rootScope.previousState = fromState.name;
 
-        if (toState.data && toState.data.authorizedRole) {
-            loginService.isAuthorized().then(function() {
-                if (toState.name.indexOf("admin") !== -1 && localStorage.userRole === USER_ROLES.ADMIN) {
+        if (toState.data && toState.data.role) {
+            loginService.authorizeRole().then(function() {
+                if (toState.data.role === "admin" && localStorage.userRole === defineUser.admin) {
                     $state.go(toState, toParams);
-                } else if (toState.name.indexOf("user") !== -1 && localStorage.userRole === USER_ROLES.USER) {
+                } else if (toState.data.role === "student" && localStorage.userRole === defineUser.user) {
                     $state.go(toState, toParams);
                 } else {
                     event.preventDefault();
+                    localStorage.removeItem("userRole");
                     $state.go("login");
                 }
             });

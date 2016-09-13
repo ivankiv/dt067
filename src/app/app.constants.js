@@ -105,8 +105,8 @@
             numberOfTestsLevels:(localStorage.NumberOfTestLevels)?JSON.parse(localStorage.NumberOfTestLevels):5,
             numberOfEntitiesPerPage:(localStorage.NumberOfEntities)?JSON.parse(localStorage.NumberOfEntities):5
         })
-        .constant("USER_ROLES", {
-                ADMIN: "admin",
-                USER: "student"
+        .constant("defineUser", {
+                admin: "admin",
+                user: "student"
         });
 }());
