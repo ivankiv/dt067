@@ -32,7 +32,7 @@
             self.showAddQuestionForm = showAddQuestionForm;
             self.showEditQuestionForm = showEditQuestionForm;
             self.showLargeQuestionImage = showLargeQuestionImage;
-            self.getAnswersByQuestionID = getAnswersByQuestionID;
+            // self.isAnswers = isAnswers;
 
             activate();
 
@@ -40,43 +40,19 @@
                 isLogged();
                 getOneTest();
                 countQuestionsByTest();
-                getQuestionsRangeByTest();
-                getAnswersByQuestionID();
+                getQuestionsRangeByTest()
+                    .then(getAnswersForQuestion);
             }
 
             function isLogged() {
                 loginService.isLogged();
             }
 
-            function getAnswersByQuestionID() {
-                answersService.getAnswersByQuestion(self.question_id)
-                    .then(getAnswersByQuestionComplete)
-            }
-
-
-            function getAnswersByQuestionComplete(response) {
-                console.log(response);
-                // if(response.data.response === 'no records') {
-                //     self.showMessageNoEntity = true;
-                // } else {
-                //     if(self.CurrentQuestionType === '1') {
-                //         for (var i = 0; i < response.data.length; i++) {
-                //             if (response.data[i].true_answer == '1') {
-                //                 self.isAnswerTrue = true;
-                //                 break;
-                //             } else if(response.data[i].true_answer == '0'){
-                //                 self.isAnswerTrue = false;
-                //             }
-                //         }
-                //     }
-                //     self.list = response.data;
-                // }
-            }
-
             function pageChanged() {
                 self.begin = ((self.currentPage - 1) * self.questionsPerPage);
                 questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, self.begin)
                     .then(getRecordsRangeComplete)
+                    .then(getAnswersForQuestion)
             }
 
             function getOneTest() {
@@ -87,14 +63,14 @@
 
             function getQuestionsRangeByTest() {
                 var start = 0;
-                questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, start)
+               return questionsService.getQuestionsRangeByTest($stateParams.currentTestId, self.questionsPerPage, start)
                     .then(getRecordsRangeComplete)
             }
             function getRecordsRangeComplete(response) {
                 if(response.data.response === 'No records') {
                     self.showMessageNoEntity = true;
                 } else {
-                    self.list = response.data;
+                   return self.list = response.data;
                 }
             }
 
@@ -187,6 +163,42 @@
                             currentQuestion: {},
                             question: question
                         }
+                    });
+                }
+            }
+
+            function getAnswersForQuestion() {
+                self.trueAnswers = [];
+                var questionID = self.list.map(function(question) {
+                    return question.question_id;
+                });
+
+                angular.forEach(questionID, function(question_id) {
+                    getAnswersByQuestionID(question_id)
+                });
+
+                self.isAnswers = function(question_id) {
+                    var isTrueAnswer = false;
+                    angular.forEach(self.trueAnswers, function(answer) {
+                        if(question_id === answer.question_id && answer.true_answer == 1) {
+                            isTrueAnswer = true;
+                        }
+                    });
+                    return isTrueAnswer
+                }
+
+            }
+
+            function getAnswersByQuestionID(question_id) {
+                return answersService.getAnswersByQuestion(question_id)
+                    .then(getAnswersByQuestionComplete)
+            }
+
+
+            function getAnswersByQuestionComplete(response) {
+                if(response.data.response !== 'no records') {
+                   response.data.forEach(function(answer) {
+                       self.trueAnswers.push(answer);
                     });
                 }
             }
