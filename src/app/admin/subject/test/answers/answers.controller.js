@@ -16,6 +16,8 @@
         self.question_id = $stateParams.questionId;
         self.true_answers = ['Не вірно', 'Вірно'];
         self.isAnswerTrue = false;
+        self.isAnswers = true;
+
 
         //methods
         self.getAnswersByQuestionID = getAnswersByQuestionID;
@@ -29,7 +31,6 @@
         function activate() {
             getAnswersByQuestionID();
             getQuestionByQuestionID();
-
         }
 
 
@@ -47,6 +48,7 @@
                     for (var i = 0; i < response.data.length; i++) {
                         if (response.data[i].true_answer == '1') {
                             self.isAnswerTrue = true;
+                            self.isAnswers = true;
                             break;
                         } else if(response.data[i].true_answer == '0'){
                             self.isAnswerTrue = false;

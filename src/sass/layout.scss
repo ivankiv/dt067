@@ -566,3 +566,23 @@ aside.wrapForQuestions {
     border: 2px solid $white;
   }
 }
+.CheckTrueAnswers{
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: greenyellow;
+  margin-right: 3px;
+  margin-bottom: 1px;
+}
+.CheckTrueAnswersFalse{
+  display: inline-block;
+  vertical-align: middle;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 3px;
+  margin-bottom: 1px;
+  background-color: $error-message;
+}
