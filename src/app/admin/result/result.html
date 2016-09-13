@@ -36,7 +36,7 @@
                         <td id="play-button-cell">
                             <button type="button" class="btn btn-primary pull-right table-help-btns"
                                     title="Переглянути результати"
-                                    ng-click = "config.showResult(test)">
+                                    ui-sref="admin-home.test-result({group_id:result.group_id, test_id:test.test_id})">
                                 <i class="glyphicon glyphicon-eye-open"></i>
                             </button>
                         </td>

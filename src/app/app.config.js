@@ -66,6 +66,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
             }
         })
 
+
+
         .state('admin-home', {
             url: '/admin',
             templateUrl: 'app/admin/admin-home.html',
@@ -88,6 +90,22 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
             },
             ncyBreadcrumb: {
                 label: 'Результати групи'
+            },
+            data: {
+                role: defineUser.admin
+            }
+        })
+
+        .state('admin-home.test-result', {
+            url: '/:group_id/result/:test_id',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/result/test-result.html',
+                    controller: 'TestResultController as result'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Результати тесту'
             },
             data: {
                 role: defineUser.admin
