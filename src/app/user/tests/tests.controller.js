@@ -130,7 +130,7 @@
                                     });
                                 testPlayerService.startTestInfoInLog(self.user_id,currentTest.test_id)
                                     .then(function (response) {
-                                        /*if(response.data.response =="Error. User made test recently"){
+                                        if(response.data.response =="Error. User made test recently"){
                                             $uibModal.open({
                                                 templateUrl: 'app/modal/templates/forbidden-time-reason.html',
                                                 controller: 'modalController as modal',
@@ -138,14 +138,14 @@
                                             })
                                             }
                                         else
-                                            {*/
+                                            {
                                             testPlayerService.getServerTime()
                                                 .then(function (response) {
                                                     localStorage.setItem("startTime", angular.toJson(response.data.unix_timestamp));
                                                 });
 
                                             $state.go("test", {questionIndex:0});
-                                        /*}*/
+                                        }
                                     });
                             }
                             else {
