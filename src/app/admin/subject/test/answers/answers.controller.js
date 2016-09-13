@@ -48,7 +48,6 @@
                     for (var i = 0; i < response.data.length; i++) {
                         if (response.data[i].true_answer == '1') {
                             self.isAnswerTrue = true;
-                            self.isAnswers = true;
                             break;
                         } else if(response.data[i].true_answer == '0'){
                             self.isAnswerTrue = false;
