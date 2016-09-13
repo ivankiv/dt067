@@ -96,10 +96,15 @@
 
             checkAnswers: baseUrl + 'SAnswer/checkAnswers/',
             addTestResult: baseUrl + 'Result/insertData/',
+            delTestResult: baseUrl + 'Result/del/', // + id of session
             getTestResultByStudentId: baseUrl + 'Result/getRecordsbyStudent/', // + id of student
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
             startTestInfoInLog: baseUrl + 'log/startTest/', // + <user_id>/<test_id>
 
             studentsQuantityForStudentState:200
+        })
+        .constant("USER_ROLES", {
+                ADMIN: "admin",
+                USER: "student"
         });
 }());

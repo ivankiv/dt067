@@ -12,8 +12,14 @@
                        ng-model="questions.currentQuestion.attachment"
                        type="file"
                        accept="image/jpeg,image/png,image/gif/svg"/>
-                <img ng-if="questions.currentQuestion.attachment" ng-src="{{questions.currentQuestion.attachment}}" height="100" width="100" alt="Зображення">
-            </div>
+                <div ng-if="questions.currentQuestion.attachment" >
+                <img ng-src="{{questions.currentQuestion.attachment}}" height="100" width="100" alt="Зображення">
+                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                            title="Видалити" ng-click="questions.deleteAttachment()">
+                <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                </div>
+             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3" for="question_text">Завдання: </label>

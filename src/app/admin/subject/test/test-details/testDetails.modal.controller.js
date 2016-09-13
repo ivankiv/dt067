@@ -11,6 +11,7 @@
             //variables
             self.testDetails = {};
             self.currentTestDetails = currentTestDetails;
+            self.levelsOfTasks = [1,2,3,4,5];
             self.amountOfTasksOfCurrentTest = parseFloat(currentTestDetails.tasks);
             self.testDetails.test_id = $stateParams.currentTestId;
             self.availableAmountOfTaskForCurrentTest = availableAmountOfTaskForCurrentTest;

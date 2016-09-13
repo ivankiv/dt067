@@ -37,11 +37,6 @@
                     .then(fulfilled, rejected);
             }
 
-            function getQuestionsByLevelRand(test_id, level, number) {
-                return $http.get(appConstants.getQuestionsByLevelRand + test_id + "/" + level + "/" + number)
-                    .then(fulfilled, rejected);
-            }
-
             function countQuestionsByTest(test_id) {
                 return $http.get(appConstants.countQuestionsByTest + test_id)
                     .then(fulfilled, rejected);

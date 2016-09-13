@@ -85,7 +85,12 @@
                                        ng-model="students.currentObj.email"
                                        ng-pattern="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
                                        required >
-                                <novalidate-messages field="studentEditForm.email" pattern="Некоректні дані!" >
+                                <novalidate-messages field="studentEditForm.email" pattern="Некоректні дані!" ></novalidate-messages>
+                            </td>
+                        </tr>
+                        <tr ng-if="students.wrongData" >
+                            <td colspan="6" class="text-center text-danger">
+                                Користувач з таким логіном існує або введені некоректні дані!
                             </td>
                         </tr>
                         <tr>

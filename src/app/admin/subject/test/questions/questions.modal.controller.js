@@ -21,6 +21,7 @@
             self.addQuestion = addQuestion;
             self.cancelForm = cancelForm;
             self.updateQuestion = updateQuestion;
+            self.deleteAttachment = deleteAttachment;
 
 
             function addQuestion() {
@@ -40,6 +41,10 @@
                     self.question = {};
                     $uibModalInstance.close();
                 }
+            }
+            function deleteAttachment () {
+                self.question.attachment = false;
+                self.currentQuestion.attachment = false;
             }
 
             function updateQuestionComplete(response) {
