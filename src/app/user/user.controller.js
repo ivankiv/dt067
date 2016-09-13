@@ -47,7 +47,7 @@
 
         function logOut() {
             loginService.logOut().then(function (response) {
-                localStorage.clear();
+                localStorage.removeItem('userRole');
                 $state.go('login');
                 return response;
             })
