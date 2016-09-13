@@ -15,7 +15,7 @@
 
 
         //Variables
-        self.maxNumberOfStudents = JSON.parse(localStorage.NumberOfStudents) || 200;
+        self.maxNumberOfStudents = (localStorage.NumberOfStudents)?JSON.parse(localStorage.NumberOfStudents): 200;
         self.currentObj = {};
         self.list = [];
 
@@ -28,6 +28,9 @@
         function set(param) {
             if(param === 'NumberOfStudents') {
                 localStorage.setItem(param, angular.toJson(self.maxNumberOfStudents));
+            }
+            if(param === 'NumberOfLevels') {
+                localStorage.setItem(param, angular.toJson(self.maxNumberOfLevels));
             }
             $window.location.reload();
         }
