@@ -101,10 +101,12 @@
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
             startTestInfoInLog: baseUrl + 'log/startTest/', // + <user_id>/<test_id>
 
-            studentsQuantityForStudentState:200
+            maxNumberOfStudents:(localStorage.NumberOfStudents)?JSON.parse(localStorage.NumberOfStudents):200,
+            numberOfTestsLevels:(localStorage.NumberOfTestLevels)?JSON.parse(localStorage.NumberOfTestLevels):5,
+            numberOfEntitiesPerPage:(localStorage.NumberOfEntities)?JSON.parse(localStorage.NumberOfEntities):5
         })
-        .constant("USER_ROLES", {
-                ADMIN: "admin",
-                USER: "student"
+        .constant("defineUser", {
+                admin: "admin",
+                user: "student"
         });
 }());

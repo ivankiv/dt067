@@ -15,7 +15,7 @@
         self.textSearch = "";
         self.begin = 0;
         self.currentPage = 1;
-        self.specialitiesPerPage = 5;
+        self.specialitiesPerPage = appConstants.numberOfEntitiesPerPage;;
         self.numberToDisplaySpecialitiesOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 

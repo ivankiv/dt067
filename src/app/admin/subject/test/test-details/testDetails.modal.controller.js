@@ -3,15 +3,15 @@
 
     angular.module('app')
         .controller('TestDetailsModalController', testDetailsModalController);
-        testDetailsModalController.$inject = ['testDetailsService', '$stateParams',  '$uibModalInstance', 'currentTestDetails', 'availableAmountOfTaskForCurrentTest'];
+        testDetailsModalController.$inject = ['testDetailsService', '$stateParams',  '$uibModalInstance', 'currentTestDetails', 'availableAmountOfTaskForCurrentTest','appConstants'];
 
-        function testDetailsModalController(testDetailsService, $stateParams,  $uibModalInstance, currentTestDetails, availableAmountOfTaskForCurrentTest) {
+        function testDetailsModalController(testDetailsService, $stateParams,  $uibModalInstance, currentTestDetails, availableAmountOfTaskForCurrentTest,appConstants) {
             var self = this;
 
             //variables
             self.testDetails = {};
             self.currentTestDetails = currentTestDetails;
-            self.levelsOfTasks = [1,2,3,4,5];
+            self.levelsOfTasks =  [];
             self.amountOfTasksOfCurrentTest = parseFloat(currentTestDetails.tasks);
             self.testDetails.test_id = $stateParams.currentTestId;
             self.availableAmountOfTaskForCurrentTest = availableAmountOfTaskForCurrentTest;
@@ -23,6 +23,15 @@
             self.updateTestDetails = updateTestDetails;
             self.cancelForm = cancelForm;
 
+            activate();
+
+            function activate() {
+                for(var i=1;i<=appConstants.numberOfTestsLevels;i++){
+                    self.levelsOfTasks.push(i);
+                    console.log(i);
+                    console.log(self.levelsOfTasks)
+                }
+            }
 
             function addTestDetails() {
                 testDetailsService.addTestDetails(self.testDetails).then(addTestDetailsComplete)
