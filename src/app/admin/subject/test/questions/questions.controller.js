@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal','answersService'];
+        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal','answersService', 'appConstants'];
 
-        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, answersService) {
+        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, answersService, appConstants) {
             var self = this;
 
             //variables
@@ -18,7 +18,7 @@
             self.question_id = $stateParams.questionId;
 
             //variables and methods for pagination
-            self.questionsPerPage = 5;
+            self.questionsPerPage = appConstants.numberOfEntitiesPerPage;
             self.totalQuestions = 0;
             self.currentPage = 1;
             self.pageChanged = pageChanged;

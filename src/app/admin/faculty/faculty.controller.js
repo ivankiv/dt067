@@ -18,7 +18,7 @@
         self.textSearch = "";
         self.begin = 0;
         self.currentPage = 1;
-        self.facultiesPerPage = 5;
+        self.facultiesPerPage = appConstants.numberOfEntitiesPerPage;;
         self.numberToDisplayFacultiesOnPage = [5,10,15,20];
         self.pageChanged = pageChanged;
 

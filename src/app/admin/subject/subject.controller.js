@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('SubjectController', subjectController);
-        subjectController.$inject = ['loginService', 'subjectService', '$uibModal'];
+        subjectController.$inject = ['loginService', 'subjectService', '$uibModal','appConstants'];
 
-        function subjectController(loginService, subjectService, $uibModal) {
+        function subjectController(loginService, subjectService, $uibModal, appConstants) {
             var self = this;
 
             //variables
@@ -17,7 +17,7 @@
             self.textSearch = "";
             self.begin = 0;
             self.currentPage = 1;
-            self.subjectsPerPage = 5;
+            self.subjectsPerPage = appConstants.numberOfEntitiesPerPage;
             self.numberToDisplaySubjectsOnPage = [5,10,15,20];
             self.pageChanged = pageChanged;
 

@@ -5,9 +5,9 @@
         .module("app")
         .controller("StudentEditController", StudentEditController);
 
-    StudentEditController.$inject = ["studentService","groupService","adminService","$stateParams","$uibModal","testService"];
+    StudentEditController.$inject = ["studentService","groupService","adminService","$stateParams","$uibModal","testService",'appConstants'];
 
-    function StudentEditController(studentService, groupService, adminService, $stateParams, $uibModal, testService) {
+    function StudentEditController(studentService, groupService, adminService, $stateParams, $uibModal, testService,appConstants) {
         var self = this;
 
         //Methods
@@ -43,7 +43,7 @@
         self.textSearch = "";
         self.begin = 0;
         self.currentPage = 1;
-        self.studentsPerPage = 5;
+        self.studentsPerPage = appConstants.numberOfEntitiesPerPage;
         self.numberToDisplayStudentsOnPage = [5,10,15,20];
         self.showMessageNoEntity = false;
         self.showMessageNoTestsForStudent= false;
