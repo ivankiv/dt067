@@ -103,8 +103,8 @@
 
             studentsQuantityForStudentState:200
         })
-        .constant("USER_ROLES", {
-                ADMIN: "admin",
-                USER: "student"
+        .constant("defineUser", {
+                admin: "admin",
+                user: "student"
         });
 }());

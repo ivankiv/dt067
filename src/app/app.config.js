@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider', 'USER_ROLES' ,'$httpProvider'];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider', 'defineUser' ,'$httpProvider'];
 
-function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USER_ROLES , $httpProvider) {
+function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , defineUser , $httpProvider) {
 
     $httpProvider.interceptors.push('spinnerService');
 
@@ -27,7 +27,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
             templateUrl: 'app/user/user.html',
             controller: 'UserController as user',
             data: {
-                authorizedRole: USER_ROLES.USER
+                role: defineUser.user
             }
         })
 
@@ -36,7 +36,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
             templateUrl: 'app/user/tests/test-player/test-player.html',
             controller: 'TestPlayerController as player',
             data: {
-                authorizedRole: USER_ROLES.USER
+                role: defineUser.user
             }
         })
 
@@ -49,7 +49,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 }
             },
             data: {
-                authorizedRole: USER_ROLES.USER
+                role: defineUser.user
             }
         })
 
@@ -61,11 +61,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                     controller: 'ResultUserController as result'
                 }
             },
-            ncyBreadcrumb: {
-                label: 'Результати'
-            },
             data: {
-                authorizedRole: USER_ROLES.USER
+                role: defineUser.user
             }
         })
 
@@ -77,7 +74,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Головна'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -93,7 +90,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Налаштування'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -109,7 +106,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Предмети'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -126,7 +123,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.subject'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -143,7 +140,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.groups'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -159,7 +156,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Групи'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -176,7 +173,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.speciality'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -193,7 +190,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.faculty'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -210,7 +207,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.subject'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -227,7 +224,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.test'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -244,7 +241,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.questions'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -261,7 +258,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.test'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -277,7 +274,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Спеціальності'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -290,10 +287,10 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 }
             },
             ncyBreadcrumb: {
-                label: 'Факультет'
+                label: 'Факультети'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -306,7 +303,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 }
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -322,7 +319,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Адміністратори'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -338,7 +335,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 label: 'Студенти'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         })
 
@@ -355,7 +352,7 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , USE
                 parent: 'admin-home.groups'
             },
             data: {
-                authorizedRole: USER_ROLES.ADMIN
+                role: defineUser.admin
             }
         });
 }
