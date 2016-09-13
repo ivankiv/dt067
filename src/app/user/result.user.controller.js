@@ -7,7 +7,7 @@
 
     ResultUserController.$inject = ["studentService","loginService","testService"];
 
-    function ResultUserController(studentService, loginService,testService) {
+    function ResultUserController(studentService, loginService, testService) {
         var self = this;
 
         self.userId = 0;
@@ -37,7 +37,7 @@
                             });
                             result.answers = JSON.parse(result.answers.replace(/&quot;/g, '"'));
                             result.questions = JSON.parse(result.questions.replace(/&quot;/g, '"'));
-                            result.true_answers = JSON.parse(result.true_answers .replace(/&quot;/g, '"'));
+                            result.true_answers = JSON.parse(result.true_answers.replace(/&quot;/g, '"'));
                             return  result;
                         })
                     }

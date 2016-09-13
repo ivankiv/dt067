@@ -5,9 +5,9 @@
     angular.module('app')
         .controller('TestPlayerController', TestPlayerController);
 
-    TestPlayerController.$inject = ['$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
+    TestPlayerController.$inject = ['testDetailsService', '$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController ($state, loginService, $stateParams, questionsService, testPlayerService,$interval, $uibModal,$q) {
+    function TestPlayerController (testDetailsService, $state, loginService, $stateParams, questionsService, testPlayerService, $interval, $uibModal,$q) {
 
         var self = this;
 
@@ -31,6 +31,7 @@
         self.questionsIdForResult = [];
         self.answersIdForResult = [];
         self.true_answers = [];
+        self.amountOfRate;
 
         //methods
         self.getTimerValue;
@@ -178,12 +179,15 @@
                         .then(function () {
                             $state.go('user.results');
                     })
-                })
+                });
+
+            getTotalPointsOfTest();
+
         }
 
         function calculateResultOfTest(answers) {
 
-            //get rate of questions for calculating result of test, which were stored on the server before.
+            //get rate of questions for calculating total amount of points of test answers
            return testPlayerService.getRateOfQuestion().then(function(response) {
                 var result = 0;
                 var score = [];
@@ -198,24 +202,43 @@
             });
         }
 
+        function getTotalPointsOfTest() {
+            testDetailsService.getTestDetailsByTest(self.test_id).then(getTestDetails)
+        }
+
+        function getTestDetails(response) {
+            self.list = response.data;
+            calculateAvailableTask();
+
+            function calculateAvailableTask() {
+                self.amountOfRate = 0;
+
+                angular.forEach(self.list, function(item) {
+                    //calculate amount of rate per current test
+                    self.amountOfRate += item.rate * item.tasks;
+                });
+            }
+        }
+
         function saveResult(resultOfTest) {
-            var questionsIdForResult =angular.toJson(self.questionsIdForResult);
+            var questionsIdForResult = angular.toJson(self.questionsIdForResult);
             var true_answers = angular.toJson(self.true_answers);
             var answersIdForResult = angular.toJson(self.listOfQuestionsId);
             var startTime = new Date(localStorage.startTime*1000).toTimeString().split(" ")[0];
+            self.amountOfRate = self.amountOfRate.toString();
             return getServerTime()
                 .then(function () {
                     var endTime = new Date(self.currentBackendTime).toTimeString().split(" ")[0];
                     var result = {
-                        student_id:   self.user_id,
-                        test_id:      self.test_id,
-                        session_date: new Date(),
-                        start_time:   startTime,
-                        end_time:     endTime,
-                        result:       resultOfTest,
-                        questions:    questionsIdForResult,
-                        true_answers: true_answers,
-                        answers:      answersIdForResult
+                        student_id:      self.user_id,
+                        test_id:         self.test_id,
+                        session_date:    new Date(),
+                        start_time:      startTime,
+                        end_time:        endTime,
+                        result:          resultOfTest,
+                        questions:       questionsIdForResult,
+                        true_answers:    true_answers,
+                        answers:         self.amountOfRate
                     };
                    return testPlayerService.saveResult(result);
             })
