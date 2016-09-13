@@ -101,7 +101,7 @@
             countTestPassesByStudent: baseUrl + 'result/countTestPassesByStudent/', // + id`s of student and test
             startTestInfoInLog: baseUrl + 'log/startTest/', // + <user_id>/<test_id>
 
-            studentsQuantityForStudentState:200
+            maxNumberOfStudents:(localStorage.NumberOfStudents)?JSON.parse(localStorage.NumberOfStudents):200
         })
         .constant("defineUser", {
                 admin: "admin",

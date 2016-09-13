@@ -43,8 +43,8 @@
                 }
             }
             function deleteAttachment () {
-                self.question.attachment = false;
-                self.currentQuestion.attachment = false;
+                self.question.attachment = '';
+                self.currentQuestion.attachment = '';
             }
 
             function updateQuestionComplete(response) {

@@ -5,9 +5,9 @@
         .module('app')
         .controller('ConfigController', ConfigController);
 
-    ConfigController.$inject = ['$uibModal'];
+    ConfigController.$inject = ['$uibModal','$window'];
 
-    function ConfigController($uibModal) {
+    function ConfigController($uibModal,$window) {
         var self = this;
 
         //Methods
@@ -15,7 +15,7 @@
 
 
         //Variables
-        self.maxNumberOfStudents = 200;
+        self.maxNumberOfStudents = (localStorage.NumberOfStudents)?JSON.parse(localStorage.NumberOfStudents): 200;
         self.currentObj = {};
         self.list = [];
 
@@ -29,6 +29,10 @@
             if(param === 'NumberOfStudents') {
                 localStorage.setItem(param, angular.toJson(self.maxNumberOfStudents));
             }
+            if(param === 'NumberOfLevels') {
+                localStorage.setItem(param, angular.toJson(self.maxNumberOfLevels));
+            }
+            $window.location.reload();
         }
     }
 }());

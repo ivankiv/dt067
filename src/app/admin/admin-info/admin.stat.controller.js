@@ -32,7 +32,7 @@
 
         function logOut() {
             loginService.logOut().then(function (response) {
-                localStorage.clear();
+                localStorage.removeItem('userRole');
                 $state.go('login');
                 return response;
             })
@@ -59,7 +59,7 @@
         function getStudentsQuantity (){
             adminStatisticService.getStudentsQuantity().then(function (data) {
                 self.studentsQuantity = data.data.numberOfRecords;
-                self.tooManyStudents = appConstants.studentsQuantityForStudentState < self.studentsQuantity;
+                self.tooManyStudents = appConstants.maxNumberOfStudents < self.studentsQuantity;
             });
         }
 
