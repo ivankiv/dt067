@@ -3,9 +3,9 @@
 
     angular.module('app')
         .controller('QuestionsController', questionsController);
-        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal'];
+        questionsController.$inject = ['loginService', 'questionsService', '$stateParams', 'testService', '$uibModal','answersService'];
 
-        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal) {
+        function questionsController (loginService, questionsService, $stateParams, testService, $uibModal, answersService) {
             var self = this;
 
             //variables
@@ -15,12 +15,14 @@
             self.nameOfType = ['', 'Простий вибір', 'Мульти вибір'];
             self.begin = 0;
             self.showMessageNoEntity = false;
+            self.question_id = $stateParams.questionId;
 
             //variables and methods for pagination
             self.questionsPerPage = 5;
             self.totalQuestions = 0;
             self.currentPage = 1;
             self.pageChanged = pageChanged;
+
 
 
             //methods
@@ -30,6 +32,7 @@
             self.showAddQuestionForm = showAddQuestionForm;
             self.showEditQuestionForm = showEditQuestionForm;
             self.showLargeQuestionImage = showLargeQuestionImage;
+            self.getAnswersByQuestionID = getAnswersByQuestionID;
 
             activate();
 
@@ -38,10 +41,36 @@
                 getOneTest();
                 countQuestionsByTest();
                 getQuestionsRangeByTest();
+                getAnswersByQuestionID();
             }
 
             function isLogged() {
                 loginService.isLogged();
+            }
+
+            function getAnswersByQuestionID() {
+                answersService.getAnswersByQuestion(self.question_id)
+                    .then(getAnswersByQuestionComplete)
+            }
+
+
+            function getAnswersByQuestionComplete(response) {
+                console.log(response);
+                // if(response.data.response === 'no records') {
+                //     self.showMessageNoEntity = true;
+                // } else {
+                //     if(self.CurrentQuestionType === '1') {
+                //         for (var i = 0; i < response.data.length; i++) {
+                //             if (response.data[i].true_answer == '1') {
+                //                 self.isAnswerTrue = true;
+                //                 break;
+                //             } else if(response.data[i].true_answer == '0'){
+                //                 self.isAnswerTrue = false;
+                //             }
+                //         }
+                //     }
+                //     self.list = response.data;
+                // }
             }
 
             function pageChanged() {
