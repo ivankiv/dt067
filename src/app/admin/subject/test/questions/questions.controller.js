@@ -98,7 +98,7 @@
                         backdrop: true
                     });
 
-                    countQuestionsByTest().then(getQuestionsRangeByTest)
+                    countQuestionsByTest().then(pageChanged);
 
                 }
 
@@ -149,7 +149,7 @@
                         backdrop: true
                     });
                     self.showMessageNoEntity = false;
-                    activate();
+                    countQuestionsByTest().then(pageChanged);
                 })
             }
 

@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('app')
-        .directive('checkPagination', function() {
+        .directive('checkPagination', function(appConstants) {
+            var itemPerPage = appConstants.numberOfEntitiesPerPage;
             return {
                 restrict: 'A',
                 scope: {
@@ -12,20 +13,9 @@
                 },
                 require: 'ngModel',
                 link: function(scope, element) {
-                    element.bind('keydown',  function() {
+                    element.bind('keyup',  function() {
                         scope.$apply(function() {
-                            scope.itemsPerPage = scope.totalItems;
-                        })
-                    });
-                    element.bind('change',  function() {
-                        scope.$apply(function() {
-                            scope.itemsPerPage = scope.totalItems;
-                        })
-                    });
-                    element.bind('blur', function() {
-                        scope.$apply(function() {
-                            scope.textSearch = "";
-                            scope.itemsPerPage = 5;
+                            scope.itemsPerPage = scope.textSearch ? scope.totalItems : itemPerPage
                         })
                     });
                 }

@@ -26,22 +26,22 @@
         padding: 0 5px;
         text-align: right;
         display: inline-block;
+        float: right;
         .timeleft-sign{
           font-weight: bold;
           color: $white;
         }
         .timer{
-          display: inline-block;
-          padding: 5px 5px;
-          font-weight: bold;
-          color: $black;
-          border: 2px solid $player-border;
-          border-radius: 3px;
-          background-color: $player-box-bg;
+          position: relative;
+          .timer-value{
+            position: absolute;
+            display: block;
+            width: 100%;
+            color: $black;
+            font-weight: bold;
+            text-align: center;
+          }
         }
-        .danger-color{
-           background-color: $error-message;
-         }
       }
     }
     .player-wrap{

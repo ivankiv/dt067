@@ -18,12 +18,19 @@
                     <div class="main-test-box">
 
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 timer-and-questionNum-box">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 questionNum-box">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 questionNum-box">
                                 <span class="questionNum-sign">Завдання {{+player.currentQuestion_index +1}} із {{player.currentTest.tasks}}</span>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 timer-box">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 timer-box">
                                 <span class="timeleft-sign">Залишилось часу:</span>
-                                <div class="timer {{player.timerBackground}}">{{player.timerValue | date: 'HH:mm:ss' : '+0000'}}</div>
+
+                                <uib-progress class="timer">
+                                    <uib-bar class="progress-bar-striped active" max="100"
+                                             value="player.progressBarValue" type="{{player.progressBarType}}">
+                                    </uib-bar>
+                                    <span class="timer-value">{{player.timerValue | date: 'HH:mm:ss' : '+0000'}}</span>
+                                </uib-progress>
+
                             </div>
                         </div>
 
