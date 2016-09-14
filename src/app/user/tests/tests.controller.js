@@ -64,7 +64,7 @@
         function getServerTime() {
             return testPlayerService.getServerTime()
                 .then(function (response) {
-                    self.current_date = response.data.curtime * 1000;
+                    self.current_date = response.data.unix_timestamp * 1000;
                 });
         }
 
