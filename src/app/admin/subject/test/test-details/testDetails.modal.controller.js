@@ -28,8 +28,6 @@
             function activate() {
                 for(var i=1;i<=appConstants.numberOfTestsLevels;i++){
                     self.levelsOfTasks.push(i);
-                    console.log(i);
-                    console.log(self.levelsOfTasks)
                 }
             }
 

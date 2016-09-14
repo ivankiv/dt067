@@ -55,14 +55,10 @@
         function authorizeRole() {
             return $http.get(appConstants.isLoggedURL)
                 .then(function(response) {
-                    if (response.data.response === "logged" &&
-                       (response.data.roles[1] === defineUser.admin || response.data.roles[1] === defineUser.user)) {
-                        return true;
-                    } else {
-                        return false;                    }
-
+                    return  (response.data.response === "logged" &&
+                            (response.data.roles[1] === defineUser.admin || response.data.roles[1] === defineUser.user));
                 }, function (response) {
-                    return false;
+                    return response;
                 });
         }
     }
