@@ -25,14 +25,7 @@
         activate();
 
         function activate() {
-            getServerTime()
-                .then(getScheduleForGroup)
-                .then(
-                function () {
-                    console.log(self.listOfTests);
-                }
-            );
-            studentService.getStudents(self.group_id)
+            getServerTime().then(getScheduleForGroup);
         }
 
 
@@ -52,6 +45,7 @@
                                     var testDate = new Date(test.date).valueOf();
                                     if(testDate <= self.current_date){
                                         self.listOfTests.push(test);
+                                        console.log(self.listOfTests);
                                         self.showMessageNoEntity = false;
                                     }
                                 }
