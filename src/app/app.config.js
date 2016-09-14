@@ -112,6 +112,22 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
             }
         })
 
+        .state('admin-home.test-stats-result', {
+            url: '/:group_id/result/:test_id/graphicalStatistics',
+            views: {
+                'content': {
+                    templateUrl: 'app/admin/result/graphicalStatistics.html',
+                    controller: 'TestResultController as result'
+                }
+            },
+            ncyBreadcrumb: {
+                label: 'Графік результатів'
+            },
+            data: {
+                role: defineUser.admin
+            }
+        })
+
         .state('admin-home.config', {
             url: '/config',
             views: {

@@ -485,7 +485,7 @@ aside.wrapForQuestions {
       width: 22%;
     }
     &:last-child {
-      width: 22%;
+      width: 20%;
     }
   }
 }
@@ -496,7 +496,30 @@ aside.wrapForQuestions {
     }
   }
 }
-
+.question-table {
+  th{
+    &:first-child {
+      width: 11%;
+    }
+    &:nth-child(2) {
+      width: 18%;
+    }
+    &:nth-child(3) {
+      width: 20%;
+    }
+    &:nth-child(4) {
+      width: 15%;
+    }
+    &:last-child {
+      width: 15%;
+    }
+  }
+  td {
+    &:last-child {
+      float: none;
+    }
+  }
+}
 .test-table{
   th{
     &:first-child {
@@ -601,4 +624,9 @@ aside.wrapForQuestions {
   margin-right: 3px;
   margin-bottom: 1px;
   background-color: $error-message;
+}
+.config-button{
+  a{
+    padding-left: 0 !important;
+  }
 }
