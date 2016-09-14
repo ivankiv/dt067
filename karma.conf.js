@@ -4,7 +4,7 @@ module.exports = function(config) {
     config.set({
 
         //base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '../',
+        basePath: './',
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -21,8 +21,7 @@ module.exports = function(config) {
             "bower_components/angular-toArrayFilter/toArrayFilter.js",
             'bower_components/angular-mocks/angular-mocks.js',
             "src/app/app.module.js",
-            'src/app/**/**/*.js',
-            'test/unit/**/*.js'
+            'src/app/**/**/*.js'
         ],
 
         // list of files to exclude
@@ -44,7 +43,7 @@ module.exports = function(config) {
         reporters: ['progress', 'html'],
 
         htmlReporter: {
-            outputFile: "test/units.html"
+            outputFile: "units.html"
         },
 
         // web server port
