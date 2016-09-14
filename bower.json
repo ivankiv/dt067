@@ -54,6 +54,27 @@
         "ui-bootstrap-tpls.min.js",
         "ui-bootstrap-csp.css"
       ]
+    },
+    "angular": {
+      "main": "angular.min.js"
+    },
+    "angular-ui-router": {
+      "main": "./release/angular-ui-router.min.js"
+    },
+    "angular-messages": {
+      "main": "angular-messages.min.js"
+    },
+    "angular-route": {
+      "main": "angular-route.min.js"
+    },
+    "angular-animate": {
+      "main": "angular-animate.min.js"
+    },
+    "angular-breadcrumb": {
+      "main": "./dist/angular-breadcrumb.min.js"
+    },
+    "jquery": {
+      "main": "./dist/jquery.min.js"
     }
   }
 }
