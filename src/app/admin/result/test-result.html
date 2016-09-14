@@ -1,0 +1,41 @@
+<section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4 class='text-center'><span class='pull-left'>Результати тесту</span>&nbsp</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="admin-home.result({group_id:result.group_id})">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                </div>
+                <table ng-if="!students.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Дата проведення</th>
+                        <th>ПІБ</th>
+                        <th>Результат</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="result in result.resultList track by $index">
+                        <td data-th="Дата проведення">{{::result.session_date}}</td>
+                        <td data-th="Назва тесту">{{::result.test_name}}</td>
+                        <td data-th="Результат">{{::result.result}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="result.showMessageNoTestsForStudent" class="text-center">
+                    <h1>Cтудент не здавав жодного тесту!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
