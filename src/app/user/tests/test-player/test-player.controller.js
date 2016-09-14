@@ -32,6 +32,8 @@
         self.answersIdForResult = [];
         self.true_answers = [];
         self.amountOfRate;
+        self.progressBarType = '';
+        self.progressBarValue;
 
         //methods
         self.getTimerValue;
@@ -85,13 +87,21 @@
         }
 
         function getTimerValue () {
+            var testDuration = self.currentTest.time_for_test * 60000;
+
             self.timer = $interval(function () {
                 self.timerValue = self.endTime - new Date().valueOf();
-                if (self.timerValue > 60000){
-                    self.timerBackground = 'norm-color';
-                } else if (self.timerValue <= 60000 && self.timerValue > 0){
-                    self.timerBackground = 'danger-color';
-                } else if (self.timerValue <= 0) {
+                self.progressBarValue = self.timerValue / testDuration * 100;
+
+                if (self.progressBarValue > 50) {
+                    self.progressBarType = 'info';
+                } else if (self.progressBarValue > 25) {
+                    self.progressBarType = 'warning';
+                } else {
+                    self.progressBarType = 'danger';
+                }
+
+                if (self.timerValue <= 0) {
                     $interval.cancel(self.timer);
                     finishTest();
                 }
