@@ -25,7 +25,8 @@
     "angular-toArrayFilter": "^1.0.1",
     "font-awesome": "fontawesome#^4.6.3",
     "angular-breadcrumb": "~0.4.1",
-    "angular-mocks": "^1.5.8"
+    "angular-mocks": "^1.5.8",
+    "angular-fusioncharts": "^0.0.2"
   },
   "overrides": {
     "bootstrap": {
@@ -55,6 +56,30 @@
         "ui-bootstrap-tpls.min.js",
         "ui-bootstrap-csp.css"
       ]
+    },
+    "angular": {
+      "main": "angular.min.js"
+    },
+    "angular-ui-router": {
+      "main": "./release/angular-ui-router.min.js"
+    },
+    "angular-messages": {
+      "main": "angular-messages.min.js"
+    },
+    "angular-route": {
+      "main": "angular-route.min.js"
+    },
+    "angular-animate": {
+      "main": "angular-animate.min.js"
+    },
+    "angular-breadcrumb": {
+      "main": "./dist/angular-breadcrumb.min.js"
+    },
+    "jquery": {
+      "main": "./dist/jquery.min.js"
+    },
+    "angular-fusioncharts": {
+      "main": "./dist/angular-fusioncharts.min.js"
     }
   }
 }
