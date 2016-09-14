@@ -9,8 +9,7 @@
   },
   "author": "IF-067 group",
   "license": "ISC",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "del": "^2.2.1",
     "gulp": "^3.9.1",
@@ -33,8 +32,13 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.9",
+    "jasmine-core": "^2.5.1",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-htmlfile-reporter": "^0.3.4",
+    "karma-jasmine": "^1.0.2",
     "run-sequence": "^1.2.2",
     "wiredep": "^4.0.0",
     "yargs": "^4.8.1"

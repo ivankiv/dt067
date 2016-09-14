@@ -28,7 +28,7 @@
         self.speciality_id = $stateParams.currentSpecialityId;
         self.faculty_id = $stateParams.faculty_id;
         self.currentPage = 1;
-        self.groupsPerPage = appConstants.numberOfEntitiesPerPage;;
+        self.groupsPerPage = appConstants.numberOfEntitiesPerPage;
         self.numberToDisplayGroupsOnPage = [5,10,15,20];
 
         //methods

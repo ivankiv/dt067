@@ -24,6 +24,7 @@
     "angular-messages": "^1.5.8",
     "angular-toArrayFilter": "^1.0.1",
     "angular-breadcrumb": "~0.4.1",
+    "angular-mocks": "^1.5.8",
     "angular-fusioncharts": "^0.0.2"
   },
   "overrides": {
