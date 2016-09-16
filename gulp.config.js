@@ -8,7 +8,7 @@ module.exports = function() {
 
         /*** file path ****/
         temp: temp,
-        alljs: ['./src/**/*.js', './*.js'],
+        alljs: ['./src/**/*.js', './*.js', '!./src/**/*.spec.js'],
         sass: client + 'sass/styles.scss',
         sassWatch: client + 'sass/**/*scss',
         index: client + 'index.html',

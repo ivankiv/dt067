@@ -77,7 +77,7 @@ gulp.task('templateCache', function() {
 
 gulp.task('concatJS', ['templateCache'], function() {
     log('Concating application"s js-file');
-    return gulp.src([config.alljs[0], config.templateCache.src])
+    return gulp.src([config.alljs[0], config.alljs[2], config.templateCache.src])
         .pipe($.sourcemaps.init())
         .pipe($.plumber())
         .pipe($.angularFilesort())

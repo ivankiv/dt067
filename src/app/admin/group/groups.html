@@ -29,6 +29,7 @@
                     </div>
                     <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
+                            id="facultyDropdown"
                             ng-model="groups.textSearch"
                             ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList"
                             check-pagination
@@ -36,11 +37,12 @@
                             total-items="groups.totalGroups"
                             text-search="groups.textSearch">
                             <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                            <option disabled selected value="">Виберіть факультет </option>
+                            <option disabled selected value="">Виберіть факультет</option>
                         </select>
                     </div>
                     <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
+                                id="specialityDropdown"
                                 ng-model="groups.textSearch"
                                 ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList"
                                 check-pagination
@@ -90,7 +92,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="group in groups.list | toArray | filter: groups.textSearch | limitTo: groups.groupsPerPage : groups.begin">
+                        <tr ng-repeat="group in groups.list
+                            | toArray | filter: groups.textSearch
+                            | limitTo: groups.groupsPerPage : groups.begin">
                             <td  data-th="Номер">{{$index + (groups.currentPage - 1) * groups.groupsPerPage + 1}}</td>
                             <td data-th="Назва">{{::group.group_name}}</td>
                             <td data-th="Факультет">{{::groups.associativeFaculty[group.faculty_id]}}</td>
