@@ -630,3 +630,8 @@ aside.wrapForQuestions {
     padding-left: 0 !important;
   }
 }
+.print-result {
+  @media print {
+    width:1200px;
+  }
+}

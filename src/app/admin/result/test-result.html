@@ -1,4 +1,4 @@
-<section id="main-content">
+<section id="main-content" class="print-result">
     <!--BEGIN SPINNER-->
     <div id="loaderSpin" spinner class="hidden">
         <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
@@ -11,12 +11,13 @@
                     <h4 class='text-center'><span class='pull-left'>Результати тесту {{result.test_name}}</span>&nbsp</h4>
                 </div>
                 <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
-                    <button type="button" class="btn btn-danger pull-right"
+                    <button type="button" class="btn btn-danger pull-right hidden-print "
                             ui-sref="admin-home.result({group_id:result.group_id})">
                         <i class="glyphicon glyphicon-share-alt"> Назад</i>
                     </button>
 
-                    <button type="button" title="Переглянути графік результатів" ui-sref="admin-home.test-stats-result({test_id: result.test_id, group_id:result.group_id})" class="btn pull-right btn-success add-btn">
+                    <button type="button" title="Переглянути графік результатів" ui-sref="admin-home.test-stats-result({test_id: result.test_id, group_id:result.group_id})"
+                            class="btn pull-right btn-success add-btn hidden-print ">
                         <i class="glyphicon glyphicon-stats"></i>
                     </button>
                 </div>
