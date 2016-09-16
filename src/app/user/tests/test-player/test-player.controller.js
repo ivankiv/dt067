@@ -7,7 +7,7 @@
 
     TestPlayerController.$inject = ['testDetailsService', '$state','loginService','$stateParams','questionsService','testPlayerService', '$interval','$uibModal','$q'];
 
-    function TestPlayerController (testDetailsService, $state, loginService, $stateParams, questionsService, testPlayerService, $interval, $uibModal,$q) {
+    function TestPlayerController (testDetailsService, $state, loginService, $stateParams, questionsService, testPlayerService, $interval, $uibModal, $q) {
 
         var self = this;
 
