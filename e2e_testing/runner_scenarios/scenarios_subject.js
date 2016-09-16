@@ -60,20 +60,27 @@ describe('D-Tester App E2E Testing', function() {
 
     describe('Testing CRUD for subject', function() {
         var buttonAddSubject = element(by.css('[title="Додати предмет"]'));
+        var buttonEditSubject = element(by.css('[title="Редагувати"]'));
+        var buttonDeleteSubject = element(by.css('[ title="Видалити"]'));
         var subjectName = 'Oснови JAVA';
 
+        //******************************************************
+                    //Testing whether we can add new subject
+        //******************************************************
         it('should add new subject to subject list', function() {
 
             buttonAddSubject.click();
 
-            var enterSubjectName = element(by.model('subjects.subject.subject_name'));
-            var enterSubjectDescription = element(by.model('subjects.subject.subject_description'));
+            var SubjectName = element(by.model('subjects.subject.subject_name'));
+            var SubjectDescription = element(by.model('subjects.subject.subject_description'));
             var submit = element.all(by.buttonText('Додати предмет'));
 
-            enterSubjectName.sendKeys(subjectName);
-            enterSubjectDescription.sendKeys(subjectName);
+            SubjectName.sendKeys(subjectName);
+            SubjectDescription.sendKeys(subjectName);
 
             submit.click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
 
             searchInput.clear();
             searchInput.sendKeys(subjectName);
@@ -81,8 +88,65 @@ describe('D-Tester App E2E Testing', function() {
             var subject_name = element.all(by.repeater('subject in subjects.list'))
                 .first().element(by.binding('subject.subject_name'));
 
-            // Verify that name of subject after filtering is Основи JavaScript
+            // Verify that name of subject after filtering is Основи JAVA
             expect(subject_name.getText()).toContain(subjectName);
+        });
+
+        //******************************************************
+                //Testing whether we can edit subject
+        //******************************************************
+
+        it('should edit subject', function() {
+            var SubjectName = element(by.model('subjects.currentSubject.subject_name'));
+            var SubjectDescription = element(by.model('subjects.currentSubject.subject_description'));
+            var submit = element.all(by.buttonText('Зберегти'));
+
+            searchInput.clear();
+            searchInput.sendKeys(subjectName);
+
+            buttonEditSubject.click();
+
+            SubjectName.clear();
+            SubjectDescription.clear();
+            SubjectName.sendKeys(subjectName);
+            SubjectDescription.sendKeys(subjectName+ " number#1");
+
+            submit.click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
+
+            searchInput.clear();
+            searchInput.sendKeys(subjectName);
+
+            var subject_description = element.all(by.repeater('subject in subjects.list'))
+                .first().element(by.binding('subject.subject_description'));
+
+            // Verify that description of subject after filtering is <Основи JAVA number#1>
+            expect(subject_description.getText()).toContain(subjectName+ " number#1");
+        });
+
+        //******************************************************
+                //Testing whether we can delete subject
+        //******************************************************
+
+        it('should delete subject', function() {
+            var submit = element.all(by.buttonText('Гаразд'));
+
+            searchInput.clear();
+            searchInput.sendKeys(subjectName);
+
+            buttonDeleteSubject.click();
+
+            browser.waitForAngular();
+            submit.click();
+            element(by.buttonText('Гаразд')).click();
+
+            searchInput.clear();
+            searchInput.sendKeys(subjectName);
+
+            // Verify that there isn't any subject with name of <Основи JAVA number#1>
+            expect(element.all(by.repeater('subject in subjects.list'))
+                .count()).toEqual(0);
         });
     });
 });
