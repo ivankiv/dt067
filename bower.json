@@ -65,9 +65,6 @@
     },
     "jquery": {
       "main": "./dist/jquery.min.js"
-    },
-    "angular-fusioncharts": {
-      "main": "./dist/angular-fusioncharts.min.js"
     }
   }
 }
