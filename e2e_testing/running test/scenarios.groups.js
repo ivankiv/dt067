@@ -112,7 +112,7 @@ describe('D-Tester App E2E Testing', function() {
         //Test create group
 
         it('should create group as', function() {
-            var groupNameAdd = 'НН-03-9';
+            var groupNameAdd = 'DD-05-9';
             element.all(by.name('add')).click();
             var createGroupInput = element(by.model('groups.group.group_name'));
             createGroupInput.sendKeys(groupNameAdd);
@@ -161,11 +161,11 @@ describe('D-Tester App E2E Testing', function() {
                expect(name_of_group.getText()).toContain(groupName);
            });
 
-            var groupNameEdit = 'РА-08-3';
+            var groupNameEdit = 'DD-05-9';
             element.all(by.name('editGroup')).click();
             var editGroupInput = element(by.model('groups.group.group_name'));
             editGroupInput.clear();
-            createGroupInput.sendKeys(groupNameEdit);
+            editGroupInput.sendKeys(groupNameEdit);
             element.all(by.css('#fadescription')).click()
                 .then(function(option){
                     option = element.all(by.css('#fadescription option'))
@@ -181,6 +181,7 @@ describe('D-Tester App E2E Testing', function() {
                         });
                 });
             element(by.buttonText('Редагувати групу')).click();
+            browser.waitForAngular();
             element(by.buttonText('Гаразд')).click();
 
             var search = element(by.model('groups.textSearch'));
