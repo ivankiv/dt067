@@ -16,6 +16,7 @@
                             ng-change="subjects.pageChanged()"
                             name="subjectsPerPage"
                             title="Кількість записів на сторінці">
+                            <option selected value="">{{subjects.subjectsPerPage}}</option>
                     </select>
                     <button type="button" class="btn btn-success add-btn" title="Додати предмет"
                        ng-click="subjects.showAddSubjectForm()"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
