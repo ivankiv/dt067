@@ -1,7 +1,7 @@
 exports.config = {
     allScriptsTimeout: 11000,
     specs: [
-        'e2e_testing/*.js'
+        'e2e_testing/running test/*.js'
     ],
     capabilities: {
         'browserName': 'chrome'
