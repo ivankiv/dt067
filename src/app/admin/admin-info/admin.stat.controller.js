@@ -22,12 +22,17 @@
         activate();
 
         function activate() {
+            isLogged();
             getFacultiesQuantity();
             getSpecialitiesQuantity();
             getGroupsQuantity();
             getStudentsQuantity();
             getSubjectsQuantity();
             getTestsQuantity();
+        }
+
+        function isLogged() {
+            loginService.isLogged();
         }
 
         function logOut() {
