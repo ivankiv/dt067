@@ -25,7 +25,6 @@
                                total-items="groups.totalGroups"
                                text-search="groups.textSearch"
                                ng-model="groups.textSearch"/>
-
                     </div>
                     <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
@@ -79,8 +78,8 @@
                                 ng-change="groups.pageChanged()"
                                 name="groupsPerPage"
                                 title="Кількість записів на сторінці">
+                                <option selected value="">{{groups.groupsPerPage}}</option>
                         </select>
-
                 </div>
                 <table class="rwd-table groups-table table-striped">
                     <thead>
