@@ -68,7 +68,7 @@
                         <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
                     </button>
 
-                    <button type="button" class="btn btn-success add-btn selct-search-group" title="Додати групу"
+                    <button type="button" class="btn btn-success add-btn selct-search-group" title="Додати групу" name="add"
                             ng-click="groups.showAddGroupForm()"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
                     </button>
 
@@ -109,6 +109,7 @@
                                 <button type="button"
                                         class="btn btn-warning pull-right table-help-btns group-help-btns"
                                         title="Редагувати"
+                                        name="editGroup"
                                         ng-click="groups.showEditGroupForm(group);">
                                     <i class="glyphicon glyphicon-pencil"></i>
                                 </button>

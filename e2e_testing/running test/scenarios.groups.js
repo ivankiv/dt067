@@ -81,7 +81,7 @@ describe('D-Tester App E2E Testing', function() {
             var search = element(by.css('input'));
             element.all(by.css('#facultyDropdown')).click()
                 .then(function(option){
-                    option = element.all(by.css('option'))
+                    option = element.all(by.css('#facultyDropdown option'))
                         .then(function (option) {
                             option[2].click();
                         });
@@ -97,7 +97,7 @@ describe('D-Tester App E2E Testing', function() {
             var search = element(by.css('input'));
             element.all(by.css('#specialityDropdown')).click()
                 .then(function(option){
-                    option = element.all(by.css('option'))
+                    option = element.all(by.css('#specialityDropdown option'))
                         .then(function (option) {
                             option[2].click();
                         });
@@ -108,6 +108,93 @@ describe('D-Tester App E2E Testing', function() {
 
             search.clear();
         });
+
+        //Test create group
+
+        it('should create group as', function() {
+            var groupNameAdd = 'НН-03-9';
+            element.all(by.name('add')).click();
+            var createGroupInput = element(by.model('groups.group.group_name'));
+            createGroupInput.sendKeys(groupNameAdd);
+            element.all(by.css('#fadescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#fadescription option'))
+                        .then(function (option) {
+                            option[2].click();
+                        });
+                });
+            element.all(by.id('specialityDescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#specialityDescription option'))
+                        .then(function (option) {
+                            option[3].click();
+                        });
+                });
+            element(by.buttonText('Додати групу')).click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
+            var search = element(by.model('groups.textSearch'));
+            search.clear();
+            search.sendKeys(groupNameAdd);
+            expect(element.all(by.repeater('group in groups.list'))
+                .count()).toEqual(1);
+            var name_of_group = element.all(by.repeater('group in groups.list'))
+                .first().element(by.binding('group.group_name'));
+
+            expect(name_of_group.getText()).toContain(groupNameAdd);
+
+
+
+        });
+
+        //Test edit group
+
+        it('should create group as', function() {
+           beforeEach(function () {
+               var search = element(by.model('groups.textSearch'));
+               search.clear();
+               search.sendKeys(groupName);
+               expect(element.all(by.repeater('group in groups.list'))
+                   .count()).toEqual(1);
+               var name_of_group = element.all(by.repeater('group in groups.list'))
+                   .first().element(by.binding('group.group_name'));
+               expect(name_of_group.getText()).toContain(groupName);
+           });
+
+            var groupNameEdit = 'РА-08-3';
+            element.all(by.name('editGroup')).click();
+            var editGroupInput = element(by.model('groups.group.group_name'));
+            editGroupInput.clear();
+            createGroupInput.sendKeys(groupNameEdit);
+            element.all(by.css('#fadescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#fadescription option'))
+                        .then(function (option) {
+                            option[2].click();
+                        });
+                });
+            element.all(by.id('specialityDescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#specialityDescription option'))
+                        .then(function (option) {
+                            option[3].click();
+                        });
+                });
+            element(by.buttonText('Редагувати групу')).click();
+            element(by.buttonText('Гаразд')).click();
+
+            var search = element(by.model('groups.textSearch'));
+            search.clear();
+            search.sendKeys(groupNameEdit);
+            expect(element.all(by.repeater('group in groups.list'))
+                .count()).toEqual(1);
+            var name_of_group = element.all(by.repeater('group in groups.list'))
+                .first().element(by.binding('group.group_name'));
+
+            expect(name_of_group.getText()).toContain(groupNameEdit);
+
+        });
+
     });
 });
 
