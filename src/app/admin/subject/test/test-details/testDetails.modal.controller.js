@@ -12,7 +12,7 @@
             self.testDetails = {};
             self.currentTestDetails = currentTestDetails;
             self.levelsOfTasks =  [];
-            self.amountOfTasksOfCurrentTest = parseFloat(currentTestDetails.tasks);
+            self.amountOfTasksOfCurrentLevel = parseFloat(currentTestDetails.tasks);
             self.testDetails.test_id = $stateParams.currentTestId;
             self.availableAmountOfTaskForCurrentTest = availableAmountOfTaskForCurrentTest;
             self.duplicateTestLevelMessage = false;
