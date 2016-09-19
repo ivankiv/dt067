@@ -2,7 +2,6 @@
 
 describe('D-Tester App E2E Testing', function() {
 
-    var subjectNameForTestingFilter = "Основи JavaScript";
     var numberOfSubjectsPerPage = 5;
 
     // Find the element with ng-model="subjects.textSearch"
@@ -39,30 +38,13 @@ describe('D-Tester App E2E Testing', function() {
             expect(element.all(by.repeater('subject in subjects.list'))
                 .count()).toEqual(numberOfSubjectsPerPage);
         });
-
-        it('should filter results', function() {
-
-            // Type "Основи JavaScript" in searchInput
-            searchInput.sendKeys(subjectNameForTestingFilter);
-
-            // Verify that there is 1 subject on the page
-            expect(element.all(by.repeater('subject in subjects.list'))
-                .count()).toEqual(1);
-
-            var subject_name = element.all(by.repeater('subject in subjects.list'))
-                .first().element(by.binding('subject.subject_name'));
-
-            // Verify that name of subject after filtering is Основи JavaScript
-            expect(subject_name.getText()).toContain('Основи JavaScript');
-
-        });
     });
 
     describe('Testing CRUD for subject', function() {
         var buttonAddSubject = element(by.css('[title="Додати предмет"]'));
         var buttonEditSubject = element(by.css('[title="Редагувати"]'));
         var buttonDeleteSubject = element(by.css('[ title="Видалити"]'));
-        var subjectName = 'Oснови JAVA';
+        var subjectName = 'Oснови основ JS';
 
         //******************************************************
                     //Testing whether we can add new subject
