@@ -2,10 +2,7 @@
 
 describe('D-Tester App E2E Testing', function() {
 
-    var groupName = "ЛЛ-06-0";
-    var facultyName = "ФЕУ";
-    var specialityName = "Менеджмент";
-    var subjectName = "";
+    var groupName = "DD-05-9";
 
 
     function toEnter() {
@@ -18,7 +15,14 @@ describe('D-Tester App E2E Testing', function() {
         loginButton.click();
     }
 
+    /*****************************************************************
+                              Groups CRUD e2e test
+     ****************************************************************/
+
+
     it('should automatically redirect to / when location hash/fragment is empty', function() {
+
+        //Enter login and password
 
         browser.get('~pupkin/dt067/dev/#/index.html');
 
@@ -30,28 +34,59 @@ describe('D-Tester App E2E Testing', function() {
 
     });
 
-    //Groups e2e tests
+    //Test list of groups on one page
 
     describe('Test for groups', function() {
-
+        //Check how much groups are in list on one page
         it('should show the number of groups', function() {
             expect(element.all(by.repeater('group in groups.list'))
                 .count()).toEqual(5);
         });
-
+        //Test dropdown selector for groups per page
         it('should change number of groups per page as', function () {
+            //Find dropdown selector quantity of groups
             element.all(by.model('groups.groupsPerPage')).click()
                 .then(function(option){
-                    option = element.all(by.css('option'))
+                    //Select option
+                    option = element.all(by.css('#groupsPerPage option'))
                         .then(function (option) {
                             option[2].click();
                         });
                 });
+            //Check the results
             expect(element.all(by.repeater('group in groups.list'))
-                .count()).toEqual(5);
+                .count()).toEqual(10);
         });
 
-        it('should find the group name as', function() {
+
+        //Test create group
+
+        it('should create group as', function() {
+            //Find add button
+            element.all(by.name('add')).click();
+            //Enter group into input
+            var createGroupInput = element(by.model('groups.group.group_name'));
+            createGroupInput.sendKeys(groupName);
+            //Choose option in faculty dropdown
+            element.all(by.css('#fadescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#fadescription option'))
+                        .then(function (option) {
+                            option[2].click();
+                        });
+                });
+            //Choose option in speciality dropdown
+            element.all(by.id('specialityDescription')).click()
+                .then(function(option){
+                    option = element.all(by.css('#specialityDescription option'))
+                        .then(function (option) {
+                            option[3].click();
+                        });
+                });
+            //Finish creating group and check the results
+            element(by.buttonText('Додати групу')).click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
             var search = element(by.model('groups.textSearch'));
             search.clear();
             search.sendKeys(groupName);
@@ -62,110 +97,23 @@ describe('D-Tester App E2E Testing', function() {
 
             expect(name_of_group.getText()).toContain(groupName);
 
-            var name_of_faculty = element.all(by.repeater('group in groups.list'))
-                .get(0).element(by.binding('groups.associativeFaculty[group.faculty_id]'));
-
-            expect(name_of_faculty.getText()).toContain(facultyName);
-
-            var name_of_speciality = element.all(by.repeater('group in groups.list'))
-                .last().element(by.binding('groups.associativeSpeciality[group.speciality_id]'));
-
-            expect(name_of_speciality.getText()).toContain(specialityName);
-
-            search.clear();
-        });
-
-        // Test dropdown search
-
-        it('should find the group name by faculty as', function() {
-            var search = element(by.css('input'));
-            element.all(by.css('#facultyDropdown')).click()
-                .then(function(option){
-                    option = element.all(by.css('#facultyDropdown option'))
-                        .then(function (option) {
-                            option[2].click();
-                        });
-                });
-            var name_of_group = element.all(by.repeater('group in groups.list'))
-                .first().element(by.binding('group.group_name'));
-            expect(name_of_group.getText()).toContain(groupName);
-
-            search.clear();
-        });
-
-        it('should find the group name by speciality as', function() {
-            var search = element(by.css('input'));
-            element.all(by.css('#specialityDropdown')).click()
-                .then(function(option){
-                    option = element.all(by.css('#specialityDropdown option'))
-                        .then(function (option) {
-                            option[2].click();
-                        });
-                });
-            var name_of_group = element.all(by.repeater('group in groups.list'))
-                .first().element(by.binding('group.group_name'));
-            expect(name_of_group.getText()).toContain(groupName);
-
-            search.clear();
-        });
-
-        //Test create group
-
-        it('should create group as', function() {
-            var groupNameAdd = 'DD-05-9';
-            element.all(by.name('add')).click();
-            var createGroupInput = element(by.model('groups.group.group_name'));
-            createGroupInput.sendKeys(groupNameAdd);
-            element.all(by.css('#fadescription')).click()
-                .then(function(option){
-                    option = element.all(by.css('#fadescription option'))
-                        .then(function (option) {
-                            option[2].click();
-                        });
-                });
-            element.all(by.id('specialityDescription')).click()
-                .then(function(option){
-                    option = element.all(by.css('#specialityDescription option'))
-                        .then(function (option) {
-                            option[3].click();
-                        });
-                });
-            element(by.buttonText('Додати групу')).click();
-            browser.waitForAngular();
-            element(by.buttonText('Гаразд')).click();
-            var search = element(by.model('groups.textSearch'));
-            search.clear();
-            search.sendKeys(groupNameAdd);
-            expect(element.all(by.repeater('group in groups.list'))
-                .count()).toEqual(1);
-            var name_of_group = element.all(by.repeater('group in groups.list'))
-                .first().element(by.binding('group.group_name'));
-
-            expect(name_of_group.getText()).toContain(groupNameAdd);
-
 
 
         });
 
         //Test edit group
 
-        it('should create group as', function() {
+        it('should edit group as', function() {
            beforeEach(function () {
                var search = element(by.model('groups.textSearch'));
                search.clear();
                search.sendKeys(groupName);
-               expect(element.all(by.repeater('group in groups.list'))
-                   .count()).toEqual(1);
-               var name_of_group = element.all(by.repeater('group in groups.list'))
-                   .first().element(by.binding('group.group_name'));
-               expect(name_of_group.getText()).toContain(groupName);
            });
 
-            var groupNameEdit = 'DD-05-9';
             element.all(by.name('editGroup')).click();
             var editGroupInput = element(by.model('groups.group.group_name'));
             editGroupInput.clear();
-            editGroupInput.sendKeys(groupNameEdit);
+            editGroupInput.sendKeys(groupName);
             element.all(by.css('#fadescription')).click()
                 .then(function(option){
                     option = element.all(by.css('#fadescription option'))
@@ -183,16 +131,65 @@ describe('D-Tester App E2E Testing', function() {
             element(by.buttonText('Редагувати групу')).click();
             browser.waitForAngular();
             element(by.buttonText('Гаразд')).click();
+        });
 
-            var search = element(by.model('groups.textSearch'));
-            search.clear();
-            search.sendKeys(groupNameEdit);
-            expect(element.all(by.repeater('group in groups.list'))
-                .count()).toEqual(1);
+        // Test dropdown search
+        //Test search on faculty dropdown
+        it('should find the group name by faculty as', function() {
+            var search = element(by.css('input'));
+            //Find the dropdown
+            element.all(by.css('#facultyDropdown')).click()
+                .then(function(option){
+                    //Select option
+                    option = element.all(by.css('#facultyDropdown option'))
+                        .then(function (option) {
+                            option[3].click();
+                        });
+                });
+            //Check the results
             var name_of_group = element.all(by.repeater('group in groups.list'))
                 .first().element(by.binding('group.group_name'));
+            expect(name_of_group.getText()).toContain(groupName);
 
-            expect(name_of_group.getText()).toContain(groupNameEdit);
+            search.clear();
+        });
+
+        //Test search on speciality dropdown
+        it('should find the group name by speciality as', function() {
+            var search = element(by.css('input'));
+            //Find the dropdown
+            element.all(by.css('#specialityDropdown')).click()
+                .then(function(option){
+                    //Select option
+                    option = element.all(by.css('#specialityDropdown option'))
+                        .then(function (option) {
+                            option[4].click();
+                        });
+                });
+            //Check the results
+            var name_of_group = element.all(by.repeater('group in groups.list'))
+                .first().element(by.binding('group.group_name'));
+            expect(name_of_group.getText()).toContain(groupName);
+
+            search.clear();
+        });
+
+        //Test delete group
+
+        it('should delete group as', function() {
+            //Find the group in the list of groups
+            beforeEach(function () {
+                var search = element(by.model('groups.textSearch'));
+                search.clear();
+                search.sendKeys(groupName);
+            });
+
+            //Confirm deleting
+
+            element.all(by.name('deleteGroup')).click();
+            element(by.buttonText('Гаразд')).click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
 
         });
 
