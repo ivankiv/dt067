@@ -5,9 +5,9 @@
         .module('app')
         .controller('TestResultController', TestResultController);
 
-    TestResultController.$inject = ['studentService', '$stateParams', 'testService','$q'];
+    TestResultController.$inject = ['studentService', '$stateParams', 'testService','groupService','subjectService','$q'];
 
-    function TestResultController(studentService, $stateParams, testService, $q) {
+    function TestResultController(studentService, $stateParams, testService, groupService, subjectService, $q) {
         var self = this;
 
         //Methods
@@ -22,16 +22,19 @@
         self.current_date = 0;
         self.promises = [];
         self.test_name = '';
+        self.subjectId= 0;
+        self.subjectName = '';
+        self.groupName = '';
 
         activate();
 
         function activate() {
-            getTestName();
+            getGroupName();
+            getTestName().then(getSubjectName);
             getListOfPromises()
                 .then(function () {
                         $q.all(self.promises)
                             .then(function (response) {
-                                console.log('finalResp',response)
                                 self.studentResultlist = response;
                             })
                 })
@@ -43,7 +46,6 @@
                     self.studentList
                         .forEach(
                             function (user) {
-                                console.log('studentsPromises',getResultOfTestByStudent(user));
                                 self.promises.push(getResultOfTestByStudent(user));
                             }
                         )
@@ -61,10 +63,28 @@
         }
 
         function getTestName() {
-            testService.getOneTest(self.test_id).then(function (response) {
-                console.log('testresp',response)
+            return testService.getOneTest(self.test_id).then(function (response) {
+                self.subjectId = response.data[0].subject_id;
                 self.test_name = response.data[0].test_name;
             });
+        }
+
+        function getSubjectName() {
+            subjectService.getOneSubject(self.subjectId).then(
+                function (response) {
+                    self.subjectName = response.data[0].subject_name;
+                }
+
+            )
+        }
+
+        function getGroupName(){
+            groupService.getOneGroup(self.group_id).then(
+                function (response) {
+                    self.groupName = response.data[0].group_name;
+                }
+
+            )
         }
 
 
