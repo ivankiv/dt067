@@ -76,7 +76,8 @@
                                 ng-model="groups.groupsPerPage"
                                 ng-options="groupPerPage for groupPerPage in groups.numberToDisplayGroupsOnPage"
                                 ng-change="groups.pageChanged()"
-                                name="groupsPerPage"
+                                name="groupsPerPage"3
+                                id="groupsPerPage"
                                 title="Кількість записів на сторінці">
                                 <option selected value="">{{groups.groupsPerPage}}</option>
                         </select>
@@ -102,6 +103,7 @@
                                 <button type="button"
                                         class="btn btn-danger views-remove-btn pull-right table-help-btns group-help-btns"
                                         title="Видалити"
+                                        name="deleteGroup"
                                         ng-click="groups.deleteGroup(group.group_id)">
                                     <i class="glyphicon glyphicon-trash"></i>
                                 </button>

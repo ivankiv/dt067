@@ -18,6 +18,11 @@
                             scope.itemsPerPage = scope.textSearch ? scope.totalItems : itemPerPage
                         })
                     });
+                    element.bind('change',  function() {
+                        scope.$apply(function() {
+                            scope.itemsPerPage = scope.textSearch ? scope.totalItems : itemPerPage
+                        })
+                    });
                 }
             }
         });
