@@ -15,6 +15,7 @@
             self.groupList = {};
             self.subjectList = {};
             self.alreadyExistInSchedule = false;
+            self.incorrectDateEntered = false;
             self.group_id =  currentGroupId.group_id;
 
 
@@ -72,16 +73,21 @@
             }
 
             function addScheduleComplete (response) {
+                if(response.status === 400) {
+                    self.alreadyExistInSchedule = true;
+                }
+
                 if(response.data.response === 'ok') {
                     $uibModalInstance.close();
                     self.schedule = {subject_id: null, event_date: new Date()};
                 }
-                if(response.status === 400) {
-                    self.alreadyExistInSchedule = true;
-                }
             }
 
             function updateScheduleComplete(response) {
+                if(response.data.response === 'Error when update') {
+                    self.incorrectDateEntered = true;
+                }
+
                 if(response.data.response === 'ok') {
                     $uibModalInstance.close();
                     self.currentSchedule = {subject_id: null, event_date: new Date()};
