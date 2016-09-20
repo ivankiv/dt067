@@ -20,6 +20,9 @@ module.exports = function(config) {
             "bower_components/angular-messages/angular-messages.js",
             "bower_components/angular-toArrayFilter/toArrayFilter.js",
             'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/angular-mocks/angular-mocks.js',
+            'bower_components/chart.js/dist/Chart.min.js',
+            'bower_components/angular-chart.js/dist/angular-chart.js',
             "src/app/app.module.js",
             'src/app/**/**/*.js'
         ],
