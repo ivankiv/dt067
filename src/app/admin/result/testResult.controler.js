@@ -133,7 +133,6 @@
                             .sort(function (a,b) {
                             return b.result - a.result;
                             });
-                            console.log('resp',resultArr);
                             if (resultArr.length !== 0) {
                             user.attempts = resultArr.length;
                             result = resultArr[0];
