@@ -41,7 +41,9 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="speciality in specialities.list| toArray | filter: specialities.textSearch | limitTo: specialities.specialitiesPerPage : specialities.begin">
+                    <tr ng-repeat="speciality in specialities.list| toArray
+                    | filter: specialities.textSearch
+                    | limitTo: specialities.specialitiesPerPage : specialities.begin">
                         <td data-th="Номер">{{$index + (specialities.currentPage - 1) * specialities.specialitiesPerPage + 1}}</td>
                         <td data-th="Спеціальність">{{::speciality.speciality_name}}</td>
                         <td data-th="Код">{{::speciality.speciality_code}}</td>
