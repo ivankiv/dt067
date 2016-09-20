@@ -31,7 +31,6 @@
 
         self.data = [
                     []
-                    // []
                 ];
 
         activate();
@@ -45,8 +44,10 @@
                             .then(function (response) {
                                 self.studentResultlist = response;
                                 angular.forEach(self.studentResultlist, function(value) {
-                                   // console.log(value,'value');
-                                    self.labels.push(value.student_surname);
+                                   console.log(value,'value');
+                                    var student = value.student_name + ' ' + value.student_surname
+                                    self.labels.push(student);
+                                    console.log(self.labels, 'self labels');
                                     // var maxResult = parseInt(value.maxResult);
                                     var result = parseInt(value.result);
                                     // self.data[1].push(maxResult);
