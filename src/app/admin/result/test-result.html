@@ -1,4 +1,4 @@
-<section id="main-content" class="print-result">
+<section id="main-content">
     <!--BEGIN SPINNER-->
     <div id="loaderSpin" spinner class="hidden">
         <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
@@ -8,7 +8,11 @@
         <div class="row">
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <div class='col-sm-8 col-xs-12 views-header'>
-                    <h4 class='text-center'><span class='pull-left'>Результати тесту {{result.test_name}}</span>&nbsp</h4>
+                    <h4 class='text-center'>
+                        <span class='pull-left'> Група: {{result.groupName}}<br> Предмет: "{{result.subjectName}}"
+                            Тест:"{{result.test_name}}"
+                            </span>
+                    </h4>
                 </div>
                 <div class='col-sm-4 col-xs-12  views-header views-header-wrapper-add-btn-and-search'>
                     <button type="button" class="btn btn-danger pull-right hidden-print "
@@ -16,74 +20,51 @@
                         <i class="glyphicon glyphicon-share-alt"> Назад</i>
                     </button>
 
-                    <button type="button" title="Переглянути графік результатів" ui-sref="admin-home.test-stats-result({test_id: result.test_id, group_id:result.group_id})"
+                    <button type="button" title="Переглянути графік результатів"
+                            ui-sref="admin-home.test-stats-result({test_id: result.test_id, group_id:result.group_id})"
                             class="btn pull-right btn-success add-btn hidden-print ">
                         <i class="glyphicon glyphicon-stats"></i>
                     </button>
                 </div>
-                <table ng-if="!students.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped print-table hidden-print">
+                <table ng-if="!students.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped hidden-print">
                     <thead>
                     <tr>
-                        <th class="hidden-print">Дата проведення</th>
-                        <th class="hidden-print">ПІБ</th>
-                        <th class="hidden-print">Результат</th>
-                        <th class="hidden-print">Кількість спроб</th>
-
-                        <th class="col-md-2 visible-print">Дата проведення</th>
-                        <th class="col-md-4 visible-print">ПІБ</th>
-                        <th class="col-md-2 visible-print">Результат</th>
-                        <th class="col-md-1 visible-print">Cпроби</th>
-                        <th class="col-md-1 visible-print">Підпис</th>
+                        <th>Дата проведення</th>
+                        <th>ПІБ</th>
+                        <th>Результат</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="testResult in result.studentResultlist track by $index">
-                        <td class="hidden-print" data-th="Дата проведення">{{::testResult.date}}</td>
-                        <td class="hidden-print" data-th="ПІБ">
+                        <td data-th="Дата проведення">{{::testResult.date}}</td>
+                        <td data-th="ПІБ">
                             {{::testResult.student_surname}}&nbsp;{{::testResult.student_name}}&nbsp;{{::testResult.student_fname}}
                         </td>
-                        <td class="hidden-print" data-th="Результат" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
-                        <td class="hidden-print" data-th="Результат" ng-if="testResult.testNeverPassed">Студент не здавав даний тест</td>
-                        <td class="hidden-print" data-th="Кількість спроб">{{::testResult.attempts}}</td>
-                        <td class="col-md-2 visible-print">{{::testResult.date}}</td>
-                        <td class="col-md-4 visible-print">
-                            {{::testResult.student_surname}}&nbsp;{{::testResult.student_name}}&nbsp;{{::testResult.student_fname}}
-                        </td>
-                        <td class="col-md-2 visible-print" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
-                        <td class="col-md-2 visible-print" ng-if="testResult.testNeverPassed">N/A</td>
-                        <td class="col-md-1 visible-print">{{::testResult.attempts}}</td>
-                        <td class="col-md-1 visible-print"></td>
+                        <td data-th="Результат" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
+                        <td data-th="Результат" ng-if="testResult.testNeverPassed">Студент не здавав даний тест</td>
                     </tr>
                     </tbody>
                 </table>
-                <table ng-if="!students.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped print-table hidden-print">
+                <table ng-if="!students.showMessageNoTestsForStudent" class="visible-print print-result">
                     <thead>
                     <tr>
-
-                        <th class="col-md-2 visible-print">Дата проведення</th>
-                        <th class="col-md-4 visible-print">ПІБ</th>
-                        <th class="col-md-2 visible-print">Результат</th>
-                        <th class="col-md-1 visible-print">Cпроби</th>
-                        <th class="col-md-1 visible-print">Підпис</th>
+                        <th class="col-md-1">№</th>
+                        <th class="col-md-2">Дата проведення</th>
+                        <th class="col-md-4">ПІБ</th>
+                        <th class="col-md-2">Результат</th>
+                        <th class="col-md-1">Підпис</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="testResult in result.studentResultlist track by $index">
-                        <td class="hidden-print" data-th="Дата проведення">{{::testResult.date}}</td>
-                        <td class="hidden-print" data-th="ПІБ">
+                        <td class="col-md-1">{{$index + 1}}</td>
+                        <td class="col-md-2">{{::testResult.date}}</td>
+                        <td class="col-md-4">
                             {{::testResult.student_surname}}&nbsp;{{::testResult.student_name}}&nbsp;{{::testResult.student_fname}}
                         </td>
-                        <td class="hidden-print" data-th="Результат" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
-                        <td class="hidden-print" data-th="Результат" ng-if="testResult.testNeverPassed">Студент не здавав даний тест</td>
-                        <td class="hidden-print" data-th="Кількість спроб">{{::testResult.attempts}}</td>
-                        <td class="col-md-2 visible-print">{{::testResult.date}}</td>
-                        <td class="col-md-4 visible-print">
-                            {{::testResult.student_surname}}&nbsp;{{::testResult.student_name}}&nbsp;{{::testResult.student_fname}}
-                        </td>
-                        <td class="col-md-2 visible-print" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
-                        <td class="col-md-2 visible-print" ng-if="testResult.testNeverPassed">N/A</td>
-                        <td class="col-md-1 visible-print">{{::testResult.attempts}}</td>
-                        <td class="col-md-1 visible-print"></td>
+                        <td class="col-md-2" ng-if="!testResult.testNeverPassed">{{::testResult.result}}/{{::testResult.maxResult}}</td>
+                        <td class="col-md-2" ng-if="testResult.testNeverPassed">N/A</td>
+                        <td class="col-md-1"></td>
                     </tr>
                     </tbody>
                 </table>

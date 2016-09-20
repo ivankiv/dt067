@@ -45,7 +45,6 @@
                                     var testDate = new Date(test.date).valueOf();
                                     if(testDate <= self.current_date){
                                         self.listOfTests.push(test);
-                                        console.log(self.listOfTests);
                                         self.showMessageNoEntity = false;
                                     }
                                 }
