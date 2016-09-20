@@ -50,7 +50,7 @@ describe('D-Tester App E2E Testing', function() {
                     //Select option
                     option = element.all(by.css('#groupsPerPage option'))
                         .then(function (option) {
-                            option[2].click();
+                            option[1].click();
                         });
                 });
             //Check the results
