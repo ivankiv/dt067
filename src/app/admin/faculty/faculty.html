@@ -24,6 +24,10 @@
                     <input class="views-header-search-inpts"
                            type="text"
                            placeholder="Пошук"
+                           check-pagination
+                           items-per-page="faculties.facultiesPerPage"
+                           total-items="faculties.totalFaculties"
+                           text-search="faculties.textSearch"
                            ng-model="faculties.textSearch"
                            name="search">
                     </div>
