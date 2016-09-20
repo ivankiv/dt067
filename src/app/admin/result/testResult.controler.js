@@ -115,6 +115,7 @@
                 .then(function (response) {
                     user.testNeverPassed=(response.data.response === "no records");
                     if(!user.testNeverPassed){
+
                             resultArr = response.data
                             .filter(function (test) {
                             return test.test_id === self.test_id
@@ -122,11 +123,16 @@
                             .sort(function (a,b) {
                             return b.result - a.result;
                             });
+                            if (resultArr.length !== 0) {
                             user.attempts = resultArr.length;
                             result = resultArr[0];
                             user.result = result.result;
                             user.maxResult = result.answers;
                             user.date = result.session_date;
+                            }
+                            else {
+                                user.testNeverPassed = true;
+                            }
                     }
                     return  user;
                 })
