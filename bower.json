@@ -24,7 +24,9 @@
     "angular-messages": "^1.5.8",
     "angular-toArrayFilter": "^1.0.1",
     "angular-breadcrumb": "~0.4.1",
-    "angular-mocks": "^1.5.8"
+    "angular-mocks": "^1.5.8",
+    "angular-chart.js": "1.0.2",
+    "chart.js": "npm:chart.js#2.x"
   },
   "overrides": {
     "bootstrap": {
@@ -38,6 +40,10 @@
         "./dist/fonts/glyphicons-halflings-regular.woff",
         "./dist/fonts/glyphicons-halflings-regular.woff2"
       ]
+    },
+    "chart.js": {
+      "main": "./dist/Chart.min.js",
+      "dependencies": {}
     },
     "angular-bootstrap": {
       "main": [

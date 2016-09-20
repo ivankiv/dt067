@@ -1,9 +1,9 @@
 angular.module('app')
     .config(configApp);
 
-configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider', 'defineUser' ,'$httpProvider'];
+configApp.$inject = ['$stateProvider', '$urlRouterProvider', '$breadcrumbProvider', 'defineUser' ,'$httpProvider', 'ChartJsProvider'];
 
-function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , defineUser , $httpProvider) {
+function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , defineUser , $httpProvider, ChartJsProvider) {
 
     $httpProvider.interceptors.push('spinnerService');
 
@@ -13,6 +13,15 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
     });
 
     $urlRouterProvider.otherwise('/');
+
+    ChartJsProvider.setOptions({
+        chartColors: ['#FF5252', '#FF8A80'],
+        responsive: false
+    });
+
+    ChartJsProvider.setOptions('line', {
+        showLines: true
+    });
 
     $stateProvider
 
