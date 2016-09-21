@@ -66,7 +66,7 @@ describe('GroupController', function () {
                     "faculty_description":"Faculty of informatiopn"
                 },
                 {
-                    "faculty_id":"1",
+                    "faculty_id":"2",
                     "faculty_name":"Faculty of automation process",
                     "faculty_description":"Faculty of automation process"
                 }
@@ -89,12 +89,12 @@ describe('GroupController', function () {
 
         expect(GroupController.list[0].group_name).toBe("AF-01-1");
         expect(GroupController.list[1].group_name).toBe("SS-01-1");
-        expect(GroupController.list[1].faculty_id).toBe("1");
+        expect(GroupController.list[1].faculty_id).toBe("2");
     });
 
     it('should have the correct data order in the list of group', function() {
 
-        expect(GroupController.specialityList[0].speciality_name).toBe("Management");
+        expect(GroupController.specialityList[0].speciality_name).toBe("Marketing");
         expect(GroupController.specialityList[1].speciality_code).toBe("6.129910");
 
     });
