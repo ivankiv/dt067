@@ -87,7 +87,7 @@ describe('D-Tester App E2E Testing', function() {
             element(by.buttonText('Додати групу')).click();
             browser.waitForAngular();
             element(by.buttonText('Гаразд')).click();
-            var search = element(by.model('groups.textSearch'));
+            var search = element(by.css('input'));
             search.clear();
             search.sendKeys(groupName);
             expect(element.all(by.repeater('group in groups.list'))
@@ -105,7 +105,7 @@ describe('D-Tester App E2E Testing', function() {
 
         it('should edit group as', function() {
            beforeEach(function () {
-               var search = element(by.model('groups.textSearch'));
+               var search = element(by.css('input'));
                search.clear();
                search.sendKeys(groupName);
            });
@@ -137,6 +137,7 @@ describe('D-Tester App E2E Testing', function() {
         //Test search on faculty dropdown
         it('should find the group name by faculty as', function() {
             var search = element(by.css('input'));
+            search.clear();
             //Find the dropdown
             element.all(by.css('#facultyDropdown')).click()
                 .then(function(option){
@@ -149,7 +150,7 @@ describe('D-Tester App E2E Testing', function() {
             //Check the results
             var name_of_group = element.all(by.repeater('group in groups.list'))
                 .first().element(by.binding('group.group_name'));
-            expect(name_of_group.getText()).toContain(groupName);
+            expect(name_of_group.getText()).toContain('ПС-11-2');
 
             search.clear();
         });
@@ -158,6 +159,7 @@ describe('D-Tester App E2E Testing', function() {
         it('should find the group name by speciality as', function() {
             var search = element(by.css('input'));
             //Find the dropdown
+            search.clear();
             element.all(by.css('#specialityDropdown')).click()
                 .then(function(option){
                     //Select option
@@ -179,7 +181,7 @@ describe('D-Tester App E2E Testing', function() {
         it('should delete group as', function() {
             //Find the group in the list of groups
             beforeEach(function () {
-                var search = element(by.model('groups.textSearch'));
+                var search = element(by.css('input'));
                 search.clear();
                 search.sendKeys(groupName);
             });
