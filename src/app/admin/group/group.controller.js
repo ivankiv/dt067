@@ -61,9 +61,9 @@
             specialityService.getSpecialities().then( function(response) {
                 self.specialityList = response.data;
                 //we make substitute id and name
-                for (var i = 0; i < self.specialityList.length; i++) {
-                    self.associativeSpeciality[self.specialityList[i].speciality_id] = self.specialityList[i].speciality_name;
-                }
+                angular.forEach(response.data, function(speciality) {
+                    self.associativeSpeciality[speciality.speciality_id] = speciality.speciality_name;
+                });
                 if(!self.showMessageNoEntity) {
                     self.list = self.list.map(function (speciality) {
                         speciality.speciality_name = self.associativeSpeciality[speciality.speciality_id];
@@ -77,9 +77,9 @@
             facultyService.getFaculties().then( function(response) {
                 self.facultyList = response.data;
                 //we make substitute id and name
-                for (var i = 0; i < self.facultyList.length; i++) {
-                    self.associativeFaculty[self.facultyList[i].faculty_id] = self.facultyList[i].faculty_name;
-                }
+                angular.forEach(response.data, function(faculty) {
+                    self.associativeFaculty[faculty.faculty_id] = faculty.faculty_name;
+                });
                 if(!self.showMessageNoEntity) {
                     self.list = self.list.map(function (faculty) {
                         faculty.faculty_name = self.associativeFaculty[faculty.faculty_id];

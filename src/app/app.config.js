@@ -19,10 +19,6 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
         responsive: true
     });
 
-    ChartJsProvider.setOptions('line', {
-        showLines: true
-    });
-
     $stateProvider
 
         .state('login', {
