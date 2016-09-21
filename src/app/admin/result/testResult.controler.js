@@ -26,35 +26,12 @@
         self.subjectName = '';
         self.groupName = '';
 
-        self.labels = ["January", "February", "March", "April", "May", "June", "July"];
+        self.labels = [];
         self.series = ['Series A', 'Series B'];
-        self.onClick = function (points, evt) {
-            console.log(points, evt);
-        };
-        self.data = [
-            [65, 59, 80, 81, 56, 55, 40],
-            [28, 48, 40, 19, 86, 27, 90]
-        ];
-        self.options = {
-            scales: {
-                yAxes: [
-                    {
-                        id: 'y-axis-1',
-                        type: 'linear',
-                        display: true,
-                        position: 'left'
-                    },
-                    {
-                        id: 'y-axis-2',
-                        type: 'linear',
-                        display: true,
-                        position: 'right'
-                    }
-                ]
-            }
-        };
 
-        self.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+        self.data = [
+                    []
+                ];
 
         activate();
 
@@ -66,6 +43,20 @@
                         $q.all(self.promises)
                             .then(function (response) {
                                 self.studentResultlist = response;
+                                angular.forEach(self.studentResultlist, function(value) {
+                                   console.log(value,'value');
+                                    var student = value.student_name + ' ' + value.student_surname
+                                    self.labels.push(student);
+                                    console.log(self.labels, 'self labels');
+                                    // var maxResult = parseInt(value.maxResult);
+                                    var result = parseInt(value.result);
+                                    // self.data[1].push(maxResult);
+                                    self.data[0].push(result);
+                                    console.log(self.data, 'self.data');
+                                });
+                                // console.log(parseInt(response[0].maxResult));
+                                // self.data[0].push(parseInt(response[0].maxResult));
+                                self.data[0].push(0);
                             })
                 })
         }
@@ -125,6 +116,7 @@
                 .then(function (response) {
                     user.testNeverPassed=(response.data.response === "no records");
                     if(!user.testNeverPassed){
+
                             resultArr = response.data
                             .filter(function (test) {
                             return test.test_id === self.test_id
@@ -132,11 +124,16 @@
                             .sort(function (a,b) {
                             return b.result - a.result;
                             });
+                            if (resultArr.length !== 0) {
                             user.attempts = resultArr.length;
                             result = resultArr[0];
                             user.result = result.result;
                             user.maxResult = result.answers;
                             user.date = result.session_date;
+                            }
+                            else {
+                                user.testNeverPassed = true;
+                            }
                     }
                     return  user;
                 })

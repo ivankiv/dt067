@@ -17,13 +17,9 @@
                     </button>
                 </div>
                <section>
-                   <canvas id="line" class="chart chart-line"
-                           chart-dataset-override="result.datasetOverride"
-                           chart-options="result.options"
+                   <canvas id="base" class="chart-horizontal-bar"
                            chart-data="result.data"
-                           chart-labels="result.labels"
-                           chart-series="result.series"
-                           chart-click="result.onClick">
+                           chart-labels="result.labels" >
                    </canvas>
                </section>
                 <div ng-if="result.showMessageNoTestsForStudent" class="text-center">

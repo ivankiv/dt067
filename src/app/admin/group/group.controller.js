@@ -74,9 +74,6 @@
         }
 
         function getFaculty() {
-            if (self.faculty_id){
-
-            }
             facultyService.getFaculties().then( function(response) {
                 self.facultyList = response.data;
                 //we make substitute id and name

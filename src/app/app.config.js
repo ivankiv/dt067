@@ -15,8 +15,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
     $urlRouterProvider.otherwise('/');
 
     ChartJsProvider.setOptions({
-        chartColors: ['#FF5252', '#FF8A80'],
-        responsive: false
+        chartColors: ['#867DB0', '#867DB0'],
+        responsive: true
     });
 
     ChartJsProvider.setOptions('line', {

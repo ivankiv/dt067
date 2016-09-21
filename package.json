@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "bower-npm-resolver": "^0.7.0",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-angular-filesort": "^1.1.1",
