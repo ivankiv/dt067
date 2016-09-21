@@ -60,7 +60,7 @@ describe('D-Tester App E2E Testing', function() {
             SubjectName.sendKeys(subjectName);
             SubjectDescription.sendKeys(subjectName);
 
-            submit.click();
+            submit.click()
             browser.waitForAngular();
             element(by.buttonText('Гаразд')).click();
 
