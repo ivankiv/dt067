@@ -39,19 +39,18 @@ describe('D-Tester App E2E Testing',function () {
     });
 
     describe('Testing CRUD for speciality',function () {
-       var buttonAddSpeciality = element(by.css('[title="Додати спеціальність"]'));
-       var buttonEditSpeciality = element(by.css('[title="Редагувати"]'));
-       var buttonDeleteSpeciality = element(by.css('[title="Видалити"]'));
-       var specialityName = 'Основи основ JS';
-       var specialityCode = 6.543210;
+       var specialityName = 'Тестування';
+       var specialityCode = '6.543210';
 
        //Testing add new speciality
        it('should add new speciality to speciality list',function () {
-          buttonAddSpeciality.click();
 
-          var SpecialityName = element(by.model('specialities.speciality.speciality_name'));
-          var SpecialityCode = element(by.model('specialities.speciality.speciality_code'));
+
+           var buttonAddSpeciality = element(by.css('[title="Додати спеціальність"]'));
+           var SpecialityName = element(by.model('specialities.speciality.speciality_name'));
+           var SpecialityCode = element(by.model('specialities.speciality.speciality_code'));
            var submit = element.all(by.buttonText('Додати спеціальність'));
+           buttonAddSpeciality.click();
 
            SpecialityName.sendKeys(specialityName);
            SpecialityCode.sendKeys(specialityCode);
@@ -69,5 +68,55 @@ describe('D-Tester App E2E Testing',function () {
            expect(speciality_name.getText()).toContain(specialityName);
        });
 
+        //Testing edit speciality
+        it('should edit speciality',function () {
+            var buttonEditSpeciality = element(by.css('[title="Редагувати"]'));
+            var SpecialityName = element(by.model('specialities.currentSpeciality.speciality_name'));
+            var SpecialityCode = element(by.model('specialities.currentSpeciality.speciality_code'));
+            var submit = element.all(by.buttonText('Редагувати спеціальність'));
+
+            searchInput.clear();
+            searchInput.sendKeys(specialityName);
+
+            buttonEditSpeciality.click();
+
+            SpecialityName.clear();
+            SpecialityCode.clear();
+            SpecialityName.sendKeys(specialityName + "Спецкурс");
+            SpecialityCode.sendKeys(specialityCode);
+
+            submit.click();
+            browser.waitForAngular();
+            element(by.buttonText('Гаразд')).click();
+
+            searchInput.clear();
+            searchInput.sendKeys(specialityName);
+
+            var speciality_name = element.all(by.repeater('speciality in specialities.list'))
+                .first().element(by.binding('speciality.speciality_name'));
+
+            expect(speciality_name.getText()).toContain(specialityName + "Спецкурс");
+        });
+
+        //Testing delete speciality
+        it('should delete speciality',function () {
+            var buttonDeleteSpeciality = element(by.css('[title="Видалити"]'));
+            var submit = element.all(by.buttonText('Гаразд'));
+
+            searchInput.clear();
+            searchInput.sendKeys(specialityName);
+
+            buttonDeleteSpeciality.click();
+
+            browser.waitForAngular();
+            submit.click();
+            element(by.buttonText('Гаразд')).click();
+
+            searchInput.clear();
+            searchInput.sendKeys(specialityName);
+
+            expect(element.all(by.repeater('speciality in specialities.list'))
+                .count()).toEqual(0);
+        });
     });
 });
