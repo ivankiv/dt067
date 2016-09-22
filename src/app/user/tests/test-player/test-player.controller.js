@@ -164,6 +164,7 @@
                 controller: 'modalController as modal',
                 backdrop: true
             });
+            getTotalPointsOfTest();
             var listOfQuestionsId = JSON.parse(localStorage.currentQuestionsId);
              self.questionsIdForResult = listOfQuestionsId.map(function(question) {
                  return question.question_id;
@@ -191,8 +192,6 @@
                     })
                 });
 
-            getTotalPointsOfTest();
-
         }
 
         function calculateResultOfTest(answers) {
@@ -201,12 +200,12 @@
            return testPlayerService.getRateOfQuestion().then(function(response) {
                 var result = 0;
                 var score = [];
-                angular.forEach(response.data, function(item, index) {
-                    if(item !== null) score[index] = item;
+                angular.forEach(response.data, function(rate, index) {
+                    if(rate !== null) score[index] = rate;
                 });
 
-                angular.forEach(answers, function(item) {
-                    result += score[item.question_id] * item.true;
+                angular.forEach(answers, function(answer) {
+                    result += score[answer.question_id] * answer.true;
                 });
                 return result
             });
@@ -218,16 +217,12 @@
 
         function getTestDetails(response) {
             self.list = response.data;
-            calculateAvailableTask();
+            self.amountOfRate = 0;
 
-            function calculateAvailableTask() {
-                self.amountOfRate = 0;
-
-                angular.forEach(self.list, function(item) {
-                    //calculate amount of rate per current test
-                    self.amountOfRate += item.rate * item.tasks;
-                });
-            }
+            angular.forEach(self.list, function(testDetail) {
+                //calculate amount of rate per current test
+                self.amountOfRate += testDetail.rate * testDetail.tasks;
+            });
         }
 
         function saveResult(resultOfTest) {
