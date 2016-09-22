@@ -2,29 +2,37 @@ module.exports = function() {
 
     var client = './src/';
     var clientApp = client + 'app/';
-    var temp = './dev/';
+    var build = './build/';
 
     var config = {
 
         /*** file path ****/
-        temp: temp,
+        build: build,
         alljs: ['./src/**/*.js', './*.js', '!./src/**/*.spec.js'],
         sass: client + 'sass/styles.scss',
         sassWatch: client + 'sass/**/*scss',
         index: client + 'index.html',
         html: clientApp + '**/*.html',
 
-        /*** temp files ***/
+        /*** not optimized files ***/
         css: 'styles.css',
-        cssSrc: temp + 'css/styles.css',
+        cssSrc: build + 'css/styles.css',
         js: 'app.js',
-        jsSrc: temp + 'js/app.js',
-        img: temp + 'img/',
+        jsSrc: build + 'js/app.js',
+        img: build + 'img/',
         imgSrc: client + 'img/**/*.*',
         fontSrc: client + 'fonts/**/*.*',
-        font: temp + 'fonts/',
+        font: build + 'fonts/',
 
-        /*** Bower and NPM locations ***/
+        //** optimized files **//
+        optimized: {
+            js: 'app.min.js',
+            jsSrc: build + 'js/app.min.js',
+            css: 'styles.min.css',
+            cssSrc: build + 'css/styles.min.css'
+        },
+
+        /*** Bower locations ***/
         bower: {
             json: require('./bower.json'),
             directory: './bower_components/',
@@ -39,7 +47,7 @@ module.exports = function() {
                 standAlone: false,
                 root: 'app/'
             },
-            src: temp + 'js/templates.js'
+            src: build + 'js/templates.js'
         }
 
     };
