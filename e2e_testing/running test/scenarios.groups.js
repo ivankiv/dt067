@@ -1,3 +1,5 @@
+(function(){
+
 'use strict';
 
 describe('D-Tester App E2E Testing', function() {
@@ -197,5 +199,5 @@ describe('D-Tester App E2E Testing', function() {
 
     });
 });
-
+}());
 

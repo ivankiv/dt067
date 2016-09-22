@@ -29,7 +29,7 @@ module.exports = function(config) {
 
         // list of files to exclude
         exclude: [
-            'test/protractor.conf.js', 'test/e2e/*.js'
+            'protractor.conf.js', 'e2e_testing/'
         ],
 
         plugins: ["karma-jasmine", "karma-chrome-launcher", "karma-htmlfile-reporter"],

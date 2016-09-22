@@ -19,10 +19,6 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
         responsive: true
     });
 
-    ChartJsProvider.setOptions('line', {
-        showLines: true
-    });
-
     $stateProvider
 
         .state('login', {
@@ -98,7 +94,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
                 }
             },
             ncyBreadcrumb: {
-                label: 'Результати групи'
+                label: 'Результати групи',
+                parent: 'admin-home.groups'
             },
             data: {
                 role: defineUser.admin
@@ -114,7 +111,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
                 }
             },
             ncyBreadcrumb: {
-                label: 'Результати тесту'
+                label: 'Результати тесту',
+                parent: 'admin-home.result'
             },
             data: {
                 role: defineUser.admin
@@ -130,7 +128,8 @@ function configApp($stateProvider, $urlRouterProvider, $breadcrumbProvider , def
                 }
             },
             ncyBreadcrumb: {
-                label: 'Графік результатів'
+                label: 'Графік результатів',
+                parent: 'admin-home.test-result'
             },
             data: {
                 role: defineUser.admin

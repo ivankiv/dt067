@@ -1,6 +1,8 @@
+(function(){
+
 'use strict';
 
-describe('D-Tester App E2E Testing',function () {
+describe('Speciality Entity e2e testing',function () {
 
     var numberOfSpecialitiesPerPage = 5;
 
@@ -52,6 +54,7 @@ describe('D-Tester App E2E Testing',function () {
            var submit = element.all(by.buttonText('Додати спеціальність'));
            buttonAddSpeciality.click();
 
+
            SpecialityName.sendKeys(specialityName);
            SpecialityCode.sendKeys(specialityCode);
 
@@ -80,6 +83,7 @@ describe('D-Tester App E2E Testing',function () {
 
             buttonEditSpeciality.click();
 
+            searchInput.clear();
             SpecialityName.clear();
             SpecialityCode.clear();
             SpecialityName.sendKeys(specialityName + "Спецкурс");
@@ -120,3 +124,4 @@ describe('D-Tester App E2E Testing',function () {
         });
     });
 });
+}());

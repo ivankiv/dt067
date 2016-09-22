@@ -29,13 +29,13 @@ describe('SubjectController', function () {
             .respond(200, [
                 {
                     "subject_id": 0,
-                    "subject_name": "РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ",
-                    "subject_description": "РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ"
+                    "subject_name": "Основи Javascript",
+                    "subject_description": "Основи Javascript"
                 },
                 {
                     "subject_id": 1,
-                    "subject_name": "РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ JS",
-                    "subject_description": "РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ JS"
+                    "subject_name": "Основи JS",
+                    "subject_description": "Основи JS"
                 }
             ]);
 
@@ -54,8 +54,8 @@ describe('SubjectController', function () {
 
     it('should have the correct data order in the list of subject', function() {
 
-        expect(SubjectController.list[0].subject_name).toBe("РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ");
-        expect(SubjectController.list[1].subject_description).toBe("РћСЃРЅРѕРІРё РїСЂРѕРіСЂР°РјСѓРІР°РЅРЅСЏ JS");
+        expect(SubjectController.list[0].subject_name).toBe("Основи Javascript");
+        expect(SubjectController.list[1].subject_description).toBe("Основи JS");
 
     });
 
