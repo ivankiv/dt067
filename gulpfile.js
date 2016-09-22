@@ -11,7 +11,12 @@ var runSequence = require('run-sequence');
 
 gulp.task('default', function() {
     log('Building development');
-    runSequence('clean-tmp', 'image', 'copyFonts', 'inject', 'watch');
+    runSequence('clean', 'image', 'copyFonts', 'inject', 'watch');
+});
+
+gulp.task('clean', function() {
+    var files = config.build + '*';
+    clean(files);
 });
 
 gulp.task('image', function () {
@@ -46,12 +51,7 @@ gulp.task('concatCSS', function() {
         .pipe($.plumber())
         .pipe($.concat(config.css))
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest(config.temp + 'css'));
-});
-
-gulp.task('clean-tmp', function() {
-    var files = config.temp + '*';
-    clean(files);
+        .pipe(gulp.dest(config.build + 'css'));
 });
 
 gulp.task('inject', ['concatCSS', 'concatJS'], function() {
@@ -61,7 +61,7 @@ gulp.task('inject', ['concatCSS', 'concatJS'], function() {
     return gulp.src(config.index)
         .pipe($.inject(gulp.src([config.cssSrc, config.jsSrc], {read: false}), {relative: true}))
         .pipe(wiredep(options))
-        .pipe(gulp.dest(config.temp));
+        .pipe(gulp.dest(config.build));
 });
 
 gulp.task('templateCache', function() {
@@ -72,7 +72,7 @@ gulp.task('templateCache', function() {
             config.templateCache.file,
             config.templateCache.options
         ))
-        .pipe(gulp.dest(config.temp + 'js'));
+        .pipe(gulp.dest(config.build + 'js'));
 });
 
 gulp.task('concatJS', ['templateCache'], function() {
@@ -83,7 +83,7 @@ gulp.task('concatJS', ['templateCache'], function() {
         .pipe($.angularFilesort())
         .pipe($.concat(config.js))
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest(config.temp + 'js'));
+        .pipe(gulp.dest(config.build + 'js'));
 });
 
 gulp.task('watch', function () {
@@ -91,6 +91,48 @@ gulp.task('watch', function () {
     $.watch([config.alljs[0], config.alljs[1], config.html, config.sassWatch], $.batch(function (events, done) {
         gulp.start('inject', done);
     }));
+});
+
+
+// ***** production tasks ******
+
+gulp.task('minifyCSS', function() {
+    log("Minifing application's css");
+    return gulp
+        .src(config.sass)
+        .pipe($.sass())
+        .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
+        .pipe($.plumber())
+        .pipe($.concat(config.optimized.css))
+        .pipe($.csso())
+        .pipe(gulp.dest(config.build + 'css'));
+});
+
+gulp.task('minifyJS', ['templateCache'], function() {
+    log("Minifing application's js");
+    return gulp.src([config.alljs[0], config.alljs[2], config.templateCache.src])
+        .pipe($.sourcemaps.init())
+        .pipe($.plumber())
+        .pipe($.angularFilesort())
+        .pipe($.concat(config.optimized.js))
+        .pipe($.uglify())
+        .pipe($.sourcemaps.write())
+        .pipe(gulp.dest(config.build + 'js'));
+});
+
+gulp.task('inject-prod', ['minifyCSS', 'minifyJS'], function() {
+    log('Injecting bower"s css-, js- files and app application"s minified css-, js-files into the html');
+    var options = config.getWiredepDefaultOptions();
+    var wiredep = require('wiredep').stream;
+    return gulp.src(config.index)
+        .pipe($.inject(gulp.src([config.optimized.cssSrc, config.optimized.jsSrc], {read: false}), {relative: true}))
+        .pipe(wiredep(options))
+        .pipe(gulp.dest(config.build));
+});
+
+gulp.task('prod', function() {
+    log('Building production');
+    runSequence('clean', 'image', 'copyFonts', 'inject-prod');
 });
 
 // ***** functions *****

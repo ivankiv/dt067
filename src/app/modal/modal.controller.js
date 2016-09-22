@@ -3,7 +3,7 @@
     angular.module('app')
         .controller('modalController', modalController);
 
-    modalController.$ingect = ['$uibModalInstance'];
+    modalController.$inject = ['$uibModalInstance'];
 
     function modalController($uibModalInstance) {
         var self = this;

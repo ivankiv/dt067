@@ -2,7 +2,11 @@
     'use strict';
 
     angular.module('app')
-        .directive('checkPagination', function(appConstants) {
+        .directive('checkPagination', checkPagination);
+
+    checkPagination.$inject = ['appConstants'];
+
+    function checkPagination(appConstants) {
             var itemPerPage = appConstants.numberOfEntitiesPerPage;
             return {
                 restrict: 'A',
@@ -24,6 +28,6 @@
                         })
                     });
                 }
-            }
-        });
+            };
+        }
 }());
