@@ -3,7 +3,7 @@
     angular.module('app')
         .controller('groupModalController', groupModalController);
 
-    groupModalController.$inject = ['groupService','facultyService', 'specialityService', 'appConstants', '$uibModalInstance', 'groupByOtherEntity', 'currentGroup', '$uibModal'];
+    groupModalController.$inject = ['groupService', 'appConstants', 'facultyService', 'specialityService', '$uibModalInstance', 'groupByOtherEntity', 'currentGroup', '$uibModal'];
 
     function groupModalController(groupService, appConstants, facultyService, specialityService, $uibModalInstance, groupByOtherEntity,  currentGroup, $uibModal) {
         var self = this;
