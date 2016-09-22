@@ -26,7 +26,7 @@
                                text-search="groups.textSearch"
                                ng-model="groups.textSearch"/>
                     </div>
-                    <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
+                    <div class="col-md-4" ng-hide="groups.faculty_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                             id="facultyDropdown"
                             ng-model="groups.textSearch"
@@ -39,7 +39,7 @@
                             <option disabled selected value="">Виберіть факультет</option>
                         </select>
                     </div>
-                    <div class="col-md-4" ng-hide="groups.speciality_id || groups.faculty_id">
+                    <div class="col-md-4" ng-hide="groups.speciality_id">
                         <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
                                 id="specialityDropdown"
                                 ng-model="groups.textSearch"
