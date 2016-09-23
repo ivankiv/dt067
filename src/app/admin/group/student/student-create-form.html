@@ -1,0 +1,112 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-xs-12 views-header'><h4>Реєстрація нового студента</h4></div>
+                <form class="form-group" name="studentCreationForm">
+                    <!--This two inputs prevent the password autofilling, because modern browsers ignore autocomplete="off"-->
+                    <input type="text" ng-hide = "true">
+                    <input type="password" ng-hide = "true">
+                    <!--end-->
+                    <table class="rwd-table create-student-table table-striped">
+                        <tbody>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <span>Фото</span>
+                                <input class="form-control add-photo-inp" type="file"
+                                       file-load = "students.currentObj.photo"
+                                       ng-model="students.currentObj.photo"
+                                       accept="image/jpeg,image/png,image/gif/svg"/>
+                                <img  id="studentImage" height="250" width="250" alt="Зображення"
+                                      ng-src="{{students.currentObj.photo}}">
+                            </td>
+                            <td colspan="3">
+                                <label for="names">ПІБ</label>
+                                <div id="names">
+                                    <input type="text" class="form-control" name="surname" placeholder="Прізвище"
+                                           ng-model="students.currentObj.student_surname"
+                                           ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i"
+                                           required >
+                                    <novalidate-messages  field="studentCreationForm.surname"></novalidate-messages></br>
+                                    <input type="text" class="form-control" name="name" placeholder="Ім’я"
+                                           ng-model="students.currentObj.student_name"
+                                           ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i"
+                                           required>
+                                    <novalidate-messages  field="studentCreationForm.name"></novalidate-messages></br>
+                                    <input type="text" class="form-control" name="f_name" placeholder="Побатькові"
+                                           ng-model="students.currentObj.student_fname"
+                                           ng-pattern="/^[a-zа-яіїє\-\'\s]+$/i"
+                                           required>
+                                    <novalidate-messages  field="studentCreationForm.f_name"></novalidate-messages></br>
+                                    <label for="group">Група</label>
+                                </div>
+                                <select class="form-control" id="group" placeholder="Виберіть групу"
+                                        ng-options="group.group_id as group.group_name for group  in students.groupList"
+                                        ng-model="students.currentObj.group_id">
+                                    <option value="" disabled>Виберіть групу</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <label for="pass">Пароль</label>
+                                <input type="text" class="form-control" name="pass" id="pass" placeholder="Введіть пароль"
+                                       ng-model="students.currentObj.plain_password"
+                                       required>
+                            </td>
+                            <td colspan="3" class="text-center">
+                                <label for="gradebook">№ залікової книжки</label>
+                                <input type="text" class="form-control" name="gradebook" id ="gradebook"
+                                       placeholder="Введіть номер залікової книжки"
+                                       ng-model="students.currentObj.gradebook_id"
+                                       required >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <label for="login1">Логін</label>
+                                <input type="text" class="form-control" name="login" id = "login1" placeholder="Введіть логін"
+                                       ng-model="students.currentObj.username"
+                                       ng-minlength="3"
+                                       ng-maxlength="50"
+                                       required >
+                                <novalidate-messages field="studentCreationForm.login"></novalidate-messages>
+                            </td>
+                            <td colspan="3" class="text-center">
+                                <label for="email" >Email</label>
+                                <input type="email" class="form-control" name="email" id="email"placeholder="Введіть email"
+                                       ng-model="students.currentObj.email"
+                                       ng-pattern="/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/"
+                                       required >
+                                <novalidate-messages field="studentCreationForm.email" pattern="Некоректні дані!" >
+                                </novalidate-messages>
+                            </td>
+                        </tr>
+                        <tr ng-if="students.wrongData">
+                            <td colspan="6"  class="text-center text-danger">
+                                Користувач з таким логіном існує або введені некоректні дані!
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"></td>
+                            <td class="text-center create-student-submit-btns-wrpr" colspan="2" >
+                                <button type="button" class="btn btn-success pull-left" title="Підтвердити"
+                                        ng-click="students.create()"
+                                        ng-disabled="studentCreationForm.$invalid">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button type="button" class="btn btn-danger pull-right" title="Скасувати"
+                                        ng-click="students.hide()">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </button>
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+        </div>
+    </section>
+</section>

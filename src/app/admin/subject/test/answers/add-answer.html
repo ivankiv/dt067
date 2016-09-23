@@ -1,0 +1,55 @@
+<div class="modal-header custom-modal-header">
+    <h3 class="modal-title">Додати відповідь </h3>
+</div>
+<div class="modal-body custom-modal-body">
+    <form class="form-horizontal" name="newAddAnswersForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="image">Зображення</label>
+            <div class="col-sm-9">
+                <input class="form-control add-photo-inp"
+                       id="image"
+                       file-load = "answers.answer.attachment"
+                       ng-model="answers.answer.attachment"
+                       type="file"
+                       accept="image/jpeg,image/png,image/gif/svg"/>
+                <div ng-if="answers.answer.attachment">
+                <img ng-src="{{answers.answer.attachment}}" height="100" width="100" alt="Зображення">
+                <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                            title="Видалити" ng-click="answers.deleteAttachment()">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="answer_text">Відповідь: </label>
+            <div class="col-sm-9">
+                <textarea class="form-control" id="answer_text"  name="answer_text"
+                          ng-model="answers.answer.answer_text"
+                          placeholder="Напишіть текс відповіді"
+                          required>
+                </textarea>
+                <novalidate-messages field="newAddAnswersForm.answer_text"></novalidate-messages>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="type">Правильність: </label>
+            <div class="col-sm-9">
+                <select class="form-control input-form" id="type" name="type"
+                        ng-model="answers.answer.true_answer"
+                        required>
+                    <option disabled selected value="">Оберіть тип відповіді</option>
+                    <option ng-disabled="answers.isAnswerTrue.isAnswerTrue" value="1">Вірно</option>
+                    <option value="0">Невірно</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="answers.addAnswer()"
+            ng-disabled="newAddAnswersForm.$invalid"> Додати відповідь
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="answers.cancelForm()">Відмінити</button>
+</div>

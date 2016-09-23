@@ -1,0 +1,52 @@
+<section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Список тестів </h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right" ui-sref="admin-home.groups">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table list-of-tests table-striped">
+                    <thead>
+                    <tr>
+
+                        <th>Назва предмету</th>
+                        <th>Назва тесту</th>
+                        <th>Дата проведення</th>
+                        <th>К-сть завдань</th>
+                        <th>Тривалість тесту</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!result.showMessageNoEntity">
+                    <tr ng-repeat="test in result.listOfTests track by $index">
+                        <td data-th="Предмет">{{::test.subject_name}}</td>
+                        <td data-th="Тест">{{::test.test_name}}</td>
+                        <td data-th="Дата">{{::test.date}}</td>
+                        <td data-th="К-сть завдань">{{::test.tasks}}</td>
+                        <td data-th="Час проходження тесту">{{::test.time_for_test}}</td>
+                        <td id="play-button-cell">
+                            <button type="button" class="btn btn-primary pull-right table-help-btns"
+                                    title="Переглянути результати"
+                                    ui-sref="admin-home.test-result({group_id:result.group_id, test_id:test.test_id})">
+                                <i class="glyphicon glyphicon-eye-open"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="result.showMessageNoEntity" class="text-center">
+                    <h1>Немає тестів для даної групи!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

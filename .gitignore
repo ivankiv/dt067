@@ -1,9 +1,13 @@
 # Created by .ignore support plugin (hsz.mobi)
 bower_components/
 node_modules/
+dev/
 .idea/
 build/
+.gitignore
 .sass-cache
 styles.css.map
 *.log
+*.log.*
 *.map
+units.html

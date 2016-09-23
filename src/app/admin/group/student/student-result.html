@@ -1,0 +1,56 @@
+<section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4 class='text-center'><span class='pull-left'>Результати тестів</span>&nbsp;
+                        {{students.currentObj.student_surname}}&nbsp;{{students.currentObj.student_name}}&nbsp;
+                        {{students.currentObj.student_fname}}</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right" ng-click="students.hide('result')">
+                        <i class="glyphicon glyphicon-share-alt"> Назад</i>
+                    </button>
+                </div>
+                <table ng-if="!students.showMessageNoTestsForStudent" class="rwd-table subject-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Назва тесту</th>
+                        <th>Дата проведення</th>
+                        <th>К-сть завдань</th>
+                        <th>Результат</th>
+                        <th>Час початку</th>
+                        <th>Час закінчення</th>
+                        <th>Видалити</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="result in students.resultList track by $index">
+                        <td data-th="Назва тесту">{{::result.test_name}}</td>
+                        <td data-th="Дата проведення">{{::result.session_date}}</td>
+                        <td data-th="К-сть завдань">{{::result.questions.length}}</td>
+                        <td data-th="Результат">{{::result.result}} із {{::result.answers}}</td>
+                        <td data-th="Час початку">{{::result.start_time}}</td>
+                        <td data-th="Час закінчення">{{::result.end_time}}</td>
+                        <td data-th="Видалити">
+                            <button type="button" class="btn btn-danger"
+                                    title="Видалити"
+                                    ng-click="students.removeTestResult(result.session_id)">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <div ng-if="students.showMessageNoTestsForStudent" class="text-center">
+                    <h1>Cтудент не здавав жодного тесту!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>

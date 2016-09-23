@@ -1,0 +1,159 @@
+.test-player-container{
+  background-color: $table-bg;
+  .main-test-box{
+    overflow: auto;
+    /*clear: both;*/
+    vertical-align: bottom;
+    text-align: center;
+    padding: 10px 20px;
+    @media (max-width: 400px) {
+      padding: 10px 5px;
+    }
+    .timer-and-questionNum-box{
+      padding: 5px 0;
+      .questionNum-box{
+        margin: 5px 0;
+        padding: 5px;
+        text-align: left;
+        display: inline-block;
+        .questionNum-sign{
+          font-weight: bold;
+          color: $white;
+        }
+      }
+      .timer-box{
+        margin: 5px 0;
+        padding: 0 5px;
+        text-align: right;
+        display: inline-block;
+        float: right;
+        .timeleft-sign{
+          font-weight: bold;
+          color: $white;
+        }
+        .timer{
+          position: relative;
+          .timer-value{
+            position: absolute;
+            display: block;
+            width: 100%;
+            color: $black;
+            font-weight: bold;
+            text-align: center;
+          }
+        }
+      }
+    }
+    .player-wrap{
+      padding: 15px 0;
+      .wrapForQuestions{
+        min-height: 10px;
+        vertical-align: top;
+        text-align: left;
+        padding: 5px;
+        margin-bottom: 10px;
+        .allOfQuestions{
+          padding: 2px 5px;
+          width: 30px;
+          text-align: center;
+          margin: 0 4px 4px 0;
+          display: inline-block;
+        }
+      }
+      .questions-box{
+        min-height: 300px;           //TODO
+        float: right;
+        border: 2px solid $player-border;
+        border-radius: 3px;
+        background-color: $player-bg;
+        .question-view{
+          border-bottom: 1px solid $player-border;
+          border-radius: 3px;
+          padding: 10px;
+          .test-sign{
+            color: $black;
+            font-weight: bold;
+            margin-top: 0;
+            text-align: center;
+          }
+          .question-image-box{
+            text-align: center;
+            padding: 5px;
+            background-color: $player-box-bg;
+            .question-image{
+              display: inline-block;
+              width: 250px;
+              @media (max-width: 400px) {
+                width: 180px;
+              }
+
+            }
+          }
+          .question-text{
+            color: $black;
+            padding: 5px;
+            background-color: $player-box-bg;
+          }
+        }
+        .answer-view{
+          border-top: 1px solid $player-border;
+          border-radius: 3px;
+          padding: 10px;
+          .test-sign{
+            color: $black;
+            font-weight: bold;
+            margin-top: 0;
+            text-align: center;
+          }
+          .answers{
+            padding: 5px;
+            min-height: 35px;
+            text-align: left;
+            vertical-align: middle;
+            background-color: $player-box-bg;
+            border-bottom: 2px solid $player-bg;
+            .form-box{
+              display: inline-block;
+              vertical-align: middle;
+              padding: 0;
+              margin: 0 3px;
+              .check-radio-inputs{
+                padding: 0;
+                margin: 0;
+                vertical-align: middle;
+              }
+            }
+            .answers-text-box{
+              display: inline-block;
+              text-align: left;
+              vertical-align: middle;
+              padding: 0;
+              margin: 0 3px;
+              color: $black;
+              .answers-text{
+                padding: 0;
+                margin: 0;
+              }
+            }
+            .answers-image-box{
+               display: block;
+               text-align: left;
+               vertical-align: middle;
+               padding: 0;
+               .answer-image{
+                 display: inline-block;
+                 width: 250px;
+                 @media (max-width: 400px) {
+                   width: 180px;
+                 }
+               }
+             }
+          }
+        }
+        .submit-answer{
+          margin: 5px auto 15px;
+        }
+      }
+    }
+  }
+}

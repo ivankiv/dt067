@@ -1,0 +1,74 @@
+<div class="modal-header custom-modal-header">
+    <h3 class="modal-title">Редагувати тест</h3>
+</div>
+<div class="modal-body custom-modal-body">
+    <form class="form-horizontal" name="editTestForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="subject">Предмет: </label>
+            <div class="col-sm-10">
+                <select class="form-control" name="subject" id="subject" ng-model="tests.currentTest.subject_id"
+                        ng-options="sublectList.subject_id as sublectList.subject_name for sublectList in tests.subjectList"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="name">Назва: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="text" name="name" id="name" ng-model="tests.currentTest.test_name"
+                       required
+                       ng-minlength="1"
+                       ng-maxlength="100">
+                <novalidate-messages field="editTestForm.name" minlength="1" maxlength="100"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="amount">Кількiсть задач: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" string-to-number name="amount" id="amount" ng-model="tests.currentTest.tasks"
+                       required
+                       min="1"
+                       max="100">
+                <novalidate-messages field="editTestForm.amount"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="time">Час для проходження: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number"  string-to-number name="time" id="time" ng-model="tests.currentTest.time_for_test"
+                       placeholder="Час, хв"
+                       required
+                       min="5"
+                       max="180">
+                <novalidate-messages field="editTestForm.time" min="5" max="180"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="status">Статус: </label>
+            <div class="col-sm-10">
+                <select class="input-form form-control" name="status" id="status" ng-model="tests.currentTest.enabled" required>
+                    <option value="0">Недоступно</option>
+                    <option value="1">Доступно</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="attempts">Кількість спроб: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" string-to-number id="attempts"  name="attempts" ng-model="tests.currentTest.attempts"
+                       required
+                       min="1"
+                       max="20">
+                <novalidate-messages field="editTestForm.attempts" max="20"></novalidate-messages>
+            </div>
+        </div>
+    </form>
+    <div class="text-danger" role="alert" ng-if="tests.wasNotEditEntityMessage">
+        <p>Не внесено жодних змін! Щоб вийти зі сторінки редагування натисніть "Відмінити"</p>
+
+    </div>
+</div>
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="tests.updateTest()"
+            ng-disabled="editTestForm.$invalid"> Зберегти
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="tests.cancelForm()">Відмінити</button>
+</div>

@@ -1,0 +1,50 @@
+<div class="modal-header custom-modal-header">
+    <h3 class="modal-title">Додати параметри для тесту: {{::testDetails.currentTestDetailsName}}</h3>
+</div>
+<div class="modal-body custom-modal-body">
+    <form class="form-horizontal" name="newTestDetailsForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="level">Рівень </label>
+            <div class="col-sm-10">
+                <select class="form-control input-form" id="level" name="level" ng-model="testDetails.testDetails.level"
+                        ng-options="level for level in testDetails.levelsOfTasks" required>
+                    <option disabled selected value="">Оберіть рівень завдання</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="tasks">Кількiсть завдань: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" id="tasks" name="tasks" ng-model="testDetails.testDetails.tasks"
+                       placeholder="доступна кількість завдань: &nbsp;{{testDetails.availableAmountOfTaskForCurrentTest}}"
+                       required
+                       min="1"
+                       max="{{testDetails.availableAmountOfTaskForCurrentTest}}"
+                       ng-disabled="testDetails.availableAmountOfTaskForCurrentTest===0">
+                <novalidate-messages field="newTestDetailsForm.tasks" max="{{testDetails.availableAmountOfTaskForCurrentTest}}"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="rate">Ціна завдання: </label>
+            <div class="col-sm-10">
+                <input class="form-control" type="number" id="rate"  name="rate" ng-model="testDetails.testDetails.rate"
+                       placeholder="Кількість балів за одне завдання"
+                       required
+                       min="1"
+                       max="50">
+                <novalidate-messages field="newTestDetailsForm.rate" max="50" min="1"></novalidate-messages>
+            </div>
+        </div>
+    </form>
+    <div class="clearfix" ng-if="testDetails.duplicateTestLevelMessage">
+        <div class="col-sm-10 col-sm-offset-2" >
+            <span class="text-danger">Завдання обраного рівня вже додано!</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="testDetails.addTestDetails()"
+            ng-disabled="newTestDetailsForm.$invalid"> Додати
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="testDetails.cancelForm()">Відмінити</button>
+</div>

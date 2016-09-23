@@ -1,2 +1,1 @@
-# dt067
-##dt067 is good
+#Front-end part of d-tester API version 2.1 created by students of SoftServe ITA group IF-067.Web-UI.

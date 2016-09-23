@@ -1,0 +1,162 @@
+<section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-xs-12 views-header'>
+                    <h4>
+                        Групи
+                        <span ng-if="groups.speciality_id"> спеціальності {{groups.associativeSpeciality[groups.speciality_id]}}</span>
+                        <span ng-if="groups.faculty_id"> факультету {{groups.associativeFaculty[groups.faculty_id]}}</span>
+                    </h4>
+                </div>
+                <div class='col-md-12 col-xs-12 views-header-input-wrapper'>
+
+                    <div class="col-md-3 search-groups-inpt selct-search-group">
+                        <input class="views-header-search-inpts-groups groups-input-search col-xs-12 selct-search-group"
+                               type="text"
+                               placeholder="Пошук"
+                               check-pagination
+                               items-per-page="groups.groupsPerPage"
+                               total-items="groups.totalGroups"
+                               text-search="groups.textSearch"
+                               ng-model="groups.textSearch"/>
+                    </div>
+                    <div class="col-md-4" ng-hide="groups.faculty_id">
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
+                            id="facultyDropdown"
+                            ng-model="groups.textSearch"
+                            ng-options="facultyList.faculty_name as facultyList.faculty_name for facultyList in groups.facultyList"
+                            check-pagination
+                            items-per-page="groups.groupsPerPage"
+                            total-items="groups.totalGroups"
+                            text-search="groups.textSearch">
+                            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            <option disabled selected value="">Виберіть факультет</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4" ng-hide="groups.speciality_id">
+                        <select class="selectpicke col-xs-12 views-header-search-inpts-groups selct-search-group"
+                                id="specialityDropdown"
+                                ng-model="groups.textSearch"
+                                ng-options="specialityList.speciality_name as specialityList.speciality_name for specialityList in groups.specialityList"
+                                check-pagination
+                                items-per-page="groups.groupsPerPage"
+                                total-items="groups.totalGroups"
+                                text-search="groups.textSearch">
+                            <option disabled selected value="">Виберіть спеціальність</option>
+                        </select>
+                    </div>
+
+                    <button ng-if="groups.speciality_id"
+                            type="button"
+                            class="btn btn-danger pull-right button-student-back selct-search-group"
+                            ui-sref="admin-home.speciality"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
+                    </button>
+                    <button ng-if="groups.faculty_id"
+                            type="button"
+                            class="btn btn-danger pull-right button-student-back selct-search-group"
+                            ui-sref="admin-home.faculty"
+                            ng-if="!schedules.group_id">
+                        <i class="glyphicon glyphicon-share-alt"><span class="hidden-xs"> Назад</span></i>
+                    </button>
+
+                    <button type="button" class="btn btn-success add-btn selct-search-group" title="Додати групу" name="add"
+                            ng-click="groups.showAddGroupForm()"><i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                    </button>
+
+                        <select class="pull-right header-views-select-pages-search selct-search-group"
+                                ng-show="groups.showSearch"
+                                ng-model="groups.groupsPerPage"
+                                ng-options="groupPerPage for groupPerPage in groups.numberToDisplayGroupsOnPage"
+                                ng-change="groups.pageChanged()"
+                                name="groupsPerPage"
+                                id="groupsPerPage"
+                                title="Кількість записів на сторінці">
+                        </select>
+                </div>
+                <table class="rwd-table groups-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Номер</th>
+                        <th>Назва</th>
+                        <th>Факультет</th>
+                        <th>Спеціальність</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="group in groups.list
+                            | toArray | filter: groups.textSearch
+                            | limitTo: groups.groupsPerPage : groups.begin">
+                            <td  data-th="Номер">{{$index + (groups.currentPage - 1) * groups.groupsPerPage + 1}}</td>
+                            <td data-th="Назва">{{::group.group_name}}</td>
+                            <td data-th="Факультет">{{::groups.associativeFaculty[group.faculty_id]}}</td>
+                            <td data-th="Спеціальність">{{::groups.associativeSpeciality[group.speciality_id]}}</td>
+                            <td>
+                                <button type="button"
+                                        class="btn btn-danger views-remove-btn pull-right table-help-btns group-help-btns"
+                                        title="Видалити"
+                                        name="deleteGroup"
+                                        ng-click="groups.deleteGroup(group.group_id)">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-warning pull-right table-help-btns group-help-btns"
+                                        title="Редагувати"
+                                        name="editGroup"
+                                        ng-click="groups.showEditGroupForm(group);">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-info pull-right table-help-btns group-help-btns"
+                                        title="Розклад"
+                                        ui-sref="admin-home.scheduleByGroupId({group_id:group.group_id})">
+                                    <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary pull-right table-help-btns group-help-btns"
+                                        title="Переглянути студентів"
+                                        ui-sref="admin-home.studentByGroup({group_id:group.group_id})">
+                                    <i class="glyphicon glyphicon-user glyphicon " aria-hidden="true"></i>
+                                </button>
+                                <button type="button"
+                                        class="btn btn-primary pull-right table-help-btns group-help-btns"
+                                        title="Результати"
+                                        ui-sref="admin-home.result({group_id:group.group_id})">
+                                    <i class="glyphicon glyphicon-registration-mark"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div ng-if="groups.showMessageNoEntity" class="text-center">
+                    <h1>
+                        <span ng-if="groups.speciality_id">Для спеціальності <strong>&rdquo;{{groups.associativeSpeciality[groups.speciality_id]}}&rdquo;</strong></span>
+                        <span ng-if="groups.faculty_id"> Для факультету <strong>&rdquo;{{groups.associativeFaculty[groups.faculty_id]}}&rdquo;</strong></span>
+                        не зареєстровано жодної групи!
+                    </h1>
+                </div>
+                <div class="group-pagination pull-right">
+                    <uib-pagination
+                        ng-show="groups.totalGroups > groups.groupsPerPage"
+                        total-items="groups.totalGroups"
+                        items-per-page="groups.groupsPerPage"
+                        ng-model="groups.currentPage"
+                        ng-change="groups.pageChanged()"
+                        previous-text="&lsaquo;"
+                        next-text="&rsaquo;">
+                    </uib-pagination>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</section>

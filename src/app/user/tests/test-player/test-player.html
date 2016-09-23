@@ -1,0 +1,61 @@
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1 test-payer-header">
+                <div class='col-sm-8 col-xs-12 views-header '>
+                    <h4>Тест:&nbsp{{::player.currentTest.test_name}}&nbspПредмет:&nbsp{{::player.currentTest.subject_name}}</h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ng-click="player.finishTest()">
+
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Завершити тест</i>
+                    </button>
+                </div>
+
+                <div class="test-player-container">
+
+                    <div class="main-test-box">
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 timer-and-questionNum-box">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 questionNum-box">
+                                <span class="questionNum-sign">Завдання {{+player.currentQuestion_index +1}} із {{player.currentTest.tasks}}</span>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 timer-box">
+                                <span class="timeleft-sign">Залишилось часу:</span>
+
+                                <uib-progress class="timer">
+                                    <uib-bar class="progress-bar-striped active" max="100"
+                                             value="player.progressBarValue" type="{{player.progressBarType}}">
+                                    </uib-bar>
+                                    <span class="timer-value">{{player.timerValue | date: 'HH:mm:ss' : '+0000'}}</span>
+                                </uib-progress>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-xs-12 player-wrap">
+
+                            <div class="col-sm-3 col-xs-12 wrapForQuestions">
+                                <form>
+                                    <button ng-click="player.chooseQuestion($index)"
+                                         class="allOfQuestions btn btn-default" ng-repeat="question in player.listOfQuestionsId"
+                                         ng-class="{'btn-info': player.listOfQuestionsId[$index].answer_ids.length > 0}">
+                                         {{$index+1}}
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div class="col-sm-8 col-xs-12 questions-box"
+                                 ng-include = "'app/user/tests/test-player/question.html'">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</section>

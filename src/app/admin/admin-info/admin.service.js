@@ -1,50 +1,62 @@
 (function(){
     'use strict';
-
     angular
-        .module("app")
-        .factory("adminService",adminService);
+        .module('app')
+        .factory('adminService',adminService);
 
-    adminService.$inject = ["$http"];
+    adminService.$inject = ['$http', 'appConstants'];
 
-    function adminService($http) {
+    function adminService($http, appConstants) {
         return{
             getAdmins:getAdmins,
             deleteAdmin:deleteAdmin,
-            editAdmin:editAdmin
+            editAdmin:editAdmin,
+            createAdmin:createAdmin,
+            duplicateLogin:duplicateLogin
         };
 
-        function getAdmins() {
-            var url = "http://dtapi.local/AdminUser/getRecords";
-            return $http.get(url)
-                .then(complete)
-                .catch(failed);
-        };
+        function getAdmins(id) {
+            var addId =(id) ? "/"+ id: "";
+            return $http.get(appConstants.getAdmins + addId)
+                .then(complete, failed);
+        }
 
         function editAdmin(obj) {
-            var url = "/AdminUser/update/" + obj.id;
-            return $http.post(url,obj)
-                .then(complete)
-                .catch(failed);
-        };
+            return $http.post(appConstants.editAdmins + obj.id, obj)
+                .then(complete, failed);
+        }
 
         function deleteAdmin(id) {
-            if (id == 1){
-                alert("Цього адміна не дозволено видаляти");
-                return;
-            }
-            var url = "/AdminUser/del/" + id;
-            return $http.delete(url)
-                .then(complete)
-                .catch(failed);
-        };
+            return $http.delete(appConstants.delAdmins + id)
+                .then(complete, failed);
+        }
+
+        function createAdmin(admin) {
+            return $http.post(appConstants.addAdmins, admin)
+                .then(complete, failed);
+        }
 
         function complete(response) {
-            return response.data;
+            return response;
         }
 
         function failed(error) {
-            alert("XHR Failed. Error: " + error.data);
+            alert('XHR Failed. Error: ' + error.data);
+        }
+
+        function duplicateLogin(username) {
+            var alreadyExist = false;
+            getAdmins().then(
+                function (response) {
+                var list = response.data;
+                list.forEach(
+                    function(x){
+                        if(x.username===username){
+                            alreadyExist = true;
+                        }
+                    });
+            });
+            return alreadyExist;
         }
     }
-})();
+}());

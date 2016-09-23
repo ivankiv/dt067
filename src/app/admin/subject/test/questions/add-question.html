@@ -1,0 +1,69 @@
+<div class="modal-header custom-modal-header">
+    <h3 class="modal-title">Додати завдання </h3>
+</div>
+<div class="modal-body custom-modal-body">
+    <form class="form-horizontal" name="newAddQuestionsForm" role="form">
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="image">Зображення</label>
+            <div class="col-sm-9">
+                <input class="form-control add-photo-inp"
+                       id="image"
+                       file-load = "questions.question.attachment"
+                       ng-model="questions.question.attachment"
+                       type="file"
+                       accept="image/jpeg,image/png,image/gif/svg"/>
+                <div ng-if="questions.question.attachment">
+                    <img ng-src="{{questions.question.attachment}}" height="100" width="100" id="questionsImage" alt="Зображення">
+                    <button type="button" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                        title="Видалити" ng-click="questions.deleteAttachment()">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="question_text">Завдання: </label>
+            <div class="col-sm-9">
+                <textarea class="form-control" id="question_text"  name="question_text"
+                          ng-model="questions.question.question_text"
+                          placeholder="Напишіть текст завдання"
+                          required>
+                </textarea>
+                <novalidate-messages field="newAddQuestionsForm.question_text"></novalidate-messages>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="level">Рівень: </label>
+            <div class="col-sm-9">
+                <select class="form-control input-form" id="level" name="level"
+                        ng-model="questions.question.level"
+                        required>
+                    <option disabled selected value="">Оберіть рівень завдання</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-3" for="type">Тип завдання: </label>
+            <div class="col-sm-9">
+                <select class="form-control input-form" id="type" name="type"
+                        ng-model="questions.question.type"
+                        required>
+                    <option disabled selected value="">Оберіть тип завдання</option>
+                    <option value="1">Простий вибір</option>
+                    <option value="2">Мульти вибір</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer custom-modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="questions.addQuestion()"
+            ng-disabled="newAddQuestionsForm.$invalid"> Додати завдання
+    </button>
+    <button class="btn btn-warning" type="button" ng-click="questions.cancelForm()">Відмінити</button>
+</div>

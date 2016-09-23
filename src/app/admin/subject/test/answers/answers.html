@@ -1,0 +1,54 @@
+<section id="main-content">
+    <!--BEGIN SPINNER-->
+    <div id="loaderSpin" spinner class="hidden">
+        <img src="img/spinner_blue.gif" class="loader" alt="Завантаження..."/>
+    </div>
+    <!--END SPINNER-->
+    <section class="wrapper">
+        <div class="row">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class='col-sm-8 col-xs-12 views-header'>
+                    <h4>Відповіді тесту: &nbsp;{{::answers.question_text}} <span>, Тип завдання: &nbsp;{{::answers.questiontype}}</span></h4>
+                </div>
+                <div class='col-sm-4 col-xs-12 views-header views-header-wrapper-add-btn-and-search'>
+                    <button type="button" class="btn btn-danger pull-right"
+                            ui-sref="admin-home.questions({currentSubjectId: answers.currentSubjectId, currentTestId: answers.currentTestId})">
+                        <i class="glyphicon glyphicon-share-alt">&nbsp;Назад</i>
+                    </button>
+                    <button type="button" class="btn btn-success add-btn" ng-click="answers.showAddAnswerForm()" title="Додати дату тесту">
+                        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <table class="rwd-table subject-table answers-table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Зображення</th>
+                        <th>Текст відповіді</th>
+                        <th>Результат</th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="!answers.showMessageNoEntity">
+                    <tr ng-repeat="answer in answers.list">
+                        <td data-th="Зображення"  ng-click="answers.ShowLargeAnswerPhotoForQuestion(answer)"><img ng-class="{'show-img': answer.attachment ? false: true}" ng-src="{{answer.attachment}}" height="100" width="100" title="Зображення {{$index + 1}}" alt="Зображення"></td>
+                        <td data-th="Текст відповіді">{{:: answer.answer_text}}</td>
+                        <td data-th="Результат">{{answers.true_answers[answer.true_answer]}}</td>
+                        <td>
+                            <button type="button" ng-click="answers.deleteAnswers(answer.answer_id)" class="btn btn-danger views-remove-btn pull-right table-help-btns"
+                                    title="Видалити">
+                                <i class="glyphicon glyphicon-trash"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning pull-right table-help-btns" ng-click="answers.showEditAnswerForm(answer)" title="Редагувати"
+                            ><i class="glyphicon glyphicon-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div ng-if="answers.showMessageNoEntity" class="text-center">
+                    <h1>Немає відповідей до даного тесту!</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
